@@ -17,3 +17,7 @@
 - Spring MVC
 - Tomcat
 - MySQL
+
+
+## 🛒 Software Development Process
+- Kanban
