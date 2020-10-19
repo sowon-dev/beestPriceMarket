@@ -18,7 +18,7 @@
 
 ## 🛒 기술스택
 - Spring MVC (Spring Tools 4 4.8.0 added Extension Spring Tools3 for Spring Tools 4 3.9.14.Release)
-- Tomcat
+- Tomcat ver 8.5
 - MySQL ver 8.0.21
 
 
