@@ -17,7 +17,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-<div class="modal fade login" id="loginModal">
+<div class="modal login" id="loginModal">
     <div class="modal-dialog login animated">
         <div class="modal-content">
             <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
