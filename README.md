@@ -8,8 +8,8 @@
 
 | 팀원 | 팀장 [소원](https://github.com/sowon-dev) | [태훈](https://github.com/xognsrksek) | [정현](https://github.com/kimjeonghyun3292) | [지은](https://github.com/jekk0215)| [태준](https://github.com/kill5951) | [재원](https://github.com/aya888) | [성연](https://github.com/devjsy0897)| [현석](https://github.com/bliss73) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 담당기능 |  |  |  |  |  |  |  |  |
-||  |  |  |  |  |  |  |  |
+| 담당기능 | 회원가입 | 회원가입 |  |  |  |  |  |  |
+|| 로그인 |  |  |  |  |  |  |  |
 ||  |  |  |  |  |  |  |  |
 ||  |  |  |  |  |  |  |  |
 ||  |  |  |  |  |  |  |  |
