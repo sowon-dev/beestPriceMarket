@@ -32,15 +32,14 @@ public class MemberController {
 	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String insertGET() throws Exception {
-		l.info("C: 회원가입 입력페이지 GET");
 		return "/member/loginandjoin";
 	}
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String insertPOST(MemberVO vo) throws Exception{
-		l.info("C: 회원가입포스트메서드"+ vo);		
+		l.info("C: 회원가입포스트메서드"+ vo);
+		System.out.println("C: 회원가입 한글확인 "+vo);
 		service.joinMember(vo);		
-		l.info("C: 회원가입 처리페이지 POST");		
 		return "redirect:/member/login";
 	}
 	
@@ -48,7 +47,6 @@ public class MemberController {
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	public @ResponseBody int idCheck(@RequestParam("id") String id) throws Exception {
 		MemberVO ck = service.idCheck(id);
-		System.out.println("C: idcheck메서드 - "+ck);
 		if(ck != null) return 1;
 		else return 0;
 	}
@@ -65,7 +63,6 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		l.info("C: 로그인POST"+ vo.getId() + vo.getPw());
-		System.out.println("C: 로그인POST의 vo- "+ vo);
 		MemberVO returnVO = service.loginMember(vo);
 		l.info("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
 		
