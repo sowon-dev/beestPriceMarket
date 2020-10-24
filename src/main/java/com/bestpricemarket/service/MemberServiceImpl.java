@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO returnVO = null;
 		try {
 			returnVO = mdao.readMemberWithIDPW(vo.getId(), vo.getPw());
-			System.out.println("S: 로그인 아디: "+vo.getId()+" 비번: "+vo.getPw());
+			System.out.println("S: 로그인 아디: "+vo.getId()+" 비번: "+vo.getPw()+" 이름: "+vo.getUsername());
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnVO = null; //실행하다 문제가 생겼을때 해당 데이터를 보내지않겠다는 의미 = 예외처리
@@ -39,7 +39,6 @@ public class MemberServiceImpl implements MemberService{
 	// 회원가입시 아이디중복확인
 	@Override
 	public MemberVO idCheck(String id) {
-		System.out.println("S: idcheck메서드 - "+mdao.idCheck(id));
 		return mdao.idCheck(id);
 	}
 
