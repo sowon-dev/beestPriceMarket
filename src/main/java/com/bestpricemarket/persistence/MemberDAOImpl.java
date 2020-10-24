@@ -37,6 +37,12 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("DAO: 로그인- "+paramMap);
 		return sqlSession.selectOne(namespace+".readMemberWithIDPW", paramMap);	
 	}
-	
+
+	// 회원가입 아이디 중복확인
+	@Override
+	public MemberVO idCheck(String id) {
+		System.out.println("DAO: idcheck메서드 - "+sqlSession.selectOne(namespace+".idCheck", id));
+		return sqlSession.selectOne(namespace+".idCheck", id);
+	}
 	
 }

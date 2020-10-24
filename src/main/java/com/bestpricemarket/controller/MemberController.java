@@ -7,8 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bestpricemarket.domain.MemberVO;
@@ -39,6 +42,15 @@ public class MemberController {
 		service.joinMember(vo);		
 		l.info("C: 회원가입 처리페이지 POST");		
 		return "redirect:/member/login";
+	}
+	
+	//회원가입시 아이디중복확인
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public @ResponseBody int idCheck(@RequestParam("id") String id) throws Exception {
+		MemberVO ck = service.idCheck(id);
+		System.out.println("C: idcheck메서드 - "+ck);
+		if(ck != null) return 1;
+		else return 0;
 	}
 	
 	/* 로그인 기능 */
