@@ -73,7 +73,7 @@ public class MemberController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainGET() throws Exception{
 		l.info("C: 메인 출력페이지 GET");
-		return "index";
+		return "/member/index";
 	}
 	
 }
