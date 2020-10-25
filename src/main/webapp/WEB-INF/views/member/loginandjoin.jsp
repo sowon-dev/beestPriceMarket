@@ -17,12 +17,13 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-<div class="modal fade login" id="loginModal">
+<%
+request.setCharacterEncoding("utf-8");
+%>
+<div class="modal login" id="loginModal" style="overflow:auto;">
     <div class="modal-dialog login animated">
         <div class="modal-content">
-            <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">로그인</h4>
-            </div>
+            <div class="modal-header"> <h4 class="modal-title">로그인</h4> </div>
             <div class="modal-body">
                 <div class="box">
                     <div class="content">
@@ -32,7 +33,7 @@
                         		<a id="facebook_login" class="circle facebook" href="#"> <i class="fa fa-facebook fa-fw"></i> </a> 
                         </div>
                         <div class="division">
-                            <div class="line l"></div> <span>다른 아이디가 있다면</span>
+                            <div class="line l"></div> <span> 또는 </span>
                             <div class="line r"></div>
                         </div>
                         <div class="error"></div>
@@ -42,6 +43,8 @@
                             	<input id="pw" class="form-control" type="password" placeholder="비밀번호" name="pw"> 
                             	<!-- <input class="btn btn-default btn-login" type="submit" value="로그인" onclick="loginAjax()">  -->
                             	<input class="btn btn-default btn-login" type="submit" value="로그인"> 
+                            	<input class="btn btn-default btn-login" type="button" value="메인으로" onclick="location.href='/member/main'" style="width:157px;height:50px;margin-top:5px;padding:0;display:inline;"> 
+                            	<input class="btn btn-default btn-login" type="button" value="회원가입" onclick="javascript: showRegisterForm();" style="width:157px;height:50px;margin-top:5px;padding:0;display:inline;"> 
                             </form>
                         </div>
                     </div>
@@ -49,38 +52,97 @@
                 <div class="box">
                     <div class="content registerBox" style="display:none;">
                         <div class="form">
-                            <form action="/member/join" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8"> 
-                            	<input id="id" class="form-control" type="text" placeholder="아이디" name="id" required> 
+                            <form action="/member/join" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8" name="frJoin"> 
+                            	<input id="id" class="form-control" type="text" placeholder="아이디(영문,숫자포함 4~12자리)" name="id" style="width:204px;margin:0 0 5px 0;padding:12 0;display:inline;"> 
+								<input id="idCheckBtn" type="button" value="아이디중복확인" class="btn btn-default btn-register" style="width:110px;height:50px;margin:0;padding:0;display:inline;"><br>
+                            		<p class="idCheck" style="margin-bottom:0;"><span class="idCheckMsg" style="font-size:12px; font-weight:bold;"></span></p>
                             	<input id="username" class="form-control" type="text" placeholder="이름" name="username" required> 
-                            	<input id="pw" class="form-control" type="password" placeholder="비밀번호(영문숫자특수문자혼합 8자리이상)" name="pw"> 
-                            	<input id="pw_confirmation" class="form-control" type="password" placeholder="비밀번호 재확인" name="password_confirmation"> 
-                            	<input id="email" class="form-control" type="text" placeholder="이메일" name="email" required>
-                            	<input id="phone" class="form-control" type="text" placeholder="전화번호 예시)01012345678" name="phone" required>                      
-								<input type="text" id="sample4_postcode" class="form-control" placeholder="우편번호" style="width:144px;margin:0 0 5px 0;padding:12 0;display:inline;" readonly>
-								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default btn-register" style="width:170px;height:50px;margin:0;padding:0;display:inline;"><br>
-								<input type="text" id="sample4_roadAddress" class="form-control" placeholder="도로명주소" name="addr1" readonly>
+                            	<input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문.숫자특수문자포함 8자리이상)" name="pw" > 
+                            		<span class="pwValCheckMsg" style="font-size:12px; font-weight:bold;"></span>
+                            	<input id="pw_confirmation" class="form-control" type="password" onkeyup="pwCheck()" placeholder="비밀번호 재확인" name="password_confirmation"> 
+                            		<span class="pwCheckMsg" style="font-size:12px; font-weight:bold;"></span>
+                            	<input id="email" class="form-control" type="email" placeholder="이메일" name="email" required style="height:48px;padding:13px 12px;margin-bottom:5px;color:black;">
+                            	<input id="phone" class="form-control" type="text" placeholder="전화번호 예)01012345678" name="phone" required>                      
+								<input type="text" id="sample4_postcode" class="form-control" placeholder="우편번호" style="width:204px;margin:0 0 5px 0;padding:12 0;display:inline;" readonly>
+								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default btn-register" style="width:110px;height:50px;margin:0;padding:0;display:inline;"><br>
+								<input type="text" id="sample4_roadAddress" class="form-control" placeholder="도로명주소" name="addr1" readonly required>
 								<input type="hidden" id="sample4_jibunAddress" class="form-control" placeholder="지번주소">
-								<input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소" name="addr2">
+								<input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소" name="addr2" required>
 								<input type="hidden" id="sample4_extraAddress" class="form-control" placeholder="참고항목">
 								<span id="guide" style="color:#999;display:none;visibility:hidden;"></span>
-                            	<input class="btn btn-default btn-register" type="submit" value="회원가입" name="commit"> 
+                            	<input class="btn btn-default btn-register" type="submit" value="회원가입" name="commit" id="submitBtn"> 
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="forgot login-footer"> <span><a href="javascript: showRegisterForm();">회원가입 하시겠습니까</a> ?</span> </div>
-                <div class="forgot register-footer" style="display:none"> <span>이미 회원가입 하셨습니까?</span> <a href="javascript: showLoginForm();">로그인</a> </div>
+                <div class="forgot login-footer"> <span><a href="">비밀번호찾기</a></span> </div>
+                <div class="forgot register-footer" style="display:none"> <span>이미 회원이라면 </span> <a href="javascript: showLoginForm();">로그인</a> </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- 아이디중복체크  -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- 주소API  -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+
+<script type="text/javascript">
+
+
+// 아이디 중복체크
+$("#idCheckBtn").click(function(){  
+let d = document.frJoin.id.value;
+
+$.ajax({
+  url : "/member/idCheck",
+  type : "post",
+  data : { id : d
+	  },
+  success : function(data) {
+	  	  
+   if(data == 1) {
+    $(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("이미 사용중인 아이디입니다.");   
+   } else {
+    $(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");
+   }
+  }
+ }); 
+});
+
+//비밀번호 체크 
+function pwValCheck(){
+    let pwd1 = document.frJoin.pw.value;
+    let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+
+	//비밀번호 유효성체크
+    if(pwd1.length < 8){
+        $('.pwValCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호 8자리이상 입력하세요.");
+   	 }else if(reg.test(pwd1) == false){
+		$('.pwValCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호는 숫자/영문/특수문자를 모두 포함해야합니다.");           
+   	 }else {
+		$('.pwValCheckMsg').css({visibility: 'hidden', display: 'block'}).text("");
+   	 }    
+}
+
+// 비밀번호 체크 
+function pwCheck(){
+    let pwd1 = document.frJoin.pw.value;
+    let pwd2 = $("#pw_confirmation").val();
+    let reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+     
+	//비밀번호 일치여부체크
+	if (pwd1 == pwd2) { //비번이 일치할 경우
+    	$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'blue'}).text("비밀번호가 일치합니다.");
+    } else { //비번이 불일치할 경우
+   		$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호가 일치하지않습니다.");           
+   		$('#submitBtn').css('background', 'rgb(0, 123, 255, .5)').attr("disabled", true);
+	}
+}
+
+// 카카오API
 function sample4_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {

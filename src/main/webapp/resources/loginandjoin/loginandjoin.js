@@ -1,5 +1,5 @@
 $(document).ready(function(){
-openLoginModal();
+	openLoginModal();
 });
 
 
@@ -27,16 +27,18 @@ function showLoginForm(){
 
 function openLoginModal(){
 	showLoginForm();
-	setTimeout(function(){
+/*	setTimeout(function(){
 		$('#loginModal').modal('show');
-	}, 230);
+	}, 230);*/
+	$('#loginModal').show();
 }
 
 function openRegisterModal(){
 	showRegisterForm();
-	setTimeout(function(){
+/*	setTimeout(function(){
 		$('#loginModal').modal('show');
-	}, 230);
+	}, 230);*/
+	$('#loginModal').show();
 }
 
 function loginAjax(){

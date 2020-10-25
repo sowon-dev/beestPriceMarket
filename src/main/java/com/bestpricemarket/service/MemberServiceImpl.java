@@ -21,7 +21,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void joinMember(MemberVO vo) {
 		mdao.joinMember(vo);		
-		System.out.println("S: 회원가입");
 	}
 
 	// 로그인
@@ -30,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO returnVO = null;
 		try {
 			returnVO = mdao.readMemberWithIDPW(vo.getId(), vo.getPw());
-			System.out.println("S: 로그인 아디: "+vo.getId()+" 비번: "+vo.getPw());
+			System.out.println("S: 로그인 아디: "+vo.getId()+" 비번: "+vo.getPw()+" 이름: "+vo.getUsername());
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnVO = null; //실행하다 문제가 생겼을때 해당 데이터를 보내지않겠다는 의미 = 예외처리
@@ -38,6 +37,10 @@ public class MemberServiceImpl implements MemberService{
 		return returnVO; 
 	}
 	
-
+	// 회원가입시 아이디중복확인
+	@Override
+	public MemberVO idCheck(String id) {
+		return mdao.idCheck(id);
+	}
 
 }

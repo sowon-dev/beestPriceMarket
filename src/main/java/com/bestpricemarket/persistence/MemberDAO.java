@@ -9,4 +9,10 @@ public interface MemberDAO {
 	
 	// 회원 정보 조회 - ID,PW정보에 해당하는 사용자 정보
 	public MemberVO readMemberWithIDPW(String id,String pw) throws Exception;
+
+	// 회원가입 아이디 중복확인
+	public MemberVO idCheck(String id);
+	
+
 }
+
