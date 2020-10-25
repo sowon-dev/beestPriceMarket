@@ -46,7 +46,7 @@
             <a class="nav-link" href="/member/login">로그인 | 회원가입</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">고객센터</a>
+            <a class="nav-link" href="/CS/list">고객센터</a>
           </li>
         </ul>
       </div>
