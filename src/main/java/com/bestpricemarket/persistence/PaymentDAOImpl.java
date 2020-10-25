@@ -22,7 +22,7 @@ public class PaymentDAOImpl implements PaymentDAO{
 	
 	// Mapper를 구분하는 값
 	private static final String namespace 
-		= "com.payment.mapper.MemberMapper"; 
+		= "com.bestpricemarket.mappers.memberMapper";
 	
 	@Override
 	public MemberVO getMember(String id) throws Exception {
