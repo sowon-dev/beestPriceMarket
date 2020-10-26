@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.service.GoodsService;
 
 @Controller
@@ -20,13 +21,24 @@ public class GoodsController {
 	@Inject
 	private GoodsService service;
 	
-	@RequestMapping(value = "/register",method = RequestMethod.GET)
+	
 	// 상품등록
+	@RequestMapping(value = "/register",method = RequestMethod.GET)
 	public String goodsRegisterGET() throws Exception{
 		
-		log.info("goodsRegister.jsp 이동");
+		log.info("C : goodsRegister.jsp 이동");
 		
 		return "/goods/goodsRegister";
+	}
+	
+	@RequestMapping(value = "/register",method = RequestMethod.POST)
+	public String goodsRegisterPOST(GoodsVO vo) throws Exception{
+		
+		service.register(vo);
+		log.info("C : 상품 등록 정보 " +vo);
+		log.info("C : 상품등록완료!");
+		
+		return "redirect:/goods/list";
 	}
 	
 	
