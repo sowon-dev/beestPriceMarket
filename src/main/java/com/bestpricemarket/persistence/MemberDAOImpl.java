@@ -44,4 +44,22 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace+".idCheck", id);
 	}
 	
+	// 회원정보 읽기
+	@Override
+	public MemberVO readMember(String id) throws Exception {
+		return sqlSession.selectOne(namespace + ".readMember",id);
+	}
+
+	// 회원정보 수정
+	@Override
+	public void updateMember(MemberVO vo) throws Exception {
+		 sqlSession.update(namespace+".updateMember", vo);
+	}
+
+	// 회원 탈퇴
+	@Override
+	public void deleteMember(MemberVO vo) throws Exception {
+		sqlSession.delete(namespace+".deleteMember",vo);
+	}
+	
 }
