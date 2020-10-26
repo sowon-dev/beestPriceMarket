@@ -52,7 +52,7 @@ public class GoodsController {
 	
 	// 상품삭제
 	
-	
+	// 정지브랜치 테스트!!
 	
 
 }
