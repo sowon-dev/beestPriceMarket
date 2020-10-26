@@ -12,8 +12,14 @@
   <!-- Bootstrap core CSS -->
   <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+	<!-- 버튼 CSS -->
+	<link href="${pageContext.request.contextPath}/resources/css/button-reg_goods.css" rel="stylesheet">
+	<!-- 버튼 CSS -->
+
+
   <!-- Custom styles for this template -->
   <link href="${pageContext.request.contextPath}/resources/css/shop-homepage.css" rel="stylesheet">
+  
 
 </head>
 
@@ -40,7 +46,7 @@
             <a class="nav-link" href="/member/login">로그인 | 회원가입</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">고객센터</a>
+            <a class="nav-link" href="/CS/list">고객센터</a>
           </li>
         </ul>
       </div>
@@ -54,11 +60,13 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
+         <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+         
+         
         <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
+          <a href="/goods/list" class="list-group-item">Category 1</a>
+          <a href="/goods/list" class="list-group-item">Category 2</a>
+          <a href="/goods/list" class="list-group-item">Category 3</a>
         </div>
 
       </div>
@@ -97,10 +105,10 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item One</a>
+                  <a href="/goods/detail">Item One</a>
                 </h4>
                 <h5>$24.99</h5>
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
@@ -113,10 +121,10 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item Two</a>
+                  <a href="/goods/detail">Item Two</a>
                 </h4>
                 <h5>$24.99</h5>
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
@@ -129,10 +137,10 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item Three</a>
+                  <a href="/goods/detail">Item Three</a>
                 </h4>
                 <h5>$24.99</h5>
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
@@ -145,10 +153,10 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item Four</a>
+                  <a href="/goods/detail">Item Four</a>
                 </h4>
                 <h5>$24.99</h5>
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
@@ -161,10 +169,10 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item Five</a>
+                  <a href="/goods/detail">Item Five</a>
                 </h4>
                 <h5>$24.99</h5>
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
