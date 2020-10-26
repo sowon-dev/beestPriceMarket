@@ -1,12 +1,17 @@
 package com.bestpricemarket.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.service.GoodsService;
@@ -34,7 +39,7 @@ public class GoodsController {
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
 	public String goodsRegisterPOST(GoodsVO vo) throws Exception{
 		
-		service.register(vo);
+		service.goodsRegister(vo);
 		log.info("C : 상품 등록 정보 " +vo);
 		log.info("C : 상품등록완료!");
 		
@@ -44,9 +49,13 @@ public class GoodsController {
 	
 	// 상품목록
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public String goodsListGET() throws Exception{
+	public String goodsListGET(Model model) throws Exception{
 		
 		log.info("goodsList.jsp 이동");
+		
+		//List<GoodsVO> goodsList = service.goodsList();
+		
+		model.addAttribute("goodsList",service.goodsList());
 		
 		return "/goods/goodsList";
 	}
@@ -54,8 +63,12 @@ public class GoodsController {
 	
 	// 상품조회(상품상세페이지)
 	@RequestMapping(value = "/detail",method = RequestMethod.GET)
-	public String goodsDetailGET() throws Exception{
+	public String goodsDetailGET(@RequestParam("gno") int gno, Model model) throws Exception{
 		log.info("goodsDetail.jsp 이동");
+		
+		GoodsVO goods = service.goodsDetail(gno);
+		
+		model.addAttribute("goods", goods);
 		
 		return "/goods/goodsDetail";
 	}

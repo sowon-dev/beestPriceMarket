@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<title>Shop Homepage - Start Bootstrap Template</title>
-
-
+<title>베프마켓 - 친구같은 경매플랫폼</title>
 </head>
-
 <body>
 
   <!-- 헤더 -->
@@ -28,7 +25,7 @@
 
         <h1 class="my-4">Shop Name</h1>
         <div class="list-group">
-          <a href="#" class="list-group-item">패션의류</a>
+          <a href="/goods/list" class="list-group-item">패션의류</a>
           <a href="#" class="list-group-item">뷰티잡화</a>
           <a href="#" class="list-group-item">생활가구</a>
           <a href="#" class="list-group-item">생활가전</a>
@@ -47,16 +44,18 @@
  
 
         <div class="row"> 
+        
+        <c:forEach var="list" items="${goodsList }">
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">상품제목</a>
+                  <a href="/goods/detail?gno=${list.gno}">${list.gname}</a>
                 </h4>
                 <h5>현재입찰가(50000)</h5>
-                <h5>경매마감시간</h5>
+                <h5>${endDate}</h5>
                 <h5>입찰자수</h5>
               </div>
               <div class="card-footer">
@@ -64,6 +63,8 @@
               </div>
             </div>
           </div>
+          
+          </c:forEach>
  
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
