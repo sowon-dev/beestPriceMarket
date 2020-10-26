@@ -12,4 +12,13 @@ public interface MemberService {
 
 	// 회원가입시 아이디중복확인
 	public MemberVO idCheck(String id);
+	
+	// 회원정보 보기
+	public MemberVO readMember(String id);
+	
+	// 회원정보 수정
+	public void updateMember(MemberVO vo);
+	
+	// 회원탈퇴
+	public void deleteMember(MemberVO vo);
 }
