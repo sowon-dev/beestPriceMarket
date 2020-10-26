@@ -39,7 +39,6 @@ public class MemberController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String insertPOST(MemberVO vo) throws Exception{
 		l.info("C: 회원가입포스트메서드"+ vo);
-		System.out.println("C: 회원가입 한글확인 "+vo);
 		service.joinMember(vo);		
 		return "redirect:/member/login";
 	}
@@ -77,6 +76,14 @@ public class MemberController {
 		}
 	}
 	
+	/* 로그아웃 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logoutGET(HttpSession session) throws Exception{
+		l.info("C: 로그아웃 GET");
+		session.invalidate();
+		// return "redirect:/member/main"; 얼럿창출력안하고싶을때 사용
+	}
+	
 	/* 메인페이지 */
 	// http://localhost:8088/member/main
 	
@@ -90,15 +97,7 @@ public class MemberController {
 	// http://localhost:8088/test/member/info
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public void infoGET(HttpSession session, Model model) throws Exception{
-		
-		//세션 객체 안에 있는 ID정보 저장
-		String id = (String) session.getAttribute("id");
-		l.info("C: 회원정보보기 GET의 아이디 "+id);
-		
-		//서비스안의 회원정보보기 메서드 호출
-		MemberVO vo = service.readMember(id);
-		
-		//정보저장 후 페이지 이동
+		MemberVO vo = service.readMember((String)session.getAttribute("id"));
 		model.addAttribute("memVO", vo);
 		l.info("C: 회원정보보기 GET의 VO "+ vo);
 	}
@@ -107,8 +106,8 @@ public class MemberController {
 	// http://localhost:8088/member/update
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String updateGET(HttpSession session, Model model) throws Exception{
-     model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
-     return "/member/updateForm";
+		model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
+		return "/member/updateForm";
    }	
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -121,7 +120,6 @@ public class MemberController {
     /* 회원탈퇴 */
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteGET(HttpSession session) throws Exception{
-    	// 세션제어
 		String id = (String) session.getAttribute("id");
 		if(id == null) {
 			return "redirect:/member/main";
@@ -132,9 +130,7 @@ public class MemberController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deletePOST(MemberVO vo, HttpSession session) throws Exception{
     	l.info("post"+vo);
-    	
     	service.deleteMember(vo);
-    	
     	session.invalidate();
     	return "redirect:/member/login ";
     }
