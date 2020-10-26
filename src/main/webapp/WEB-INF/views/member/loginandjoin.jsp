@@ -39,12 +39,12 @@ request.setCharacterEncoding("utf-8");
                         <div class="error"></div>
                         <div class="form loginBox">
                             <form action="/member/login" method="post" accept-charset="UTF-8"> 
-                            	<input id="id" class="form-control" type="text" placeholder="아이디" name="id"> 
-                            	<input id="pw" class="form-control" type="password" placeholder="비밀번호" name="pw"> 
+                            	<input id="id" class="form-control" type="text" placeholder="아이디" name="id" required> 
+                            	<input id="pw" class="form-control" type="password" placeholder="비밀번호" name="pw" required> 
                             	<!-- <input class="btn btn-default btn-login" type="submit" value="로그인" onclick="loginAjax()">  -->
                             	<input class="btn btn-default btn-login" type="submit" value="로그인"> 
-                            	<input class="btn btn-default btn-login" type="button" value="메인으로" onclick="location.href='/member/main'" style="width:157px;height:50px;margin-top:5px;padding:0;display:inline;"> 
-                            	<input class="btn btn-default btn-login" type="button" value="회원가입" onclick="javascript: showRegisterForm();" style="width:157px;height:50px;margin-top:5px;padding:0;display:inline;"> 
+                            	<input class="btn btn-default btn-login" type="button" value="메인으로" onclick="location.href='/member/main'" style="width:157px;height:40px;margin-top:5px;padding:0;display:inline;"> 
+                            	<input class="btn btn-default btn-login" type="button" value="회원가입" onclick="javascript: showRegisterForm();" style="width:157px;height:40px;margin-top:5px;padding:0;display:inline;"> 
                             </form>
                         </div>
                     </div>
@@ -53,11 +53,11 @@ request.setCharacterEncoding("utf-8");
                     <div class="content registerBox" style="display:none;">
                         <div class="form">
                             <form action="/member/join" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8" name="frJoin"> 
-                            	<input id="id" class="form-control" type="text" placeholder="아이디(영문,숫자포함 4~12자리)" name="id" style="width:204px;margin:0 0 5px 0;padding:12 0;display:inline;"> 
+                            	<input id="id" class="form-control" type="text" placeholder="아이디(영문,숫자혼용)" name="id" style="width:204px;margin:0 0 5px 0;padding:12 0;display:inline;" required> 
 								<input id="idCheckBtn" type="button" value="아이디중복확인" class="btn btn-default btn-register" style="width:110px;height:50px;margin:0;padding:0;display:inline;"><br>
                             		<p class="idCheck" style="margin-bottom:0;"><span class="idCheckMsg" style="font-size:12px; font-weight:bold;"></span></p>
                             	<input id="username" class="form-control" type="text" placeholder="이름" name="username" required> 
-                            	<input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문.숫자특수문자포함 8자리이상)" name="pw" > 
+                            	<input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문,숫자,특수문자혼용)" name="pw" > 
                             		<span class="pwValCheckMsg" style="font-size:12px; font-weight:bold;"></span>
                             	<input id="pw_confirmation" class="form-control" type="password" onkeyup="pwCheck()" placeholder="비밀번호 재확인" name="password_confirmation"> 
                             		<span class="pwCheckMsg" style="font-size:12px; font-weight:bold;"></span>
@@ -77,8 +77,8 @@ request.setCharacterEncoding("utf-8");
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="forgot login-footer"> <span><a href="">비밀번호찾기</a></span> </div>
-                <div class="forgot register-footer" style="display:none"> <span>이미 회원이라면 </span> <a href="javascript: showLoginForm();">로그인</a> </div>
+                <div class="forgot login-footer"> <span>비밀번호를 잊어버렸다면 </span><a href="" style="color:black">비밀번호찾기</a></div>
+                <div class="forgot register-footer" style="display:none"> <span>이미 회원이라면 </span> <a href="javascript: showLoginForm();"style="color:black">로그인</a> </div>
             </div>
         </div>
     </div>
@@ -90,26 +90,29 @@ request.setCharacterEncoding("utf-8");
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-
-
 // 아이디 중복체크
 $("#idCheckBtn").click(function(){  
-let d = document.frJoin.id.value;
-
-$.ajax({
-  url : "/member/idCheck",
-  type : "post",
-  data : { id : d
-	  },
-  success : function(data) {
-	  	  
-   if(data == 1) {
-    $(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("이미 사용중인 아이디입니다.");   
-   } else {
-    $(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");
-   }
-  }
- }); 
+	let d = document.frJoin.id.value;
+	
+	$.ajax({
+	  url : "/member/idCheck",
+	  type : "post",
+	  data : { id : d },
+	  success : function(data) {
+		if(data == 1) {
+			$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("이미 사용중인 아이디입니다.");
+		} else {
+			if(d == ""){ 
+				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("아이디를 입력하세요.");
+			}else if(d.length < 4){
+				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("아이디를 4자리이상 입력하세요.");
+			}else{
+				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");				
+			}
+			
+	    }
+	  }, error : function(){ console.log("아이디 중복확인 실패"); }
+	 }); 
 });
 
 //비밀번호 체크 
