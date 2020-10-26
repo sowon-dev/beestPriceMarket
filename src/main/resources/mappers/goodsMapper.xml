@@ -7,4 +7,16 @@
   <mapper namespace="com.bestpricemarket.mappers.goodsMapper">
   
   
+  	
+  	
+  	<!-- 상품 등록 -->
+	<insert id="registerGoods">
+ 	insert into goods(gno,g_m_id,category,gname,lowestprice,content,image,like,regDate,endDate) 
+       <!-- values (#{gno},#{g_m_id},#{category},#{gname}, #{lowestprice}, #{content}, #{image},#{like},#{regDate},#{regDate}) -->
+       values (#{1},#{admin},#{가전},#{냉장고}, #{10000}, #{ㅇㅇㅇㅇㅇ}, null,null,now(),now())
+	</insert>
+  	<!-- 상품등록 -->
+  
+  
+  
   </mapper>
