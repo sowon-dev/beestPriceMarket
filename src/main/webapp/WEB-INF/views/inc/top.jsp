@@ -42,6 +42,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/member/update">마이페이지</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/member/logout">로그아웃</a>
+          </li>
 		  <%} %>          
           <li class="nav-item">
             <a class="nav-link" href="/CS/list">고객센터</a>
