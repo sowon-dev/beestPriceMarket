@@ -10,10 +10,10 @@ public interface GoodsDAO {
 	public void registerGoods(GoodsVO vo) throws Exception; 
 	
 	// 상품목록
-	public List<GoodsVO> listGoods() throws Exception;
+	//public List<GoodsVO> listGoods() throws Exception;
 		
 	// 상품조회(상품상세페이지)
-	public GoodsVO goodsDetail(int gno) throws Exception;
+	//public GoodsVO goodsDetail(int gno) throws Exception;
 		
 	// 상품수정
 		

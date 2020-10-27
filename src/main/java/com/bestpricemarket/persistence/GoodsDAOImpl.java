@@ -28,20 +28,20 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	// 상품목록
-	@Override
-	public List<GoodsVO> listGoods() throws Exception {
-		System.out.println("DAO : 상품 목록");
+	//@Override
+	//public List<GoodsVO> listGoods() throws Exception {
+		//System.out.println("DAO : 상품 목록");
 		
-		return sqlSession.selectList(namespace+".listGoods");
-	}
+		//return sqlSession.selectList(namespace+".listGoods");
+	//}
 		
 	// 상품조회(상품상세페이지)
-	@Override
-	public GoodsVO goodsDetail(int gno) throws Exception {
-		System.out.println("DAO : 상품 조회");
+	//@Override
+	//public GoodsVO goodsDetail(int gno) throws Exception {
+		//System.out.println("DAO : 상품 조회");
 		
-		return sqlSession.selectOne(namespace+".detailGoods", gno);
-	}
+		//return sqlSession.selectOne(namespace+".detailGoods", gno);
+	//}
 		
 	// 상품수정
 		
