@@ -42,7 +42,7 @@ public class GoodsController {
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
 	public String goodsRegisterPOST(GoodsVO vo) throws Exception{
 		
-		service.register(vo);
+		service.goodsRegister(vo);
 		log.info("C : 상품 등록 정보 " +vo);
 		log.info("C : 상품등록완료!");
 		
@@ -50,17 +50,6 @@ public class GoodsController {
 	}
 	
 	
-	  @RequestMapping(value = "/register",method = RequestMethod.POST) 
-	  public String goodsRegisterPOST(GoodsVO vo) throws Exception{
-	  
-		  service.goodsRegister(vo); 
-		  System.out.println("C : 상품등록: "+vo);
-		  log.info("C : 상품 등록 정보 " +vo);
-		  log.info("C : 상품등록완료!");
-	 
-		  return "redirect:/goods/list"; 
-	  }
-	 
 	
 	
 	
