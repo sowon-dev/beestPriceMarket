@@ -2,6 +2,7 @@ package com.bestpricemarket.controller;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 
 
@@ -32,19 +33,24 @@ public class GoodsController {
 	public String goodsRegisterGET() throws Exception{
 		
 		log.info("C : goodsRegister.jsp 이동");
-		
+		System.out.println("@@@@@@@ 상품등록 페이지 이동");
 		return "/goods/goodsRegister";
 	}
 	
-	@RequestMapping(value = "/register",method = RequestMethod.POST)
-	public String goodsRegisterPOST(GoodsVO vo) throws Exception{
-		
-		service.goodsRegister(vo);
-		log.info("C : 상품 등록 정보 " +vo);
-		log.info("C : 상품등록완료!");
-		
-		return "redirect:/goods/list";
-	}
+	
+	  @RequestMapping(value = "/register",method = RequestMethod.POST) 
+	  public String goodsRegisterPOST(GoodsVO vo) throws Exception{
+	  
+		  service.goodsRegister(vo); 
+		  System.out.println("C : 상품등록: "+vo);
+		  log.info("C : 상품 등록 정보 " +vo);
+		  log.info("C : 상품등록완료!");
+	 
+		  return "redirect:/goods/list"; 
+	  }
+	 
+	
+	
 	
 	
 	// 상품목록
@@ -55,7 +61,7 @@ public class GoodsController {
 		
 		//List<GoodsVO> goodsList = service.goodsList();
 		
-		model.addAttribute("goodsList",service.goodsList());
+		//model.addAttribute("goodsList",service.goodsList());
 		
 		return "/goods/goodsList";
 	}
@@ -63,17 +69,18 @@ public class GoodsController {
 	
 	// 상품조회(상품상세페이지)
 	@RequestMapping(value = "/detail",method = RequestMethod.GET)
-	public String goodsDetailGET(@RequestParam("gno") int gno, Model model) throws Exception{
+	public String goodsDetailGET(/* @RequestParam("gno") int gno, Model model */) throws Exception{
 		log.info("goodsDetail.jsp 이동");
 		
-		GoodsVO goods = service.goodsDetail(gno);
+		//GoodsVO goods = service.goodsDetail(gno);
 		
-		model.addAttribute("goods", goods);
+		//model.addAttribute("goods", goods);
 		
 		return "/goods/goodsDetail";
 	}
 	
 	// 상품수정
+	
 	
 	// 상품삭제
 	

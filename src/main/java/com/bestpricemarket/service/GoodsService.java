@@ -11,10 +11,10 @@ public interface GoodsService {
 	public void goodsRegister(GoodsVO vo) throws Exception;
 	
 	// 상품목록
-	public List<GoodsVO> goodsList() throws Exception;
+	//public List<GoodsVO> goodsList() throws Exception;
 		
 	// 상품조회(상품상세페이지)
-	public GoodsVO goodsDetail(int gno) throws Exception;
+	//public GoodsVO goodsDetail(int gno) throws Exception;
 		
 	// 상품수정
 		
