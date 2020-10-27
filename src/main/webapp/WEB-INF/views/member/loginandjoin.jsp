@@ -57,9 +57,9 @@ request.setCharacterEncoding("utf-8");
 								<input id="idCheckBtn" type="button" value="아이디중복확인" class="btn btn-default btn-register" style="width:110px;height:50px;margin:0;padding:0;display:inline;"><br>
                             		<p class="idCheck" style="margin-bottom:0;"><span class="idCheckMsg" style="font-size:12px; font-weight:bold;"></span></p>
                             	<input id="username" class="form-control" type="text" placeholder="이름" name="username" required> 
-                            	<input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문,숫자,특수문자혼용)" name="pw" > 
+                            	<input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문,숫자,특수문자혼용)" name="pw" required> 
                             		<span class="pwValCheckMsg" style="font-size:12px; font-weight:bold;"></span>
-                            	<input id="pw_confirmation" class="form-control" type="password" onkeyup="pwCheck()" placeholder="비밀번호 재확인" name="password_confirmation"> 
+                            	<input id="pw_confirmation" class="form-control" type="password" onkeyup="pwCheck()" placeholder="비밀번호 재확인" name="password_confirmation" required> 
                             		<span class="pwCheckMsg" style="font-size:12px; font-weight:bold;"></span>
                             	<input id="email" class="form-control" type="email" placeholder="이메일" name="email" required style="height:48px;padding:13px 12px;margin-bottom:5px;color:black;">
                             	<input id="phone" class="form-control" type="text" placeholder="전화번호 예)01012345678" name="phone" required>                      
@@ -67,7 +67,7 @@ request.setCharacterEncoding("utf-8");
 								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default btn-register" style="width:110px;height:50px;margin:0;padding:0;display:inline;"><br>
 								<input type="text" id="sample4_roadAddress" class="form-control" placeholder="도로명주소" name="addr1" readonly required>
 								<input type="hidden" id="sample4_jibunAddress" class="form-control" placeholder="지번주소">
-								<input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소" name="addr2" required>
+								<input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소" name="addr2">
 								<input type="hidden" id="sample4_extraAddress" class="form-control" placeholder="참고항목">
 								<span id="guide" style="color:#999;display:none;visibility:hidden;"></span>
                             	<input class="btn btn-default btn-register" type="submit" value="회원가입" name="commit" id="submitBtn"> 
@@ -90,6 +90,8 @@ request.setCharacterEncoding("utf-8");
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
+// 버튼 비활성화
+
 // 아이디 중복체크
 $("#idCheckBtn").click(function(){  
 	let d = document.frJoin.id.value;
@@ -139,9 +141,10 @@ function pwCheck(){
 	//비밀번호 일치여부체크
 	if (pwd1 == pwd2) { //비번이 일치할 경우
     	$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'blue'}).text("비밀번호가 일치합니다.");
+		$('#submitBtn').css({background: 'rgb(33, 37, 41, 1)', color:'#FFFFFF'}).attr("disabled", false);
     } else { //비번이 불일치할 경우
    		$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호가 일치하지않습니다.");           
-   		$('#submitBtn').css('background', 'rgb(0, 123, 255, .5)').attr("disabled", true);
+	   	$('#submitBtn').css('background', 'rgb(33, 37, 41, .5)').attr("disabled", true);	
 	}
 }
 

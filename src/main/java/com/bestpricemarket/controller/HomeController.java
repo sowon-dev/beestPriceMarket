@@ -28,7 +28,7 @@ public class HomeController {
 	
 	// http://localhost:8088/main
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void index() {
+	public void main() {
 	}
 	
 }
