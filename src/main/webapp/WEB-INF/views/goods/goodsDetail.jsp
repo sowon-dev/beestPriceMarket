@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -160,54 +161,100 @@
 				<!-- 상품정보 -->	
 				
 				<!-- 상품문의 -->  	
+				
+				<section class="commentForm">
 				  	<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
 				  		<div class="review-heading">REVIEWS</div>
+				  		<div id="reply">
+
+                        <c:if test="${member == null }">
+                         <p>문의를 남기시려면 <a href="/member/login">로그인</a>해주세요</p>
+                          </c:if>
+ 
+                        <c:if test="${member != null}">
+                        <section class="commentForm">
+                        <form role="form" method="post" autocomplete="off">
+                         <div class="input_area">
+                         <textarea name="repCon" id="repCon"></textarea>
+                         </div>
+   
+                
+                         </form>
+                         </section>
+                           </c:if>
+ 
 				  		<form class="review-form">
-		        			<div class="form-group">
-			        			<label>문의내용</label>
-			        			<textarea class="form-control" rows="10"></textarea>
-			        		</div>
-			        		<div class="row">
+				  		<div class="row">
 				        		<div class="col-md-6">
 				        			<div class="form-group">
 					        			<input type="text" name="" class="form-control" placeholder="Name*">
 					        		</div>
 					        	</div>
-				        		<div class="col-md-6">
-				        			<div class="form-group">
-					        			<input type="text" name="" class="form-control" placeholder="Email Id*">
-					        		</div>
-					        	</div>
+				        		
 					        </div>
-					        <button class="round-black-btn">문의하기</button>
+				  		
+		        			<div class="form-group">
+		        			
+			        			<label>문의내용</label>
+			        			<input type="hidden" name="c_g_gno" id="c_g_gno">
+			        			<textarea class="form-control" rows="10" name="c_content" id="c_content"></textarea>
+			        		</div>
+			        		
+					        <button class="round-black-btn" id="comment_btn">문의하기</button>
+					        
+					        <script>
+					        $("#comment_btn").click(function(){
+					        	  
+					        	  var commentForm = $(".commentForm form[role='form']");
+					        	  var c_g_gno = $("#c_g_gno").val();
+					        	  var c_content = $("#c_content").val()
+					        	  
+					        	  var data = {
+					        	    c_g_gno : c_g_gno,
+					        	    c_content : c_content
+					        	    };
+					        	  
+					        	  $.ajax({
+					        	   url : "/comment",
+					        	   type : "post",
+					        	   data : data,
+					        	   success : function(){
+					        	    commentList();
+					        	   }
+					        	  });
+					        	 });
+
+					        </script>
 			        	</form>
 			        	
+			        	</div>
 			        	<br>
 			        				  	
 				  	<!-- 상품문의 목록 -->
 				  	<table class="comment-tbl">
   					  <tr>
     					<th class="comment-tbl-th">번호</th>
-    					<th class="comment-tbl-th" id="comment-sub">제목</th>
     					<th class="comment-tbl-th">작성자</th>
-    					<th class="comment-tbl-th">등록일시</th>
-    					<th class="comment-tbl-th"></th>
+    					<th class="comment-tbl-th">내용</th>
+    					<th class="comment-tbl-th">등록일자</th>
   					  </tr>
   					  <tr>
-    					<td>번호</td>
-    					<td>제목</td>
-    					<td>작성자</td>
-    					<td>등록일시</td>
-    					<td>답변</td>
+    					<td>${comment.c_num}</td>
+    					<td>${comment.c_m_id}</td>
+    					<td>${comment.c_content}</td>
+    					<td>${comment.c_regdate}</td>
   						</tr>
 					</table>
 				  	<!-- 상품문의 목록 -->
 				  	</div>
+				  	</section>
+				  	
 				 <!-- 상품문의 -->	 	
 				</div>
 			</div>
 		</div>
 	</div>
+	
   <!-- 본문 -->
   
   
