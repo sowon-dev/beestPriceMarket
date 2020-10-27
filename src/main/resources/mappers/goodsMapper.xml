@@ -9,6 +9,7 @@
   
   	
   	
+
   	<!-- 상품등록 -->
 	  <insert id="register">
  		insert into goods(category,gname,lowestprice,content,endDate)  
@@ -31,6 +32,7 @@
   		
   	</select>  -->
   	<!-- 상품조회 -->
+
   
   
   

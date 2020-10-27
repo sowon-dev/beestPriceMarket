@@ -32,6 +32,7 @@
     
     <!-- 섬머노트 에디터 -->
     <!-- include libraries(jQuery, bootstrap) -->
+
 	 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
@@ -89,6 +90,7 @@
 			return false;
 		}
 
+
 		if(endDate == ""){
 			alert("물품의 마감날짜를 입력하세요.");
 			document.fr.endDate.focus();
@@ -109,6 +111,7 @@
                 </div>
                 
                 <div class="card-body">
+
                     <form action ="" method="post" enctype="multipart/form-data"  name="fr">
                     <input type="hidden" name="gno">
                   <div>
@@ -168,12 +171,15 @@
                         <div class="name">첨부 이미지 미리보기</div>
                            <div class="value">
                                <!--  <div class="input-group js-input-file">
+
                                     <input class="input-file" type="file" name="file_cv" id="file">
                                     <label class="label--file" for="file">파일 선택</label>
                                     <span class="input-file__info">선택된 파일이 없습니다</span>
                                 </div> -->
                            <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
                         </div>
+
+
                     </div>
                     <div class="form-row">
                      <!--   <div class="name">입찰 일자</div>
@@ -198,6 +204,7 @@
                           <div class="value">
                              <input class="input--style-6" type="text" name="lowestprice" id="input">
                              <!-- 콤마 -->
+
                                  <script type="text/javascript">
                                    $(function() {
                                 	    var $input = $("#input");
@@ -220,6 +227,8 @@
                                 	function numberFormat(obj) {
                                 	  obj.value = comma(uncomma(obj.value));
                                 	}
+
+
                                 </script> 
                              <!-- 콤마 -->   
                            </div>
@@ -235,6 +244,7 @@
     </div>
 
  
+
    
 
 

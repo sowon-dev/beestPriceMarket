@@ -42,4 +42,39 @@ public class MemberServiceImpl implements MemberService{
 		return mdao.idCheck(id);
 	}
 
+	// 회원정보보기
+	@Override
+	public MemberVO readMember(String id) {
+		MemberVO vo = null;
+		try {
+			vo = mdao.readMember(id);
+			System.out.println("S: DAO 처리 완료, 정보 리턴");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+	}
+
+	// 회원정보 수정
+	@Override
+	public void updateMember(MemberVO vo) {
+		try {
+			mdao.updateMember(vo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+
+	// 회원탈퇴
+	@Override
+	public void deleteMember(MemberVO vo) {
+	    try {
+			mdao.deleteMember(vo);
+			System.out.println("S: vo 확인"+vo);
+	    } catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+	}
 }

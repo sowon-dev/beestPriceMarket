@@ -1,6 +1,8 @@
 package com.bestpricemarket.persistence;
 
+
 import java.util.List;
+
 
 import com.bestpricemarket.domain.GoodsVO;
 

@@ -19,6 +19,12 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsDAO gdao;	
 	
 	// 상품등록
+	@Override
+	public void register(GoodsVO vo) throws Exception {
+			gdao.registerGoods(vo);
+			System.out.println("S : 상품등록"+vo);
+	}
+	
 	
 	  @Override 
 	  public void goodsRegister(GoodsVO vo) throws Exception {

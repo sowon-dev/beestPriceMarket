@@ -33,8 +33,20 @@ public class GoodsController {
 	public String goodsRegisterGET() throws Exception{
 		
 		log.info("C : goodsRegister.jsp 이동");
+
 		System.out.println("@@@@@@@ 상품등록 페이지 이동");
+
 		return "/goods/goodsRegister";
+	}
+	
+	@RequestMapping(value = "/register",method = RequestMethod.POST)
+	public String goodsRegisterPOST(GoodsVO vo) throws Exception{
+		
+		service.register(vo);
+		log.info("C : 상품 등록 정보 " +vo);
+		log.info("C : 상품등록완료!");
+		
+		return "redirect:/goods/list";
 	}
 	
 	

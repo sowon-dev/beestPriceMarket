@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD지정  -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.bestpricemarket.mappers.commentMapper">
+  
+  <!-- 댓글 등록 -->
+  <insert id="commentInsert">
+        insert into comment (c_num, c_g_gno, c_m_id, c_regdate, c_content, c_ref, c_seq, c_lev)
+        values(#{c_num},#{c_g_gno},#{c_m_id},now(),#{c_content},#{c_ref},#{c_seq},#{c_lev}) 
+    </insert>
+ <!-- 댓글 등록 -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>

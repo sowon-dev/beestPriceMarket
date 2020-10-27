@@ -23,4 +23,22 @@
 		where id=#{id}		
 	</select>
 	
+	<select id="readMember" resultType="com.bestpricemarket.domain.MemberVO">
+		select *
+		from member
+		where id=#{id}
+	</select>
+	
+	<select id="updateMember" resultType="String">
+		 update member
+         set pw=#{pw},username=#{username},email=#{email},
+         phone=#{phone},addr1=#{addr1},addr2=#{addr2},reg_date=now()
+         where id=#{id}         
+	</select>	
+
+    <select id="deleteMember" resultType="String">
+	    delete from member
+	    where id=#{id}
+    </select>
+	
 </mapper>

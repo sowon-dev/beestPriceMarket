@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.bestpricemarket.domain.MemberVO;
 
@@ -42,6 +43,25 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberVO idCheck(String id) {
 		return sqlSession.selectOne(namespace+".idCheck", id);
+	}
+	
+	// 회원정보 읽기
+	@Override
+	public MemberVO readMember(String id) throws Exception {
+		return sqlSession.selectOne(namespace + ".readMember",id);
+	}
+
+	// 회원정보 수정
+	@Override
+	public void updateMember(MemberVO vo) throws Exception {
+		 sqlSession.update(namespace+".updateMember", vo);
+	}
+
+	// 회원 탈퇴
+	@Override
+	public void deleteMember(MemberVO vo) throws Exception {	
+		System.out.println("DAO: 확인! "+vo);
+		sqlSession.delete(namespace+".deleteMember",vo);
 	}
 	
 }
