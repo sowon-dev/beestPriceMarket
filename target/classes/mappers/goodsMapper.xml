@@ -9,13 +9,29 @@
   
   	
   	
-  	<!-- 상품 등록 -->
-	<insert id="registerGoods">
- 	insert into goods(gno,g_m_id,category,gname,lowestprice,content,image,like,regDate,endDate) 
-       <!-- values (#{gno},#{g_m_id},#{category},#{gname}, #{lowestprice}, #{content}, #{image},#{like},#{regDate},#{regDate}) -->
-       values (#{1},#{admin},#{가전},#{냉장고}, #{10000}, #{ㅇㅇㅇㅇㅇ}, null,null,now(),now())
-	</insert>
   	<!-- 상품등록 -->
+	  <insert id="register">
+ 		insert into goods(category,gname,lowestprice,content,endDate)  
+       values(#{category},#{gname},#{lowestprice},#{content},#{endDate}) 
+	</insert>  
+  	<!-- 상품등록 -->
+  	
+  	<!-- 상품목록 -->
+  	<!-- <select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">
+  		select * 
+  		from goods
+  		order by gno desc
+  	</select> -->
+  	<!-- 상품목록 -->
+  	
+  	<!-- 상품조회 -->
+  	<!-- <select id="detailGoods" resultType="com.bestpricemarket.domain.GoodsVO">
+  		select *
+  		from goods 
+  		
+  	</select>  -->
+  	<!-- 상품조회 -->
+
   
   
   

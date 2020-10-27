@@ -26,7 +26,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- 본문 JS  -->
 
-  
+ 
 
 </head>
 
@@ -98,7 +98,7 @@
 		     <!-- 경매정보 테이블 -->   		
 		       <table>
 		         <tr>
-		         	<th colspan="2">상품제목</th>
+		         	<th colspan="2">${goods.gname}</th>
 		         </tr>
   				 <tr>
     				<th>현재입찰가</th>
@@ -106,11 +106,11 @@
  				 </tr>
   				 <tr>
     				<th>입찰시작가</th>
-    				<td>10000원</td>
+    				<td>${goods.lowestprice}</td>
   				 </tr>
   				 <tr>
     				<th>경매기간</th>
-    				<td>2020.10.23 - 2020.10.30</td>
+    				<td>${goods.regDate} - ${goods.endDate}</td>
   				 </tr>
   				 <tr>
      			    <th>남은시간</th>
