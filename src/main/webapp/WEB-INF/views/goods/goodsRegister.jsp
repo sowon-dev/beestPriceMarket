@@ -144,9 +144,7 @@
                        <div class="name">물품설명</div>
                            <div class="value"> 
                              <div class="input-group"> 
-                                 <!-- <div id="summernote" name="content"> -->
                                       <textarea rows="30" cols="400" name="content" id="summernote"></textarea> 
-                                <!--  </div>   -->  
                              </div>  
                            </div>
                        </div>

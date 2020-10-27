@@ -7,12 +7,11 @@
   <mapper namespace="com.bestpricemarket.mappers.goodsMapper">
   
   
-  	
-  	
+  
   	<!-- 상품등록 -->
 	  <insert id="register">
- 		insert into goods(category,gname,lowestprice,content,endDate)  
-       values(#{category},#{gname},#{lowestprice},#{content},#{endDate}) 
+ 		insert into goods(category,g_m_id,gname,lowestprice,content,regDate,endDate)  
+       values(#{category},${g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate}) 
 	</insert>  
   	<!-- 상품등록 -->
   	
