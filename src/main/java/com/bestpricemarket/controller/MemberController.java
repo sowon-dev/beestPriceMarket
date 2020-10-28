@@ -9,10 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,7 +67,7 @@ public class MemberController {
 		MemberVO returnVO = service.loginMember(vo);
 		System.out.println("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
 		
-		//String url ="";
+		String url ="";
 		
 		if(returnVO != null) {
 			session.setAttribute("id", returnVO.getId());			
@@ -77,10 +75,10 @@ public class MemberController {
 			//url = "redirect:/member/main";
 			return "redirect:/member/main"; 
 		} else {
-			 // PrintWriter out = response.getWriter();
-			 // response.setContentType("text/html; charset=UTF-8"); out.
-			 // println("<script>alert('로그인 정보가 일치하지않습니다 다시 시도해주세요.'); history.go(-1);</script>"
-			 // ); out.flush();
+			 PrintWriter out = response.getWriter();
+			 //response.setContentType("text/html; charset=UTF-8"); 
+			 //out.println("<script>alert('로그인 정보가 일치하지않습니다 다시 시도해주세요.'); history.go(-1);</script>"); 
+			 //out.flush();
 			 
 			return "redirect:/member/login";
 		}
@@ -103,8 +101,6 @@ public class MemberController {
 		l.info("C: 메인 출력페이지 GET");
 		MemberVO vo = service.readMember((String)session.getAttribute("id"));
 		model.addAttribute("memVO", vo);
-		System.out.println("C: 메인세션 "+session.getAttribute("id"));
-		System.out.println("C: 메인세션 "+vo.getUsername());
 		return "main";
 	}
 	
