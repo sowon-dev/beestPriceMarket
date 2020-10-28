@@ -55,18 +55,17 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="/goods/register"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="/goods/detail?gno=${list.gno}">${list.gname}</a>
                 </h4>
-                <h5>현재입찰가(50000)</h5>
-                <h5>${endDate}</h5>
-                <h5>입찰자수</h5>
+                <h6>현재가(50000)</h6>
+                <h6>입찰자 0</h6>
+                <h6>${list.endDate}</h6>
+               
               </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
+             
             </div>
           </div>
           
@@ -90,9 +89,6 @@
   <!-- 푸터 -->
   <jsp:include page="../inc/bottom.jsp"/>
   <!-- 푸터 -->
-
-  
-
 </body>
 
 </html>

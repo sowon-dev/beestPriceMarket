@@ -1,5 +1,6 @@
 package com.bestpricemarket.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -19,32 +20,46 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsDAO gdao;	
 	
 	// 상품등록
-	
-	
-	  @Override 
-	  public void goodsRegister(GoodsVO vo) throws Exception {
+	@Override 
+	public void goodsRegister(GoodsVO vo) throws Exception {
 	       gdao.registerGoods(vo); 
 	       System.out.println("S : 상품등록"+vo); 
+	}
+	
+	// 파일업로드
+	
+	  @Override 
+	  public void fileUpload(String originalfileName, String saveFileName, long fileSize) {
+	 
+		  HashMap<String, Object> hm = new HashMap<>(); 
+		  hm.put("originalfileName",originalfileName); 
+		  hm.put("saveFileName", saveFileName); 
+		  hm.put("fileSize", fileSize);
+	  
+		  gdao.uploadFile(hm);
+	  
 	  }
 	 
+
 	
 	// 상품목록
-	//@Override
-	//public List<GoodsVO> goodsList() throws Exception {
+	@Override
+	public List<GoodsVO> goodsList() throws Exception {
 
-		//System.out.println("S : 상품목록");
-		//return gdao.listGoods();
-	//}
+		System.out.println("S : 상품목록");
+		return gdao.listGoods();
+	}
 		
 	// 상품조회(상품상세페이지)
-	//@Override
-	//public GoodsVO goodsDetail(int gno) throws Exception {
-		//System.out.println("S : 상품조회");
-		//sreturn gdao.goodsDetail(gno);
+	@Override
+	public GoodsVO goodsDetail(int gno) throws Exception {
+		System.out.println("S : 상품조회");
+		
+		return gdao.goodsDetail(gno);
 	}
 		
 	// 상품수정
 		
 	// 상품삭제
 
-//}
+}

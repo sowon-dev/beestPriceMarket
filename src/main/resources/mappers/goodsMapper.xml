@@ -9,26 +9,34 @@
   
   
   	<!-- 상품등록 -->
-	  <insert id="register">
- 		insert into goods(category,g_m_id,gname,lowestprice,content,regDate,endDate)  
-       values(#{category},${g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate}) 
+	<insert id="register">
+ 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
+ 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate});
 	</insert>  
   	<!-- 상품등록 -->
   	
+  	<!-- 파일업로드  -->
+	<insert id="uploadFile" parameterType="HashMap">
+		insert into 
+		goodsfile (f_g_gno,f_name,f_oname,f_size) values(#{gno},#{originalfileName},#{saveFileName},#{fileSize}) select gno from goods 
+		
+		
+	</insert>  	 
+  	<!-- 파일업로드  -->
+  	
+  	
+  	
   	<!-- 상품목록 -->
-  	<!-- <select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">
-  		select * 
-  		from goods
-  		order by gno desc
-  	</select> -->
+  	<select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">
+  		select * from goods order by gno desc
+  	</select> 
   	<!-- 상품목록 -->
   	
+  	
   	<!-- 상품조회 -->
-  	<!-- <select id="detailGoods" resultType="com.bestpricemarket.domain.GoodsVO">
-  		select *
-  		from goods 
-  		
-  	</select>  -->
+  	<select id="detailGoods" resultType="com.bestpricemarket.domain.GoodsVO">
+  		select * from goods where gno = #{gno} 
+  	</select>  
   	<!-- 상품조회 -->
 
   
