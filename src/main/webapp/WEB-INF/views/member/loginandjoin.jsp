@@ -183,28 +183,6 @@ function signUpValidation(){
 	}	
 }
 
-function signUp(){
-	$.ajax({
-		
-		url : "/jquery/signUp",
-		type:'POST',
-		data :  $("#registerform").serialize(),
-		success:function(data){
-			if(data == 1){
-				alert("회원가입이 완료됐습니다.^^");
-				location.href = "/member/login"
-			}else if(data == 2){
-				alert("이미 존재하는 아이디입니다.");
-				return false;
-			}else if(data == 3){
-				alert("이미 존재하는 닉네임입니다.");
-				return false;
-			}
-		}
-	})
-}
-
-
 // 카카오API
 function sample4_execDaumPostcode() {
     new daum.Postcode({
