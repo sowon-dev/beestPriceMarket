@@ -62,27 +62,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr, 
-			HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		MemberVO returnVO = service.loginMember(vo);
 		System.out.println("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
-		
-		String url ="";
 		
 		if(returnVO != null) {
 			session.setAttribute("id", returnVO.getId());			
 			rttr.addFlashAttribute("mvo", returnVO);
-			//url = "redirect:/member/main";
 			return "redirect:/member/main"; 
 		} else {
-			 PrintWriter out = response.getWriter();
-			 //response.setContentType("text/html; charset=UTF-8"); 
-			 //out.println("<script>alert('로그인 정보가 일치하지않습니다 다시 시도해주세요.'); history.go(-1);</script>"); 
-			 //out.flush();
-			 
 			return "redirect:/member/login";
 		}
-		//return url;
 	}
 	
 	/* 로그아웃 */
