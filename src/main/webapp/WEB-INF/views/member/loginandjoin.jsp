@@ -28,9 +28,9 @@ request.setCharacterEncoding("utf-8");
                 <div class="box">
                     <div class="content">
                         <div class="social"> 
-                         <a class="circle github" href="#"> <i class="fa fa-github fa-fw"></i> </a> 
+                         	<a class="circle github" href="#"> <i class="fa fa-github fa-fw"></i> </a> 
                          	<a id="google_login" class="circle google" href="#"> <i class="fa fa-google-plus fa-fw"></i> </a> 
-                        		<a id="facebook_login" class="circle facebook" href="#"> <i class="fa fa-facebook fa-fw"></i> </a> 
+                        	<a id="facebook_login" class="circle facebook" href="#"> <i class="fa fa-facebook fa-fw"></i> </a> 
                         </div>
                         <div class="division">
                             <div class="line l"></div> <span> 또는 </span>
@@ -70,7 +70,7 @@ request.setCharacterEncoding("utf-8");
 								<input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소" name="addr2">
 								<input type="hidden" id="sample4_extraAddress" class="form-control" placeholder="참고항목">
 								<span id="guide" style="color:#999;display:none;visibility:hidden;"></span>
-                            	<input class="btn btn-default btn-register" type="submit" value="회원가입" name="commit" id="submitBtn"> 
+                            	<input class="btn btn-default btn-register" type="button" value="회원가입" name="commit" id="submitBtn" onclick="signUpValidation()" > 
                             </form>
                         </div>
                     </div>
@@ -90,8 +90,6 @@ request.setCharacterEncoding("utf-8");
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
-// 버튼 비활성화
-
 // 아이디 중복체크
 $("#idCheckBtn").click(function(){  
 	let d = document.frJoin.id.value;
@@ -111,7 +109,6 @@ $("#idCheckBtn").click(function(){
 			}else{
 				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");				
 			}
-			
 	    }
 	  }, error : function(){ console.log("아이디 중복확인 실패"); }
 	 }); 
@@ -132,7 +129,7 @@ function pwValCheck(){
    	 }    
 }
 
-// 비밀번호 체크 
+// 비밀번호 일치여부 체크 
 function pwCheck(){
     let pwd1 = document.frJoin.pw.value;
     let pwd2 = $("#pw_confirmation").val();
@@ -147,6 +144,66 @@ function pwCheck(){
 	   	$('#submitBtn').css('background', 'rgb(33, 37, 41, .5)').attr("disabled", true);	
 	}
 }
+
+// 회원가입 유효성 체크
+function signUpValidation(){
+	let f = document.frJoin;
+	let userId = f.id.value;
+	let userPw = f.pw.value;
+	let userPwCheck = f.password_confirmation.value;
+	let userName = f.username.value;
+	let email = f.email.value;
+	let phone = f.phone.value;
+	let addr1 = f.addr1.value;
+	
+	if(!userId || userId.length < 4){
+		alert("아이디 중복확인버튼을 눌러주세요");
+		$("#id").focus();
+	}else if(!userName){
+		alert("이름 입력은 필수입니다.");
+		$("#username").focus();
+	}else if(!userPw){
+		alert("비밀번호 입력은 필수입니다.");
+		$("#pw").focus();
+	}else if(!userPwCheck){
+		alert("비밀번호 확인은 필수입니다.");
+		$("#password_confirmation").focus();	
+	}else if(!email){
+		alert("이메일 입력은 필수입니다.");
+		$("#email").focus();
+	}else if(!phone){
+		alert("전화번호 입력은 필수입니다.");
+		$("#phone").focus();
+	}else if(!addr1){
+		alert("우편번호찾기버튼을 눌러주세요.");
+		$("#addr1").focus();
+	}else {
+		alert("성공적으로 회원가입 되었습니다.")
+		document.frJoin.submit();
+	}	
+}
+
+function signUp(){
+	$.ajax({
+		
+		url : "/jquery/signUp",
+		type:'POST',
+		data :  $("#registerform").serialize(),
+		success:function(data){
+			if(data == 1){
+				alert("회원가입이 완료됐습니다.^^");
+				location.href = "/member/login"
+			}else if(data == 2){
+				alert("이미 존재하는 아이디입니다.");
+				return false;
+			}else if(data == 3){
+				alert("이미 존재하는 닉네임입니다.");
+				return false;
+			}
+		}
+	})
+}
+
 
 // 카카오API
 function sample4_execDaumPostcode() {
