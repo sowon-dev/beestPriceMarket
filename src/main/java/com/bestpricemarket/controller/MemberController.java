@@ -1,6 +1,10 @@
 package com.bestpricemarket.controller;
 
+import java.io.PrintWriter;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -56,24 +60,31 @@ public class MemberController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET() throws Exception{
-		l.info("C: 로그인 입력페이지 GET");
 		return "/member/loginandjoin";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
-		l.info("C: 로그인POST"+ vo.getId() + vo.getPw());
+	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		MemberVO returnVO = service.loginMember(vo);
-		l.info("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
+		System.out.println("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
+		
+		//String url ="";
 		
 		if(returnVO != null) {
 			session.setAttribute("id", returnVO.getId());			
 			rttr.addFlashAttribute("mvo", returnVO);
+			//url = "redirect:/member/main";
 			return "redirect:/member/main"; 
 		} else {
-			// 해당 정보 없는 경우 : => login페이지로 이동
+			 // PrintWriter out = response.getWriter();
+			 // response.setContentType("text/html; charset=UTF-8"); out.
+			 // println("<script>alert('로그인 정보가 일치하지않습니다 다시 시도해주세요.'); history.go(-1);</script>"
+			 // ); out.flush();
+			 
 			return "redirect:/member/login";
 		}
+		//return url;
 	}
 	
 	/* 로그아웃 */
@@ -88,8 +99,12 @@ public class MemberController {
 	// http://localhost:8088/member/main
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String mainGET() throws Exception{
+	public String mainGET(HttpSession session, Model model) throws Exception{
 		l.info("C: 메인 출력페이지 GET");
+		MemberVO vo = service.readMember((String)session.getAttribute("id"));
+		model.addAttribute("memVO", vo);
+		System.out.println("C: 메인세션 "+session.getAttribute("id"));
+		System.out.println("C: 메인세션 "+vo.getUsername());
 		return "main";
 	}
 	
