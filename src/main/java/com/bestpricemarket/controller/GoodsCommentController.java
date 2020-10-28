@@ -22,6 +22,10 @@ public class GoodsCommentController {
 	@Inject
 	private GoodsCommentService service;
 	
+	
+	
+	
+	
 	// 댓글 등록
 	@RequestMapping(value = "/comment",method = RequestMethod.POST)
 	public void goodsRegisterPOST(GoodsCommentVO cmt, HttpSession session) throws Exception{
