@@ -1,5 +1,6 @@
 package com.bestpricemarket.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,26 +23,33 @@ public class GoodsDAOImpl implements GoodsDAO {
 	// 상품등록
 	@Override
 	public void registerGoods(GoodsVO vo) throws Exception {
-		sqlSession.insert(namespace+".register",vo);
-		System.out.println("DAO : 상품등록"+vo);
 		
+		System.out.println("DAO : 상품등록"+vo);
+		sqlSession.insert(namespace+".register",vo);
 	}
 	
+	//파일업로드
+	
+	 @Override public void uploadFile(HashMap<String, Object> hm) {
+		 sqlSession.insert(namespace+".uploadFile",hm);
+	 }
+	 
+	
 	// 상품목록
-	//@Override
-	//public List<GoodsVO> listGoods() throws Exception {
-		//System.out.println("DAO : 상품 목록");
+	@Override
+	public List<GoodsVO> listGoods() throws Exception {
+		System.out.println("DAO : 상품 목록");
 		
-		//return sqlSession.selectList(namespace+".listGoods");
-	//}
+		return sqlSession.selectList(namespace+".listGoods");
+	}
 		
 	// 상품조회(상품상세페이지)
-	//@Override
-	//public GoodsVO goodsDetail(int gno) throws Exception {
-		//System.out.println("DAO : 상품 조회");
+	@Override
+	public GoodsVO goodsDetail(int gno) throws Exception {
+		System.out.println("DAO : 상품 조회");
 		
-		//return sqlSession.selectOne(namespace+".detailGoods", gno);
-	//}
+		return sqlSession.selectOne(namespace+".detailGoods", gno);
+	}
 		
 	// 상품수정
 		
