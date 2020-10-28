@@ -29,6 +29,27 @@
     <script src='${pageContext.request.contextPath}/resources/goods/goods_js/global.js'></script>
     <!-- <script src="js/global.js"></script> -->
     
+    <!-- 버튼 -->
+      <style type="text/css">  
+.btn {
+    border-radius: 4px; 
+    background: #212529;
+    color: #fff;
+    padding: 7px 45px;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #212529; 
+    transition: all 0.5s ease-in-out 0s;
+}
+.btn:hover,
+.btn:focus {
+    background: transparent;
+    color: #212529;
+    text-decoration: none;
+}
+</style>
+    <!-- 버튼 -->
+    
     
     <!-- 섬머노트 에디터 -->
     <!-- include libraries(jQuery, bootstrap) -->
@@ -41,16 +62,16 @@
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		  $('#summernote').summernote({
+		$(document).ready(function() {
+		  	$('#summernote').summernote({
 			  height: 300,                 // 에디터 높이
 			  minHeight: null,             // 최소 높이
 			  maxHeight: null,             // 최대 높이
 			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
 			  lang: "ko-KR",					// 한글 설정
 			  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-		  });
-	});
+		  	});
+		});
 	</script> 
 	
     <!-- 섬머노트 에디터 -->
@@ -112,11 +133,13 @@
                 
                 <div class="card-body">
 
-                    <form action ="" method="post" enctype="multipart/form-data"  name="fr">
-                    <input type="hidden" name="gno">
-                  <div>
-                  </div>
+                    <form action ="/goods/register" method="post" enctype="multipart/form-data"  name="fr">
+                   
+                   
+                
                   <div class="form-row">
+                  
+                  
                      <div class="name">물품분류</div>
                         <select class="bo_w_select" name="category">
                       		<option value="" selected>카테고리 선택</option>
@@ -129,7 +152,7 @@
                     <div class="form-row">
                       <div class="name">판매자</div>
                          <div class="value">
-                             <input class="input--style-6" type="text" name="g_m_id">
+                           <input class="input--style-6" type="text" name="g_m_id"><br>
                          </div>
                     </div>
                       
@@ -144,27 +167,26 @@
                        <div class="name">물품설명</div>
                            <div class="value"> 
                              <div class="input-group"> 
-                                 <!-- <div id="summernote" name="content"> -->
-                                      <textarea rows="30" cols="400" name="content" id="summernote"></textarea> 
-                                <!--  </div>   -->  
+                                      <textarea rows="30" cols="400" id="summernote" name="content" ></textarea> 
                              </div>  
                            </div>
                        </div>
+                       
                     <div class="form-row">
                        <div class="name">첨부 이미지 등록</div>
-                          <!-- <div class="value">
+                           <div class="value">
                               <div class="input-group js-input-file">
-                                    <input class="input-file" type="file" name="file_cv" id="file"> 
-                                    <label class="label--file" for="file">파일 선택</label> 
-                                   <span class="input-file__info">선택된 파일이 없습니다</span>
+                                    
+                                     <input multiple="multiple" type="file" name="uploadFile" class="input-file" id="file"/>  
+                                    <!-- <input type="file" name="file" class="input-file" id="file"  />  -->
                               </div>
                           <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
-                       </div> -->
+                       </div> 
 						
 
 
 
-
+	
 
                     </div> 
                     <div class="form-row">
@@ -178,67 +200,35 @@
                                 </div> -->
                            <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
                         </div>
-
-
+					
                     </div>
-                    <div class="form-row">
-                     <!--   <div class="name">입찰 일자</div>
-                         <div class="value">
-                            <input class="input--style-6" type="datetime-local" name="regDate">
-                         </div>
-                          <script>
-                            document.getElementById('regDate').value= new Date().toISOString().slice(0, -1);
-                         </script>  -->
-                    </div>
+            
+                   
+                   
+                   
                     <div class="form-row">
                        <div class="name">마감 일자</div>
                          <div class="value">
-                            <input class="input--style-6" type="datetime-local" name="endDate">
+                            <input class="input--style-6" type="text" name="endDate">
                          </div>
-                          <script>
+                         <!--  <script>
                             document.getElementById('endDate').value= new Date().toISOString().slice(0, -1);
-                         </script> 
+                         </script>  -->
                     </div>
                     <div class="form-row">
                         <div class="name">경매 시작가</div>
                           <div class="value">
                              <input class="input--style-6" type="text" name="lowestprice" id="input">
-                             <!-- 콤마 -->
-
-                                 <script type="text/javascript">
-                                   $(function() {
-                                	    var $input = $("#input");
-                                	    $input.on('keyup', function() {
-                                	    // 입력 값 알아내기
-                                	    var _this = this;
-                                	    numberFormat(_this)
-                                	  })
-                                	});
-                                	// 콤마 찍기
-                                	function comma(str) {
-                                	  str = String(str);
-                                	  return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-                                	}
-                                	// 콤마 풀기
-                                	function uncomma(str) {
-                                	  str = String(str);
-                                	  return str.replace(/[^\d]+/g, '');
-                                	}
-                                	function numberFormat(obj) {
-                                	  obj.value = comma(uncomma(obj.value));
-                                	}
-
-
-                                </script> 
-                             <!-- 콤마 -->   
+                            
                            </div>
                       </div>
                       <div class="card-footer">
-                    	<input type="submit" value="물품 등록" onclick="return goods_register()" class="btn btn--radius-2 btn--blue-2" > 
+                    	<input type="submit" value="물품 등록" onclick="return goods_register()" class="btn" > 
                     	
                       </div>
                   </form>
                 </div>
+              
             </div>
         </div>
     </div>

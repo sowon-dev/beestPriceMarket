@@ -98,15 +98,23 @@
 		     <!-- 경매정보 테이블 -->   		
 		       <table>
 		         <tr>
+
 		         	<th colspan="2">상품제목</th>
+=======
+		         	<th colspan="2" style="font-size:40px;">${goods.gname}</th>
+
 		         </tr>
   				 <tr>
     				<th>현재입찰가</th>
-    				<td>50000원</td>
+    				<td></td>
  				 </tr>
   				 <tr>
     				<th>입찰시작가</th>
+
     				<td>10000원</td>
+=======
+    				<td>${goods.lowestprice}원</td>
+
   				 </tr>
   				 <tr>
     				<th>경매기간</th>
@@ -114,11 +122,11 @@
   				 </tr>
   				 <tr>
      			    <th>남은시간</th>
-    				<td>-----</td>
+    				<td></td>
   				</tr>
   				<tr>
      				<th>입찰수</th>
-    				<td>10명       <button>입찰기록</button></td>
+    				<td>       <button>입찰기록</button></td>
   				</tr>
   				<tr>
      				<th>배송정보</th>
@@ -131,7 +139,7 @@
 		        
 	        			<div class="product-count">
 	        				<form action="#" class="display-flex">
-	        				  <a href="#" class="round-black-btn">입찰하기</a>
+	        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
 	        				  <a href="#" class="round-black-btn">관심상품</a>
 							</form>
 							
@@ -159,6 +167,8 @@
 				  	상품 설명란
 				  	</div>
 				<!-- 상품정보 -->	
+				
+<!-- /******************************************************************************************************************************************** -->
 				
 				<!-- 상품문의 -->  	
 				
@@ -313,6 +323,8 @@
 				  	</section>
 				  	
 				 <!-- 상품문의 -->	 	
+				 
+<!-- /******************************************************************************************************************************************** -->
 				</div>
 			</div>
 		</div>
