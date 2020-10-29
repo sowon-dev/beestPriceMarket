@@ -52,9 +52,15 @@
   	 </select>
   
   	 <select id="getGoods" resultType="com.bestpricemarket.domain.GoodsVO">
-  	 	select * from goods where gno = #{gno}
+  	 	select gname,gno,bidprice from goods where gno = #{gno}
   	 </select>
   	 
-
+  	 <insert id="insertParam">
+  	 	insert into pay	values(#{p_merchant_uid},#{p_g_gno},#{pg},#{p_method},#{p_buyer_name},#{p_buyer_tel},#{p_g_gname},#{p_g_bidprice},#{p_re_name},#{p_re_tel},#{p_re_addr1},#{p_re_addr2})
+  	 </insert>
+  	 
+  	 <select id="getPayment" resultType="com.bestpricemarket.domain.PaymentVO">
+  	 	select * from pay where p_g_gno = #{p_g_gno}
+  	 </select>
   
   </mapper>
