@@ -17,8 +17,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	//DB연결
 	@Inject
-	private SqlSession sqlSession; //mapper위치까지 접근 가능 but mapper가 여러개일수있음 => mapper구분필요
-	
+	private SqlSession sqlSession;
 	private static final String namespace = "com.bestpricemarket.mappers.memberMapper";
 
 	//회원가입

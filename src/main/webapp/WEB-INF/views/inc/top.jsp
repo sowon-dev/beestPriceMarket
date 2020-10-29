@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/goods/list">내경매</a>
+            <a class="nav-link" href="/myAction">내경매</a>
           </li>
           <%
           String id = (String) session.getAttribute("id");
@@ -41,6 +41,9 @@
           <%} else { %>
           <li class="nav-item">
             <a class="nav-link" href="/member/update">마이페이지</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/member/logout">로그아웃</a>
           </li>
 		  <%} %>          
           <li class="nav-item">
