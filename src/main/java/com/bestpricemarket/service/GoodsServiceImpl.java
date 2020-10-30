@@ -8,7 +8,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.persistence.GoodsCommentDAO;
 import com.bestpricemarket.persistence.GoodsDAO;
 
 @Service
@@ -17,7 +19,8 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	// DAO 의존 주입
 	@Inject
-	private GoodsDAO gdao;	
+	private GoodsDAO gdao;
+	
 	
 	// 상품등록
 	@Override 
@@ -61,5 +64,7 @@ public class GoodsServiceImpl implements GoodsService {
 	// 상품수정
 		
 	// 상품삭제
+	
+	
 
 }

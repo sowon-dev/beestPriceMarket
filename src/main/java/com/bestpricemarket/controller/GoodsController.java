@@ -1,6 +1,7 @@
 package com.bestpricemarket.controller;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsFileVO;
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.service.GoodsCommentService;
 import com.bestpricemarket.service.GoodsService;
 
 @Controller
@@ -31,6 +34,7 @@ public class GoodsController {
 	// 서비스 의존 주입 
 	@Inject
 	private GoodsService service;
+	
 	
 	
 	// 상품등록
@@ -122,6 +126,10 @@ public class GoodsController {
 	
 	
 	// 상품삭제
+	
+	
+	
+	
 	
 	
 	

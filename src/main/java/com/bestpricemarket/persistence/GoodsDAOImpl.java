@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 
+import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsVO;
 
 @Repository
@@ -50,9 +51,13 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		return sqlSession.selectOne(namespace+".detailGoods", gno);
 	}
+
+	
 		
 	// 상품수정
 		
 	// 상품삭제
+	
+	
 
 }

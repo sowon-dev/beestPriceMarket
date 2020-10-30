@@ -3,6 +3,7 @@ package com.bestpricemarket.service;
 
 import java.util.List;
 
+import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsFileVO;
 import com.bestpricemarket.domain.GoodsVO;
 
@@ -26,5 +27,7 @@ public interface GoodsService {
 	// 상품수정
 		
 	// 상품삭제
+	
+	
 
 }
