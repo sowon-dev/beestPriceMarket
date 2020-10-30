@@ -8,24 +8,8 @@
   
   
   
-  	<!-- 상품등록 -->
-	<insert id="register">
- 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
- 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate});
-	</insert>  
-  	<!-- 상품등록 -->
-  	
-  	<!-- 파일업로드  -->
-	<insert id="uploadFile" parameterType="HashMap">
-		insert into 
-		goodsfile (f_g_gno,f_name,f_oname,f_size) values(#{gno},#{originalfileName},#{saveFileName},#{fileSize}) select gno from goods 
-		
-		
-	</insert>  	 
-  	<!-- 파일업로드  -->
-  	
-  	
-  	
+
+  	  	
   	<!-- 상품목록 -->
   	<select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">
   		select * from goods order by gno desc
@@ -38,6 +22,53 @@
   		select * from goods where gno = #{gno} 
   	</select>  
   	<!-- 상품조회 -->
+  	
+  	
+  	  <!-- 상품등록 -->
+	<insert id="register" useGeneratedKeys="true" keyProperty="gno" parameterType="com.bestpricemarket.domain.GoodsVO">
+ 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
+ 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate});
+	</insert>  
+  	<!-- 상품등록 -->
+  	
+  	
+  	<!-- 첨부파일업로드  -->
+	 <insert id="insertFile" parameterType="hashmap">
+		<![CDATA[
+			insert into goodsfile
+			 (f_g_gno,f_oname,f_name,f_size,crea_date,update_date) 
+			 values(#{gno},#{f_oname},#{f_name},#{f_size},sysdate(),sysdate())
+		]]>
+	</insert> 
+	<!-- 첨부파일업로드  -->
+	
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		select fno, f_oname, round(f_size/1024,1) as f_size
+		from goodsfile
+		where fno = #{fno}
+		and del_chk = 'N'
+	</select>
+	
+	
+	<!-- <select id="detailFile" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			select 
+			   fno, f_oname, round(f_size/1024,1) as f_size
+			from
+			   goodsfile
+			where 
+			   f_g_gno = #{fno}
+			   and
+			   del_chk = 'N'      
+		]]>
+	</select> 
+	 -->
+	
+	
+  	<!-- 파일업로드  -->
+  	
 
   
   

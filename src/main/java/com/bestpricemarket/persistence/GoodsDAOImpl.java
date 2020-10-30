@@ -2,6 +2,7 @@ package com.bestpricemarket.persistence;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -25,15 +26,34 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public void registerGoods(GoodsVO vo) throws Exception {
 		
 		System.out.println("DAO : 상품등록"+vo);
+		
 		sqlSession.insert(namespace+".register",vo);
+		
+		
+		
+		
 	}
 	
-	//파일업로드
+	// 첨부파일 업로드
+	@Override
+	public void insertFile(Map<String, Object> map) throws Exception {
+		
+		System.out.println("DAO : 첨부 파일 업로드 -> " + map);
+		sqlSession.insert(namespace+".insertFile", map);
+		
+		
+		
+	}
 	
-	 @Override public void uploadFile(HashMap<String, Object> hm) {
-		 sqlSession.insert(namespace+".uploadFile",hm);
-	 }
-	 
+	// 첨부파일 조회
+	@Override
+	public List<Map<String, Object>> selectFileList(int gno) throws Exception {
+
+		System.out.println("DAO : 첨부 파일 조회 -> " + gno);
+		return sqlSession.selectList(namespace+".selectFileList", gno);
+	}
+	
+	
 	
 	// 상품목록
 	@Override

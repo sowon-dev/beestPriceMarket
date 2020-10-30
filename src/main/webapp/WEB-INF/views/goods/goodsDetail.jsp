@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,6 +136,30 @@
 	        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
 	        				  <a href="#" class="round-black-btn">관심상품</a>
 							</form>
+	        			</div>
+	        			
+	        			<div class="product-count">
+	        				<form action="" class="display-flex">
+	        				  <button type="button" id="modify" class="round-black-btn" style="margin-right:20px;" >수정</button>
+	        				  <button type="button"  id="delete" class="round-black-btn" >삭제</button>
+							</form>
+							
+							<script type="text/javascript">
+							 var formObj = $("form[role='form']");
+							  
+							  $("#modify").click(function(){
+							   formObj.attr("action", "/goods/modify");
+							   formObj.attr("method", "get")
+							   formObj.submit();
+							  });
+							  
+							  $("#delete").click(function(){    
+							   formObj.attr("action", "/goods/delete");
+							   formObj.submit();
+							  });
+							</script>
+							
+							
 							
 	        			</div>
 	        		</div>
@@ -155,9 +181,33 @@
 			
 				<div class="tab-content" id="myTabContent">
 				<!-- 상품정보 -->	
-				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-				  	상품 설명란
-				  	</div>
+<%-- 				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+				  	
+				  	<c:choose>
+    					<c:when test="${fn:length(file) > 0 }">
+   	 					<div class="blog-file">
+        <ul>
+        <c:forEach items="${file }" var="file">
+            <li> 
+                <span class="file-img"></span>
+                <div class="file-info">
+                    <a href='#'><i class="fa fa-camera"></i> ${file.f_oname }</a>
+                    <span>${file.f_size }kb</span>
+                    <img src="${file.f_name }">
+                </div>
+            </li>
+        </c:forEach>
+        </ul>
+    </div>
+    </c:when>
+</c:choose>
+				  	</div> --%>
+				  	
+				  	
+			${file }
+				  	
+				  	
+				  	
 				<!-- 상품정보 -->	
 				
 <!-- /******************************************************************************************************************************************** -->
