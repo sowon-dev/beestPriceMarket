@@ -23,7 +23,4 @@
 
 	<context:component-scan base-package="com.bestpricemarket.controller" />
 	
-	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean class="com.bestpricemarket.loginAPI.NaverLoginBO" id="naverLoginBO"/>
-	
 </beans:beans>

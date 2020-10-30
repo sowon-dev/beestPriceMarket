@@ -28,8 +28,8 @@ request.setCharacterEncoding("utf-8");
                 <div class="box">
                     <div class="content">
                         <div class="social"> 
-                         	<a class="circle github" href="#"> <i class="fa fa-github fa-fw"></i> </a> 
                          	<span id="google_login" class="circle google" onclick="init();"> <i class="fa fa-google-plus fa-fw"></i> </span> 
+                         	<a class="circle github" href="#"> <i class="fa fa-github fa-fw"></i> </a> 
                         	<a id="facebook_login" class="circle facebook" href="#"> <i class="fa fa-facebook fa-fw"></i> </a> 
                         </div>
                         <div class="division">
