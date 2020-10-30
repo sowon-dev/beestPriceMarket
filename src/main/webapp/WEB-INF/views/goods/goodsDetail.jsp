@@ -38,6 +38,23 @@
    <jsp:include page="../inc/top.jsp"/>
   <!-- 헤더 -->
   
+  <script type="text/javascript">
+  
+							  var formObj = $("form[role='form']");
+							  
+							  $('#modify').click(function(){
+							   /* formObj.attr("action", "/goods/modify?gno="${goods.gno});
+							   formObj.attr("method", "get")
+							   formObj.submit(); */
+							   alert("dddddddd")
+							  });
+							  
+							  $("#delete").click(function(){    
+							   formObj.attr("action", "/goods/delete");
+							   formObj.submit();
+							  }); 
+							</script>
+  
   
   <!-- 본문 -->
   <div class="pd-wrap">
@@ -130,38 +147,29 @@
 			</table>
 			<!-- 경매정보 테이블 --> 
 
-		        
+		        <form action="#" class="display-flex">
 	        			<div class="product-count">
-	        				<form action="#" class="display-flex">
+	        				
 	        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
 	        				  <a href="#" class="round-black-btn">관심상품</a>
-							</form>
+					
 	        			</div>
-	        			
-	        			<div class="product-count">
-	        				<form action="" class="display-flex">
-	        				  <button type="button" id="modify" class="round-black-btn" style="margin-right:20px;" >수정</button>
-	        				  <button type="button"  id="delete" class="round-black-btn" >삭제</button>
-							</form>
-							
-							<script type="text/javascript">
-							 var formObj = $("form[role='form']");
-							  
-							  $("#modify").click(function(){
-							   formObj.attr("action", "/goods/modify");
-							   formObj.attr("method", "get")
-							   formObj.submit();
-							  });
-							  
-							  $("#delete").click(function(){    
-							   formObj.attr("action", "/goods/delete");
-							   formObj.submit();
-							  });
-							</script>
-							
-							
-							
+	        	</form>				
+	        	<!-- 수정/삭제 // 자바스크립트 구현 해야함!! 이동 안됨 -->
+	        			<form action="" role="form">
+	        			<div class="product-count" >
+	        				  <a href="/goods/modify?gno=${goods.gno}" style="margin-right:20px;" >수정</a>
+	        				  <input type="button"  id="delete" value="삭제" class="round-black-btn" >
 	        			</div>
+	        			</form>
+	        			<!-- 
+	        			<form action="" role="form">
+	        			<div class="product-count" >
+	        				  <input type="button"  id="modify" value="수정" class="round-black-btn" >
+	        				  <input type="button"  id="delete" value="삭제" class="round-black-btn" >
+	        			</div>
+	        			</form> -->
+	        	<!-- 수정/삭제 // 자바스크립트 구현 해야함!! 이동 안됨 -->		
 	        		</div>
 	        	</div>
 	        </div>
@@ -181,32 +189,15 @@
 			
 				<div class="tab-content" id="myTabContent">
 				<!-- 상품정보 -->	
-<%-- 				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+
 				  	
-				  	<c:choose>
-    					<c:when test="${fn:length(file) > 0 }">
-   	 					<div class="blog-file">
-        <ul>
-        <c:forEach items="${file }" var="file">
-            <li> 
-                <span class="file-img"></span>
-                <div class="file-info">
-                    <a href='#'><i class="fa fa-camera"></i> ${file.f_oname }</a>
-                    <span>${file.f_size }kb</span>
-                    <img src="${file.f_name }">
-                </div>
-            </li>
-        </c:forEach>
-        </ul>
-    </div>
-    </c:when>
-</c:choose>
-				  	</div> --%>
-				  	
-				  	
-			${file }
-				  	
-				  	
+				  	<div class="form-group" style="border: 1px solid #dbdbdb;">
+					<c:forEach var="file" items="${file}">
+						<a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>(${file.f_size}kb)<br>
+						<img src="${file.f_name}">
+					</c:forEach>
+				</div>
+	
 				  	
 				<!-- 상품정보 -->	
 				
