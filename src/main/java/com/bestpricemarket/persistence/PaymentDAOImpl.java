@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.MemberVO;
-import com.bestpricemarket.domain.ParamVO;
 import com.bestpricemarket.domain.PaymentVO;
 
 //@Repository : DAO객체를 스프링에서 인식 할 수 있도록 처리

@@ -2,7 +2,6 @@ package com.bestpricemarket.persistence;
 
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.MemberVO;
-import com.bestpricemarket.domain.ParamVO;
 import com.bestpricemarket.domain.PaymentVO;
 
 public interface PaymentDAO {
