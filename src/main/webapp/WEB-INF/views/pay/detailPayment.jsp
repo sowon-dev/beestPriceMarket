@@ -7,7 +7,7 @@
 	<title>Home</title>
 <style>
 .payMove {
-  background-color: black;
+  background-color: #212529;
   font: bold;
   color: white;
   transition-duration: 0.4s;
@@ -35,6 +35,7 @@
 <!-- 카카오페이 결제모듈 스크립트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <body>
 <!-- 주문자 정보 -->
 <form name="order_form">
@@ -101,13 +102,18 @@
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">주소</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="re_addr1" name="re_addr1">                            
+                           <input id="postcode1" type="hidden" value="" style="width:50px;" readonly/>
+                           <input id="postcode2" type="hidden" value="" style="width:50px;" readonly/>
+                           <input id="zonecode" type="hidden" value="" style="width:50px;" readonly/>
+                           <input type="text" class="form-control" id="re_addr1" name="re_addr1" readonly style="width:218px;display: inline-block;">  
+                           <input type="button" class="payMove" onClick="openDaumZipAddress();" value = "주소 찾기" style="padding: 8px 10px;font-size: 14px;">                              
                         </div>
+                        
                     </div> 
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">상세주소</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="re_addr2" name="re_addr2">                            
+                        <div class="col-sm-9">                        	
+                            <input type="text" class="form-control" id="re_addr2" name="re_addr2">                           
                         </div>
                     </div>
                      <div class="form-group">
@@ -122,6 +128,8 @@
         </div> <!-- / panel preview2 -->       
 	</div>
 </div><!-- 주문자 정보 -->
+
+<!-- 우편번호 테스트 -->
 
 <!-- 상품 정보 -->
 <div class="container">
@@ -190,6 +198,7 @@
 </div><!-- 결제창  -->
 </form>
 
+
 <script type="text/javascript">
 	function same_info(f) {
 			f.re_username.value = f.username.value;
@@ -197,14 +206,39 @@
 			f.re_addr1.value = f.addr1.value;
 			f.re_addr2.value = f.addr2.value;
 	}	
+
+	function openDaumZipAddress() {
+
+		new daum.Postcode({
+
+			oncomplete:function(data) {
+
+				jQuery("#postcode1").val(data.postcode1);
+
+				jQuery("#postcode2").val(data.postcode2);
+
+				jQuery("#zonecode").val(data.zonecode);
+
+				jQuery("#re_addr1").val(data.address);
+
+				jQuery("#re_addr2").focus();
+
+				console.log(data);
+
+			}
+
+		}).open();
+
+	}	
 </script>
+
+
 
 <script>
 	var re_username = document.order_form.re_username;
 	var re_phone = document.order_form.re_phone;
 	var re_addr1 = document.order_form.re_addr1;
-	var re_addr2 = document.order_form.re_addr2;
-
+	var re_addr2 = document.order_form.re_addr2;	
 	
 	
 	
@@ -274,8 +308,12 @@
     	    			//[3] 아직 제대로 결제가 되지 않았습니다.
     	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
     	    		}    	    		
-    	    	});
-    	    	location.href="/pay/order";
+    	    	});    	    	    	    	
+   
+    	    	alert("결제 성공"); // 임시로 띄어놓음. alert없으면 DB에 insert처리하는 시간보다 빨리 처리되서 상품정보 출력X    	    	    		    	    	
+        	    location.href="/pay/order?gno=" + ${gvo.gno}; 
+        	           	    
+    	    	
     	    } else {
     	        var msg = '결제에 실패하였습니다.';
     	        msg += '에러내용 : ' + rsp.error_msg;

@@ -1,8 +1,5 @@
 package com.bestpricemarket.controller;
 
-import java.io.PrintWriter;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bestpricemarket.domain.MemberVO;
-import com.bestpricemarket.domain.ParamVO;
 import com.bestpricemarket.domain.PaymentVO;
 import com.bestpricemarket.service.PaymentService;
 
@@ -48,36 +45,38 @@ public class PaymentController {
 		// 내경매에서 해당하는 상품번호 물건을 결제하기 눌렀을때 출력되는 상품정보 객체저장
 		// 추후 사진추가예정(지금은 사진x)
 		model.addAttribute("gvo", service.getGoods(a_g_gno));
+		
+		// 결제 유효성검사(DB에 중복된값 체크)
+		PaymentVO result = service.getpayment(a_g_gno);
+		model.addAttribute("result", result);
 		return "/pay/detailPayment";
 	}
 
 	
 	  @RequestMapping(value = "/payment",method = RequestMethod.POST)
 	  @ResponseBody
-	  public String kakao(HttpServletRequest req,HttpServletResponse resp,/*RedirectAttributes rttr*/Model model,@ModelAttribute PaymentVO pvo) throws Exception {
+		public void kakao(HttpServletRequest req,/* RedirectAttributes rttr */Model model,/* @ModelAttribute */PaymentVO pvo) throws Exception {
 	  // 결제정보 처리 페이지(정보처리) 
 	  // String imp_uid = req.getParameter("imp_uid");
 	  // System.out.println("결과값 : " + imp_uid);	 
 	  // System.out.println("객체 값 : " + pvo);
-	  resp.setContentType("text/html; charset=UTF-8");
+	 
 	  
 	  PaymentVO vo2 = service.getpayment(pvo.getP_g_gno());
 	  System.out.println("pvo : " + pvo);
-	  System.out.println("vo2 : " + vo2);
-	  
-	  if(pvo.getP_g_gno() != vo2.getP_g_gno()) {
-		  service.insertParam(pvo);
-		  resp.sendRedirect("/main"); 		  
+	  System.out.println("vo2 : " + vo2);   
+	
+	  if(vo2 == null) {
+		 service.insertParam(pvo);		 
 	  }
-	  return "/main";	   
-	  }
+	}
 	 
 
 	// http://localhost:8088/pay/order
-	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	/* @ResponseBody */
-	public String orderCompleted(/* @RequestBody Map<String,Object> kakaoPayInfo */) throws Exception {
-		//logger.info(kakaoPayInfo.toString());
+	@RequestMapping(value = "/order", method = RequestMethod.GET)	
+	public String orderCompleted(int gno,Model model) throws Exception {
+		PaymentVO pvo = service.getpayment(gno);
+		model.addAttribute("pay",pvo);
 		return "/pay/orderCompleted";
 	}
 	

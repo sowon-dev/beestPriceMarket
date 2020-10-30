@@ -81,8 +81,8 @@ background: #1AA85C;
  <div class="row m-auto text-center w-75">
 	<div class="col-4 princing-item blue" style="margin-left: 33.33%; margin-top: 12%;">
           <div class="pricing-divider ">
-              <h3 class="text-light">상품 주문이 완료되었습니다.</h3>
-            <h4 class="my-0 display-2 text-light font-weight-normal mb-3"><span class="h3">삼성 갤럭시 노트 10</span></h4>
+              <h3 class="text-light">상품 결제가 완료되었습니다.</h3>
+            <h4 class="my-0 display-2 text-light font-weight-normal mb-3"><span class="h3">${pay.p_g_gname }</span></h4>
              <svg class='pricing-divider-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
           <path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
 	c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z' fill='#FFFFFF' opacity='0.6'></path>
@@ -97,13 +97,13 @@ background: #1AA85C;
 
           <div class="card-body bg-white mt-0 shadow">
             <ul class="list-unstyled mb-5 position-relative">
-              <li><b>결재금액 </b> ₩ 100000</li>
-              <li><b>구매자 아이디 </b> 이재용</li>
-              <li><b>구매자 이메일</b> rich@gmail.com </li>
-              <li><b>상품 번호 </b> #331856</li>
+              <li><b>결재금액 </b> ${pay.p_g_bidprice}원</li>
+              <li><b>구매자 이름 </b> ${pay.p_buyer_name }</li>
+              <li><b>구매자 연락처</b> ${pay.p_buyer_tel } </li>
+              <li><b>상품 번호 </b> ${pay.p_g_gno }</li>
             </ul>
             <button type="button" class="btn btn-lg btn-block  btn-custom " 
-            onclick="location.href='http://localhost:8088/pay/payment'">홈으로 가기</button>
+            onclick="location.href='/main'">홈으로 가기</button>
           </div>
         </div>      
  </div>
