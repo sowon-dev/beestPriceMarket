@@ -29,7 +29,7 @@ request.setCharacterEncoding("utf-8");
                     <div class="content">
                         <div class="social"> 
                          	<a class="circle github" href="#"> <i class="fa fa-github fa-fw"></i> </a> 
-                         	<a id="google_login" class="circle google" href="#"> <i class="fa fa-google-plus fa-fw"></i> </a> 
+                         	<span id="google_login" class="circle google" onclick="init();"> <i class="fa fa-google-plus fa-fw"></i> </span> 
                         	<a id="facebook_login" class="circle facebook" href="#"> <i class="fa fa-facebook fa-fw"></i> </a> 
                         </div>
                         <div class="division">
@@ -88,6 +88,9 @@ request.setCharacterEncoding("utf-8");
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- 주소API  -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- google signin api -->
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 
 <script type="text/javascript">
 // 아이디 중복체크
@@ -182,6 +185,50 @@ function signUpValidation(){
 		document.frJoin.submit();
 	}	
 }
+
+// google signin API
+var googleUser = {};
+function init() {
+	 gapi.load('auth2', function() {
+	  console.log("init()시작");
+	  auth2 = gapi.auth2.init({
+	        client_id: '344387180411-fk8bjqrfa46sk96fsl9jr0u7bn5rc3o9.apps.googleusercontent.com',
+	        cookiepolicy: 'single_host_origin',
+	      });
+	      attachSignin(document.getElementById('google_login'));
+	 });
+}
+
+//google signin API2
+function attachSignin(element) {
+    auth2.attachClickHandler(element, {},
+        function(googleUser) {
+    	var profile = googleUser.getBasicProfile();
+    	var id_token = googleUser.getAuthResponse().id_token;
+	  	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  	  console.log('ID토큰: ' + id_token); // Do not send to your backend! Use an ID token instead.
+	  	  console.log('Name: ' + profile.getName());
+	  	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			$(function() {
+				$.ajax({
+				    url: '/member/loginGoogle',
+				    type: 'post',
+				    data: {"id": profile.getEmail(),
+				        "pw": profile.getId(),
+				        "username": profile.getName(),
+						"email": profile.getEmail()
+					    },
+				    success: function (data) {
+				            alert("구글아이디로 로그인 되었습니다");
+				            location.href="/member/main";
+				        }
+				});
+			})
+        }, function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
+    console.log("끝");
+  }
 
 // 카카오API
 function sample4_execDaumPostcode() {
