@@ -86,7 +86,8 @@
 		var content = document.fr.content.value;
 		var lowestprice = document.fr.lowestprice.value;
 		var endDate = document.fr.endDate.value;
-		
+
+		alert(category);
 		if(category == ""){
 			alert("물품분류를 선택하세요.");
 			document.fr.category.focus();
@@ -117,9 +118,12 @@
 			document.fr.endDate.focus();
 			return false;
 		}
+
+	 
 	}
 	</script>    
     <!-- 유효성 체크 -->
+ 
     
 </head>
 <body>
@@ -133,7 +137,7 @@
                 
                 <div class="card-body">
 
-                    <form action ="/goods/register" method="post" enctype="multipart/form-data"  name="fr">
+                    <form action ="/goods/register" method="post" enctype="multipart/form-data" name="fr">
                    
                    
                 
@@ -176,32 +180,46 @@
                        <div class="name">첨부 이미지 등록</div>
                            <div class="value">
                               <div class="input-group js-input-file">
-                                    
-                                     <input multiple="multiple" type="file" name="uploadFile" class="input-file" id="file"/>  
-                                    <!-- <input type="file" name="file" class="input-file" id="file"  />  -->
+                              <input type="file" id="gdsImg" name="file">
+                               <div class="select_img"><img src=""></div>     
+                                    <!--  <input multiple="multiple" type="file" name="uploadFile" class="input-file" id="file"/>  --> 
+                                     <!-- <input type="file" name="file" class="input-file" id="file"  />  --> 
                               </div>
                           <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
-                       </div> 
-						
+                       </div>  
+					
+					   
+    			<!-- 이미지업로드 -->
+ 				<script>
+  					$("#gdsImg").change(function(){
+   						if(this.files && this.files[0]) {
+    						var reader = new FileReader;
+    						reader.onload = function(data) {
+     					$(".select_img img").attr("src", data.target.result).width(500);        
+    					}
+    					reader.readAsDataURL(this.files[0]);
+   						}
+  					});
+ 				</script>
+    			<!-- 이미지업로드 -->
+    			
+    			
 
-
-
-	
 
                     </div> 
-                    <div class="form-row">
+                  <!--   <div class="form-row">
                         <div class="name">첨부 이미지 미리보기</div>
-                           <div class="value">
+                           <div class="value"> -->
                                <!--  <div class="input-group js-input-file">
 
                                     <input class="input-file" type="file" name="file_cv" id="file">
                                     <label class="label--file" for="file">파일 선택</label>
                                     <span class="input-file__info">선택된 파일이 없습니다</span>
                                 </div> -->
-                           <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
-                        </div>
+                        <!--    <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
+                        </div> -->
 					
-                    </div>
+                   <!--  </div> -->
             
                    
                    
@@ -223,7 +241,7 @@
                            </div>
                       </div>
                       <div class="card-footer">
-                    	<input type="submit" value="물품 등록" onclick="return goods_register()" class="btn" > 
+                    	<input type="submit" value="물품 등록"  onclick="return goods_register()" class="btn" > 
                     	
                       </div>
                   </form>

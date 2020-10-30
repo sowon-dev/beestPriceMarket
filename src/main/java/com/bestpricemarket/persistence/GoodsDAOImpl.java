@@ -29,9 +29,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		sqlSession.insert(namespace+".register",vo);
 		
-		
-		
-		
 	}
 	
 	// 첨부파일 업로드
@@ -40,8 +37,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		System.out.println("DAO : 첨부 파일 업로드 -> " + map);
 		sqlSession.insert(namespace+".insertFile", map);
-		
-		
 		
 	}
 	

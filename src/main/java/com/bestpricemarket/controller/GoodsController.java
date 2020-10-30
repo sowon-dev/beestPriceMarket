@@ -132,8 +132,8 @@ public class GoodsController {
 		
 		System.out.println("C : goodsModify.jsp 이동");
 		
-		//GoodsVO vo = service.goodsModify(gno);
-		
+		GoodsVO goods = service.goodsModify(gno);
+		model.addAttribute("goods", goods);
 		
 		return "/goods/goodsModify";
 		

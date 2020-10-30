@@ -14,27 +14,12 @@ public class GoodsVO {
 	private Timestamp regDate;
 	private Timestamp endDate;
 	private int actionstatus;
+	/*
+	 * private String image; private String imgThumb;
+	 */
 	
+
 	
-	// 생성자
-	public GoodsVO() {}
-	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content, int like,
-			Timestamp regDate, Timestamp endDate, int actionstatus) {
-		super();
-		this.gno = gno;
-		this.g_m_id = g_m_id;
-		this.category = category;
-		this.gname = gname;
-		this.lowestprice = lowestprice;
-		this.content = content;
-		this.like = like;
-		this.regDate = regDate;
-		this.endDate = endDate;
-		this.actionstatus = actionstatus;
-	}
-	
-	
-	// set/get 메소드
 	public int getGno() {
 		return gno;
 	}
@@ -96,12 +81,35 @@ public class GoodsVO {
 		this.actionstatus = actionstatus;
 	}
 	
+	
+	public GoodsVO() {}
+	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content, int like,
+			Timestamp regDate, Timestamp endDate, int actionstatus) {
+		super();
+		this.gno = gno;
+		this.g_m_id = g_m_id;
+		this.category = category;
+		this.gname = gname;
+		this.lowestprice = lowestprice;
+		this.content = content;
+		this.like = like;
+		this.regDate = regDate;
+		this.endDate = endDate;
+		this.actionstatus = actionstatus;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "GoodsVO [gno=" + gno + ", g_m_id=" + g_m_id + ", category=" + category + ", gname=" + gname
 				+ ", lowestprice=" + lowestprice + ", content=" + content + ", like=" + like + ", regDate=" + regDate
 				+ ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
 	}
+	
+	
+	
+
+	
 	
 	
 	

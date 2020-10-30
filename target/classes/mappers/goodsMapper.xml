@@ -6,9 +6,12 @@
   
   <mapper namespace="com.bestpricemarket.mappers.goodsMapper">
   
-  
-  
-
+    <!-- 상품등록 -->
+	<insert id="register" useGeneratedKeys="true" keyProperty="gno" parameterType="com.bestpricemarket.domain.GoodsVO">
+ 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
+ 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate});
+	</insert>  
+  	<!-- 상품등록 -->
   	  	
   	<!-- 상품목록 -->
   	<select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">
@@ -16,21 +19,11 @@
   	</select> 
   	<!-- 상품목록 -->
   	
-  	
   	<!-- 상품조회 -->
   	<select id="detailGoods" resultType="com.bestpricemarket.domain.GoodsVO">
   		select * from goods where gno = #{gno} 
   	</select>  
   	<!-- 상품조회 -->
-  	
-  	
-  	  <!-- 상품등록 -->
-	<insert id="register" useGeneratedKeys="true" keyProperty="gno" parameterType="com.bestpricemarket.domain.GoodsVO">
- 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
- 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate});
-	</insert>  
-  	<!-- 상품등록 -->
-  	
   	
   	<!-- 첨부파일업로드  -->
 	 <insert id="insertFile" parameterType="hashmap">
@@ -47,7 +40,7 @@
 	<select id="selectFileList" parameterType="int" resultType="hashMap">
 		select fno, f_oname, round(f_size/1024,1) as f_size
 		from goodsfile
-		where fno = #{fno}
+		where f_g_gno = #{gno}
 		and del_chk = 'N'
 	</select>
 	
