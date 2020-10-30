@@ -142,17 +142,6 @@ public class MemberController {
 		System.out.println("C: 구글아이디 포스트 db에서 가져온 vo "+ vo);
 		System.out.println("C: 구글아이디 포스트 ajax에서 가져온 id "+ mvo_ajaxid);
 		
-		/*
-		//구글 회원가입
-		service.joinMemberByGoogle(vo);	
-		
-		//구글 로그인
-		returnVO = service.loginMemberByGoogle(vo);
-		session.setAttribute("id", returnVO.getId());			
-		rttr.addFlashAttribute("mvo", returnVO);
-		*/
-		
-		//idCheck함수를 사용하는 방법? 파라미터로 id가 필요한데??? 버튼만 눌리면 어떻게 받아오지?
 		if(returnVO == null) { //아이디가 DB에 존재하지 않는 경우
 			//구글 회원가입
 			service.joinMemberByGoogle(vo);	
