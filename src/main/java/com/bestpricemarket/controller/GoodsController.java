@@ -1,10 +1,14 @@
 package com.bestpricemarket.controller;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
@@ -17,10 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
-import com.bestpricemarket.domain.GoodsFileVO;
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.service.GoodsService;
+import com.bestpricemarket.utils.FileUtils;
 
 @Controller
 @RequestMapping(value = "/goods/*")
@@ -32,63 +37,61 @@ public class GoodsController {
 	@Inject
 	private GoodsService service;
 	
+	// 파일 업로드 소스 
+	/*
+	 * @Resource(name = "uploadPath") private String uploadPath;
+	 */
+	
+	
+	
 	
 	// 상품등록
 	@RequestMapping(value = "/register",method = RequestMethod.GET)
-	public String goodsRegisterGET() throws Exception{
+	public String goodsRegisterGET(Model model) throws Exception{
 		
 		log.info("C : goodsRegister.jsp 이동");
 
 		System.out.println("@@@@@@@ 상품등록 페이지 이동");
 
+		model.addAttribute("text", "text");
 		return "/goods/goodsRegister";
 	}
 	
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
-	public String goodsRegisterPOST(GoodsVO vo, HttpSession session,
-			MultipartHttpServletRequest mhsq) throws Exception{
+	public String goodsRegisterPOST(GoodsVO vo, MultipartHttpServletRequest mpRequest) throws Exception{
 		
-		String id = (String) session.getAttribute("id");
 		
-		service.goodsRegister(vo);
-		log.info("C : 상품 등록 정보 " +vo);
+		
+		// 파일 업로드 - 방법1
+		/*
+		 * String imgUploadPath = uploadPath + File.separator + "imgUpload"; String
+		 * ymdPath = UploadFileUtils.calcPath(imgUploadPath); String fileName = null;
+		 * 
+		 * if(file != null) { fileName = UploadFileUtils.fileUpload(imgUploadPath,
+		 * file.getOriginalFilename(), file.getBytes(), ymdPath); } else { fileName =
+		 * uploadPath + File.separator + "images" + File.separator + "none.png"; }
+		 * 
+		 * vo.setImage(File.separator + "imgUpload" + ymdPath + File.separator +
+		 * fileName); vo.setImgThumb(File.separator + "imgUpload" + ymdPath +
+		 * File.separator + "s" + File.separator + "s_" + fileName);
+		 */
+		// 파일 업로드 - 방법1
+		
+		// 파일 업로드 - 방법2
+		
+		// 파일 업로드 - 방법2
+		
+		
+		
 		System.out.println("C : 뷰페이지에서 전달되는 파라미터 -> "+ vo);
+		service.goodsRegister(vo, mpRequest);
 		
 		
-		  String realFolder = "d:/upload2/"; File dir = new File(realFolder); if(
-		  !dir.isDirectory()) { dir.mkdir(); }
-		  
-		  // 넘어온 파일을 리스트로 저장 
-		  List<MultipartFile> mf = mhsq.getFiles("uploadFile");
-		  if(mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
-		  
-		  }else { 
-			  for(int i=0; i<mf.size(); i++) { 
-				  // 파일 중복명 처리 
-				  String getId = UUID.randomUUID().toString(); 
-				  // 본래 파일명 
-				  String originalfileName = mf.get(i).getOriginalFilename(); 
-				  // 저장되는 파일 이름  
-				  //String saveFileName = getId+ "." + getExtension(originalfileName); 
-				  String saveFileName = getId + "." +FilenameUtils.getExtension(originalfileName);
-		  
-		  
-				  String savePath = realFolder + saveFileName; // 저장 될 파일 경로
-		  
-				  long fileSize = mf.get(i).getSize(); // 파일 사이즈
-		  
-				  mf.get(i).transferTo(new File(savePath)); // 파일 저장
-		  
-				  service.fileUpload(originalfileName, saveFileName, fileSize);
-		  
-		  } }
-		 
-		  log.info("C : 상품등록완료!");
-		  System.out.println("C : 상품등록 완료@@@@");
+		
+		System.out.println("C : 상품등록 완료@@@@");
 		
 		return "redirect:/goods/list";
 	}
-	
 	
 	
 
@@ -96,7 +99,7 @@ public class GoodsController {
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String goodsListGET(Model model) throws Exception{
 		
-		log.info("goodsList.jsp 이동");
+		System.out.println("C : goodsList.jsp 이동");
 		
 		List<GoodsVO> goodsList = service.goodsList();
 		
@@ -106,24 +109,56 @@ public class GoodsController {
 	}
 	
 	
-	// 상품조회(상품상세페이지)
+	
+	// 상품 상세페이지 
 	@RequestMapping(value = "/detail",method = RequestMethod.GET)
 	public String goodsDetailGET(@RequestParam("gno") int gno, Model model) throws Exception{
-		log.info("goodsDetail.jsp 이동");
+		System.out.println("C : goodsDetail.jsp 이동");
 		
-		GoodsVO goods = service.goodsDetail(gno);
+		 
 		
-		model.addAttribute("goods", goods);
+		model.addAttribute("goods", service.goodsDetail(gno));
+		
+		List<Map<String, Object>> fileList = service.selectFileList(gno);
+		model.addAttribute("file", fileList);
 		
 		return "/goods/goodsDetail";
 	}
 	
+	
 	// 상품수정
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public String goodsModifyGET(@RequestParam("gno") int gno,Model model) throws Exception{
+		
+		System.out.println("C : goodsModify.jsp 이동");
+		
+		//GoodsVO vo = service.goodsModify(gno);
+		
+		
+		return "/goods/goodsModify";
+		
+		
+	}
 	
 	
 	// 상품삭제
 	
 	
 	
+	
+	//*******************************************************************************************************************************
+	// 내경매
+	@RequestMapping(value = "/myauction", method = RequestMethod.GET)
+	public String myAuctionGET() throws Exception{
+	      
+	      return "/goods/myAuction";
+	   }
+	
+
+
 
 }
+	
+	
+
+

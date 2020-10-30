@@ -1,15 +1,25 @@
 package com.bestpricemarket.service;
 
+import java.io.File;
+
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.persistence.GoodsDAO;
+import com.bestpricemarket.utils.FileUtils;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -19,27 +29,33 @@ public class GoodsServiceImpl implements GoodsService {
 	@Inject
 	private GoodsDAO gdao;	
 	
+	@Resource(name="fileUtils")
+	private FileUtils fileUtils;
+	
 	// 상품등록
-	@Override 
-	public void goodsRegister(GoodsVO vo) throws Exception {
-	       gdao.registerGoods(vo); 
-	       System.out.println("S : 상품등록"+vo); 
+	@Override
+	public void goodsRegister(GoodsVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
+		
+		System.out.println("S : 상품 목록");
+		 gdao.registerGoods(vo);
+		
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(vo, mpRequest); 
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			gdao.insertFile(list.get(i)); 
+		}
+		
 	}
 	
-	// 파일업로드
+	// 첨부파일 조회
+	@Override
+	public List<Map<String, Object>> selectFileList(int gno) throws Exception {
+
+		System.out.println("S : 첨부파일 조회");
+		
+		return gdao.selectFileList(gno);
+	}
 	
-	  @Override 
-	  public void fileUpload(String originalfileName, String saveFileName, long fileSize) {
-	 
-		  HashMap<String, Object> hm = new HashMap<>(); 
-		  hm.put("originalfileName",originalfileName); 
-		  hm.put("saveFileName", saveFileName); 
-		  hm.put("fileSize", fileSize);
-	  
-		  gdao.uploadFile(hm);
-	  
-	  }
-	 
 
 	
 	// 상품목록
@@ -53,13 +69,25 @@ public class GoodsServiceImpl implements GoodsService {
 	// 상품조회(상품상세페이지)
 	@Override
 	public GoodsVO goodsDetail(int gno) throws Exception {
-		System.out.println("S : 상품조회");
+		// TODO Auto-generated method stub
 		
-		return gdao.goodsDetail(gno);
+		GoodsVO vo = gdao.goodsDetail(gno);
+		
+		
+		return vo;
 	}
-		
+	
 	// 상품수정
 		
 	// 상품삭제
 
 }
+
+
+
+
+
+
+
+
+
