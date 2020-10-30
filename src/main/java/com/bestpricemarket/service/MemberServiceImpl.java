@@ -48,7 +48,7 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO vo = null;
 		try {
 			vo = mdao.readMember(id);
-			System.out.println("S: DAO 처리 완료, 정보 리턴");
+			System.out.println("S: 로그인 정보 리턴");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,7 +61,6 @@ public class MemberServiceImpl implements MemberService{
 		try {
 			mdao.updateMember(vo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -77,4 +76,27 @@ public class MemberServiceImpl implements MemberService{
 			e.printStackTrace();
 		}
 	}
+
+	//구글 회원가입
+	@Override
+	public void joinMemberByGoogle(MemberVO vo) {
+		mdao.joinMember(vo);
+	}
+
+	//구글 로그인
+	@Override
+	public MemberVO loginMemberByGoogle(MemberVO vo) {
+		MemberVO returnVO = null;
+		try {
+			returnVO = mdao.readMemberWithIDPW(vo.getId(), vo.getPw());
+			System.out.println("S: 로그인 아디: "+vo.getId()+" 비번: "+vo.getPw()+" 이름: "+vo.getUsername());
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnVO = null; //실행하다 문제가 생겼을때 해당 데이터를 보내지않겠다는 의미 = 예외처리
+		}
+		return returnVO;
+	}
+	
+
+	
 }
