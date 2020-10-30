@@ -64,7 +64,7 @@
 
                         <div class="col-md-6 text-right">
                             <p class="font-weight-bold mb-4">물건 현황</p>
-                            <p class="mb-1"><span class="text-muted">아이디: </span>${BasketVO.l_m_id}</p>
+                            <p class="mb-1"><span class="text-muted">아이디: </span>${b}</p>
                             <p class="mb-1"><span class="text-muted">카테고리 </span> 10253642</p>
                             <p class="mb-1"><span class="text-muted">상품이름: </span> Root</p>
                             <p class="mb-1"><span class="text-muted">좋아요: </span> John Doe</p>
@@ -76,8 +76,8 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th class="border-0 text-uppercase small font-weight-bold">찜한 순서</th>
-                                        <th class="border-0 text-uppercase small font-weight-bold">아이디</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">찜한순서</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold"></th>
                                         <th class="border-0 text-uppercase small font-weight-bold">상품이름</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">경매상태</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">입찰가</th>
@@ -86,16 +86,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:forEach items="${basketlist }" var="BasketVO">
                                     <tr>
-                                        <td>1</td>
-                                        <td>${bv.l_m_id }</td>
-                                        <td>LTS Versions</td>
-                                        <td>21</td>
-                                        <td>$321</td>
-                                        <td>$3452</td>
-                                    	<td>삭제</td>
+                                        <td>${BasketVO.lno }</td> 
+                                        <td>${BasketVO.l_m_id }</td> 
+                                        <td>${BasketVO.gname }</td>
+                                        <td>${BasketVO.actionstatus }</td>
+                                        <td>${BasketVO.lowestprice }</td>
+                                        <td>${BasketVO.enddate }</td>
+                                    	<td><a href="/basket/delete?lno=${BasketVO.lno }">삭제</a></td>
                                     	<td>입찰</td>
                                     </tr>
+                                    </c:forEach>
                                     <tr>
                                         <td>1</td>
                                         <td>Software</td>
