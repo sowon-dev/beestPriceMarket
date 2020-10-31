@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/myAction">내경매</a>
+            <a class="nav-link" href="/goods/myauction">내경매</a>
           </li>
           <%
           String id = (String) session.getAttribute("id");

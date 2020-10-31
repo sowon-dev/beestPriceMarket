@@ -1,5 +1,7 @@
 package com.bestpricemarket.persistence;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.MemberVO;
+import com.bestpricemarket.domain.PaymentVO;
 
 //@Repository : DAO객체를 스프링에서 인식 할 수 있도록 처리
 //DAO 객체를 구현한 객체로 사용하도록 지정
@@ -22,7 +25,7 @@ public class PaymentDAOImpl implements PaymentDAO{
 	
 	// Mapper를 구분하는 값
 	private static final String namespace 
-		= "com.payment.mapper.MemberMapper"; 
+		= "com.bestpricemarket.mappers.payMapper"; 
 	
 	@Override
 	public MemberVO getMember(String id) throws Exception {
@@ -37,4 +40,14 @@ public class PaymentDAOImpl implements PaymentDAO{
 		return gvo;
 	}
 
+	@Override
+	public void insertParam(PaymentVO pvo) throws Exception {
+		sqlSession.selectOne(namespace + ".insertParam",pvo);		
+	}
+
+	@Override
+	public PaymentVO getPayment(int p_g_gno) throws Exception {
+		
+		return sqlSession.selectOne(namespace + ".getPayment",p_g_gno);
+	}
 }
