@@ -77,7 +77,7 @@ request.setCharacterEncoding("utf-8");
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="forgot login-footer"> <span>비밀번호를 잊어버렸다면 </span><a href="" style="color:black">비밀번호찾기</a></div>
+                <div class="forgot login-footer"> <span>비밀번호를 잊어버렸다면 </span><a href="/member/findpw" style="color:black">비밀번호찾기</a></div>
                 <div class="forgot register-footer" style="display:none"> <span>이미 회원이라면 </span> <a href="javascript: showLoginForm();"style="color:black">로그인</a> </div>
             </div>
         </div>
@@ -206,7 +206,7 @@ function attachSignin(element) {
     	var profile = googleUser.getBasicProfile();
     	var id_token = googleUser.getAuthResponse().id_token;
 	  	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  	  console.log('ID토큰: ' + id_token); // Do not send to your backend! Use an ID token instead.
+	  	  console.log('ID토큰: ' + id_token);
 	  	  console.log('Name: ' + profile.getName());
 	  	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 			$(function() {

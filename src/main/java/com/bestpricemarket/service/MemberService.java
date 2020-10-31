@@ -28,4 +28,6 @@ public interface MemberService {
 	//구글로그인
 	public MemberVO loginMemberByGoogle(MemberVO vo);
 	
+	//이메일발송
+	public void sendEmail(MemberVO vo, String div) throws Exception;
 }

@@ -1,6 +1,5 @@
 package com.bestpricemarket.controller;
 
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -168,6 +167,11 @@ public class MemberController {
 		}
 		
 		return "redirect:/member/main";
+	}
+    
+    /* 비밀번호 찾기 */
+    @RequestMapping(value = "/findpw")
+	public void findPw() throws Exception{
 	}
 	
 }
