@@ -1,5 +1,7 @@
 package com.bestpricemarket.persistence;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.bestpricemarket.domain.MemberVO;
 
 public interface MemberDAO {
@@ -22,6 +24,7 @@ public interface MemberDAO {
 	// 회원탈퇴
 	public void deleteMember(MemberVO vo) throws Exception;
 	
-
+	// 비밀번호 변경
+	public int updatePw(MemberVO vo) throws Exception;
 }
 
