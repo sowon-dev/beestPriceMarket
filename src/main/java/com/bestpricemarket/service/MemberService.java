@@ -1,5 +1,7 @@
 package com.bestpricemarket.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.bestpricemarket.domain.MemberVO;
 
 // 일반적으로는 DAO랑 같은 메소드명을 사용하여 일관성을 유지한다
@@ -30,4 +32,8 @@ public interface MemberService {
 	
 	//이메일발송
 	public void sendEmail(MemberVO vo, String div) throws Exception;
+	
+	//비밀번호찾기
+	public void findPw(HttpServletResponse resp, MemberVO vo) throws Exception;
+	
 }
