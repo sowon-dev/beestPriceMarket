@@ -31,7 +31,6 @@ public class CSDAOImpl implements CSDAO {
 	@Override
 	public List<CSVO> listAll() throws Exception {
 
-		System.out.println("DAO�뿉�꽌 listAll()瑜� �샇異�");
 		
 		List<CSVO> CSList =
 				session.selectList(namespace+".listAll");
@@ -42,13 +41,9 @@ public class CSDAOImpl implements CSDAO {
 	//글내용
 	@Override
 	public CSVO content(Integer csbno) throws Exception {
-		System.out.println("DAO : content(csbno) �샇異� ");
-		System.out.println("DAO : mapper �궗�슜�빐�꽌 SQL �샇異� ");
 		
 		CSVO vo = session.selectOne(namespace+".content",csbno);
 		
-		System.out.println("DAO : SQL 援щЦ 泥섎━ �셿猷�");
-		System.out.println("DAO : �꽌鍮꾩뒪 媛앹껜 �씠�룞");		
 		return vo;
 	}
 
@@ -76,7 +71,6 @@ public class CSDAOImpl implements CSDAO {
 	public List<CSVO> listPage(int displayPost, int postNum) throws Exception {
 
 		HashMap data = new HashMap();
-		//DAO, Mapper에서는 data를 하나만 전송하기 때문에 HashMap사용(VO사용해도 됨)
 		
 		data.put("displayPost", displayPost);
 		data.put("postNum", postNum);
