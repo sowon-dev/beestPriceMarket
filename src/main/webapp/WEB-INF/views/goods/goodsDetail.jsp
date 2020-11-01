@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- 본문 CSS -->
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -25,7 +28,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- 본문 JS  -->
 
-  
+	
+	        			
+
+
 
 </head>
 
@@ -36,13 +42,16 @@
   <!-- 헤더 -->
   
   
+  
+  
+  
   <!-- 본문 -->
   <div class="pd-wrap">
 		<div class="container">
 	        <div class="heading-section">
 	        </div>
 	        <div class="row">
-	        	<div class="col-md-6">
+	       	<div class="col-md-6">
 	        		<div id="slider" class="owl-carousel product-slider">
 						<div class="item">
 						  	<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
@@ -89,35 +98,36 @@
 						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
 						</div>
 					</div>
-	        	</div>
+	        	</div> 
 	        	<div class="col-md-6">
 	        		<div class="product-dtl">
         				
 		        		<br><br>
+		     
 		     <!-- 경매정보 테이블 -->   		
 		       <table>
 		         <tr>
-		         	<th colspan="2">상품제목</th>
+		         	<th colspan="2" style="font-size:40px;">${goods.gname}</th>
 		         </tr>
   				 <tr>
     				<th>현재입찰가</th>
-    				<td>50000원</td>
+    				<td></td>
  				 </tr>
   				 <tr>
     				<th>입찰시작가</th>
-    				<td>10000원</td>
+    				<td>${goods.lowestprice}원</td>
   				 </tr>
   				 <tr>
     				<th>경매기간</th>
-    				<td>2020.10.23 - 2020.10.30</td>
+    				<td>${goods.regDate} - ${goods.endDate}</td>
   				 </tr>
   				 <tr>
      			    <th>남은시간</th>
-    				<td>-----</td>
+    				<td></td>
   				</tr>
   				<tr>
      				<th>입찰수</th>
-    				<td>10명       <button>입찰기록</button></td>
+    				<td>       <button>입찰기록</button></td>
   				</tr>
   				<tr>
      				<th>배송정보</th>
@@ -127,37 +137,81 @@
 			</table>
 			<!-- 경매정보 테이블 --> 
 
-		        
+		        <form action="#" class="display-flex">
 	        			<div class="product-count">
-	        				<form action="#" class="display-flex">
-	        				  <a href="#" class="round-black-btn">입찰하기</a>
+	        				
+	        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
 	        				  <a href="#" class="round-black-btn">관심상품</a>
-							</form>
-							
+	        				  <a href="${path}/goods/report">신고하기</a>
+					
 	        			</div>
+	        	</form>				
+	       <!-- 수정/삭제 이동 -->
+	      
+	        <form action="" role="form">
+	        	<div class="product-count" >
+	        		<input type="hidden" name="gno" id="gno" value="${goods.gno}">
+	        		<input type="button"  id="modify" value="수정" class="round-black-btn" style="margin-right:20px;">
+	        		<input type="button"  id="delete" value="삭제" class="round-black-btn" >
+	        	</div>
+	        </form> 
+	         
+	        <script type="text/javascript">
+
+				$(document).ready(function(){
+
+					var gno = $('#gno').val();
+					
+					$(document).on("click","#modify",function(){
+							location.href = '/goods/modify?gno='+gno;
+					});
+
+					$(document).on("click","#delete",function(){
+						var con = confirm("정말로 삭제하시겠습니까?");
+						if(con){
+							location.href = '/goods/delete?gno='+gno;
+						}	
+					});
+				});
+			</script>
+	        <!-- 수정/삭제 이동 -->
+
 	        		</div>
 	        	</div>
 	        </div>
+	        
+	        
 	        
 	        <!-- 상품 정보, 상품 문의 탭 -->
 	        <div class="product-info-tabs">
 		        <ul class="nav nav-tabs" id="myTab" role="tablist">
 				  	<li class="nav-item">
-				    	<a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">상품정보</a>
+				    	<a href="#description" class="nav-link active" id="description-tab" data-toggle="tab"  role="tab" aria-controls="description" aria-selected="true" >상품정보</a>
 				  	</li>
 				  	<li class="nav-item">
-				    	<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">상품문의(0)</a>
+				    	<a href="#review" class="nav-link" id="review-tab" data-toggle="tab"  role="tab" aria-controls="review" aria-selected="false" >상품문의</a>
 				  	</li>
 				</ul>
 			<!-- 상품 정보, 상품 문의 탭 -->
+		
 			
 			
 				<div class="tab-content" id="myTabContent">
+				
+				<!-- 상품정보 -->
+				${goods.content}
+				
+					
+				  	<div class="form-group" style="border: 1px solid #dbdbdb;">
+					<c:forEach var="file" items="${file}">
+					 <img src="<c:url value="/imgUpload/${file.f_name}"/>"/>
+					<%-- <a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>(${file.f_size}kb)<br> --%>
+					</c:forEach>
+				</div>
+	
 				<!-- 상품정보 -->	
-				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-				  	상품 설명란
-				  	</div>
-				<!-- 상품정보 -->	
+				
+<!-- /******************************************************************************************************************************************** -->
 				
 				<!-- 상품문의 -->  	
 				  	<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
@@ -204,6 +258,7 @@
 				  	<!-- 상품문의 목록 -->
 				  	</div>
 				 <!-- 상품문의 -->	 	
+				 <!-- /******************************************************************************************************************************************** -->
 				</div>
 			</div>
 		</div>

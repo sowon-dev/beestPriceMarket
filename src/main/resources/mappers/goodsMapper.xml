@@ -6,16 +6,87 @@
   
   <mapper namespace="com.bestpricemarket.mappers.goodsMapper">
   
-  
-  	
-  	
-  	<!-- 상품 등록 -->
-	<insert id="registerGoods">
- 	insert into goods(gno,g_m_id,category,gname,lowestprice,content,image,like,regDate,endDate) 
-       <!-- values (#{gno},#{g_m_id},#{category},#{gname}, #{lowestprice}, #{content}, #{image},#{like},#{regDate},#{regDate}) -->
-       values (#{1},#{admin},#{가전},#{냉장고}, #{10000}, #{ㅇㅇㅇㅇㅇ}, null,null,now(),now())
-	</insert>
+    <!-- 상품등록 -->
+	<insert id="register" useGeneratedKeys="true" keyProperty="gno" parameterType="com.bestpricemarket.domain.GoodsVO">
+ 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
+ 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate})
+	</insert>  
   	<!-- 상품등록 -->
+  	  	
+  	<!-- 상품목록 -->
+  	<select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">
+  		select * from goods order by gno desc
+  	</select> 
+  	<!-- 상품목록 -->
+  	
+  	<!-- 상품조회 -->
+  	<select id="detailGoods" resultType="com.bestpricemarket.domain.GoodsVO">
+  		select * from goods where gno = #{gno} 
+  	</select>  
+  	<!-- 상품조회 -->
+  		
+  	<!-- 상품 수정 -->
+  	<update id="modifyGoods">
+  		update goods
+  		  set
+  		  	category = #{category},
+  		    gname = #{gname},
+  		    content = #{content},
+  		    endDate = #{endDate},
+  		    lowestprice = #{lowestprice}
+  		  where gno = #{gno}  
+  	</update>
+  	<!-- 상품 수정 -->
+  	
+  	<!-- 상품 삭제 -->
+  	<delete id="deleteGoods">
+  		delete from goods
+  		where gno = #{gno}
+  	</delete>
+  	<!-- 상품 삭제 -->
+  	
+  	<!-- 첨부파일업로드  -->
+	 <insert id="insertFile" parameterType="hashmap">
+		<![CDATA[
+			insert into goodsfile
+			 (f_g_gno,f_oname,f_name,f_size,crea_date,update_date) 
+			 values(#{gno},#{f_oname},#{f_name},#{f_size},sysdate(),sysdate())
+		]]>
+	</insert> 
+	<!-- 첨부파일업로드  -->
+	
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		select fno, f_name, f_oname, round(f_size/1024,1) as f_size, del_chk
+		from goodsfile
+		where f_g_gno = #{gno}
+		and del_chk = 'N'
+		order by fno asc
+	</select>
+  	<!-- 파일업로드  -->
+  	
+  	<!-- 첨부파일업로드 수정 -->
+  	<update id="updateFile" parameterType="hashMap">
+  		update goodsfile
+  		set del_chk = 'Y'
+  		where fno = #{fno}
+  	</update>
+  	<!-- 첨부파일업로드 수정 -->
+  
+  
+  
+  
+   <!-- 상품신고 -->
+  	<select id="showReportDetail" resultType="com.bestpricemarket.domain.ReportVO">
+  		select g.g_m_id, g.gname, g.gno, m.email
+  		from goods g
+  		join Member m
+  		on g.g_m_id = m.id
+  		where gno=#{gno}
+  	</select>
+  	<!-- 상품신고 -->
+
   
   
   
