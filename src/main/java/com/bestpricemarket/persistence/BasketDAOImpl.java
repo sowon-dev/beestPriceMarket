@@ -1,6 +1,8 @@
 package com.bestpricemarket.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -28,23 +30,33 @@ public class BasketDAOImpl implements BasketDAO {
 	}
 
 	@Override
-	public List<BasketVO> Basketlist() throws Exception {
+	public List<BasketVO> Basketlist(int start, int end) throws Exception {
 	 System.out.println("D: 장바구니 리스트");	
-	  
+	 Map<String, Object> map = new HashMap<String,Object>(); 
+	 map.put("start", start);
+	 map.put("end", end);
 	 List<BasketVO> basketlist =
-	 session.selectList(namespace+".listBasket");
+	 session.selectList(namespace+".listBasket",map);
 		
 		return basketlist;
 	}
 
 	@Override
-	public void deleteBasket(BasketVO bv) throws Exception {
+	public void deleteBasket(Integer lno) throws Exception {
 		System.out.println("D: 삭제 동작!!");
 	  
 	    session.selectOne(namespace+".deleteBasket");
 	}
 
-	  
+	@Override
+	public int getCount() throws Exception {
+		
+		return session.selectOne(namespace+".getCount");
+	}
+
+	
+
+
 	
 
 }
