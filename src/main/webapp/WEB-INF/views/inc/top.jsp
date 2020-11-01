@@ -24,9 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/main">홈
-              <!-- <span class="sr-only">(current)</span> -->
-            </a>
+            <a class="nav-link" href="/main">HOME</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/goods/myauction">내경매</a>

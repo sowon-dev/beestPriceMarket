@@ -23,4 +23,6 @@
 
 	<context:component-scan base-package="com.bestpricemarket.controller" />
 	
+	<!-- 일반 파일 업로드 경로 -->
+	<resources mapping="/imgUpload/**" location="${pageContext.request.contextPath}/resources/imgUpload/" />
 </beans:beans>

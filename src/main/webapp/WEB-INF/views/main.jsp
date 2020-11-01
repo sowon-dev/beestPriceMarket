@@ -1,20 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>베프마켓 - 친구같은 경매플랫폼</title>
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- 버튼 CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/button-reg_goods.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/resources/css/shop-homepage.css" rel="stylesheet">
-
 <!-- 버튼 CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/button-reg_goods.css" rel="stylesheet">
 <!-- 버튼 CSS -->
