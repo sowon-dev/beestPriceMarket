@@ -47,7 +47,7 @@
           </li>
 		  <%} %>          
           <li class="nav-item">
-            <a class="nav-link" href="/CS/list">고객센터</a>
+            <a class="nav-link" href="/CS/CSFAQ">고객센터</a>
           </li>
         </ul>
       </div>
