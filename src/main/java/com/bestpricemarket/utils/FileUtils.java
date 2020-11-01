@@ -22,52 +22,7 @@ import net.coobird.thumbnailator.Thumbnails;
 @Component("fileUtils")
 public class FileUtils {
 	
-	// 방법1-----------------------------------------------------------------------------
-	/*
-	 * static final int THUMB_WIDTH = 300; static final int THUMB_HEIGHT = 300;
-	 * 
-	 * public static String fileUpload(String uploadPath, String fileName, byte[]
-	 * fileData, String ymdPath) throws Exception {
-	 * 
-	 * UUID uid = UUID.randomUUID();
-	 * 
-	 * String newFileName = uid + "_" + fileName; String imgPath = uploadPath +
-	 * ymdPath;
-	 * 
-	 * File target = new File(imgPath, newFileName); FileCopyUtils.copy(fileData,
-	 * target);
-	 * 
-	 * String thumbFileName = "s_" + newFileName; File image = new File(imgPath +
-	 * File.separator + newFileName);
-	 * 
-	 * File thumbnail = new File(imgPath + File.separator + "s" + File.separator +
-	 * thumbFileName);
-	 * 
-	 * if (image.exists()) { thumbnail.getParentFile().mkdirs();
-	 * Thumbnails.of(image).size(THUMB_WIDTH, THUMB_HEIGHT).toFile(thumbnail); }
-	 * return newFileName; }
-	 * 
-	 * public static String calcPath(String uploadPath) { Calendar cal =
-	 * Calendar.getInstance(); String yearPath = File.separator +
-	 * cal.get(Calendar.YEAR); String monthPath = yearPath + File.separator + new
-	 * DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1); String datePath =
-	 * monthPath + File.separator + new
-	 * DecimalFormat("00").format(cal.get(Calendar.DATE));
-	 * 
-	 * makeDir(uploadPath, yearPath, monthPath, datePath); makeDir(uploadPath,
-	 * yearPath, monthPath, datePath + "\\s");
-	 * 
-	 * return datePath; }
-	 * 
-	 * private static void makeDir(String uploadPath, String... paths) {
-	 * 
-	 * if (new File(paths[paths.length - 1]).exists()) { return; }
-	 * 
-	 * for (String path : paths) { File dirPath = new File(uploadPath + path);
-	 * 
-	 * if (!dirPath.exists()) { dirPath.mkdir(); } } }
-	 */
-	// 방법1-----------------------------------------------------------------------------
+
 	
 	
 	private static final String filePath = "C:\\mp\\file\\"; // 파일이 저장될 위치
@@ -75,11 +30,7 @@ public class FileUtils {
 	public List<Map<String, Object>> parseInsertFileInfo(GoodsVO vo, 
 			MultipartHttpServletRequest mpRequest) throws Exception{
 		
-		/*
-			Iterator은 데이터들의 집합체? 에서 컬렉션으로부터 정보를 얻어올 수 있는 인터페이스입니다.
-			List나 배열은 순차적으로 데이터의 접근이 가능하지만, Map등의 클래스들은 순차적으로 접근할 수가 없습니다.
-			Iterator을 이용하여 Map에 있는 데이터들을 while문을 이용하여 순차적으로 접근합니다.
-		*/
+		
 		
 		Iterator<String> iterator = mpRequest.getFileNames();
 		
@@ -104,22 +55,64 @@ public class FileUtils {
 				originalFileName = multipartFile.getOriginalFilename();
 				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 				storedFileName = getRandomString() + originalFileExtension;
-				
 				file = new File(filePath + storedFileName);
+				//String filePath = mpRequest.getSession().getServletContext().getRealPath("/imgUpload");//
 				multipartFile.transferTo(file);
 				listMap = new HashMap<String, Object>();
 				listMap.put("gno", gno);
 				listMap.put("f_oname", originalFileName);
 				listMap.put("f_name", storedFileName);
 				listMap.put("f_size", multipartFile.getSize());
+				//listMap.put("path", filePath+"/"+storedFileName);//
 				list.add(listMap);
 			}
 		}
 		return list;
 	}
 	
+	public List<Map<String, Object>> parseUpdateFileInfo(GoodsVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception{ 
+		Iterator<String> iterator = mpRequest.getFileNames();
+		MultipartFile multipartFile = null; 
+		String originalFileName = null; 
+		String originalFileExtension = null; 
+		String storedFileName = null; 
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		Map<String, Object> listMap = null; 
+		
+		int gno = vo.getGno();
+		
+		while(iterator.hasNext()){ 
+			multipartFile = mpRequest.getFile(iterator.next()); 
+			if(multipartFile.isEmpty() == false){ 
+				originalFileName = multipartFile.getOriginalFilename(); 
+				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); 
+				storedFileName = getRandomString() + originalFileExtension; 
+				multipartFile.transferTo(new File(filePath + storedFileName)); 
+				listMap = new HashMap<String,Object>();
+				listMap.put("IS_NEW", "Y");
+				listMap.put("gno", gno); 
+				listMap.put("f_oname", originalFileName);
+				listMap.put("f_name", storedFileName); 
+				listMap.put("f_size", multipartFile.getSize()); 
+				list.add(listMap); 
+			} 
+		}
+		if(files != null && fileNames != null){ 
+			for(int i = 0; i<fileNames.length; i++) {
+					listMap = new HashMap<String,Object>();
+                    listMap.put("IS_NEW", "N");
+					listMap.put("fno", files[i]); 
+					list.add(listMap); 
+			}
+		}
+		return list; 
+	}
+
+	
 	public static String getRandomString() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
-	
 }
+	
+

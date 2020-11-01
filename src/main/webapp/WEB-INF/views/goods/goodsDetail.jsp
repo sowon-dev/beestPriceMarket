@@ -28,7 +28,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- 본문 JS  -->
 
-  
+	
+	        			
+
+
 
 </head>
 
@@ -38,22 +41,8 @@
    <jsp:include page="../inc/top.jsp"/>
   <!-- 헤더 -->
   
-  <script type="text/javascript">
   
-							  var formObj = $("form[role='form']");
-							  
-							  $('#modify').click(function(){
-							   /* formObj.attr("action", "/goods/modify?gno="${goods.gno});
-							   formObj.attr("method", "get")
-							   formObj.submit(); */
-							   alert("dddddddd")
-							  });
-							  
-							  $("#delete").click(function(){    
-							   formObj.attr("action", "/goods/delete");
-							   formObj.submit();
-							  }); 
-							</script>
+  
   
   
   <!-- 본문 -->
@@ -62,7 +51,7 @@
 	        <div class="heading-section">
 	        </div>
 	        <div class="row">
-	        	<div class="col-md-6">
+	       	<div class="col-md-6">
 	        		<div id="slider" class="owl-carousel product-slider">
 						<div class="item">
 						  	<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
@@ -109,19 +98,16 @@
 						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
 						</div>
 					</div>
-	        	</div>
+	        	</div> 
 	        	<div class="col-md-6">
 	        		<div class="product-dtl">
         				
 		        		<br><br>
+		     
 		     <!-- 경매정보 테이블 -->   		
 		       <table>
 		         <tr>
-
-		         	<th colspan="2">상품제목</th>
-=======
 		         	<th colspan="2" style="font-size:40px;">${goods.gname}</th>
-
 		         </tr>
   				 <tr>
     				<th>현재입찰가</th>
@@ -129,15 +115,11 @@
  				 </tr>
   				 <tr>
     				<th>입찰시작가</th>
-
-    				<td>10000원</td>
-=======
     				<td>${goods.lowestprice}원</td>
-
   				 </tr>
   				 <tr>
     				<th>경매기간</th>
-    				<td>2020.10.23 - 2020.10.30</td>
+    				<td>${goods.regDate} - ${goods.endDate}</td>
   				 </tr>
   				 <tr>
      			    <th>남은시간</th>
@@ -160,59 +142,78 @@
 	        				
 	        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
 	        				  <a href="#" class="round-black-btn">관심상품</a>
+	        				  <a href="${path}/goods/report">신고하기</a>
 					
 	        			</div>
 	        	</form>				
-	        	<!-- 수정/삭제 // 자바스크립트 구현 해야함!! 이동 안됨 -->
-	        			<form action="" role="form">
-	        			<div class="product-count" >
-	        				  <a href="/goods/modify?gno=${goods.gno}" style="margin-right:20px;" >수정</a>
-	        				  <input type="button"  id="delete" value="삭제" class="round-black-btn" >
-	        			</div>
-	        			</form>
-	        			<!-- 
-	        			<form action="" role="form">
-	        			<div class="product-count" >
-	        				  <input type="button"  id="modify" value="수정" class="round-black-btn" >
-	        				  <input type="button"  id="delete" value="삭제" class="round-black-btn" >
-	        			</div>
-	        			</form> -->
-	        	<!-- 수정/삭제 // 자바스크립트 구현 해야함!! 이동 안됨 -->		
+	       <!-- 수정/삭제 이동 -->
+	      
+	        <form action="" role="form">
+	        	<div class="product-count" >
+	        		<input type="hidden" name="gno" id="gno" value="${goods.gno}">
+	        		<input type="button"  id="modify" value="수정" class="round-black-btn" style="margin-right:20px;">
+	        		<input type="button"  id="delete" value="삭제" class="round-black-btn" >
+	        	</div>
+	        </form> 
+	         
+	        <script type="text/javascript">
+
+				$(document).ready(function(){
+
+					var gno = $('#gno').val();
+					
+					$(document).on("click","#modify",function(){
+							location.href = '/goods/modify?gno='+gno;
+					});
+
+					$(document).on("click","#delete",function(){
+						var con = confirm("정말로 삭제하시겠습니까?");
+						if(con){
+							location.href = '/goods/delete?gno='+gno;
+						}	
+					});
+				});
+			</script>
+	        <!-- 수정/삭제 이동 -->
+
 	        		</div>
 	        	</div>
 	        </div>
+	        
+	        
 	        
 	        <!-- 상품 정보, 상품 문의 탭 -->
 	        <div class="product-info-tabs">
 		        <ul class="nav nav-tabs" id="myTab" role="tablist">
 				  	<li class="nav-item">
-				    	<a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">상품정보</a>
+				    	<a href="#description" class="nav-link active" id="description-tab" data-toggle="tab"  role="tab" aria-controls="description" aria-selected="true" >상품정보</a>
 				  	</li>
 				  	<li class="nav-item">
-				    	<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">상품문의</a>
+				    	<a href="#review" class="nav-link" id="review-tab" data-toggle="tab"  role="tab" aria-controls="review" aria-selected="false" >상품문의</a>
 				  	</li>
 				</ul>
 			<!-- 상품 정보, 상품 문의 탭 -->
+		
 			
 			
 				<div class="tab-content" id="myTabContent">
-				<!-- 상품정보 -->	
-
-				  	
+				
+				<!-- 상품정보 -->
+				${goods.content}
+				
+					
 				  	<div class="form-group" style="border: 1px solid #dbdbdb;">
 					<c:forEach var="file" items="${file}">
-						<a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>(${file.f_size}kb)<br>
-						<img src="${file.f_name}">
+					 <img src="<c:url value="/imgUpload/${file.f_name}"/>"/>
+					<%-- <a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>(${file.f_size}kb)<br> --%>
 					</c:forEach>
 				</div>
 	
-				  	
 				<!-- 상품정보 -->	
 				
 <!-- /******************************************************************************************************************************************** -->
 				
 				<!-- 상품문의 -->  	
-				
 				<section class="commentForm">
 				  	<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
 				  		<div class="review-heading">REVIEWS</div>
@@ -345,7 +346,6 @@
               
           });
        
-           
           </script>		        
           <!-- 상품문의 댓글리스트 -->
           
@@ -355,23 +355,24 @@
 			        	
 			        	</div>
 			        	<br>
-			        				
-			        		
-                       	
 			        				  	
 				  	
 				  	</div>
 				  	</section>
-				  	
 				 <!-- 상품문의 -->	 	
 				 
 <!-- /******************************************************************************************************************************************** -->
+	
 				</div>
-			</div>
 		</div>
-	</div>
+			
+		</div>
+		</div>
+		
+		
 	
   <!-- 본문 -->
+  				
   
   
 

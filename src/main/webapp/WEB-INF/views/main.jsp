@@ -28,16 +28,23 @@
 	<!-- 상품 카테고리 메뉴바 -->
       <div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item">패션의류</a>
-          <a href="#" class="list-group-item">뷰티잡화</a>
-          <a href="#" class="list-group-item">생활가구</a>
-          <a href="#" class="list-group-item">생활가전</a>
-          <a href="#" class="list-group-item">디지털</a>
-          <a href="#" class="list-group-item">컴퓨터</a>
-          <a href="#" class="list-group-item">도서</a>
-          <a href="#" class="list-group-item">기타</a>
+        <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+        
+         <div class="list-group">
+          <a href="/goods/list" class="list-group-item">노트북</a>
+          <a href="/goods/list" class="list-group-item">데스크탑</a>
+          <a href="/goods/list" class="list-group-item">모니터</a>
+          <a href="/goods/list" class="list-group-item">PC부품</a>
+          <a href="/goods/list" class="list-group-item">디지털</a>
+          <a href="/goods/list" class="list-group-item">생활가전</a>
+          <a href="/goods/list" class="list-group-item">생활문구</a>
+          <a href="/goods/list" class="list-group-item">생활가구</a>
+          <a href="/goods/list" class="list-group-item">스포츠</a>
+          <a href="/goods/list" class="list-group-item">자동차</a>
+          <a href="/goods/list" class="list-group-item">패션의류</a>
+          <a href="/goods/list" class="list-group-item">패션잡화</a>
+          <a href="/goods/list" class="list-group-item">화장품</a>
+          <a href="/goods/list" class="list-group-item">쥬얼리</a>
         </div>
       </div> 
     <!-- 상품 카테고리 메뉴바 -->

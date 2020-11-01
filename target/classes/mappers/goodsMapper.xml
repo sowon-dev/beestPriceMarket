@@ -9,7 +9,7 @@
     <!-- 상품등록 -->
 	<insert id="register" useGeneratedKeys="true" keyProperty="gno" parameterType="com.bestpricemarket.domain.GoodsVO">
  		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
- 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate});
+ 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate})
 	</insert>  
   	<!-- 상품등록 -->
   	  	
@@ -24,6 +24,26 @@
   		select * from goods where gno = #{gno} 
   	</select>  
   	<!-- 상품조회 -->
+  		
+  	<!-- 상품 수정 -->
+  	<update id="modifyGoods">
+  		update goods
+  		  set
+  		  	category = #{category},
+  		    gname = #{gname},
+  		    content = #{content},
+  		    endDate = #{endDate},
+  		    lowestprice = #{lowestprice}
+  		  where gno = #{gno}  
+  	</update>
+  	<!-- 상품 수정 -->
+  	
+  	<!-- 상품 삭제 -->
+  	<delete id="deleteGoods">
+  		delete from goods
+  		where gno = #{gno}
+  	</delete>
+  	<!-- 상품 삭제 -->
   	
   	<!-- 첨부파일업로드  -->
 	 <insert id="insertFile" parameterType="hashmap">
@@ -38,30 +58,34 @@
 	
 	<!-- 첨부파일 조회 -->
 	<select id="selectFileList" parameterType="int" resultType="hashMap">
-		select fno, f_oname, round(f_size/1024,1) as f_size
+		select fno, f_name, f_oname, round(f_size/1024,1) as f_size, del_chk
 		from goodsfile
 		where f_g_gno = #{gno}
 		and del_chk = 'N'
+		order by fno asc
 	</select>
-	
-	
-	<!-- <select id="detailFile" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
-			select 
-			   fno, f_oname, round(f_size/1024,1) as f_size
-			from
-			   goodsfile
-			where 
-			   f_g_gno = #{fno}
-			   and
-			   del_chk = 'N'      
-		]]>
-	</select> 
-	 -->
-	
-	
   	<!-- 파일업로드  -->
   	
+  	<!-- 첨부파일업로드 수정 -->
+  	<update id="updateFile" parameterType="hashMap">
+  		update goodsfile
+  		set del_chk = 'Y'
+  		where fno = #{fno}
+  	</update>
+  	<!-- 첨부파일업로드 수정 -->
+  
+  
+  
+  
+   <!-- 상품신고 -->
+  	<select id="showReportDetail" resultType="com.bestpricemarket.domain.ReportVO">
+  		select g.g_m_id, g.gname, g.gno, m.email
+  		from goods g
+  		join Member m
+  		on g.g_m_id = m.id
+  		where gno=#{gno}
+  	</select>
+  	<!-- 상품신고 -->
 
   
   

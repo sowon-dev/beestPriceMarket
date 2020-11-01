@@ -1,17 +1,10 @@
 package com.bestpricemarket.controller;
-
-import java.io.File;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,13 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.ReportVO;
 import com.bestpricemarket.service.GoodsService;
-import com.bestpricemarket.utils.FileUtils;
 
 @Controller
 @RequestMapping(value = "/goods/*")
@@ -43,7 +34,7 @@ public class GoodsController {
 	 */
 	
 	
-	
+	// 상품 CURD *******************************************************************************************************************************
 	
 	// 상품등록
 	@RequestMapping(value = "/register",method = RequestMethod.GET)
@@ -60,33 +51,8 @@ public class GoodsController {
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
 	public String goodsRegisterPOST(GoodsVO vo, MultipartHttpServletRequest mpRequest) throws Exception{
 		
-		
-		
-		// 파일 업로드 - 방법1
-		/*
-		 * String imgUploadPath = uploadPath + File.separator + "imgUpload"; String
-		 * ymdPath = UploadFileUtils.calcPath(imgUploadPath); String fileName = null;
-		 * 
-		 * if(file != null) { fileName = UploadFileUtils.fileUpload(imgUploadPath,
-		 * file.getOriginalFilename(), file.getBytes(), ymdPath); } else { fileName =
-		 * uploadPath + File.separator + "images" + File.separator + "none.png"; }
-		 * 
-		 * vo.setImage(File.separator + "imgUpload" + ymdPath + File.separator +
-		 * fileName); vo.setImgThumb(File.separator + "imgUpload" + ymdPath +
-		 * File.separator + "s" + File.separator + "s_" + fileName);
-		 */
-		// 파일 업로드 - 방법1
-		
-		// 파일 업로드 - 방법2
-		
-		// 파일 업로드 - 방법2
-		
-		
-		
 		System.out.println("C : 뷰페이지에서 전달되는 파라미터 -> "+ vo);
 		service.goodsRegister(vo, mpRequest);
-		
-		
 		
 		System.out.println("C : 상품등록 완료@@@@");
 		
@@ -112,12 +78,11 @@ public class GoodsController {
 	
 	// 상품 상세페이지 
 	@RequestMapping(value = "/detail",method = RequestMethod.GET)
-	public String goodsDetailGET(@RequestParam("gno") int gno, Model model) throws Exception{
+	public String goodsDetailGET(@RequestParam("gno") int gno, Model model, HttpSession session) throws Exception{
 		System.out.println("C : goodsDetail.jsp 이동");
 		
-		 
-		
 		model.addAttribute("goods", service.goodsDetail(gno));
+		session.setAttribute("id", "user1");
 		
 		List<Map<String, Object>> fileList = service.selectFileList(gno);
 		model.addAttribute("file", fileList);
@@ -130,23 +95,49 @@ public class GoodsController {
 	@RequestMapping(value = "/modify",method = RequestMethod.GET)
 	public String goodsModifyGET(@RequestParam("gno") int gno,Model model) throws Exception{
 		
-		System.out.println("C : goodsModify.jsp 이동");
+		System.out.println("C : goodsModify.jsp 이동(GET)");
 		
-		GoodsVO goods = service.goodsModify(gno);
-		model.addAttribute("goods", goods);
+		GoodsVO goodsVO = service.goodsDetail(gno);
+		model.addAttribute("goodsVO", goodsVO);
+		
+		List<Map<String, Object>> fileList = service.selectFileList(goodsVO.getGno());
+		model.addAttribute("file", fileList);
 		
 		return "/goods/goodsModify";
-		
-		
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String goodsModifyPOST(GoodsVO vo, @RequestParam(value="fileNoDel[]") String[] files,
+			 @RequestParam(value="fileNameDel[]") String[] fileNames,
+			 MultipartHttpServletRequest mpRequest) throws Exception {
+			System.out.println("C : 상품 수정 POST");
+	 
+			service.goodsModify(vo, files, fileNames, mpRequest);
+			
+			System.out.println("C : 수정된 정보 -> " + vo);
+	 
+			return "redirect:/goods/list";
 	}
 	
 	
 	// 상품삭제
+	@RequestMapping(value = "/delete",method = {RequestMethod.GET,RequestMethod.POST})
+	public String goodsDeletePOST(@RequestParam("gno") int gno) throws Exception{
+		
+		System.out.println("C : 상품 삭제 POST");
+		
+		service.goodsDelete(gno);
+		
+		return "redirect:/goods/list";
+	}
+	
+	// 상품 CURD *******************************************************************************************************************************
 	
 	
 	
 	
-	//*******************************************************************************************************************************
+	
+	// 내경매 *******************************************************************************************************************************
 	// 내경매
 	@RequestMapping(value = "/myauction", method = RequestMethod.GET)
 	public String myAuctionGET() throws Exception{
@@ -154,6 +145,36 @@ public class GoodsController {
 	      return "/goods/myAuction";
 	   }
 	
+	
+	// 내경매 *******************************************************************************************************************************
+	
+	
+	
+	
+	// 상품신고 *******************************************************************************************************************************
+	/*태준*/
+	// 상품신고
+	// http://localhost:8088/goods/report?gno=1
+	@RequestMapping(value="/report",method = RequestMethod.GET)
+	public void reportGET(HttpSession session, @RequestParam("gno") int bno, Model model) throws Exception{
+	//public void reportGET( @RequestParam("session") String session, @RequestParam("gno") int bno, Model model) throws Exception{
+		log.info("C : /report -> report.jsp ");
+		log.info("C : reportGET() 호출 ");
+		session.setAttribute("id", "user1");
+		model.addAttribute("reportVO", service.showReportDetail(session, bno));
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/report",method = RequestMethod.POST) 
+	public String reportGET(HttpSession session, ReportVO vo) throws Exception{
+		service.sendReportEmail(vo); 
+	  
+		return "/goods/goodsDetail"; 
+	}
+	/*태준 끝*/
+	// 상품신고 *******************************************************************************************************************************
 
 
 

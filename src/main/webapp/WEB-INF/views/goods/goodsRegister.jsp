@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,25 +62,30 @@
 	<!-- include summernote css/js -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-		  	$('#summernote').summernote({
-			  height: 300,                 // 에디터 높이
-			  minHeight: null,             // 최소 높이
-			  maxHeight: null,             // 최대 높이
-			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-			  lang: "ko-KR",					// 한글 설정
-			  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-		  	});
-		});
-	</script> 
 	
-    <!-- 섬머노트 에디터 -->
-    
-    <!-- 유효성 체크 -->
+	<!-- ck에디터 -->
+	<script src="/resources/ckeditor/ckeditor.js"></script>
+	<!-- ck에디터 -->
+	
 	<script type="text/javascript">
+		// 파일 추가
+		
+			function fn_addFile(){
+			  var fileIndex = 1;
+				 $(".fileAdd").on("click", function(){
+					$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
 
-	function goods_register(){
+					});
+
+				$(document).on("click","#fileDelBtn", function(){
+					$(this).parent().remove();
+				});
+			}
+		
+		// 파일추가
+		
+		// 유효성체크
+		function goods_register(){
 
 		var category = document.fr.category.value;
 		var gname = document.fr.gname.value;
@@ -87,7 +93,6 @@
 		var lowestprice = document.fr.lowestprice.value;
 		var endDate = document.fr.endDate.value;
 
-		alert(category);
 		if(category == ""){
 			alert("물품분류를 선택하세요.");
 			document.fr.category.focus();
@@ -100,11 +105,11 @@
 			return false;
 		}
 
-		if(content == ""){
+	/* 	if(content == ""){
 			alert("물품설명을 입력하세요.");
 			document.fr.content.focus();
 			return false;
-		}
+		}  */
 
 		if(lowestprice == ""){
 			alert("물품의 하한가를 입력하세요.");
@@ -118,13 +123,10 @@
 			document.fr.endDate.focus();
 			return false;
 		}
-
-	 
 	}
-	</script>    
-    <!-- 유효성 체크 -->
- 
-    
+	// 유효성체크
+		
+	</script> 
 </head>
 <body>
 
@@ -132,25 +134,38 @@
         <div class="wrapper wrapper--w900">
             <div class="card card-6">
                 <div class="card-heading">
-                    <h2 class="title">상품 등록</h2>
+                    <h2 class="title">물품 등록</h2>
                 </div>
                 
+                
+                
+                
                 <div class="card-body">
+               <%--  <c:if test = "${goods.g_m_id != null }"> --%>
 
                     <form action ="/goods/register" method="post" enctype="multipart/form-data" name="fr">
                    
-                   
-                
+                  
                   <div class="form-row">
                   
                   
                      <div class="name">물품분류</div>
                         <select class="bo_w_select" name="category">
                       		<option value="" selected>카테고리 선택</option>
-                      		<option value="ddd">가전/디지털</option>
-                      		<option value="aaa">의류/뷰티</option>
-                      		<option value="ccc">생활용품</option>
-                      		<option value="ee">도서/티켓</option>
+                      		<option value="notebook">노트북</option>
+                      		<option value="desktop">데스크탑</option>
+                      		<option value="monitor">모니터</option>
+                      		<option value="component">PC부품</option>
+                      		<option value="digital">디지털</option>
+                      		<option value="appliances">생활가전</option>
+                      		<option value="stationery">생활문구</option>
+                      		<option value="furniture">생활가구</option>
+                      		<option value="sports">스포츠</option>
+                      		<option value="car">자동차</option>
+                      		<option value="fashion">패션의류</option>
+                      		<option value="miscellaneousitems">패션잡화</option>
+                      		<option value="cosmetics">화장품</option>
+                      		<option value="jewelry">쥬얼리</option>
                       	</select>
                     </div>
                     <div class="form-row">
@@ -163,7 +178,7 @@
                     <div class="form-row">
                        <div class="name">물품제목</div>
                           <div class="value">
-                             <input class="input--style-6" type="text" name="gname" >
+                             <input class="input--style-6" type="text" name="gname">
                           </div>
                        </div>
                         
@@ -171,63 +186,43 @@
                        <div class="name">물품설명</div>
                            <div class="value"> 
                              <div class="input-group"> 
-                                      <textarea rows="30" cols="400" id="summernote" name="content" ></textarea> 
+                                      <textarea rows="30" cols="400"  name="content" id="content"></textarea> 
                              </div>  
                            </div>
                        </div>
                        
+                    <!-- ck에디터 -->   
+                    <script>
+ 						var ckeditor_config = {
+   							resize_enaleb : false,
+   							enterMode : CKEDITOR.ENTER_BR,
+   							shiftEnterMode : CKEDITOR.ENTER_P,
+   							filebrowserUploadUrl : "/goods/imgUpload"
+ 						};
+ 
+						 CKEDITOR.replace("content", ckeditor_config);
+					</script>
+					<!-- ck 에디터 -->
+                       
+             <!-- 이미지업로드 -->        
                     <div class="form-row">
                        <div class="name">첨부 이미지 등록</div>
                            <div class="value">
-                              <div class="input-group js-input-file">
-                              <input type="file" id="gdsImg" name="file">
-                               <div class="select_img"><img src=""></div>     
-                                    <!--  <input multiple="multiple" type="file" name="uploadFile" class="input-file" id="file"/>  --> 
-                                     <!-- <input type="file" name="file" class="input-file" id="file"  />  --> 
+                             <div class="input-group js-input-file">
+                           		<div id="fileIndex"></div>
+                                     <input type="file" name="file" class="input-file" id="file"  />   
                               </div>
-                          <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
-                       </div>  
-					
-					   
-    			<!-- 이미지업로드 -->
- 				<script>
-  					$("#gdsImg").change(function(){
-   						if(this.files && this.files[0]) {
-    						var reader = new FileReader;
-    						reader.onload = function(data) {
-     					$(".select_img img").attr("src", data.target.result).width(500);        
-    					}
-    					reader.readAsDataURL(this.files[0]);
-   						}
-  					});
- 				</script>
-    			<!-- 이미지업로드 -->
-    			
-    			
-
-
+							<button  type="button" class="fileAdd" onclick="fn_addFile()">파일추가</button>
+                   	   </div>
                     </div> 
-                  <!--   <div class="form-row">
-                        <div class="name">첨부 이미지 미리보기</div>
-                           <div class="value"> -->
-                               <!--  <div class="input-group js-input-file">
-
-                                    <input class="input-file" type="file" name="file_cv" id="file">
-                                    <label class="label--file" for="file">파일 선택</label>
-                                    <span class="input-file__info">선택된 파일이 없습니다</span>
-                                </div> -->
-                        <!--    <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div>
-                        </div> -->
-					
-                   <!--  </div> -->
-            
+            <!-- 이미지업로드 -->
                    
                    
                    
                     <div class="form-row">
                        <div class="name">마감 일자</div>
                          <div class="value">
-                            <input class="input--style-6" type="text" name="endDate">
+                            <input class="input--style-6" type="text" name="endDate" >
                          </div>
                          <!--  <script>
                             document.getElementById('endDate').value= new Date().toISOString().slice(0, -1);
@@ -236,7 +231,7 @@
                     <div class="form-row">
                         <div class="name">경매 시작가</div>
                           <div class="value">
-                             <input class="input--style-6" type="text" name="lowestprice" id="input">
+                             <input class="input--style-6" type="text" name="lowestprice" id="input" >
                             
                            </div>
                       </div>
@@ -245,7 +240,12 @@
                     	
                       </div>
                   </form>
+                  <%--  </c:if> --%>
+                  <%--  <c:if test="${goods.g_m_id == null }">
+                   			<p>로그인 후에 작성할 수 있습니다.</p>
+                   </c:if> --%>
                 </div>
+               
               
             </div>
         </div>
