@@ -44,7 +44,8 @@
                             <div class="name">글 작성자</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-6" type="cs_m_id" name="cs_m_id" readonly="readonly" placeholder="아이디">
+                                <%String id=(String)session.getAttribute("id"); %>
+                                    <input class="input--style-6" type="text" name="cs_m_id" readonly="readonly" value="<%=id%>">
                                 </div>
                             </div>
                         </div>
@@ -52,14 +53,14 @@
                             <div class="name">문의 내용</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <textarea class="textarea--style-6" name="message" placeholder="Message sent to the employer"></textarea>
+                                    <textarea class="textarea--style-6" name="cs_content" placeholder="Message sent to the employer"></textarea>
                                 </div>
                             </div>
                         </div>
+		                <div class="card-footer">
+		                   	<button type="submit" class="btn btn-secondary btn-block" style="font-size: 20px">작성하기</button>
+		                </div>
                     </form>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn--radius-2 btn--blue-2" type="submit">작성하기</button>
                 </div>
             </div>
         </div>
