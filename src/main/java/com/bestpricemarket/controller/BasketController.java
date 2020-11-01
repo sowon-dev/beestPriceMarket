@@ -51,7 +51,7 @@ public class BasketController {
     public  String listGET(HttpSession session,@RequestParam(defaultValue="1") int curPage,Model model) throws Exception{
     	
     	int count = service.getCount();
-    	BasketPager pager = new BasketPager(count, curPage);
+    	BasketPager pager = new BasketPager(count,curPage);
     	int start = pager.getPageBegin();
     	int end = pager.getPageEnd();
     	List<BasketVO> basketlist = service.Basketlist(start,end);
