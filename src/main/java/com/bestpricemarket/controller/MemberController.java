@@ -175,7 +175,6 @@ public class MemberController {
     @RequestMapping(value = "/findpw", method = RequestMethod.GET)
 	public void findPwGET() throws Exception{
 	}
-    // 비밀번호 찾기
  	@RequestMapping(value = "/findpw", method = RequestMethod.POST)
  	public void findPwPOST(@ModelAttribute MemberVO member, HttpServletResponse response) throws Exception{
  		service.findPw(response, member);

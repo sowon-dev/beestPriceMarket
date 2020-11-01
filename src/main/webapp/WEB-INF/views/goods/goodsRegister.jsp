@@ -222,7 +222,7 @@
                     <div class="form-row">
                        <div class="name">마감 일자</div>
                          <div class="value">
-                            <input class="input--style-6" type="text" name="endDate" >
+                            <input class="input--style-6" type="date" name="endDate" >
                          </div>
                          <!--  <script>
                             document.getElementById('endDate').value= new Date().toISOString().slice(0, -1);

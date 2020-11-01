@@ -57,7 +57,7 @@
       <div class="col-lg-3">
         <h1 class="my-4">회원정보보기</h1>
         <div class="list-group">
-      	  <a href="/member/basket" class="list-group-item">좋아요</a>
+      	  <a href="/basket/list" class="list-group-item">좋아요</a>
           <a href="/member/update" class="list-group-item">회원 수정</a>	
           <a href="/member/delete" class="list-group-item">회원 탈퇴</a>
         </div>
