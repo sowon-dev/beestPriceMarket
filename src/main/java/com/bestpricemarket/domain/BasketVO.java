@@ -12,6 +12,11 @@ public class BasketVO {
  private Timestamp enddate;
  private int actionstatus;
  
+ 
+ 
+ 
+ 
+ 
  public BasketVO() {}
 
 public BasketVO(Integer lno, int l_g_gno, String l_m_id, int l_m_actionstatus, String gname, int lowestprice,
@@ -26,6 +31,10 @@ public BasketVO(Integer lno, int l_g_gno, String l_m_id, int l_m_actionstatus, S
 	this.enddate = enddate;
 	this.actionstatus = actionstatus;
 }
+
+
+
+
 
 public Integer getLno() {
 	return lno;

@@ -8,8 +8,9 @@ public interface BasketService {
 	
 	public void insertBasket(BasketVO bv) throws Exception;
 
-	public List<BasketVO> Basketlist() throws Exception;
+	public List<BasketVO> Basketlist(int start, int end) throws Exception;
 
-    public void deleteBasket(BasketVO bv) throws Exception;
-		
+    public void deleteBasket(Integer lno) throws Exception;
+	
+    public int getCount() throws Exception;
 }

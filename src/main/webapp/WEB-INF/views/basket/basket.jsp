@@ -34,6 +34,12 @@
 
 </style> 
 
+<script type="text/javascript">
+function basketlist(page){
+	location.href="basket/basket?curPage=" + page
+}
+function
+</script>
 
 </head>
 <body>
@@ -56,7 +62,7 @@
      <div class="row"> 
          <div class="col-12">  
           <!--  <div class="card"> -->  
-                    <div class="row pb-5 p-5"   style="height: 200px;">
+                    <%-- <div class="row pb-5 p-5"   style="height: 200px;">
                         <div class="col-md-6">
                             <p class="font-weight-bold mb-4">경매 상품</p>
                             <img src="basket/pineapple.jpg" alt="안뜨노">
@@ -69,15 +75,20 @@
                             <p class="mb-1"><span class="text-muted">상품이름: </span> Root</p>
                             <p class="mb-1"><span class="text-muted">좋아요: </span> John Doe</p>
                         </div>
-                    </div>
-
+                    </div> --%>
+                   <h1 class="my-4" style="text-align: center;">장바구니</h1>   
                     <div class="row p-5" style="top:300px;"  >
-                        <div class="col-md-12">
+                       <c:choose>
+                      <c:when test="${basketlist == null }">
+                       <h2>관심 상품이 없습니다 ㅠㅠ</h2>
+                      </c:when>
+                        <c:otherwise>
+                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th class="border-0 text-uppercase small font-weight-bold">찜한순서</th>
-                                        <th class="border-0 text-uppercase small font-weight-bold"></th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">상품</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">상품이름</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">경매상태</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">입찰가</th>
@@ -89,80 +100,58 @@
                                     <c:forEach items="${basketlist }" var="BasketVO">
                                     <tr>
                                         <td>${BasketVO.lno }</td> 
+                                        <!-- 업로드 위치 모르겠음 -->
+                                        <td><img src="./upload/${ gdto.getImage().split[0]}"></td>
                                         <td>${BasketVO.l_m_id }</td> 
-                                        <td>${BasketVO.gname }</td>
+                                        <!--  -->
+                                        <td><a href="/goods/detail?lno=${BasketVO.lno }">${BasketVO.gname }</a></td>
                                         <td>${BasketVO.actionstatus }</td>
                                         <td>${BasketVO.lowestprice }</td>
                                         <td>${BasketVO.enddate }</td>
                                     	<td><a href="/basket/delete?lno=${BasketVO.lno }">삭제</a></td>
-                                    	<td>입찰</td>
+                                    	<td><a href="/pay/order">입찰</a></td>
                                     </tr>
                                     </c:forEach>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Software</td>
-                                        <td>Support</td>
-                                        <td>234</td>
-                                        <td>$6356</td>
-                                        <td>$23423</td>
-                                    	<td>삭제</td>
-                                    	<td>입찰</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Software</td>
-                                        <td>Sofware Collection</td>
-                                        <td>4534</td>
-                                        <td>$354</td>
-                                        <td>$23434</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Software</td>
-                                        <td>LTS Versions</td>
-                                        <td>21</td>
-                                        <td>$321</td>
-                                        <td>$3452</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Software</td>
-                                        <td>Support</td>
-                                        <td>234</td>
-                                        <td>$6356</td>
-                                        <td>$23423</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Software</td>
-                                        <td>Sofware Collection</td>
-                                        <td>4534</td>
-                                        <td>$354</td>
-                                        <td>$23434</td>
-                                    </tr>
+                                   
                                 </tbody>
+                         
+                          
+                          <!-- 페이지 -->
+                         <tr>
+                          <td colspan="5" align="center">
+          					<ul class="pagination justify-content-center">
+          					<c:if test="${map.pager.curBlock > 1 }">
+          					  <li class="pagination justify-content-center"><a href="javascript : basketlist('1')">[처음]</a></li>
+          					  </c:if>
+          					  <c:if test="${map.pager.curBlock > 1 }">
+          					  <li class="pagination justify-content-center"><a href="javascript : basketlist('${map.pager.prevPage }')">[이전]</a></li>
+          					  </c:if>                               
+                              <c:forEach var="lno" begin="${map.pager.blockBegin }" end="${map.pager.blockEnd }">
+                               <c:choose>
+								<c:when test="${lno == map.pager.curPage }">
+									<span style="color: #09418c;">${lno }</span>&nbsp;
+								</c:when>	                               
+                                  <c:otherwise>
+                                  	<li class="pagination justify-content-center"><a href="javascript: basketlist('${lno }')">${lno }</a>&nbsp;</li>
+                                  </c:otherwise>
+                               </c:choose>
+                              </c:forEach> 
+       						<c:if test="${map.pager.curBlock <= map.pager.totBlock }">
+       						  <li class="pagination justify-content-center"><a href="javascript: basketlist('${map.pager.nextPage }')">[다음]</a></li>
+       						</c:if>                  
+                            <c:if test="${map.pager.curBlock <= map.pager.totPage }">
+       						  <li class="pagination justify-content-center"><a href="javascript: basketlist('${map.pager.totPage }')">[끝]</a></li>
+       						</c:if>      
+                           </ul>
+                         </td>
+                         </tr>
                             </table>
                         </div>
-                    </div>
-                             
-                   
-                        <!-- <div class="py-3 px-5 text-right">
-                            <div class="mb-2">Grand Total</div>
-                            <div class="h2 font-weight-light">$234,234</div>
-                        </div>
-
-                        <div class="py-3 px-5 text-right">
-                            <div class="mb-2">Discount</div>
-                            <div class="h2 font-weight-light">10%</div>
-                        </div>
-
-                        <div class="py-3 px-5 text-right">
-                            <div class="mb-2">Sub - Total amount</div>
-                            <div class="h2 font-weight-light">$32,432</div> -->
-                        
+                        </c:otherwise>
+                        </c:choose>
                        
-
-                    <!-- </div> --> 
+                        
+                    </div>
                 </div>
             </div> 
       </div>   
