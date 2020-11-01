@@ -11,7 +11,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<link href="${pageContext.request.contextPath}/resources/BasketCSS/css/bootstrap.min.css" rel="stylesheet">
 
  <style type="text/css">
 .container{
@@ -134,27 +134,31 @@ function
                          <tr>
                           <td colspan="5" align="center">
           					<ul class="pagination justify-content-center">
-          					<c:if test="${map.pager.curBlock > 1 }">
-          					  <li class="pagination justify-content-center"><a href="javascript : basketlist('1')">[처음]</a></li>
+          					<c:if test="${map.pager.curBlock >= 1 }">
+          					  <li class="page-item"><a class="page-link" href="javascript : basketlist('1')">[처음]</a></li>
           					  </c:if>
-          					  <c:if test="${map.pager.curBlock > 1 }">
-          					  <li class="pagination justify-content-center"><a href="javascript : basketlist('${map.pager.prevPage }')">[이전]</a></li>
+          					  
+          					  <c:if test="${map.pager.curBlock >= 1 }">
+          					  <li class="page-item"><a class="page-link" href="javascript : basketlist('${map.pager.prevPage }')">[이전]</a></li>
           					  </c:if>                               
+                              
                               <c:forEach var="lno" begin="${map.pager.blockBegin }" end="${map.pager.blockEnd }">
                                <c:choose>
 								<c:when test="${lno == map.pager.curPage }">
-									<span style="color: #09418c;">${lno }</span>&nbsp;
+									<li class="page-item"><a class="page-link" href="javascript: basketlist('${lno }')">${lno }</a></li>
 								</c:when>	                               
                                   <c:otherwise>
-                                  	<li class="pagination justify-content-center"><a href="javascript: basketlist('${lno }')">${lno }</a>&nbsp;</li>
+                                  	<li class="page-item"><a class="page-link" href="javascript: basketlist('${lno }')">${lno }</a></li>
                                   </c:otherwise>
                                </c:choose>
                               </c:forEach> 
+       						
        						<c:if test="${map.pager.curBlock <= map.pager.totBlock }">
-       						  <li class="pagination justify-content-center"><a href="javascript: basketlist('${map.pager.nextPage }')">[다음]</a></li>
+       						  <li class="page-item"><a class="page-link" href="javascript: basketlist('${map.pager.nextPage }')">[다음]</a></li>
        						</c:if>                  
+                            
                             <c:if test="${map.pager.curBlock <= map.pager.totPage }">
-       						  <li class="pagination justify-content-center"><a href="javascript: basketlist('${map.pager.totPage }')">[끝]</a></li>
+       						  <li class="page-item"><a class="page-link" href="javascript: basketlist('${map.pager.totPage }')">[끝]</a></li>
        						</c:if>      
                            </ul>
                          </td>
