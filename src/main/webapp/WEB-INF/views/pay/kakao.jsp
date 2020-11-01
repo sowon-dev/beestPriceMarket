@@ -12,7 +12,8 @@
 	 <script>
     $(function(){
         var IMP = window.IMP; // 생략가능
-        IMP.init('imp23418340'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        IMP.init('imp24656167'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용		
+        // imp24656167 <- 내 식별코드
         var msg;
         
         IMP.request_pay({
@@ -51,7 +52,7 @@
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                     }
                 });
-                //성공시 이동할 페이지
+                // 성공시 이동할 페이지
                location.href='/pay/order';
             } else {
                 msg = '결제에 실패하였습니다.';

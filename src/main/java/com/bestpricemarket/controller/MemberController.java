@@ -1,14 +1,14 @@
 package com.bestpricemarket.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +39,6 @@ public class MemberController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String insertPOST(MemberVO vo) throws Exception{
 		l.info("C: 회원가입포스트메서드"+ vo);
-		System.out.println("C: 회원가입 한글확인 "+vo);
 		service.joinMember(vo);		
 		return "redirect:/member/login";
 	}
@@ -57,32 +56,39 @@ public class MemberController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET() throws Exception{
-		l.info("C: 로그인 입력페이지 GET");
 		return "/member/loginandjoin";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
-		l.info("C: 로그인POST"+ vo.getId() + vo.getPw());
 		MemberVO returnVO = service.loginMember(vo);
-		l.info("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
+		System.out.println("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
 		
 		if(returnVO != null) {
 			session.setAttribute("id", returnVO.getId());			
 			rttr.addFlashAttribute("mvo", returnVO);
 			return "redirect:/member/main"; 
 		} else {
-			// 해당 정보 없는 경우 : => login페이지로 이동
 			return "redirect:/member/login";
 		}
+	}
+	
+	/* 로그아웃 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logoutGET(HttpSession session) throws Exception{
+		l.info("C: 로그아웃 GET");
+		session.invalidate();
+		// return "redirect:/member/main"; 얼럿창출력안하고싶을때 사용
 	}
 	
 	/* 메인페이지 */
 	// http://localhost:8088/member/main
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String mainGET() throws Exception{
+	public String mainGET(HttpSession session, Model model) throws Exception{
 		l.info("C: 메인 출력페이지 GET");
+		MemberVO vo = service.readMember((String)session.getAttribute("id"));
+		model.addAttribute("memVO", vo);
 		return "main";
 	}
 	
@@ -90,15 +96,7 @@ public class MemberController {
 	// http://localhost:8088/test/member/info
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public void infoGET(HttpSession session, Model model) throws Exception{
-		
-		//세션 객체 안에 있는 ID정보 저장
-		String id = (String) session.getAttribute("id");
-		l.info("C: 회원정보보기 GET의 아이디 "+id);
-		
-		//서비스안의 회원정보보기 메서드 호출
-		MemberVO vo = service.readMember(id);
-		
-		//정보저장 후 페이지 이동
+		MemberVO vo = service.readMember((String)session.getAttribute("id"));
 		model.addAttribute("memVO", vo);
 		l.info("C: 회원정보보기 GET의 VO "+ vo);
 	}
@@ -107,8 +105,8 @@ public class MemberController {
 	// http://localhost:8088/member/update
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String updateGET(HttpSession session, Model model) throws Exception{
-     model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
-     return "/member/updateForm";
+		model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
+		return "/member/updateForm";
    }	
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -121,7 +119,6 @@ public class MemberController {
     /* 회원탈퇴 */
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteGET(HttpSession session) throws Exception{
-    	// 세션제어
 		String id = (String) session.getAttribute("id");
 		if(id == null) {
 			return "redirect:/member/main";
@@ -132,13 +129,56 @@ public class MemberController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deletePOST(MemberVO vo, HttpSession session) throws Exception{
     	l.info("post"+vo);
-    	
     	service.deleteMember(vo);
-    	
     	session.invalidate();
     	return "redirect:/member/login ";
     }
 	
-	
+	/* 구글아이디로 로그인 */	
+    @ResponseBody
+	@RequestMapping(value = "/loginGoogle", method = RequestMethod.POST)
+	public String loginGooglePOST(MemberVO vo, HttpSession session, RedirectAttributes rttr, MemberVO mvo) throws Exception{
+		MemberVO returnVO = service.loginMemberByGoogle(vo);
+		String mvo_ajaxid = mvo.getId(); 
+		System.out.println("C: 구글아이디 포스트 db에서 가져온 vo "+ vo);
+		System.out.println("C: 구글아이디 포스트 ajax에서 가져온 id "+ mvo_ajaxid);
+		
+		if(returnVO == null) { //아이디가 DB에 존재하지 않는 경우
+			//구글 회원가입
+			service.joinMemberByGoogle(vo);	
+			
+			//구글 로그인
+			returnVO = service.loginMemberByGoogle(vo);
+			session.setAttribute("id", returnVO.getId());			
+			rttr.addFlashAttribute("mvo", returnVO);
+		}
+		
+		if(mvo_ajaxid.equals(returnVO.getId())){ //아이디가 DB에 존재하는 경우
+			//구글 로그인
+			service.loginMemberByGoogle(vo);
+			session.setAttribute("id", returnVO.getId());			
+			rttr.addFlashAttribute("mvo", returnVO);
+		}else {//아이디가 DB에 존재하지 않는 경우
+			//구글 회원가입
+			service.joinMemberByGoogle(vo);	
+			
+			//구글 로그인
+			returnVO = service.loginMemberByGoogle(vo);
+			session.setAttribute("id", returnVO.getId());			
+			rttr.addFlashAttribute("mvo", returnVO);
+		}
+		
+		return "redirect:/member/main";
+	}
+    
+    /* 비밀번호 찾기 */
+    @RequestMapping(value = "/findpw", method = RequestMethod.GET)
+	public void findPwGET() throws Exception{
+	}
+    // 비밀번호 찾기
+ 	@RequestMapping(value = "/findpw", method = RequestMethod.POST)
+ 	public void findPwPOST(@ModelAttribute MemberVO member, HttpServletResponse response) throws Exception{
+ 		service.findPw(response, member);
+ 	}
 	
 }

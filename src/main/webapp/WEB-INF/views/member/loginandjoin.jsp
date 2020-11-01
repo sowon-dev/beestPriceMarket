@@ -28,9 +28,9 @@ request.setCharacterEncoding("utf-8");
                 <div class="box">
                     <div class="content">
                         <div class="social"> 
-                         <a class="circle github" href="#"> <i class="fa fa-github fa-fw"></i> </a> 
-                         	<a id="google_login" class="circle google" href="#"> <i class="fa fa-google-plus fa-fw"></i> </a> 
-                        		<a id="facebook_login" class="circle facebook" href="#"> <i class="fa fa-facebook fa-fw"></i> </a> 
+                         	<span id="google_login" class="circle google" onclick="init();"> <i class="fa fa-google-plus fa-fw"></i> </span> 
+                         	<a class="circle github" href="#"> <i class="fa fa-github fa-fw"></i> </a> 
+                        	<a id="facebook_login" class="circle facebook" href="#"> <i class="fa fa-facebook fa-fw"></i> </a> 
                         </div>
                         <div class="division">
                             <div class="line l"></div> <span> 또는 </span>
@@ -39,12 +39,12 @@ request.setCharacterEncoding("utf-8");
                         <div class="error"></div>
                         <div class="form loginBox">
                             <form action="/member/login" method="post" accept-charset="UTF-8"> 
-                            	<input id="id" class="form-control" type="text" placeholder="아이디" name="id"> 
-                            	<input id="pw" class="form-control" type="password" placeholder="비밀번호" name="pw"> 
+                            	<input id="id" class="form-control" type="text" placeholder="아이디" name="id" required> 
+                            	<input id="pw" class="form-control" type="password" placeholder="비밀번호" name="pw" required> 
                             	<!-- <input class="btn btn-default btn-login" type="submit" value="로그인" onclick="loginAjax()">  -->
                             	<input class="btn btn-default btn-login" type="submit" value="로그인"> 
-                            	<input class="btn btn-default btn-login" type="button" value="메인으로" onclick="location.href='/member/main'" style="width:157px;height:50px;margin-top:5px;padding:0;display:inline;"> 
-                            	<input class="btn btn-default btn-login" type="button" value="회원가입" onclick="javascript: showRegisterForm();" style="width:157px;height:50px;margin-top:5px;padding:0;display:inline;"> 
+                            	<input class="btn btn-default btn-login" type="button" value="메인으로" onclick="location.href='/member/main'" style="width:157px;height:40px;margin-top:5px;padding:0;display:inline;"> 
+                            	<input class="btn btn-default btn-login" type="button" value="회원가입" onclick="javascript: showRegisterForm();" style="width:157px;height:40px;margin-top:5px;padding:0;display:inline;"> 
                             </form>
                         </div>
                     </div>
@@ -53,13 +53,13 @@ request.setCharacterEncoding("utf-8");
                     <div class="content registerBox" style="display:none;">
                         <div class="form">
                             <form action="/member/join" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8" name="frJoin"> 
-                            	<input id="id" class="form-control" type="text" placeholder="아이디(영문,숫자포함 4~12자리)" name="id" style="width:204px;margin:0 0 5px 0;padding:12 0;display:inline;"> 
+                            	<input id="id" class="form-control" type="text" placeholder="아이디(영문,숫자혼용)" name="id" style="width:204px;margin:0 0 5px 0;padding:12 0;display:inline;" required> 
 								<input id="idCheckBtn" type="button" value="아이디중복확인" class="btn btn-default btn-register" style="width:110px;height:50px;margin:0;padding:0;display:inline;"><br>
                             		<p class="idCheck" style="margin-bottom:0;"><span class="idCheckMsg" style="font-size:12px; font-weight:bold;"></span></p>
                             	<input id="username" class="form-control" type="text" placeholder="이름" name="username" required> 
-                            	<input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문.숫자특수문자포함 8자리이상)" name="pw" > 
+                            	<input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문,숫자,특수문자혼용)" name="pw" required> 
                             		<span class="pwValCheckMsg" style="font-size:12px; font-weight:bold;"></span>
-                            	<input id="pw_confirmation" class="form-control" type="password" onkeyup="pwCheck()" placeholder="비밀번호 재확인" name="password_confirmation"> 
+                            	<input id="pw_confirmation" class="form-control" type="password" onkeyup="pwCheck()" placeholder="비밀번호 재확인" name="password_confirmation" required> 
                             		<span class="pwCheckMsg" style="font-size:12px; font-weight:bold;"></span>
                             	<input id="email" class="form-control" type="email" placeholder="이메일" name="email" required style="height:48px;padding:13px 12px;margin-bottom:5px;color:black;">
                             	<input id="phone" class="form-control" type="text" placeholder="전화번호 예)01012345678" name="phone" required>                      
@@ -67,18 +67,18 @@ request.setCharacterEncoding("utf-8");
 								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default btn-register" style="width:110px;height:50px;margin:0;padding:0;display:inline;"><br>
 								<input type="text" id="sample4_roadAddress" class="form-control" placeholder="도로명주소" name="addr1" readonly required>
 								<input type="hidden" id="sample4_jibunAddress" class="form-control" placeholder="지번주소">
-								<input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소" name="addr2" required>
+								<input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소" name="addr2">
 								<input type="hidden" id="sample4_extraAddress" class="form-control" placeholder="참고항목">
 								<span id="guide" style="color:#999;display:none;visibility:hidden;"></span>
-                            	<input class="btn btn-default btn-register" type="submit" value="회원가입" name="commit" id="submitBtn"> 
+                            	<input class="btn btn-default btn-register" type="button" value="회원가입" name="commit" id="submitBtn" onclick="signUpValidation()" > 
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="forgot login-footer"> <span><a href="">비밀번호찾기</a></span> </div>
-                <div class="forgot register-footer" style="display:none"> <span>이미 회원이라면 </span> <a href="javascript: showLoginForm();">로그인</a> </div>
+                <div class="forgot login-footer"> <span>비밀번호를 잊어버렸다면 </span><a href="/member/findpw" style="color:black">비밀번호찾기</a></div>
+                <div class="forgot register-footer" style="display:none"> <span>이미 회원이라면 </span> <a href="javascript: showLoginForm();"style="color:black">로그인</a> </div>
             </div>
         </div>
     </div>
@@ -88,28 +88,33 @@ request.setCharacterEncoding("utf-8");
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- 주소API  -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- google signin api -->
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 
 <script type="text/javascript">
-
-
 // 아이디 중복체크
 $("#idCheckBtn").click(function(){  
-let d = document.frJoin.id.value;
-
-$.ajax({
-  url : "/member/idCheck",
-  type : "post",
-  data : { id : d
-	  },
-  success : function(data) {
-	  	  
-   if(data == 1) {
-    $(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("이미 사용중인 아이디입니다.");   
-   } else {
-    $(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");
-   }
-  }
- }); 
+	let d = document.frJoin.id.value;
+	
+	$.ajax({
+	  url : "/member/idCheck",
+	  type : "post",
+	  data : { id : d },
+	  success : function(data) {
+		if(data == 1) {
+			$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("이미 사용중인 아이디입니다.");
+		} else {
+			if(d == ""){ 
+				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("아이디를 입력하세요.");
+			}else if(d.length < 4){
+				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("아이디를 4자리이상 입력하세요.");
+			}else{
+				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");				
+			}
+	    }
+	  }, error : function(){ console.log("아이디 중복확인 실패"); }
+	 }); 
 });
 
 //비밀번호 체크 
@@ -127,7 +132,7 @@ function pwValCheck(){
    	 }    
 }
 
-// 비밀번호 체크 
+// 비밀번호 일치여부 체크 
 function pwCheck(){
     let pwd1 = document.frJoin.pw.value;
     let pwd2 = $("#pw_confirmation").val();
@@ -136,11 +141,94 @@ function pwCheck(){
 	//비밀번호 일치여부체크
 	if (pwd1 == pwd2) { //비번이 일치할 경우
     	$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'blue'}).text("비밀번호가 일치합니다.");
+		$('#submitBtn').css({background: 'rgb(33, 37, 41, 1)', color:'#FFFFFF'}).attr("disabled", false);
     } else { //비번이 불일치할 경우
    		$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호가 일치하지않습니다.");           
-   		$('#submitBtn').css('background', 'rgb(0, 123, 255, .5)').attr("disabled", true);
+	   	$('#submitBtn').css('background', 'rgb(33, 37, 41, .5)').attr("disabled", true);	
 	}
 }
+
+// 회원가입 유효성 체크
+function signUpValidation(){
+	let f = document.frJoin;
+	let userId = f.id.value;
+	let userPw = f.pw.value;
+	let userPwCheck = f.password_confirmation.value;
+	let userName = f.username.value;
+	let email = f.email.value;
+	let phone = f.phone.value;
+	let addr1 = f.addr1.value;
+	
+	if(!userId || userId.length < 4){
+		alert("아이디 중복확인버튼을 눌러주세요");
+		$("#id").focus();
+	}else if(!userName){
+		alert("이름 입력은 필수입니다.");
+		$("#username").focus();
+	}else if(!userPw){
+		alert("비밀번호 입력은 필수입니다.");
+		$("#pw").focus();
+	}else if(!userPwCheck){
+		alert("비밀번호 확인은 필수입니다.");
+		$("#password_confirmation").focus();	
+	}else if(!email){
+		alert("이메일 입력은 필수입니다.");
+		$("#email").focus();
+	}else if(!phone){
+		alert("전화번호 입력은 필수입니다.");
+		$("#phone").focus();
+	}else if(!addr1){
+		alert("우편번호찾기버튼을 눌러주세요.");
+		$("#addr1").focus();
+	}else {
+		alert("성공적으로 회원가입 되었습니다.")
+		document.frJoin.submit();
+	}	
+}
+
+// google signin API
+var googleUser = {};
+function init() {
+	 gapi.load('auth2', function() {
+	  console.log("init()시작");
+	  auth2 = gapi.auth2.init({
+	        client_id: '344387180411-fk8bjqrfa46sk96fsl9jr0u7bn5rc3o9.apps.googleusercontent.com',
+	        cookiepolicy: 'single_host_origin',
+	      });
+	      attachSignin(document.getElementById('google_login'));
+	 });
+}
+
+//google signin API2
+function attachSignin(element) {
+    auth2.attachClickHandler(element, {},
+        function(googleUser) {
+    	var profile = googleUser.getBasicProfile();
+    	var id_token = googleUser.getAuthResponse().id_token;
+	  	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  	  console.log('ID토큰: ' + id_token);
+	  	  console.log('Name: ' + profile.getName());
+	  	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			$(function() {
+				$.ajax({
+				    url: '/member/loginGoogle',
+				    type: 'post',
+				    data: {"id": profile.getEmail(),
+				        "pw": profile.getId(),
+				        "username": profile.getName(),
+						"email": profile.getEmail()
+					    },
+				    success: function (data) {
+				            alert("구글아이디로 로그인 되었습니다");
+				            location.href="/member/main";
+				        }
+				});
+			})
+        }, function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
+    console.log("끝");
+  }
 
 // 카카오API
 function sample4_execDaumPostcode() {

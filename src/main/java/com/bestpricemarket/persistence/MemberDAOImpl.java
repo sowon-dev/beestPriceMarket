@@ -17,8 +17,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	//DB연결
 	@Inject
-	private SqlSession sqlSession; //mapper위치까지 접근 가능 but mapper가 여러개일수있음 => mapper구분필요
-	
+	private SqlSession sqlSession;
 	private static final String namespace = "com.bestpricemarket.mappers.memberMapper";
 
 	//회원가입
@@ -63,5 +62,12 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("DAO: 확인! "+vo);
 		sqlSession.delete(namespace+".deleteMember",vo);
 	}
+
+	//비밀번호변경
+	@Override
+	public int updatePw(MemberVO vo) throws Exception {
+		return sqlSession.update(namespace+".updatePw", vo);
+	}
+	
 	
 }

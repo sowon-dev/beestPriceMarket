@@ -27,10 +27,14 @@
 
 	<!-- 상품 카테고리 메뉴바 -->
       <div class="col-lg-3">
-
-        <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
-        
-         <div class="list-group">
+      <c:if test="${memVO.username != null}">
+        <h2 class="my-4">${memVO.username}님<br>환영합니다😀</h2>
+      </c:if>
+         <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+      <c:if test="${memVO.username == null}">
+        <h2 class="my-4">카테고리</h2>
+      </c:if>
+        <div class="list-group">
           <a href="/goods/list" class="list-group-item">노트북</a>
           <a href="/goods/list" class="list-group-item">데스크탑</a>
           <a href="/goods/list" class="list-group-item">모니터</a>
@@ -45,6 +49,7 @@
           <a href="/goods/list" class="list-group-item">패션잡화</a>
           <a href="/goods/list" class="list-group-item">화장품</a>
           <a href="/goods/list" class="list-group-item">쥬얼리</a>
+
         </div>
       </div> 
     <!-- 상품 카테고리 메뉴바 -->
