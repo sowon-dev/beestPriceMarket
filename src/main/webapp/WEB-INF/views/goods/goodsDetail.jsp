@@ -28,8 +28,31 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- 본문 JS  -->
 
-	
-	        			
+<!-- 수정/삭제 아이콘 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- 수정/삭제 아이콘 -->
+
+<script type="text/javascript">
+ 	<!-- 수정/삭제 이동 --> 
+		$(document).ready(function(){
+
+			var gno = $('#gno').val();
+					
+			$(document).on("click","#modify",function(){
+				location.href = '/goods/modify?gno='+gno;
+			});
+
+			$(document).on("click","#delete",function(){
+				var con = confirm("정말로 삭제하시겠습니까?");
+				if(con){
+					location.href = '/goods/delete?gno='+gno;
+				}	
+			});
+		});
+	  <!-- 수정/삭제 이동 -->
+</script>
 
 
 
@@ -40,10 +63,6 @@
   <!-- 헤더 -->
    <jsp:include page="../inc/top.jsp"/>
   <!-- 헤더 -->
-  
-  
-  
-  
   
   <!-- 본문 -->
   <div class="pd-wrap">
@@ -104,10 +123,11 @@
         				
 		        		<br><br>
 		     
-		     <!-- 경매정보 테이블 -->   		
+		     <!-- 경매정보 테이블 -->  
+		     		
 		       <table>
 		         <tr>
-		         	<th colspan="2" style="font-size:40px;">${goods.gname}</th>
+		         	<th colspan="2" style="font-size:40px;">${goods.gname}  </th>
 		         </tr>
   				 <tr>
     				<th>현재입찰가</th>
@@ -133,6 +153,10 @@
      				<th>배송정보</th>
     				<td>직거래</td>
   				</tr>
+  				<tr>
+     				<th>판매자</th>
+    				<td>${goods.g_m_id}</td>
+  				</tr>
   				
 			</table>
 			<!-- 경매정보 테이블 --> 
@@ -146,35 +170,18 @@
 					
 	        			</div>
 	        	</form>				
-	       <!-- 수정/삭제 이동 -->
-	      
+	       <!-- 수정/삭제 -->
+	      <c:if test="${ id == goods.g_m_id}">
 	        <form action="" role="form">
 	        	<div class="product-count" >
 	        		<input type="hidden" name="gno" id="gno" value="${goods.gno}">
 	        		<input type="button"  id="modify" value="수정" class="round-black-btn" style="margin-right:20px;">
 	        		<input type="button"  id="delete" value="삭제" class="round-black-btn" >
 	        	</div>
-	        </form> 
-	         
-	        <script type="text/javascript">
-
-				$(document).ready(function(){
-
-					var gno = $('#gno').val();
-					
-					$(document).on("click","#modify",function(){
-							location.href = '/goods/modify?gno='+gno;
-					});
-
-					$(document).on("click","#delete",function(){
-						var con = confirm("정말로 삭제하시겠습니까?");
-						if(con){
-							location.href = '/goods/delete?gno='+gno;
-						}	
-					});
-				});
-			</script>
-	        <!-- 수정/삭제 이동 -->
+	        </form>
+	       </c:if> 
+	         <!-- 수정/삭제 -->
+	        
 
 	        		</div>
 	        	</div>
