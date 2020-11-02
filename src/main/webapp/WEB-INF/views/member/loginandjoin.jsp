@@ -38,14 +38,13 @@ request.setCharacterEncoding("utf-8");
                         </div>
                         <div class="error"></div>
                         <div class="form loginBox">
-                            <form action="/member/login" method="post" accept-charset="UTF-8"> 
+                            <form action="" method="post" accept-charset="UTF-8" name="frlogin"> 
                             	<input id="id" class="form-control" type="text" placeholder="아이디" name="id" required> 
                             	<input id="pw" class="form-control" type="password" placeholder="비밀번호" name="pw" required> 
-                            	<!-- <input class="btn btn-default btn-login" type="submit" value="로그인" onclick="loginAjax()">  -->
-                            	<input class="btn btn-default btn-login" type="submit" value="로그인"> 
+                            </form>
+                            	<input class="btn btn-default btn-login" type="submit" value="로그인" onclick="loginAjax()"> 
                             	<input class="btn btn-default btn-login" type="button" value="메인으로" onclick="location.href='/member/main'" style="width:157px;height:40px;margin-top:5px;padding:0;display:inline;"> 
                             	<input class="btn btn-default btn-login" type="button" value="회원가입" onclick="javascript: showRegisterForm();" style="width:157px;height:40px;margin-top:5px;padding:0;display:inline;"> 
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -225,9 +224,8 @@ function attachSignin(element) {
 				});
 			})
         }, function(error) {
-          alert(JSON.stringify(error, undefined, 2));
+          alert("구글아이디 로그인이 실패했습니다.");
         });
-    console.log("끝");
   }
 
 // 카카오API

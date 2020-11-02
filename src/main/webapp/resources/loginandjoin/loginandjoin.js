@@ -2,7 +2,6 @@ $(document).ready(function(){
 	openLoginModal();
 });
 
-
 function showRegisterForm(){
 	$('.loginBox').fadeOut('fast',function(){
 		$('.registerBox').fadeIn('fast');
@@ -41,25 +40,32 @@ function openRegisterModal(){
 	$('#loginModal').show();
 }
 
-function loginAjax(){
-	/* Remove this comments when moving to server*/
-		$.post( "/login", function( data ) {
-		if(data == 1){
-			window.location.replace("/main");
-		} else {
-			shakeModal();
-	}
-});
-
-
-/* Simulate error message from the server */
-shakeModal();
+function loginAjax(){	
+	$.ajax({
+		method:"post",
+		url: "/member/login",
+		data: {
+			id:document.frlogin.id.value,
+			pw:document.frlogin.pw.value
+		},
+		success: function(data){
+			if(data == "true"){
+				alert("정상적으로 로그인되었습니다");
+				window.location.replace("/main");
+			} else {
+				shakeModal();
+			}
+		}, error: function(){ 
+			alert("예기치못한 오류가 발생했습니다. 다시 시도해주세요");
+			shakeModal(); 
+		}
+	});
 }
 
 function shakeModal(){
 	$('#loginModal .modal-dialog').addClass('shake');
 	$('.error').addClass('alert alert-danger').html("잘못된 아이디/비밀번호입니다.");
-	/*$('input[type="password"]').val('');*/
+	$('input[type="password"]').val('');
 	setTimeout( function(){
 		$('#loginModal .modal-dialog').removeClass('shake');
 	}, 1000 );
