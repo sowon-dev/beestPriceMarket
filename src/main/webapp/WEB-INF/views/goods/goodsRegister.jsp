@@ -52,7 +52,6 @@
     <!-- 버튼 -->
     
     
-    <!-- 섬머노트 에디터 -->
     <!-- include libraries(jQuery, bootstrap) -->
 
 	 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -141,7 +140,7 @@
                 
                 
                 <div class="card-body">
-               <%--  <c:if test = "${goods.g_m_id != null }"> --%>
+               <%--  <c:if test = "${id != null }">  --%>
 
                     <form action ="/goods/register" method="post" enctype="multipart/form-data" name="fr">
                    
@@ -171,7 +170,8 @@
                     <div class="form-row">
                       <div class="name">판매자</div>
                          <div class="value">
-                           <input class="input--style-6" type="text" name="g_m_id"><br>
+                           <input class="input--style-6" type="text" name="g_m_id" value="${id}" readonly><br>
+                           
                          </div>
                     </div>
                       
@@ -197,10 +197,11 @@
    							resize_enaleb : false,
    							enterMode : CKEDITOR.ENTER_BR,
    							shiftEnterMode : CKEDITOR.ENTER_P,
-   							filebrowserUploadUrl : "/goods/imgUpload"
+   							filebrowserUploadUrl : "/goods/imageUpload"
  						};
  
 						 CKEDITOR.replace("content", ckeditor_config);
+
 					</script>
 					<!-- ck 에디터 -->
                        
@@ -222,7 +223,7 @@
                     <div class="form-row">
                        <div class="name">마감 일자</div>
                          <div class="value">
-                            <input class="input--style-6" type="date" name="endDate" >
+                            <input class="input--style-6" type="date" name="endDate" style="height: 45px;" >
                          </div>
                          <!--  <script>
                             document.getElementById('endDate').value= new Date().toISOString().slice(0, -1);
@@ -235,12 +236,24 @@
                             
                            </div>
                       </div>
+                      
+                     <div class="form-row">
+                        <div class="name">배송방법</div>
+                          <div class="value">
+                             <input type="radio" name="deliver_way"  value="직거래" style="width: 30px;">직거래
+                             <input type="radio" name="deliver_way"  value="택배" style="width: 30px;">택배
+                            
+                           </div>
+                      </div>
+                      
                       <div class="card-footer">
-                    	<input type="submit" value="물품 등록"  onclick="return goods_register()" class="btn" > 
                     	
+                    	<input type="button" value="목록으로" class="btn" style="width: 100px; !important" onclick="location.href='/main'">
+                    	<input type="submit" value="등록하기"  onclick="return goods_register()" class="btn" style="width: 100px; margin-left: 470px; !important" >  
+                    	<input type="reset" value="취소하기" class="btn" style="width: 100px; !important"> 
                       </div>
                   </form>
-                  <%--  </c:if> --%>
+                   <%--  </c:if>  --%>
                   <%--  <c:if test="${goods.g_m_id == null }">
                    			<p>로그인 후에 작성할 수 있습니다.</p>
                    </c:if> --%>

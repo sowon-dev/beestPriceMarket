@@ -66,6 +66,8 @@ public class FileUtils {
 				//listMap.put("path", filePath+"/"+storedFileName);//
 				list.add(listMap);
 			}
+			
+			
 		}
 		return list;
 	}

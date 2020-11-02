@@ -1,5 +1,6 @@
 package com.bestpricemarket.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class GoodsVO {
@@ -12,8 +13,8 @@ public class GoodsVO {
 	private String content;
 	private int finalprice;
 	private int like;
-	private Timestamp regDate;
-	private Timestamp endDate;
+	private Date regDate;
+	private Date endDate;
 	private int actionstatus;
 	/*
 	 * private String image; private String imgThumb;
@@ -21,7 +22,7 @@ public class GoodsVO {
 	
 	public GoodsVO() {}
 	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content, int finalprice,
-			int like, Timestamp regDate, Timestamp endDate, int actionstatus) {
+			int like, Date regDate, Date endDate, int actionstatus) {
 		super();
 		this.gno = gno;
 		this.g_m_id = g_m_id;
@@ -83,16 +84,16 @@ public class GoodsVO {
 	public void setLike(int like) {
 		this.like = like;
 	}
-	public Timestamp getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Timestamp regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public Timestamp getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Timestamp endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	public int getActionstatus() {
