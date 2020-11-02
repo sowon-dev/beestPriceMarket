@@ -37,7 +37,7 @@ public class BasketController {
 	private static final Logger l = LoggerFactory.getLogger(MemberController.class);
 	
 	
-	 @RequestMapping(value="/basket") 
+	 @RequestMapping(value="/insert") 
 	 public String insert(@ModelAttribute BasketVO bv, HttpSession session){ 
 		 l.info("C: vo 확인"+bv);
 	  
@@ -47,29 +47,26 @@ public class BasketController {
 	
 	
 	
-    @RequestMapping(value = "/basket", method = RequestMethod.GET)
-    public  String listGET(HttpSession session,@RequestParam(defaultValue="1") int curPage,Model model) throws Exception{
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public  String listGET(HttpSession session,Model model) throws Exception{
+    	String id = (String)session.getAttribute("id");
     	
-    	int count = service.getCount();
-    	BasketPager pager = new BasketPager(count,curPage);
-    	int start = pager.getPageBegin();
-    	int end = pager.getPageEnd();
-    	List<BasketVO> basketlist = service.Basketlist(start,end);
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	System.out.println("c: 리스트 확인"+basketlist);
-    	map.put("basketlist",basketlist);
-    	map.put("pager", pager);
-		
-    	model.addAttribute("basketlist",basketlist); 
-    	model.addAttribute("map",map);
+    	if(id == null) {
+    		
+    		return "/member/loginandjoin";
+    	}
+    	
+    	List<BasketVO> basketlist = null;
+    	basketlist = service.Basketlist();
+    	
     	return"/basket/basket";
     } 
     
     
 
     
-    @RequestMapping(value="/delete")
-    public String deleteGET(@RequestParam Integer lno) throws Exception{
+    @RequestMapping(value="/delete", method = RequestMethod.GET)
+    public String deleteGET(@RequestParam Integer lno,HttpSession session) throws Exception{
     	
     	
     	service.deleteBasket(lno);
@@ -77,8 +74,41 @@ public class BasketController {
     	
     	System.out.println("C: 삭제 성공");
     	
-    	return "/basket/basket";
-    }
+    	return "/basket/listPage";
     
+    }
+
+	
+	  @RequestMapping(value="/listPage", method = RequestMethod.GET) 
+	  public String getListPage(Model model, @RequestParam(value="num",defaultValue="1") int num) throws Exception{ 
+		// 게시물 목록 + 페이징 추가
+		 BasketPager page = new BasketPager();
+		 
+		 page.setNum(num);
+		 page.setCount(service.getCount());  
+
+		 List<BasketVO> basketlist = null; 
+		 basketlist = service.listPage(page.getDisplayPost(), page.getPostNum());
+
+		 model.addAttribute("basketlist", basketlist);   
+		 model.addAttribute("pageNum", page.getPageNum());
+
+		 model.addAttribute("startPageNum", page.getStartPageNum());
+		 model.addAttribute("endPageNum", page.getEndPageNum());
+		  
+		 model.addAttribute("prev", page.getPrev());
+		 model.addAttribute("next", page.getNext());  
+
+		 
+		 
+		 model.addAttribute("page", page);
+		 model.addAttribute("select", num);
+	  
+			 return "/basket/listPage"; 
+	  }
+	  
 
 }
+	 
+
+

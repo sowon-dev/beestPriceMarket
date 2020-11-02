@@ -1,156 +1,98 @@
 package com.bestpricemarket.domain;
 
 public class BasketPager {
-	 public static final int PAGE_SCALE = 5;
+	// 현재 페이지 번호
+	private int num;
 
-	 public static final int BLOCK_SCALE = 5;
+	// 게시물 총 갯수
+	private int count;
 
-	 private int curPage;
-	 private int prevPage;
-	 private int nextPage;
-	 private int totPage;
-	 private int totBlock;
-	 private int curBlock;
-	 private int prevBlock;
-	 private int nextBlock;
+	// 한 페이지에 출력할 게시물 갯수
+	private int postNum = 10;
 
-	 private int pageBegin;
-	 private int pageEnd;
+	// 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
+	private int pageNum;
 
-	 private int blockBegin;
+	// 출력할 게시물
+	private int displayPost;
 
-	 private int blockEnd;
+	// 한번에 표시할 페이징 번호의 갯수
+	private int pageNumCnt = 10;
 
-	 public BasketPager(int count, int curPage) {
-	  curBlock = 1;
-	  this.curPage = curPage;
-	  setTotPage(count);
-	  setPageRange();
-	  setTotBlock();
-	  setBlockRange();
-	 }
+	// 표시되는 페이지 번호 중 마지막 번호
+	private int endPageNum;
 
-	 public void setBlockRange() {
+	// 표시되는 페이지 번호 중 첫번째 번호
+	private int startPageNum;
 
-	  curBlock = (int) Math.ceil((curPage - 1) / BLOCK_SCALE) + 1;
+	// 다음/이전 표시 여부
+	private boolean prev;
+	private boolean next;
+	
+	public void setNum(int num) {
+		 this.num = num;
+		}
 
-	  blockBegin = (curBlock - 1) * BLOCK_SCALE + 1;
+		public void setCount(int count) {
+		 this.count = count;
+		
+		 dataCalc();
+		}
 
-	  blockEnd = blockBegin + BLOCK_SCALE - 1;
+		public int getCount() {
+		 return count;
+		}
 
-	  if (blockEnd > totPage)
-	   blockEnd = totPage;
+		public int getPostNum() {
+		 return postNum;
+		}
 
-	  prevPage = (curPage == 1) ? 1 : (curBlock - 1) * BLOCK_SCALE;
+		public int getPageNum() {
+		 return pageNum;
+		}
 
-	  nextPage = curBlock > totBlock ? (curBlock * BLOCK_SCALE) : (curBlock * BLOCK_SCALE) + 1;
+		public int getDisplayPost() {
+		 return displayPost;
+		}
 
-	  if (nextPage >= totPage)
-	   nextPage = totPage;
-	 }
+		public int getPageNumCnt() {
+		 return pageNumCnt;
+		}
 
-	 public void setPageRange() {
+		public int getEndPageNum() {
+		 return endPageNum;
+		}
 
-	  pageBegin = (curPage - 1) * PAGE_SCALE + 1;
+		public int getStartPageNum() {
+		 return startPageNum;
+		}
 
-	  pageEnd = pageBegin + PAGE_SCALE - 1;
-	 }
+		public boolean getPrev() {
+		 return prev;
+		} 
 
-	 public int getCurPage() {
-	  return curPage;
-	 }
-
-	 public void setCurPage(int curPage) {
-	  this.curPage = curPage;
-	 }
-
-	 public int getPrevPage() {
-	  return prevPage;
-	 }
-
-	 public void setPrevPage(int prevPage) {
-	  this.prevPage = prevPage;
-	 }
-
-	 public int getNextPage() {
-	  return nextPage;
-	 }
-
-	 public void setNextPage(int nextPage) {
-	  this.nextPage = nextPage;
-	 }
-
-	 public int getTotPage() {
-	  return totPage;
-	 }
-
-	 public void setTotPage(int count) {
-
-	  totPage = (int) Math.ceil(count * 1.0 / PAGE_SCALE);
-	 }
-
-	 public int getTotBlock() {
-	  return totBlock;
-	 }
-
-	 public void setTotBlock() {
-
-	  totBlock = (int) Math.ceil(totPage / BLOCK_SCALE);
-	 }
-
-	 public int getCurBlock() {
-	  return curBlock;
-	 }
-
-	 public void setCurBlock(int curBlock) {
-	  this.curBlock = curBlock;
-	 }
-
-	 public int getPrevBlock() {
-	  return prevBlock;
-	 }
-
-	 public void setPrevBlock(int prevBlock) {
-	  this.prevBlock = prevBlock;
-	 }
-
-	 public int getNextBlock() {
-	  return nextBlock;
-	 }
-
-	 public void setNextBlock(int nextBlock) {
-	  this.nextBlock = nextBlock;
-	 }
-
-	 public int getPageBegin() {
-	  return pageBegin;
-	 }
-
-	 public void setPageBegin(int pageBegin) {
-	  this.pageBegin = pageBegin;
-	 }
-
-	 public int getPageEnd() {
-	  return pageEnd;
-	 }
-
-	 public void setPageEnd(int pageEnd) {
-	  this.pageEnd = pageEnd;
-	 }
-
-	 public int getBlockBegin() {
-	  return blockBegin;
-	 }
-
-	 public void setBlockBegin(int blockBegin) {
-	  this.blockBegin = blockBegin;
-	 }
-
-	 public int getBlockEnd() {
-	  return blockEnd;
-	 }
-
-	 public void setBlockEnd(int blockEnd) {
-	  this.blockEnd = blockEnd;
-	 }
+		public boolean getNext() {
+		 return next;
+		}
+		private void dataCalc() {
+			 
+			 // 마지막 번호
+			 endPageNum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
+			 
+			 // 시작 번호
+			 startPageNum = endPageNum - (pageNumCnt - 1);
+			 
+			 // 마지막 번호 재계산
+			 int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNumCnt));
+			 
+			 if(endPageNum > endPageNum_tmp) {
+			  endPageNum = endPageNum_tmp;
+			 }
+			 
+			 prev = startPageNum == 1 ? false : true;
+			 next = endPageNum * pageNumCnt >= count ? false : true;
+			 
+			 displayPost = (num - 1) * postNum;
+			 
+			}
 }

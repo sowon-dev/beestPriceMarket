@@ -122,21 +122,34 @@ function basketlist(page){
                                         </c:choose>
                                         <td>${BasketVO.lowestprice }</td>
                                         <td>${BasketVO.enddate }</td>
-                                    	<td><a href="/basket/delete?lno=${BasketVO.lno }">삭제</a></td>
+                                    	<td><button class="btn" type="submit">삭제</button></td>
                                     	<td><a href="/pay/order">입찰</a></td>
                                     </tr>
                                     </c:forEach>
-                                   
                                 </tbody>
                             </table>
 										<!-- 페이징 처리 -->
-										<div>
-											<c:forEach begin="1" end="${pageNum}" var="num">
-												<span> <a href="/board/listPage?num=${num}">${num}</a>
-												</span>
-											</c:forEach>
-										</div>
-
+										<c:if test="${page.prev}">
+										 <span>[ <a href="/basket/listPage?num=${page.startPageNum - 1}">이전</a> ]</span>
+										</c:if>
+										
+										<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
+										 <span>
+										 
+										  <c:if test="${select != num}">
+										   <a href="/basket/listPage?num=${num}">${num}</a>
+										  </c:if>    
+										  
+										  <c:if test="${select == num}">
+										   <b>${num}</b>
+										  </c:if>
+										    
+										 </span>
+										</c:forEach>
+										
+										<c:if test="${page.next}">
+										 <span>[ <a href="/basket/listPage?num=${page.endPageNum + 1}">다음</a> ]</span>
+										</c:if>
 									</div>
                         </c:otherwise>
                         </c:choose>
@@ -148,7 +161,7 @@ function basketlist(page){
       </div>   
       </div>  
     
-    <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="http://totoprayogo.com">totoprayogo.com</a></div>
+    
       </div>
 <!-- 상품 카테고리 메뉴바 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>   
