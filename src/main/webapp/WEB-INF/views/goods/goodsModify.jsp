@@ -84,6 +84,7 @@
 			document.fr.category.focus();
 			return false;
 		}
+		
 
 		if(gname == ""){
 			alert("물품제목을 입력하세요.");
@@ -91,10 +92,11 @@
 			return false;
 		}
 
-		if(content == ""){
-			alert("물품설명을 입력하세요.");
-			document.fr.content.focus();
-			return false;
+		if(CKEDITOR.instances.content.getData() == '' 
+			|| CKEDITOR.instances.content.getData().length == 0){
+				alert("물품설명을 입력하세요.");
+				$("#content").focus();
+				return false;
 		}
 
 		if(lowestprice == ""){
@@ -110,8 +112,23 @@
 			return false;
 		}
 
+		if(bidunit == ""){
+			alert("입찰 단위를 입력하세요.");
+			document.fr.bidunit.focus();
+			return false;
+		}
+
 	 
 	}
+
+
+	// category
+	$(function(){
+	  	$("#category").val("${goodsVO.category}").attr("selected","true");
+    });
+	// category
+
+	
 	</script>    
     <!-- 유효성 체크 -->
  
@@ -135,19 +152,14 @@
                   <div class="form-row">
                   
                      <div class="name">물품분류</div>
-                        <select class="bo_w_select" name="category">
+                        <select class="bo_w_select" name="category" id="category">
                       		<option value="" selected>카테고리 선택</option>
-                      		<option value="notebook"
-                      		>노트북</option>
-                      		<option value="desktop">데스크탑</option>
-                      		<option value="monitor">모니터</option>
-                      		<option value="component">PC부품</option>
+                      		<option value="computer">컴퓨터</option>
                       		<option value="digital">디지털</option>
                       		<option value="appliances">생활가전</option>
                       		<option value="stationery">생활문구</option>
                       		<option value="furniture">생활가구</option>
                       		<option value="sports">스포츠</option>
-                      		<option value="car">자동차</option>
                       		<option value="fashion">패션의류</option>
                       		<option value="miscellaneousitems">패션잡화</option>
                       		<option value="cosmetics">화장품</option>
@@ -181,10 +193,13 @@
                     <!-- ck에디터 -->   
                     <script>
  						var ckeditor_config = {
+ 							width: 1000,	
+ 							height: 500,	
    							resize_enaleb : false,
    							enterMode : CKEDITOR.ENTER_BR,
    							shiftEnterMode : CKEDITOR.ENTER_P,
-   							filebrowserUploadUrl : "/goods/imgUpload"
+   							uploadUrl: "/goods/ckUpload",
+   							filebrowserUploadUrl : "/goods/ckUpload"
  						};
  
 						 CKEDITOR.replace("content", ckeditor_config);
@@ -244,18 +259,11 @@
         	 		}
         		
         		// 파일추가
-
-
-
-
                 </script>
-                   
-                   
-                   
                     <div class="form-row">
                        <div class="name">마감 일자</div>
                          <div class="value">
-                            <input class="input--style-6" type="text" name="endDate" value="${goodsVO.endDate}">
+                            <input class="input--style-6" type="date" name="endDate" value="${goodsVO.endDate}" style="height: 45px;">
                          </div>
                          <!--  <script>
                             document.getElementById('endDate').value= new Date().toISOString().slice(0, -1);
@@ -268,16 +276,21 @@
                             
                            </div>
                       </div>
-                      </form>
                       
+                      <div class="form-row">
+                        <div class="name">입찰 단위</div>
+                          <div class="value">
+                             <input class="input--style-6" type="text" name="bidunit" id="input" value="${goodsVO.bidunit}">
+                            
+                           </div>
+                      </div>
+                      </form>
                       <div class="card-footer">
                       	<input type="submit" value="목록으로" id="list" class="btn" style="width: 100px; !important">
-                    	<input type="submit" value="수정하기" id="modify" onclick="return goods_modify()" class="btn" style="width: 100px; margin-left: 470px; !important">
+                    	<input type="submit" value="수정하기" id="modify" onclick="return goods_modify()" class="btn" style="width: 100px; margin-left: 870px; !important">
                     	<input type="submit" value="취소하기" id="back" class="btn" style="width: 100px; !important">
                       </div>
-                  
                 </div>
-              
             </div>
         </div>
     </div>

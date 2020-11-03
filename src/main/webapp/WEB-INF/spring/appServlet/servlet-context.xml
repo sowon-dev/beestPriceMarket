@@ -23,6 +23,18 @@
 
 	<context:component-scan base-package="com.bestpricemarket.controller" />
 	
+	<!-- 업로드 패스 설정 --> 
+	<!--  <beans:bean class="java.lang.String" id="uploadPath">
+ 		<beans:constructor-arg value="C:\mp\file" />
+	</beans:bean>  -->
+	 
+	
 	<!-- 일반 파일 업로드 경로 -->
 	<resources mapping="/imgUpload/**" location="${pageContext.request.contextPath}/resources/imgUpload/" />
+
+	<!-- ck에디터 파일 업로드 경로 -->
+	<resources mapping="/ckUpload/**" location="/resources/ckUpload/" />
+	
+
+
 </beans:beans>

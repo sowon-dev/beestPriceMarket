@@ -10,6 +10,7 @@ public class GoodsVO {
 	private String category;
 	private String gname;
 	private int lowestprice;
+	private int bidunit;
 	private String content;
 	private int finalprice;
 	private int like;
@@ -21,7 +22,7 @@ public class GoodsVO {
 	 */
 	
 	public GoodsVO() {}
-	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
+	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, int bidunit, String content,
 			int finalprice, int like, Date regDate, Date endDate, int actionstatus) {
 		super();
 		this.gno = gno;
@@ -29,6 +30,7 @@ public class GoodsVO {
 		this.category = category;
 		this.gname = gname;
 		this.lowestprice = lowestprice;
+		this.bidunit = bidunit;
 		this.content = content;
 		this.finalprice = finalprice;
 		this.like = like;
@@ -36,9 +38,6 @@ public class GoodsVO {
 		this.endDate = endDate;
 		this.actionstatus = actionstatus;
 	}
-	
-	
-	
 	public int getGno() {
 		return gno;
 	}
@@ -68,6 +67,12 @@ public class GoodsVO {
 	}
 	public void setLowestprice(int lowestprice) {
 		this.lowestprice = lowestprice;
+	}
+	public int getBidunit() {
+		return bidunit;
+	}
+	public void setBidunit(int bidunit) {
+		this.bidunit = bidunit;
 	}
 	public String getContent() {
 		return content;
@@ -110,9 +115,12 @@ public class GoodsVO {
 	@Override
 	public String toString() {
 		return "GoodsVO [gno=" + gno + ", g_m_id=" + g_m_id + ", category=" + category + ", gname=" + gname
-				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like="
-				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
+				+ ", lowestprice=" + lowestprice + ", bidunit=" + bidunit + ", content=" + content + ", finalprice="
+				+ finalprice + ", like=" + like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus="
+				+ actionstatus + "]";
 	}
+	
+	
 	
 	
 	

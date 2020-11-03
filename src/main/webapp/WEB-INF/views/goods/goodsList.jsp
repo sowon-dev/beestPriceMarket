@@ -32,15 +32,11 @@
         
         <div class="list-group">
           <a href="/goods/list" class="list-group-item">노트북</a>
-          <a href="#" class="list-group-item">데스크탑</a>
-          <a href="#" class="list-group-item">모니터</a>
-          <a href="#" class="list-group-item">PC부품</a>
           <a href="#" class="list-group-item">디지털</a>
           <a href="#" class="list-group-item">생활가전</a>
           <a href="#" class="list-group-item">생활문구</a>
           <a href="#" class="list-group-item">생활가구</a>
           <a href="#" class="list-group-item">스포츠</a>
-          <a href="#" class="list-group-item">자동차</a>
           <a href="#" class="list-group-item">패션의류</a>
           <a href="#" class="list-group-item">패션잡화</a>
           <a href="#" class="list-group-item">화장품</a>
