@@ -21,8 +21,8 @@ public class GoodsVO {
 	 */
 	
 	public GoodsVO() {}
-	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content, int finalprice,
-			int like, Date regDate, Date endDate, int actionstatus) {
+	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
+			int finalprice, int like, Date regDate, Date endDate, int actionstatus) {
 		super();
 		this.gno = gno;
 		this.g_m_id = g_m_id;
@@ -36,6 +36,9 @@ public class GoodsVO {
 		this.endDate = endDate;
 		this.actionstatus = actionstatus;
 	}
+	
+	
+	
 	public int getGno() {
 		return gno;
 	}
@@ -72,10 +75,10 @@ public class GoodsVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getBidprice() {
+	public int getFinalprice() {
 		return finalprice;
 	}
-	public void setBidprice(int finalprice) {
+	public void setFinalprice(int finalprice) {
 		this.finalprice = finalprice;
 	}
 	public int getLike() {
@@ -107,9 +110,15 @@ public class GoodsVO {
 	@Override
 	public String toString() {
 		return "GoodsVO [gno=" + gno + ", g_m_id=" + g_m_id + ", category=" + category + ", gname=" + gname
-				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like=" + like
-				+ ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
+				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like="
+				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
