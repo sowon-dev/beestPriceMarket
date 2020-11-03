@@ -24,6 +24,7 @@ public interface MemberService {
 	// 회원탈퇴
 	public void deleteMember(MemberVO vo);
 	
+	
 	//구글회원가입
 	public void joinMemberByGoogle(MemberVO vo);
 	

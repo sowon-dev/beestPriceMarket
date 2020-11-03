@@ -9,14 +9,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/BasketCSS/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/loginandjoin/loginandjoin.css" rel="stylesheet">
 
  <style type="text/css">
 .container{
  width: 100% !important; 
 }
+</style> 
+<style type="text/css">  
 .btn {
     border-radius: 4px; 
     background: #212529;
@@ -33,8 +34,8 @@
     color: #212529;
     text-decoration: none;
 }
+</style>
 
-</style> 
 
 <script type="text/javascript">
 function basketlist(page){
@@ -86,6 +87,10 @@ function basketlist(page){
                       </c:when>
                         <c:otherwise>
                          <div class="col-md-12">
+                            
+				 			 
+						    
+                            <form method="post" role="form">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -98,10 +103,11 @@ function basketlist(page){
                                    	    <th class="border-0 text-uppercase small font-weight-bold" colspan="2">여부</th>
                                     </tr>
                                 </thead>
+                                
                                 <tbody>
                                     <c:forEach items="${basketlist }" var="BasketVO">
                                     <tr>
-                                        <td>${BasketVO.lno }</td> 
+                                        <td>${BasketVO.lno}</td> 
                                         <!-- 업로드 위치 모르겠음 -->
                                         <td><img src="./upload/${ gdto.getImage().split[0]}"></td>
                                         <!--  -->
@@ -122,34 +128,47 @@ function basketlist(page){
                                         </c:choose>
                                         <td>${BasketVO.lowestprice }</td>
                                         <td>${BasketVO.enddate }</td>
-                                    	<td><button class="btn" type="submit">삭제</button></td>
+                                    	<td><a href="/basket/delete?lno=${BasketVO.lno}">삭제</a></td>
                                     	<td><a href="/pay/order">입찰</a></td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
+							</form>
 										<!-- 페이징 처리 -->
+										
+										<ul class="pagination justify-content-center">
 										<c:if test="${page.prev}">
-										 <span>[ <a href="/basket/listPage?num=${page.startPageNum - 1}">이전</a> ]</span>
+										 <li class="page-item">
+										 <a class="page-link" href="/basket/listPage?num=${page.startPageNum - 1}">이전</a>
+										 </li>
 										</c:if>
 										
 										<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
-										 <span>
+										 
 										 
 										  <c:if test="${select != num}">
-										   <a href="/basket/listPage?num=${num}">${num}</a>
+										  <li class="page-item"> 
+										  <a class="page-link" href="/basket/listPage?num=${num}">${num}</a>
+										  </li>
 										  </c:if>    
 										  
-										  <c:if test="${select == num}">
-										   <b>${num}</b>
+										 <c:if test="${select == num}">
+										  <li class="page-item">
+										  <b><a class="page-link" href="/basket/listPage?num=${num}">${num}</a></b>
+										  </li>
 										  </c:if>
 										    
-										 </span>
+										 
 										</c:forEach>
 										
 										<c:if test="${page.next}">
-										 <span>[ <a href="/basket/listPage?num=${page.endPageNum + 1}">다음</a> ]</span>
+										 <li class="page-item">
+										 <a class="page-link" href="/basket/listPage?num=${page.endPageNum + 1}">다음</a>
+										 </li>
 										</c:if>
+									</ul>
+									
 									</div>
                         </c:otherwise>
                         </c:choose>
@@ -165,7 +184,22 @@ function basketlist(page){
       </div>
 <!-- 상품 카테고리 메뉴바 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>   
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+     $(document).ready(function(){
+		var formObj = $("form[role='form']");
+                 
+		$(".btn").on("click",function(){
+				alert("삭제 되었습니다");
+				formObj.attr("action","/basket/delete");
+				formObj.submit();
 
+			});	
+
+         });
+
+    </script>
 
 </body>
 </html>

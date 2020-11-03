@@ -114,12 +114,18 @@
   <!-- /.container -->
 <fieldset>
     <legend> 회원탈퇴 </legend>
-    <form action="/member/delete" method="post">
+    <form  method="post" name="form1">
        <span class="front" style="margin-right: 52px;">아이디 </span> <input type="text" name="id" class="form-control" value="${id }" style="width:226px;display:inline;" readonly> <br>
       <span class="front" style="margin-right: 40px;">비밀번호</span><input type="password" class="form-control" name="pw"  style= "width: 226px; display: inline;"  required> <br>
-     
-      <input type="submit" class="btn" style="background-color: #343A40; color:white; " value="회원탈퇴"  name="commit">          
+     <input type="submit" class="btn" style="background-color: #343A40; color:white; " value="회원탈퇴"  id="btnDelete"> 
     </form>  
+   <c:if test="${msg == false }">
+ <p>
+ 입력한 비밀번호가 잘 못 되었습니다.
+ </p>
+</c:if>
+  
+  
   </fieldset>
   <!-- Footer -->
   <footer class="py-5 bg-dark" style="left:0px;">
@@ -132,6 +138,10 @@
   <!-- Bootstrap core JavaScript -->
   <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  
+
+
 </body>
 </html>
 

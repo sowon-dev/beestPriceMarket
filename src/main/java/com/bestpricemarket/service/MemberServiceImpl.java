@@ -73,18 +73,21 @@ public class MemberServiceImpl implements MemberService{
 	public void deleteMember(MemberVO vo) {
 	    try {
 			mdao.deleteMember(vo);
-			System.out.println("S: vo 확인"+vo);
+			System.out.println("S: id 확인"+vo);
 	    } catch (Exception e) {
 		
 			e.printStackTrace();
 		}
 	}
 
+	
 	//구글 회원가입
 	@Override
 	public void joinMemberByGoogle(MemberVO vo) {
 		mdao.joinMember(vo);
 	}
+
+	
 
 	//구글 로그인
 	@Override

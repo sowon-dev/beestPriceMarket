@@ -56,12 +56,15 @@ public class MemberDAOImpl implements MemberDAO {
 		 sqlSession.update(namespace+".updateMember", vo);
 	}
 
+	
+	
 	// 회원 탈퇴
 	@Override
-	public void deleteMember(MemberVO vo) throws Exception {	
-		System.out.println("DAO: 확인! "+vo);
+	public void deleteMember(MemberVO vo) throws Exception {
 		sqlSession.delete(namespace+".deleteMember",vo);
 	}
+
+	
 
 	//비밀번호변경
 	@Override

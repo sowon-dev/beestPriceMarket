@@ -41,7 +41,7 @@ public class BasketDAOImpl implements BasketDAO {
 	public void deleteBasket(Integer lno) throws Exception {
 		System.out.println("D: 삭제 동작!!");
 	  
-	    session.delete(namespace+".deleteBasket");
+	    session.delete(namespace+".deleteBasket",lno);
 	}
 
 	@Override

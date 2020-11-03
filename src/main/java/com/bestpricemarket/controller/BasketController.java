@@ -34,7 +34,7 @@ public class BasketController {
 	
 
 	
-	private static final Logger l = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger l = LoggerFactory.getLogger(BasketController.class);
 	
 	
 	 @RequestMapping(value="/insert") 
@@ -65,16 +65,16 @@ public class BasketController {
     
 
     
-    @RequestMapping(value="/delete", method = RequestMethod.GET)
-    public String deleteGET(@RequestParam Integer lno,HttpSession session) throws Exception{
+    @RequestMapping(value="/delete", method=RequestMethod.GET)
+    public String deletePOST(@RequestParam(value="lno")Integer lno,HttpSession session) throws Exception{
     	
-    	
+    	System.out.println("lno :"+lno);
     	service.deleteBasket(lno);
 		
     	
     	System.out.println("C: 삭제 성공");
     	
-    	return "/basket/listPage";
+    	return "redirect:/basket/listPage";
     
     }
 
@@ -83,6 +83,8 @@ public class BasketController {
 	  public String getListPage(Model model, @RequestParam(value="num",defaultValue="1") int num) throws Exception{ 
 		// 게시물 목록 + 페이징 추가
 		 BasketPager page = new BasketPager();
+		 
+		 
 		 
 		 page.setNum(num);
 		 page.setCount(service.getCount());  
@@ -98,7 +100,7 @@ public class BasketController {
 		  
 		 model.addAttribute("prev", page.getPrev());
 		 model.addAttribute("next", page.getNext());  
-
+		 
 		 
 		 
 		 model.addAttribute("page", page);

@@ -127,8 +127,17 @@ public class MemberController {
 	}
     
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deletePOST(MemberVO vo, HttpSession session) throws Exception{
+    public String deletePOST(MemberVO vo, HttpSession session,RedirectAttributes rttr) throws Exception{
     	l.info("post"+vo);
+    	
+    	if(vo != null) {
+    		session.setAttribute("id", vo.getId());			
+			rttr.addFlashAttribute("vo", vo);
+			rttr.addFlashAttribute("msg",false);
+			return "redirect:/member/delete";
+    	}
+    	
+    	
     	service.deleteMember(vo);
     	session.invalidate();
     	return "redirect:/member/login ";

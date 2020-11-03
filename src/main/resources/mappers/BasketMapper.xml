@@ -26,10 +26,11 @@
  
   </select>
   
-  <delete id="deleteBasket">
+  <delete id="deleteBasket" parameterType="int">
 	delete from likes
 	where lno=#{lno}
   </delete>
+  
   <select id="getCount" resultType="int">
    select count(lno)
    from likes 

@@ -65,16 +65,19 @@
       <div class="col-lg-9">
 	    <fieldset>
 	    <legend> 회원정보 수정 </legend>
-	    <form action="/member/update" method="post">
+	    <form action="/member/update" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8" name="frJoin">
 	     <span class="front" style="margin-right: 34px;">아이디</span>  <input type="text" name="id" class="form-control" value="${memberVO.id }" style="width:226px;display:inline; text-align: center;" readonly><br>
-	     <span class="front" style="margin-right: 17px; ">비밀번호</span>  <input type="password" class="form-control" name="pw" placeholder="비밀번호를 입력하세요" style="width:226px;display:inline; " required> <br>
+	     <span class="front" style="margin-right: 17px; ">비밀번호</span>  <input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문,숫자,특수문자혼용)" name="pw" style="width:226px;display:inline;" required>  <br>
+				<span class="pwValCheckMsg" style="font-size:12px; font-weight:bold;"></span>
+		 <span class="front" style="margin-right: 85px; "></span>	<input id="pw_confirmation" class="form-control" type="password" onkeyup="pwCheck()" placeholder="비밀번호 재확인" name="password_confirmation" style="width:226px;display:inline;" required> 							     
+	             <span class="pwCheckMsg" style="font-size:12px; font-weight:bold;"></span><br>
 	     <span class="front" style="margin-right: 50px; "> 이름 </span><input type="text" name="username" class="form-control" value="${memberVO.username }" style="width:226px;display:inline; "> <br>
 	      <span class="front" style="margin-right: 34px;" >이메일</span> <input type="text" name="email" class="form-control"  value="${memberVO.email }" style="width:226px;display:inline; "> <br>
 	      <span class="front"  style="margin-right: 38px;">연락처</span><input type="text" name="phone"  class="form-control" value="${memberVO.phone}" style="width:226px;display:inline; "><br>
 	      <span class="front" style="margin-right: 45px; ">주소: </span><input type="text" name="addr1" class="form-control" value="${memberVO.addr1}" style="width:226px;display:inline; "><br>
 	      <span class="front" style="margin-right: 40px; ">주소2:</span><input type="text" name="addr2" class="form-control" value="${memberVO.addr2}" style="width:226px;display:inline; "><br>
 	      <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="${memberVO.reg_date}" style="width:226px;display:inline; "><br>
-	      <input type="submit" class="btn" value="회원수정" style="background-color: #343A40; color:white; " name="commit">          
+	      <input class="btn btn-default btn-register" type="button" value="회원수정" name="commit" id="submitBtn" onclick="signUpValidation()">          
 	    </form>  
 	  	</fieldset>
       </div>
@@ -88,6 +91,85 @@
   <!-- Bootstrap core JavaScript -->
   <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+
+//비밀번호 체크 
+  function pwValCheck(){
+      let pwd1 = document.frJoin.pw.value;
+      let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+
+  	//비밀번호 유효성체크
+      if(pwd1.length < 8){
+          $('.pwValCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호 8자리이상 입력하세요.");
+     	 }else if(reg.test(pwd1) == false){
+  		$('.pwValCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호는 숫자/영문/특수문자를 모두 포함해야합니다.");           
+     	 }else {
+  		$('.pwValCheckMsg').css({visibility: 'hidden', display: 'block'}).text("");
+     	 }    
+  }
+
+  // 비밀번호 일치여부 체크 
+  function pwCheck(){
+      let pwd1 = document.frJoin.pw.value;
+      let pwd2 = $("#pw_confirmation").val();
+      let reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+       
+  	//비밀번호 일치여부체크
+  	if (pwd1 == pwd2) { //비번이 일치할 경우
+      	$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'blue'}).text("비밀번호가 일치합니다.");
+  		$('#submitBtn').css({background: 'rgb(33, 37, 41, 1)', color:'#FFFFFF'}).attr("disabled", false);
+      } else { //비번이 불일치할 경우
+     		$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호가 일치하지않습니다.");           
+  	   	$('#submitBtn').css('background', 'rgb(33, 37, 41, .5)').attr("disabled", true);	
+  	}
+    if (pwd2.length < 8 ) {
+    	$('.pwCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호 8자리이상 입력하세요.");           
+  	   	$('#submitBtn').css('background', 'rgb(33, 37, 41, .5)').attr("disabled", true);	
+        }
+
+    }
+//회원가입 유효성 체크
+  function signUpValidation(){
+  	let f = document.frJoin;
+  	let userId = f.id.value;
+  	let userPw = f.pw.value;
+  	let userPwCheck = f.password_confirmation.value;
+  	let userName = f.username.value;
+  	let email = f.email.value;
+  	let phone = f.phone.value;
+  	let addr1 = f.addr1.value;
+  	
+  	if(!userId || userId.length < 4){
+  		alert("아이디 중복확인버튼을 눌러주세요");
+  		$("#id").focus();
+  	}else if(!userName){
+  		alert("이름 입력은 필수입니다.");
+  		$("#username").focus();
+  	}else if(!userPw || userPw < 8){
+  		alert("비밀번호 확인해주세요");
+  		$("#pw").focus();
+  	}else if(!userPwCheck){
+  		alert("비밀번호 확인은 필수입니다.");
+  		$("#password_confirmation").focus();	
+  	}else if(!email){
+  		alert("이메일 입력은 필수입니다.");
+  		$("#email").focus();
+  	}else if(!phone){
+  		alert("전화번호 입력은 필수입니다.");
+  		$("#phone").focus();
+  	}else if(!addr1){
+  		alert("우편번호찾기버튼을 눌러주세요.");
+  		$("#addr1").focus();
+  	}else if(userPwCheck != userPw || userPwCheck <8 ){
+        alert("비밀번호를 확인해주세요");
+        $("userPwCheck").focus();
+  	  	}else {
+  		alert("성공적으로 회원수정 되었습니다.")
+  		document.frJoin.submit();
+  	}	
+  }
+  </script>	
 </body>
 </html>
 
