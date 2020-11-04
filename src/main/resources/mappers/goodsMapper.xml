@@ -67,15 +67,15 @@
   	<!-- 파일업로드  -->
   	
   	<!-- 첨부파일업로드 수정 -->
-  	<update id="updateFile" parameterType="hashMap">
-  		update goodsfile
-  		set del_chk = 'Y'
-  		where fno = #{fno}
-  	</update>
+  	 <update id="updateFile" parameterType="hashMap">
+  		update goodsfile set del_chk = 'Y' where fno = #{fno}
+  	</update> 
   	<!-- 첨부파일업로드 수정 -->
-  
-  
-  
+  	
+ 
+  	
+  	
+  	
   
    <!-- 상품신고 -->
   	<select id="showReportDetail" resultType="com.bestpricemarket.domain.ReportVO">

@@ -66,6 +66,8 @@ public class FileUtils {
 				//listMap.put("path", filePath+"/"+storedFileName);//
 				list.add(listMap);
 			}
+			
+			
 		}
 		return list;
 	}
@@ -95,7 +97,7 @@ public class FileUtils {
 				listMap.put("f_oname", originalFileName);
 				listMap.put("f_name", storedFileName); 
 				listMap.put("f_size", multipartFile.getSize()); 
-				list.add(listMap); 
+				list.add(listMap);
 			} 
 		}
 		if(files != null && fileNames != null){ 
@@ -114,4 +116,3 @@ public class FileUtils {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 }
-	

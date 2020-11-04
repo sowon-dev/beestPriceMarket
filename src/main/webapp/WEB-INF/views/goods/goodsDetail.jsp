@@ -7,7 +7,7 @@
 <html lang="en">
 
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 <!-- 본문 CSS -->
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -28,8 +28,31 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- 본문 JS  -->
 
-	
-	        			
+<!-- 수정/삭제 아이콘 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- 수정/삭제 아이콘 -->
+
+<script type="text/javascript">
+ 	<!-- 수정/삭제 이동 --> 
+		$(document).ready(function(){
+
+			var gno = $('#gno').val();
+					
+			$(document).on("click","#modify",function(){
+				location.href = '/goods/modify?gno='+gno;
+			});
+
+			$(document).on("click","#delete",function(){
+				var con = confirm("정말로 삭제하시겠습니까?");
+				if(con){
+					location.href = '/goods/delete?gno='+gno;
+				}	
+			});
+		});
+	  <!-- 수정/삭제 이동 -->
+</script>
 
 
 
@@ -41,10 +64,6 @@
    <jsp:include page="../inc/top.jsp"/>
   <!-- 헤더 -->
   
-  
-  
-  
-  
   <!-- 본문 -->
   <div class="pd-wrap">
 		<div class="container">
@@ -52,63 +71,30 @@
 	        </div>
 	        <div class="row">
 	       	<div class="col-md-6">
-	        		<div id="slider" class="owl-carousel product-slider">
-						<div class="item">
-						  	<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-					</div>
-					<div id="thumb" class="owl-carousel product-thumb">
-						<div class="item">
-						  	<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-					</div>
+	      <!--  	<div class="form-group" style="border: 1px solid #dbdbdb;">  -->
+					<c:forEach var="file" items="${file}">
+					 <img src="<c:url value="/imgUpload/${file.f_name}"/>" width="500px" height="500px"/>
+					</c:forEach> 
+				<!-- </div> -->
+			<!-- </div> -->
+			
+	       	
 	        	</div> 
 	        	<div class="col-md-6">
 	        		<div class="product-dtl">
         				
 		        		<br><br>
 		     
-		     <!-- 경매정보 테이블 -->   		
+		     <!-- 경매정보 테이블 -->  
+		     		
 		       <table>
 		         <tr>
-		         	<th colspan="2" style="font-size:40px;">${goods.gname}</th>
+		         	<th colspan="2" style="font-size:40px;">${goods.gname}  </th>
 		         </tr>
+		          <tr>
+    				<th>카테고리</th>
+    				<td>${goods.category}</td>
+ 				 </tr>
   				 <tr>
     				<th>현재입찰가</th>
     				<td></td>
@@ -117,9 +103,10 @@
     				<th>입찰시작가</th>
     				<td>${goods.lowestprice}원</td>
   				 </tr>
+  				
   				 <tr>
     				<th>경매기간</th>
-    				<td>${goods.regDate} - ${goods.endDate}</td>
+    				<td>${goods.regDate}  ~  ${goods.endDate}</td>
   				 </tr>
   				 <tr>
      			    <th>남은시간</th>
@@ -130,51 +117,37 @@
     				<td>       <button>입찰기록</button></td>
   				</tr>
   				<tr>
-     				<th>배송정보</th>
-    				<td>직거래</td>
+     				<th>판매자</th>
+    				<td>${goods.g_m_id}</td>
   				</tr>
   				
 			</table>
 			<!-- 경매정보 테이블 --> 
 
+			<!-- 입찰하기/관심상품(구매자들만 보이기) -->
+			<c:if test="${ id != goods.g_m_id}">
 		        <form action="#" class="display-flex">
 	        			<div class="product-count">
-	        				
 	        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
 	        				  <a href="#" class="round-black-btn">관심상품</a>
 	        				  <a href="${path}/goods/report">신고하기</a>
-					
 	        			</div>
-	        	</form>				
-	       <!-- 수정/삭제 이동 -->
-	      
-	        <form action="" role="form">
+	        	</form>
+	        </c:if>		
+	        <!-- 입찰하기/관심상품(구매자들만 보이기) -->
+	        				
+	      <!-- 수정/삭제(상품 올린 사람만 보이기) -->
+	      <c:if test="${ id == goods.g_m_id}">
+			<form action="" role="form">
 	        	<div class="product-count" >
 	        		<input type="hidden" name="gno" id="gno" value="${goods.gno}">
 	        		<input type="button"  id="modify" value="수정" class="round-black-btn" style="margin-right:20px;">
 	        		<input type="button"  id="delete" value="삭제" class="round-black-btn" >
 	        	</div>
-	        </form> 
-	         
-	        <script type="text/javascript">
-
-				$(document).ready(function(){
-
-					var gno = $('#gno').val();
-					
-					$(document).on("click","#modify",function(){
-							location.href = '/goods/modify?gno='+gno;
-					});
-
-					$(document).on("click","#delete",function(){
-						var con = confirm("정말로 삭제하시겠습니까?");
-						if(con){
-							location.href = '/goods/delete?gno='+gno;
-						}	
-					});
-				});
-			</script>
-	        <!-- 수정/삭제 이동 -->
+	        </form>
+	       </c:if> 
+	       <!-- 수정/삭제(상품 올린 사람만 보이기) -->
+	        
 
 	        		</div>
 	        	</div>
@@ -202,11 +175,11 @@
 				${goods.content}
 				
 					
-				  	<div class="form-group" style="border: 1px solid #dbdbdb;">
+				  <%-- 	<div class="form-group" style="border: 1px solid #dbdbdb;">
 					<c:forEach var="file" items="${file}">
 					 <img src="<c:url value="/imgUpload/${file.f_name}"/>"/>
-					<%-- <a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>(${file.f_size}kb)<br> --%>
-					</c:forEach>
+					<a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>(${file.f_size}kb)<br>
+					</c:forEach> --%>
 				</div>
 	
 				<!-- 상품정보 -->	

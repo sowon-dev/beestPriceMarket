@@ -95,7 +95,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		System.out.println("DAO : 첨부파일 수정");
 		sqlSession.update(namespace+".updateFile",map);
 	}
-	
+	//
 	
 	
 	
