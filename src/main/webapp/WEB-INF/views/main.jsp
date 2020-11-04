@@ -26,10 +26,12 @@
      
       <c:if test="${memVO.username != null}">
         <h2 class="my-4">${memVO.username}님<br>환영합니다😀</h2>
+        <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
       </c:if>
-       <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+      
       <c:if test="${memVO.username == null}">
         <h2 class="my-4">카테고리</h2>
+         
       </c:if>
       
         <div class="list-group">

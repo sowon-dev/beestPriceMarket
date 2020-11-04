@@ -71,7 +71,7 @@
     <!-- 유효성 체크 -->
 	<script type="text/javascript">
 
-	function goods_register(){
+	function goods_modify(){
 
 		var category = document.fr.category.value;
 		var gname = document.fr.gname.value;
@@ -128,17 +128,17 @@
                 
                 <div class="card-body">
 
-                 <form action ="/goods/modify" method="post" enctype="multipart/form-data" name="fr">
+                 <form action ="/goods/modify" method="post" enctype="multipart/form-data" name="fr" role="form">
                     <input type="hidden" name="gno"  value="${goodsVO.gno}">
                     <input type="hidden" id="fileNoDel" name="fileNoDel[]" value=""> 
 					<input type="hidden" id="fileNameDel" name="fileNameDel[]" value=""> 
                   <div class="form-row">
                   
-                  
                      <div class="name">물품분류</div>
                         <select class="bo_w_select" name="category">
                       		<option value="" selected>카테고리 선택</option>
-                      		<option value="notebook">노트북</option>
+                      		<option value="notebook"
+                      		>노트북</option>
                       		<option value="desktop">데스크탑</option>
                       		<option value="monitor">모니터</option>
                       		<option value="component">PC부품</option>
@@ -154,10 +154,11 @@
                       		<option value="jewelry">쥬얼리</option>
                       	</select>
                     </div>
+                    
                     <div class="form-row">
                       <div class="name">판매자</div>
                          <div class="value">
-                           <input class="input--style-6" type="text" name="g_m_id" value="${goodsVO.g_m_id}"><br>
+                           <input class="input--style-6" type="text" name="g_m_id" value="${id}" readonly><br>
                          </div>
                     </div>
                       
@@ -267,26 +268,46 @@
                             
                            </div>
                       </div>
+                      </form>
+                      
                       <div class="card-footer">
-                    	<input type="submit" value="물품 수정"  onclick="return goods_register()" class="btn" >
-                    	<input type="button" value="취소" id="back" class="btn">
-                    	
-                    	<script type="text/javascript">
-                    	$("#back").click(function(){
-                    		  //history.back();
-                    		  location.href = "/goods/detail?gno=" + ${goodsVO.gno};
-                    		 });   
-                    	</script> 
-                    	
+                      	<input type="submit" value="목록으로" id="list" class="btn" style="width: 100px; !important">
+                    	<input type="submit" value="수정하기" id="modify" onclick="return goods_modify()" class="btn" style="width: 100px; margin-left: 470px; !important">
+                    	<input type="submit" value="취소하기" id="back" class="btn" style="width: 100px; !important">
                       </div>
-                  </form>
+                  
                 </div>
               
             </div>
         </div>
     </div>
 
+ <script type="text/javascript">
+
+ $(document).ready(function(){
+	 
+ var formObj = $("form[role='form']");
+
+		// 수정하기 
+		$("#modify").on("click",function(){
+			formObj.submit();
+		});
  
+ 		// 취소하기 
+        $("#back").click(function(){
+        //history.back();
+        location.href = "/goods/detail?gno=" + ${goodsVO.gno};
+        });
+
+ 		// 목록으로 
+ 		$("#list").on("click", function(){
+			location.href="/goods/list";
+ 	 		
+ 	 	});
+
+        
+ });    
+ </script> 
 
    
 
