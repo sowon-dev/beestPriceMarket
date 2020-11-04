@@ -47,19 +47,7 @@ public class GoodsServiceImpl implements GoodsService {
 		for(int i=0; i<size; i++){ 
 			gdao.insertFile(list.get(i)); 
 		}
-		
 	}
-	
-	// 첨부파일 조회
-	@Override
-	public List<Map<String, Object>> selectFileList(int gno) throws Exception {
-
-		System.out.println("S : 첨부파일 조회");
-		
-		return gdao.selectFileList(gno);
-	}
-	
-
 	
 	// 상품목록
 	@Override
@@ -87,11 +75,16 @@ public class GoodsServiceImpl implements GoodsService {
 		gdao.goodsModify(vo);
 		
 		System.out.println("S : 수정된 상품 정보 -> "+ vo);
+		System.out.println("@@@@@@@@@@"+files);
+		System.out.println("@@@@@@@@@@!!!!!!!!!!!!"+fileNames);
 		
 		List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(vo, files, fileNames, mpRequest);
 		Map<String, Object> tempMap = null;
-		int size = list.size();
-		for(int i = 0; i<size; i++) {
+		System.out.println("@@@@@@@@@@@@@여기는??????????");
+		//int size = list.size();
+		System.out.println("$$$$$$$$$"+ list);
+		
+		for(int i = 0; i<list.size(); i++) {
 			tempMap = list.get(i);
 			if(tempMap.get("IS_NEW").equals("Y")) {
 				gdao.insertFile(tempMap);
@@ -99,7 +92,6 @@ public class GoodsServiceImpl implements GoodsService {
 				gdao.updateFile(tempMap);
 			}
 		}
-		
 	}
 		
 	// 상품삭제
@@ -109,8 +101,16 @@ public class GoodsServiceImpl implements GoodsService {
 		gdao.goodsDelete(gno);
 	}
 
+	// 첨부파일 조회//
+	@Override
+	public List<Map<String, Object>> selectFileList(int gno) throws Exception {
+
+		System.out.println("S : 첨부파일 조회");
+			
+		return gdao.selectFileList(gno);
+	}
 	
-	
+
 	
 	
 	

@@ -33,7 +33,7 @@ public interface GoodsDAO {
 	// 첨부파일 조회
 	public List<Map<String, Object>> selectFileList(int gno) throws Exception; 
 	
-	// 첨부파일 수정
+	// 첨부파일 수정//
 	public void updateFile(Map<String, Object> map) throws Exception;
 	
 	
