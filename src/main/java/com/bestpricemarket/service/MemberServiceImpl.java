@@ -71,20 +71,23 @@ public class MemberServiceImpl implements MemberService{
 	// 회원탈퇴
 	@Override
 	public void deleteMember(MemberVO vo) {
-	    try {
+	    	 try {
 			mdao.deleteMember(vo);
-			System.out.println("S: vo 확인"+vo);
-	    } catch (Exception e) {
-		
-			e.printStackTrace();
-		}
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+	    	System.out.println("S: id 확인"+vo);
 	}
 
+	
 	//구글 회원가입
 	@Override
 	public void joinMemberByGoogle(MemberVO vo) {
 		mdao.joinMember(vo);
 	}
+
+	
 
 	//구글 로그인
 	@Override
@@ -176,6 +179,12 @@ public class MemberServiceImpl implements MemberService{
 			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			out.close();
 		}
+	}
+   
+	//비밀번경
+	@Override
+	public void modifyPw(MemberVO vo) throws Exception {
+		mdao.updatePw(vo);
 	}
 	
 	

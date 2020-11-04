@@ -22,7 +22,8 @@ public interface MemberService {
 	public void updateMember(MemberVO vo);
 	
 	// 회원탈퇴
-	public void deleteMember(MemberVO vo);
+	public void deleteMember(MemberVO vo) throws Exception;
+	
 	
 	//구글회원가입
 	public void joinMemberByGoogle(MemberVO vo);
@@ -35,5 +36,10 @@ public interface MemberService {
 	
 	//비밀번호찾기
 	public void findPw(HttpServletResponse resp, MemberVO vo) throws Exception;
+	
+	//비밀번호 변경
+	public void modifyPw(MemberVO vo) throws Exception;
+
+	
 	
 }
