@@ -142,8 +142,9 @@ public class GoodsController {
 
 		return "redirect:/goods/list";
 	}
+	
 
-	 // ck 이미지 업로드
+	 // ck에디터 이미지 업로드
 	
 	  @RequestMapping(value="/ckUpload", method = RequestMethod.POST) 
 	  public void imageUpload(HttpServletRequest request, HttpServletResponse response,

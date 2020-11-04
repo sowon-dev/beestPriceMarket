@@ -8,8 +8,8 @@
   
     <!-- 상품등록 -->
 	<insert id="register" useGeneratedKeys="true" keyProperty="gno" parameterType="com.bestpricemarket.domain.GoodsVO">
- 		insert into goods (category, g_m_id, gname, lowestprice, bidunit, content, regDate, endDate) 
- 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{bidunit},#{content},now(),#{endDate})
+ 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
+ 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate})
 	</insert>  
   	<!-- 상품등록 -->
   	  	
@@ -67,15 +67,15 @@
   	<!-- 파일업로드  -->
   	
   	<!-- 첨부파일업로드 수정 -->
-  	<update id="updateFile" parameterType="hashMap">
-  		update goodsfile
-  		set del_chk = 'Y'
-  		where fno = #{fno}
-  	</update>
+  	 <update id="updateFile" parameterType="hashMap">
+  		update goodsfile set del_chk = 'Y' where fno = #{fno}
+  	</update> 
   	<!-- 첨부파일업로드 수정 -->
-  
-  
-  
+  	
+ 
+  	
+  	
+  	
   
    <!-- 상품신고 -->
   	<select id="showReportDetail" resultType="com.bestpricemarket.domain.ReportVO">

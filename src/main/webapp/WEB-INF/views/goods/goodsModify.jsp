@@ -48,6 +48,18 @@
     color: #212529;
     text-decoration: none;
 }
+
+#file{
+	 border-radius: 4px; 
+    background: #212529;
+    color: #fff;
+    padding: 7px 45px;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #212529; 
+    transition: all 0.5s ease-in-out 0s;
+}
+
 </style>
     <!-- 버튼 -->
     
@@ -59,9 +71,7 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
-	<!-- include summernote css/js -->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+	
 	
 	<!-- ck에디터 -->
 	<script src="/resources/ckeditor/ckeditor.js"></script>
@@ -111,13 +121,6 @@
 			document.fr.endDate.focus();
 			return false;
 		}
-
-		if(bidunit == ""){
-			alert("입찰 단위를 입력하세요.");
-			document.fr.bidunit.focus();
-			return false;
-		}
-
 	 
 	}
 
@@ -209,56 +212,61 @@
                        
                        
                        
-                 <!-- 이미지업로드 -->      
-                    <div class="form-row">
-                       <div class="name">첨부 이미지 등록</div>
+                 <!-- 섬네일 이미지업로드 -->      
+                     <div class="form-row">
+                       <div class="name">섬네일 이미지 등록</div>
                            <div class="value">
                               <div class="input-group js-input-file">
                               		<div id="fileIndex">
                               		  <c:forEach var="file" items="${file}" varStatus="var">
 										<div>
-											<input type="hidden" id="fno" name="FILE_NO_${var.index}" value="${file.fno }">
-											<input type="hidden" id="f_name" name="f_name" value="FILE_NO_${var.index}">
-											<button id="fileDel" onclick="fn_del('${file.fno}','FILE_NO_${var.index}');" type="button">삭제</button><br>
+											<input type="hidden" id="fno" name="fno_${var.index}" value="${file.fno }">
+											<input type="hidden" id="f_name" name="f_name" value="fno_${var.index}">
+											<a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>
+											<button id="fileDel" onclick="fn_del('${file.fno}','fno_${var.index}');" type="button">삭제</button><br>
 										</div>
 									  </c:forEach>
                               		</div>
-                              		<input type="file" name="file" class="input-file" id="file"  />
                               </div>
                           <!-- <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div> -->
-                          	<button  type="button" class="fileAdd" onclick="fn_addFile()">파일추가</button>
+                         
+                          	<button  type="button" class="fileAdd" id="file" onclick="fn_addFile()">파일추가</button>
+                          	
                        </div>  
-                    </div> 
-                <!-- 이미지업로드 -->
+                    </div>  
+                <!-- 섬네일 이미지업로드 -->
                 
                 <script type="text/javascript">
 
+              
+              
 
-        		// 파일 추가
-        		
-        			function fn_addFile(){
-        			  var fileIndex = 1;
-        				 $(".fileAdd").on("click", function(){
-        					$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
 
-        					});
+        	// 파일 추가
+			$(document).ready(function(){
+			  var fileIndex = 1;
+				 $(".fileAdd").on("click", function(){
+					$("#fileIndex").append("<div><input type='file' id='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDel'>"+"삭제"+"</button></div>");
 
-        				$(document).on("click","#fileDelBtn", function(){
-        					$(this).parent().remove();
-        				});
-        			}
+					});
 
-        			var fileNoArry = new Array();
-        	 		var fileNameArry = new Array();
-        	 		function fn_del(value, name){
-        	 			
-        	 			fileNoArry.push(value);
-        	 			fileNameArry.push(name);
-        	 			$("#fileNoDel").attr("value", fileNoArry);
-        	 			$("#fileNameDel").attr("value", fileNameArry);
-        	 		}
-        		
-        		// 파일추가
+				$(document).on("click","#fileDel", function(){
+					$(this).parent().remove();
+				});
+
+				
+				var fileNoArry = new Array();
+    	 		var fileNameArry = new Array();
+    	 		function fn_del(value, name){
+    	 			
+    	 			fileNoArry.push(value);
+    	 			fileNameArry.push(name);
+    	 			$("#fileNoDel").attr("value", fileNoArry);
+    	 			$("#fileNameDel").attr("value", fileNameArry);
+    	 		}
+				
+			});	
+        	// 파일추가
                 </script>
                     <div class="form-row">
                        <div class="name">마감 일자</div>
@@ -276,19 +284,11 @@
                             
                            </div>
                       </div>
-                      
-                      <div class="form-row">
-                        <div class="name">입찰 단위</div>
-                          <div class="value">
-                             <input class="input--style-6" type="text" name="bidunit" id="input" value="${goodsVO.bidunit}">
-                            
-                           </div>
-                      </div>
                       </form>
                       <div class="card-footer">
                       	<input type="submit" value="목록으로" id="list" class="btn" style="width: 100px; !important">
                     	<input type="submit" value="수정하기" id="modify" onclick="return goods_modify()" class="btn" style="width: 100px; margin-left: 870px; !important">
-                    	<input type="submit" value="취소하기" id="back" class="btn" style="width: 100px; !important">
+                    	<input type="button" value="취소하기" id="back" class="btn" style="width: 100px; !important" onclick="cancel()">
                       </div>
                 </div>
             </div>
@@ -306,12 +306,6 @@
 			formObj.submit();
 		});
  
- 		// 취소하기 
-        $("#back").click(function(){
-        //history.back();
-        location.href = "/goods/detail?gno=" + ${goodsVO.gno};
-        });
-
  		// 목록으로 
  		$("#list").on("click", function(){
 			location.href="/goods/list";
@@ -320,6 +314,16 @@
 
         
  });    
+
+ 	function cancel(){
+		var result = confirm("취소하시겠습니까? 변경사항이 저장되지 않을 수 있습니다.");
+		if(result){
+		    history.back();
+		}
+	}
+
+
+ 
  </script> 
 
    

@@ -48,6 +48,19 @@
     color: #212529;
     text-decoration: none;
 }
+
+#file{
+	 border-radius: 4px; 
+    background: #212529;
+    color: #fff;
+    padding: 7px 45px;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #212529; 
+    transition: all 0.5s ease-in-out 0s;
+}
+
+
 </style>
     <!-- 버튼 -->
     
@@ -69,17 +82,17 @@
 	<script type="text/javascript">
 		// 파일 추가
 		
-			function fn_addFile(){
+			$(document).ready(function(){
 			  var fileIndex = 1;
 				 $(".fileAdd").on("click", function(){
-					$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
+					$("#fileIndex").append("<div><input type='file' style='float:left;' id='file' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDel'>"+"삭제"+"</button></div>");
 
 					});
 
-				$(document).on("click","#fileDelBtn", function(){
+				$(document).on("click","#fileDel", function(){
 					$(this).parent().remove();
 				});
-			}
+			});	
 		
 		// 파일추가
 		
@@ -91,7 +104,6 @@
 		var content = document.fr.content.value;
 		var lowestprice = document.fr.lowestprice.value;
 		var endDate = document.fr.endDate.value;
-		var bidunit = document.fr.bidunit.value;
 
 		if(category == ""){
 			alert("물품분류를 선택하세요.");
@@ -104,17 +116,13 @@
 			document.fr.gname.focus();
 			return false;
 		}
-
-	
-
+		
 		if(CKEDITOR.instances.content.getData() == '' 
 			|| CKEDITOR.instances.content.getData().length == 0){
 				alert("물품설명을 입력하세요.");
 				$("#content").focus();
 				return false;
 			}
-
-
 		
 		if(lowestprice == ""){
 			alert("물품의 하한가를 입력하세요.");
@@ -122,19 +130,13 @@
 			return false;
 		}
 
-
 		if(endDate == ""){
 			alert("물품의 마감날짜를 입력하세요.");
 			document.fr.endDate.focus();
 			return false;
 		}
 
-		if(bidunit == ""){
-			alert("입찰 단위를 입력하세요.");
-			document.fr.bidunit.focus();
-			return false;
-		}
-		
+	
 		
 	}
 	// 유효성체크
@@ -149,13 +151,7 @@
                 <div class="card-heading">
                     <h2 class="title">물품 등록</h2>
                 </div>
-                
-                
-                
-                
                 <div class="card-body">
-               <%--  <c:if test = "${id != null }">  --%>
-
                     <form action ="/goods/register" method="post" enctype="multipart/form-data" name="fr">
                    
                   
@@ -218,20 +214,17 @@
 					</script>
 					<!-- ck 에디터 -->
                        
-             <!-- 이미지업로드 -->        
+           <!-- 섬네일이미지업로드 -->        
                     <div class="form-row">
-                       <div class="name">첨부 이미지 등록</div>
+                       <div class="name">섬네일 이미지 등록</div>
                            <div class="value">
                              <div class="input-group js-input-file">
                            		<div id="fileIndex"></div>
-                                     <input type="file" name="file" class="input-file" id="file"  />   
                               </div>
-							<button  type="button" class="fileAdd" onclick="fn_addFile()">파일추가</button>
+							 <button  type="button" class="fileAdd" id="file" onclick="fn_addFile()">파일추가</button> 
                    	   </div>
                     </div> 
-            <!-- 이미지업로드 -->
-                   <hr>
-                   
+            <!-- 섬네일이미지업로드 -->
                    
                     <div class="form-row">
                        <div class="name">마감 일자</div>
@@ -250,34 +243,28 @@
                            </div>
                       </div>
                       
-                      <div class="form-row">
-                        <div class="name">입찰 단위</div>
-                          <div class="value">
-                             <input class="input--style-6" type="text" name="bidunit" id="input" >
-                            
-                           </div>
-                      </div>
                 
                       
                       <div class="card-footer">
                     	
-                    	<input type="button" value="목록으로" class="btn" style="width: 100px; !important" onclick="location.href='/main'">
+                    	<input type="button" value="목록으로" class="btn" style="width: 100px; !important" onclick="location.href='/goods/list'">
                     	<input type="submit" value="등록하기"  onclick="return goods_register()" class="btn" style="width: 100px; margin-left: 870px; !important" >  
-                    	<input type="reset" value="취소하기" class="btn" style="width: 100px; !important"> 
+                    	<input type="button" value="취소하기" class="btn" style="width: 100px; !important" onclick="cancel()">
                       </div>
                   </form>
-                   <%--  </c:if>  --%>
-                  <%--  <c:if test="${goods.g_m_id == null }">
-                   			<p>로그인 후에 작성할 수 있습니다.</p>
-                   </c:if> --%>
                 </div>
-               
-              
             </div>
         </div>
     </div>
 
- 
+ <script type="text/javascript">
+		function cancel(){
+			var result = confirm("취소하시겠습니까? 변경사항이 저장되지 않을 수 있습니다.");
+			if(result){
+			    history.back();
+			}
+		}
+ </script>
 
    
 

@@ -1,6 +1,7 @@
 package com.bestpricemarket.domain;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class GoodsVO {
@@ -10,34 +11,14 @@ public class GoodsVO {
 	private String category;
 	private String gname;
 	private int lowestprice;
-	private int bidunit;
 	private String content;
 	private int finalprice;
 	private int like;
 	private Date regDate;
 	private Date endDate;
 	private int actionstatus;
-	/*
-	 * private String image; private String imgThumb;
-	 */
 	
-	public GoodsVO() {}
-	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, int bidunit, String content,
-			int finalprice, int like, Date regDate, Date endDate, int actionstatus) {
-		super();
-		this.gno = gno;
-		this.g_m_id = g_m_id;
-		this.category = category;
-		this.gname = gname;
-		this.lowestprice = lowestprice;
-		this.bidunit = bidunit;
-		this.content = content;
-		this.finalprice = finalprice;
-		this.like = like;
-		this.regDate = regDate;
-		this.endDate = endDate;
-		this.actionstatus = actionstatus;
-	}
+	
 	public int getGno() {
 		return gno;
 	}
@@ -67,12 +48,6 @@ public class GoodsVO {
 	}
 	public void setLowestprice(int lowestprice) {
 		this.lowestprice = lowestprice;
-	}
-	public int getBidunit() {
-		return bidunit;
-	}
-	public void setBidunit(int bidunit) {
-		this.bidunit = bidunit;
 	}
 	public String getContent() {
 		return content;
@@ -111,15 +86,37 @@ public class GoodsVO {
 		this.actionstatus = actionstatus;
 	}
 	
+	public GoodsVO() {}
+	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
+			int finalprice, int like, Date regDate, Date endDate, int actionstatus) {
+		super();
+		this.gno = gno;
+		this.g_m_id = g_m_id;
+		this.category = category;
+		this.gname = gname;
+		this.lowestprice = lowestprice;
+		this.content = content;
+		this.finalprice = finalprice;
+		this.like = like;
+		this.regDate = regDate;
+		this.endDate = endDate;
+		this.actionstatus = actionstatus;
+	}
+	
 	
 	@Override
 	public String toString() {
 		return "GoodsVO [gno=" + gno + ", g_m_id=" + g_m_id + ", category=" + category + ", gname=" + gname
-				+ ", lowestprice=" + lowestprice + ", bidunit=" + bidunit + ", content=" + content + ", finalprice="
-				+ finalprice + ", like=" + like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus="
-				+ actionstatus + "]";
+				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like="
+				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
 	}
+
 	
+	
+	
+	
+	
+
 	
 	
 	

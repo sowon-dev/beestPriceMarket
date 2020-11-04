@@ -7,7 +7,7 @@
 <html lang="en">
 
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 <!-- 본문 CSS -->
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -71,52 +71,14 @@
 	        </div>
 	        <div class="row">
 	       	<div class="col-md-6">
-	        		<div id="slider" class="owl-carousel product-slider">
-						<div class="item">
-						  	<!-- <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" /> -->
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-					</div>
-					<div id="thumb" class="owl-carousel product-thumb">
-						<div class="item">
-						  	<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-						  	<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-						  	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-					</div>
+	      <!--  	<div class="form-group" style="border: 1px solid #dbdbdb;">  -->
+					<c:forEach var="file" items="${file}">
+					 <img src="<c:url value="/imgUpload/${file.f_name}"/>" width="500px" height="500px"/>
+					</c:forEach> 
+				<!-- </div> -->
+			<!-- </div> -->
+			
+	       	
 	        	</div> 
 	        	<div class="col-md-6">
 	        		<div class="product-dtl">
@@ -141,13 +103,10 @@
     				<th>입찰시작가</th>
     				<td>${goods.lowestprice}원</td>
   				 </tr>
-  				 <tr>
-     				<th>입찰 단위</th>
-    				<td>${goods.bidunit}원</td>
-  				</tr>
+  				
   				 <tr>
     				<th>경매기간</th>
-    				<td>${goods.regDate}  -  ${goods.endDate}</td>
+    				<td>${goods.regDate}  ~  ${goods.endDate}</td>
   				 </tr>
   				 <tr>
      			    <th>남은시간</th>
