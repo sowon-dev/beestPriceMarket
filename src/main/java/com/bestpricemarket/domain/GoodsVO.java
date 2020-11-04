@@ -1,6 +1,7 @@
 package com.bestpricemarket.domain;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class GoodsVO {
@@ -16,27 +17,6 @@ public class GoodsVO {
 	private Date regDate;
 	private Date endDate;
 	private int actionstatus;
-	/*
-	 * private String image; private String imgThumb;
-	 */
-	
-	public GoodsVO() {}
-	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
-			int finalprice, int like, Date regDate, Date endDate, int actionstatus) {
-		super();
-		this.gno = gno;
-		this.g_m_id = g_m_id;
-		this.category = category;
-		this.gname = gname;
-		this.lowestprice = lowestprice;
-		this.content = content;
-		this.finalprice = finalprice;
-		this.like = like;
-		this.regDate = regDate;
-		this.endDate = endDate;
-		this.actionstatus = actionstatus;
-	}
-	
 	
 	
 	public int getGno() {
@@ -106,6 +86,23 @@ public class GoodsVO {
 		this.actionstatus = actionstatus;
 	}
 	
+	public GoodsVO() {}
+	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
+			int finalprice, int like, Date regDate, Date endDate, int actionstatus) {
+		super();
+		this.gno = gno;
+		this.g_m_id = g_m_id;
+		this.category = category;
+		this.gname = gname;
+		this.lowestprice = lowestprice;
+		this.content = content;
+		this.finalprice = finalprice;
+		this.like = like;
+		this.regDate = regDate;
+		this.endDate = endDate;
+		this.actionstatus = actionstatus;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -113,6 +110,13 @@ public class GoodsVO {
 				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like="
 				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
 	}
+
+	
+	
+	
+	
+	
+
 	
 	
 	

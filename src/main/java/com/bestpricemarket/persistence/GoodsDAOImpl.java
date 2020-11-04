@@ -88,7 +88,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectList(namespace+".selectFileList", gno);
 	}
 	
-	// 첨부파일 수정
+	// 첨부파일 수정//
 	@Override
 	public void updateFile(Map<String, Object> map) throws Exception {
 
