@@ -28,10 +28,10 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public List<BasketVO> Basketlist(int start,int end) throws Exception {
+	public List<BasketVO> Basketlist() throws Exception {
 		l.info("S: 장바구니 추가동작!");
 		List<BasketVO> basketlist = 
-				bkdao.Basketlist(start,end);
+				bkdao.Basketlist();
 		return basketlist;
 	}
 
@@ -46,6 +46,12 @@ public class BasketServiceImpl implements BasketService {
 	public int getCount() throws Exception {
 		
 		return bkdao.getCount();
+	}
+
+	@Override
+	public List listPage(int displayPost, int postNum) throws Exception {
+		
+		return bkdao.listPage(displayPost, postNum);
 	}
 
 	

@@ -30,13 +30,9 @@ public class BasketDAOImpl implements BasketDAO {
 	}
 
 	@Override
-	public List<BasketVO> Basketlist(int start, int end) throws Exception {
-	 System.out.println("D: 장바구니 리스트");	
-	 Map<String, Object> map = new HashMap<String,Object>(); 
-	 map.put("start", start);
-	 map.put("end", end);
-	 List<BasketVO> basketlist =
-	 session.selectList(namespace+".listBasket",map);
+	public List<BasketVO> Basketlist() throws Exception {
+	 List<BasketVO> basketlist = 
+	 session.selectList(namespace+".listBasket");
 		
 		return basketlist;
 	}
@@ -45,7 +41,7 @@ public class BasketDAOImpl implements BasketDAO {
 	public void deleteBasket(Integer lno) throws Exception {
 		System.out.println("D: 삭제 동작!!");
 	  
-	    session.selectOne(namespace+".deleteBasket");
+	    session.delete(namespace+".deleteBasket",lno);
 	}
 
 	@Override
@@ -54,9 +50,19 @@ public class BasketDAOImpl implements BasketDAO {
 		return session.selectOne(namespace+".getCount");
 	}
 
+	@Override
+	public List listPage(int displayPost, int postNum) throws Exception {
+		Map data = new HashMap();
+		  
+		 data.put("displayPost", displayPost);
+		 data.put("postNum", postNum);
+		  
+		 return session.selectList(namespace + ".listPage", data);
+	}
+
 	
 
-
+  
 	
 
 }
