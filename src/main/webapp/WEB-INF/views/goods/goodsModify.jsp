@@ -285,11 +285,13 @@
                            </div>
                       </div>
                       </form>
+
                       <div class="card-footer">
                       	<input type="submit" value="목록으로" id="list" class="btn" style="width: 100px; !important">
                     	<input type="submit" value="수정하기" id="modify" onclick="return goods_modify()" class="btn" style="width: 100px; margin-left: 870px; !important">
                     	<input type="button" value="취소하기" id="back" class="btn" style="width: 100px; !important" onclick="cancel()">
                       </div>
+
                 </div>
             </div>
         </div>
@@ -305,6 +307,7 @@
 		$("#modify").on("click",function(){
 			formObj.submit();
 		});
+
  
  		// 목록으로 
  		$("#list").on("click", function(){
@@ -323,7 +326,7 @@
 	}
 
 
- 
+
  </script> 
 
    

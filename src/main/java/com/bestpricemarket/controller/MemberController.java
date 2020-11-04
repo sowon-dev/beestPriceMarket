@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bestpricemarket.domain.MemberVO;
@@ -60,16 +61,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
+	public void loginPOST(MemberVO vo, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
 		MemberVO returnVO = service.loginMember(vo);
 		System.out.println("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
-		
+			
 		if(returnVO != null) {
 			session.setAttribute("id", returnVO.getId());			
 			rttr.addFlashAttribute("mvo", returnVO);
-			return "redirect:/member/main"; 
+			response.getWriter().print(true);
 		} else {
-			return "redirect:/member/login";
+			response.getWriter().print(false);
 		}
 	}
 	

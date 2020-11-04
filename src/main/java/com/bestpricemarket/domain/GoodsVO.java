@@ -1,8 +1,7 @@
 package com.bestpricemarket.domain;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
+
 
 public class GoodsVO {
 	
@@ -18,6 +17,7 @@ public class GoodsVO {
 	private Date endDate;
 	private int actionstatus;
 	
+
 	
 	public int getGno() {
 		return gno;
@@ -110,6 +110,7 @@ public class GoodsVO {
 				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like="
 				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
 	}
+
 
 	
 	

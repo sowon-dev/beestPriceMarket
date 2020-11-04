@@ -1,5 +1,4 @@
 package com.bestpricemarket.controller;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,8 +48,10 @@ public class GoodsController {
 	// *******************************************************************************************************************************
 
 	// 상품등록
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String goodsRegisterGET(Model model, HttpSession session) throws Exception {
+
 
 		System.out.println("@@@@@@@ 상품등록 페이지 이동");
 
@@ -60,12 +61,14 @@ public class GoodsController {
 		return "/goods/goodsRegister";
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String goodsRegisterPOST(GoodsVO vo, MultipartHttpServletRequest mpRequest) throws Exception {
 
-		System.out.println("C : 뷰페이지에서 전달되는 파라미터 -> " + vo);
-
-		// 상품 등록 서비스
+	
+ @RequestMapping(value = "/register",method = RequestMethod.POST)
+	public String goodsRegisterPOST(GoodsVO vo, MultipartHttpServletRequest mpRequest) throws Exception{
+		
+		System.out.println("C : 뷰페이지에서 전달되는 파라미터 -> "+ vo);
+		
+		// 상품 등록 서비스 
 		service.goodsRegister(vo, mpRequest);
 
 		System.out.println("C : 상품등록 완료@@@@");
@@ -101,14 +104,14 @@ public class GoodsController {
 	}
 
 	// 상품수정
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String goodsModifyGET(@RequestParam("gno") int gno, Model model, HttpSession session) throws Exception {
-
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public String goodsModifyGET(@RequestParam("gno") int gno,Model model,HttpSession session) throws Exception{
+		
 		System.out.println("C : goodsModify.jsp 이동(GET)");
-
-		// 아이디 세션값
-		model.addAttribute("id", (String) session.getAttribute("id"));
-
+		
+		// 아이디 세션값 
+		model.addAttribute("id", (String)session.getAttribute("id"));
+		
 		GoodsVO goodsVO = service.goodsDetail(gno);
 		model.addAttribute("goodsVO", goodsVO);
 
@@ -143,6 +146,7 @@ public class GoodsController {
 		return "redirect:/goods/list";
 	}
 	
+
 
 	 // ck에디터 이미지 업로드
 	
@@ -251,13 +255,7 @@ public class GoodsController {
 			} 
 			  
 	// ck 이미지 업로드
-			  
-		
-
-			 
 	
-	
-
 	// 상품 CURD
 	// *******************************************************************************************************************************
 

@@ -207,6 +207,7 @@
    							shiftEnterMode : CKEDITOR.ENTER_P,
    						 	uploadUrl: "/goods/ckUpload",
    							filebrowserUploadUrl : "/goods/ckUpload"
+
  						};
  
 						 CKEDITOR.replace("content", ckeditor_config);
@@ -243,7 +244,6 @@
                            </div>
                       </div>
                       
-                
                       
                       <div class="card-footer">
                     	
@@ -252,6 +252,7 @@
                     	<input type="button" value="취소하기" class="btn" style="width: 100px; !important" onclick="cancel()">
                       </div>
                   </form>
+
                 </div>
             </div>
         </div>

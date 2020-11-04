@@ -120,6 +120,10 @@
      				<th>판매자</th>
     				<td>${goods.g_m_id}</td>
   				</tr>
+  				<tr>
+     				<th>판매자</th>
+    				<td>${goods.g_m_id}</td>
+  				</tr>
   				
 			</table>
 			<!-- 경매정보 테이블 --> 
@@ -138,7 +142,7 @@
 	        				
 	      <!-- 수정/삭제(상품 올린 사람만 보이기) -->
 	      <c:if test="${ id == goods.g_m_id}">
-			<form action="" role="form">
+	        <form action="" role="form">
 	        	<div class="product-count" >
 	        		<input type="hidden" name="gno" id="gno" value="${goods.gno}">
 	        		<input type="button"  id="modify" value="수정" class="round-black-btn" style="margin-right:20px;">
@@ -147,6 +151,7 @@
 	        </form>
 	       </c:if> 
 	       <!-- 수정/삭제(상품 올린 사람만 보이기) -->
+
 	        
 
 	        		</div>
