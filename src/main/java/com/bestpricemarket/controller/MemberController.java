@@ -1,6 +1,9 @@
 package com.bestpricemarket.controller;
 
+import java.io.PrintWriter;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,7 +64,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
+	    public String loginPOST(MemberVO vo, HttpSession session, RedirectAttributes rttr) throws Exception{
 		MemberVO returnVO = service.loginMember(vo);
 		System.out.println("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
 		
@@ -104,43 +108,51 @@ public class MemberController {
 	/* 회원정보 수정(update) */
 	// http://localhost:8088/member/update
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String updateGET(HttpSession session, Model model) throws Exception{
-		model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
+	public String updateGET(HttpSession session,Model model) throws Exception{
+		 model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
 		return "/member/updateForm";
    }	
-
+    //회원정보 수정
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String updatePOST(MemberVO vo) throws Exception{        
-        l.info("C: 수정할 정보 ->"+vo);
-        service.updateMember(vo);
-    	return "redirect:/member/main";
+    public String updatePOST(MemberVO vo,HttpSession session,HttpServletResponse response) throws Exception{        
+		     MemberVO mvo = service.loginMember(vo);
+		      if(mvo != null) { 		
+		    		service.updateMember(vo);
+		    		
+		    		return "redirect:/member/main";
+		        }		
+		    response.setContentType("text/html; charset=UTF-8");
+		    
+		    PrintWriter out = response.getWriter();
+		     
+		    out.println("<script>alert('비밀번호가 옳바르지않습니다'); </script>");
+		    out.flush();
+		    return "/member/updateForm";
     }
     
     /* 회원탈퇴 */
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String deleteGET(HttpSession session) throws Exception{
-		String id = (String) session.getAttribute("id");
-		if(id == null) {
-			return "redirect:/member/main";
-		}
-		return "/member/deleteForm";
-	}
+	public String deleteGET(MemberVO vo,HttpSession session,Model model) throws Exception{
+    		
+	    	return "member/deleteForm";
+    } 
     
+    //회원 탈퇴
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deletePOST(MemberVO vo, HttpSession session,RedirectAttributes rttr) throws Exception{
-    	l.info("post"+vo);
-    	
-    	if(vo != null) {
-    		session.setAttribute("id", vo.getId());			
-			rttr.addFlashAttribute("vo", vo);
-			rttr.addFlashAttribute("msg",false);
-			return "redirect:/member/delete";
-    	}
-    	
-    	
-    	service.deleteMember(vo);
-    	session.invalidate();
-    	return "redirect:/member/login ";
+    public String deletePOST(MemberVO vo, HttpSession session,HttpServletResponse response) throws Exception{
+    	    MemberVO mvo = service.loginMember(vo); 
+    	    if(mvo != null) { 		
+    	    		service.deleteMember(vo);
+    	    		session.invalidate();
+    	    		return "redirect:/member/main";
+    	    }		
+    	    response.setContentType("text/html; charset=UTF-8");
+    	    
+    	    PrintWriter out = response.getWriter();
+    	     
+    	    out.println("<script>alert('비밀번호가 옳바르지않습니다'); </script>");
+    	    out.flush();
+    	    return "/member/deleteForm";
     }
 	
 	/* 구글아이디로 로그인 */	
@@ -189,4 +201,47 @@ public class MemberController {
  		service.findPw(response, member);
  	}
 	
+ 	//pw-change 요청
+ 	@RequestMapping(value ="/changePw", method = RequestMethod.GET)
+ 	public String pwChange(Model model,HttpSession session) {
+ 		model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
+ 		return "/member/changePw1";
+ 	}
+ 	
+ 	
+ 	//비밀번호 변경 요청
+ 	@RequestMapping(value = "/changePw")
+ 	public String pwChange(MemberVO vo, HttpSession session,Model model,RedirectAttributes rttr) throws Exception {
+ 		l.info("비밀번호 변경 요청 발생!!!");
+ 		if( vo != null) {
+ 			service.modifyPw(vo);
+			rttr.addFlashAttribute("vo", vo);
+			return "redirect:/member/main";
+		} else {
+			l.info("/member/changePw2로 이동");
+			return "/member/changePw2";
+		}
+ 	}
+ 	
+ 	//비밀번호 확인
+ 	@RequestMapping(value = "/checkPw")
+ 	public String checkPw(MemberVO vo,HttpServletResponse response) throws Exception {
+ 		MemberVO mvo =service.loginMember(vo); 
+ 		// 비번이 일치 하는 경우
+ 		if(mvo != null) {
+ 			
+ 		return "/member/changePw2";
+ 	   }else {
+ 		
+ 		l.info("일치하지 않음!"+vo);
+ 		response.setContentType("text/html; charset=UTF-8");
+	    
+	    PrintWriter out = response.getWriter();
+	     
+	    out.println("<script>alert('비밀번호가 옳바르지않습니다'); </script>");
+	    out.flush();
+ 		return "/member/changePw1";
+ 	  }
+ 	 }
+ 	
 }

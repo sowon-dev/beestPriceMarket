@@ -16,4 +16,6 @@ public interface BasketService {
 
  // 게시물 목록 + 페이징
     public List listPage(int displayPost, int postNum) throws Exception;
+
+    
 }

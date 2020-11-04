@@ -37,13 +37,6 @@
 </style>
 
 
-<script type="text/javascript">
-function basketlist(page){
-	location.href="basket/basket?curPage=" + page
-}
-
-</script>
-
 </head>
 <body>
 
@@ -55,7 +48,7 @@ function basketlist(page){
       <div class="col-lg-3">
         <h1 class="my-4">회원정보보기</h1>
         <div class="list-group">
-      	  <a href="/member/basket" class="list-group-item">좋아요</a>
+      	  <a href="/basket/listPage" class="list-group-item">좋아요</a>
           <a href="/member/update" class="list-group-item">회원 수정</a>	
           <a href="/member/delete" class="list-group-item">회원 탈퇴</a>
         </div>
@@ -81,11 +74,7 @@ function basketlist(page){
                     </div> --%>
                    <h1 class="my-4" style="text-align: center;">장바구니</h1>   
                     <div class="row p-5" style="top:300px;"  >
-                       <c:choose>
-                      <c:when test="${basketlist == null }">
-                       <h2>관심 상품이 없습니다 ㅠㅠ</h2>
-                      </c:when>
-                        <c:otherwise>
+                       
                          <div class="col-md-12">
                             
 				 			 
@@ -105,13 +94,18 @@ function basketlist(page){
                                 </thead>
                                 
                                 <tbody>
+				                       <c:choose>
+				                      <c:when test="${basketlist == null }">
+				                       <h2>관심 상품이 없습니다 ㅠㅠ</h2>
+				                      </c:when>
+				                        <c:otherwise>
                                     <c:forEach items="${basketlist }" var="BasketVO">
                                     <tr>
                                         <td>${BasketVO.lno}</td> 
                                         <!-- 업로드 위치 모르겠음 -->
-                                        <td><img src="./upload/${ gdto.getImage().split[0]}"></td>
+                                        <td><img src="./upload/${BasketVO.f_name}" alt="안뜸"> </td>
                                         <!--  -->
-                                        <td><a href="goods/detail?lno=${BasketVO.lno }">${BasketVO.gname }</a></td>
+                                        <td><a href="goods/detail?gno=${BasketVO.lno }">${BasketVO.gname }</a></td>
                                         <c:choose>
                                         <c:when test="${BasketVO.actionstatus == -1 }">
                                           <td>입찰실패</td>
@@ -131,7 +125,9 @@ function basketlist(page){
                                     	<td><a href="/basket/delete?lno=${BasketVO.lno}">삭제</a></td>
                                     	<td><a href="/pay/order">입찰</a></td>
                                     </tr>
-                                    </c:forEach>
+                                       </c:forEach>
+                                </c:otherwise>
+                        </c:choose>
                                 </tbody>
                             </table>
 							</form>
@@ -170,8 +166,7 @@ function basketlist(page){
 									</ul>
 									
 									</div>
-                        </c:otherwise>
-                        </c:choose>
+                       
                        
                         
                     </div>

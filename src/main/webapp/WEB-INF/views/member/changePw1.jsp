@@ -1,4 +1,4 @@
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -17,14 +17,25 @@
 <!-- <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel="stylesheet"> --> -->
 <link href='${pageContext.request.contextPath}/resources/loginandjoin/loginandjoin.css' rel="stylesheet">
 <style>
-  .btn  {
-    background-color :  #343A40;
-    color :  white;
-  }
-  .btn:hover {
-    background: #00BBFF;
-    color : #007BFF;
-  }
+
+.btn {
+    border-radius: 4px !important; 
+    background: #212529 !important;
+    color: #fff !important;
+    padding: 7px 45px !important;
+    display: inline-block !important;
+    margin-top: 20px !important;
+    border: solid 2px #212529 !important; 
+    transition: all 0.5s ease-in-out 0s !important;
+}
+.btn:hover,
+.btn:focus {
+    background: transparent !important;
+    color: #212529 !important;
+    text-decoration: none !important;
+}
+
+ 
  .py-5  {
    width:100%;
    position:absolute;
@@ -65,23 +76,18 @@
       </div>
       <div class="col-lg-9">
 	    <fieldset>
-	    <legend> 회원정보 수정 </legend>
-	    <form action="/member/update" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8" name="frJoin">
+	    <legend> 비밀번호 수정 </legend>
+	    <form action="/member/checkPw" method="post">
 	     <span class="front" style="margin-right: 34px;">아이디</span>  <input type="text" name="id" class="form-control" value="${memberVO.id }" style="width:226px;display:inline; text-align: center;" readonly><br>
-	     <span class="front" style="margin-right: 17px; ">비밀번호</span>  <input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문,숫자,특수문자혼용)" name="pw" style="width:226px;display:inline;" required>  <br>
-	     <span class="front" style="margin-right: 50px; "> 이름 </span><input type="text" name="username" class="form-control" value="${memberVO.username }" style="width:226px;display:inline; "> <br>
-	     <span class="front" style="margin-right: 34px;" >이메일</span> <input type="text" name="email" class="form-control"  value="${memberVO.email }" style="width:226px;display:inline; "> <br>
-	     <span class="front"  style="margin-right: 38px;">연락처</span><input type="text" name="phone"  class="form-control" value="${memberVO.phone}" style="width:226px;display:inline; "><br>
-	     <span class="front" style="margin-right: 45px; ">주소: </span><input type="text" name="addr1" class="form-control" value="${memberVO.addr1}" style="width:226px;display:inline; "><br>
-	     <span class="front" style="margin-right: 40px; ">주소2:</span><input type="text" name="addr2" class="form-control" value="${memberVO.addr2}" style="width:226px;display:inline; "><br>
-	     <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="${memberVO.reg_date}" style="width:226px;display:inline; "readonly><br>
-	     <input class="btn btn-default btn-register" type="submit" value="회원수정" name="commit" id="submitBtn" >          
+	     <span class="front" style="margin-right: 17px; ">비밀번호</span>  <input class="form-control" type="password"  placeholder="기존 비밀번호 입력해주세요" name="pw" style="width:226px;display:inline;" required>  <br>
+				<span class="newPwMsg" style="font-size:12px; font-weight:bold;"></span>
+	      <input class="btn" type="submit" value="비밀번호수정" name="commit" id="submitBtn" onclick="signUpValidation()">          
 	    </form>  
 	  	</fieldset>
       </div>
     </div>
   </div>
-
+ 
   <!-- 푸터 -->
   <jsp:include page="../inc/bottom.jsp"/>
   <!-- 푸터 -->
@@ -90,10 +96,8 @@
   <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  
 
 
-  
+
 </body>
 </html>
-

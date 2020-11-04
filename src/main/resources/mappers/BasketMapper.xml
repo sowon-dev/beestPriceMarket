@@ -4,19 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.bestpricemarket.mappers.BasketMapper">
-   
   
-  
-  
-  
-  
-<!--   
   <insert id="insertBasket">
-   insert into likes(l_g_gno,l_m_id,l_m_actionstatus)
-     values(#{l_g_gno},#{l_m_id},#{l_m_actionstaus})
+   insert into likes(l.no,l_g_gno,l_m_id,l_m_actionstatus)
+     values(#{lno},#{l_g_gno},#{l_m_id},#{l_m_actionstaus})
   
   </insert>
-   -->
+
   <select id="listBasket"   resultType="com.bestpricemarket.domain.BasketVO" >
    select  l.lno,l.l_m_id ,m.username, g.gno,g.gname,g.actionstatus,g.lowestprice,g.enddate
    from likes l join member m
@@ -38,13 +32,15 @@
  
  <!-- 게시물 목록 + 페이징 -->
  <select id="listPage" parameterType="hashMap" resultType="com.bestpricemarket.domain.BasketVO">
-   select  l.lno,l.l_m_id ,m.username, g.gno,g.gname,g.actionstatus,g.lowestprice,g.enddate
+   select l.lno,l.l_m_id ,m.username, g.gno,g.gname,g.actionstatus,g.lowestprice,g.enddate,f.f_name
    from likes l join member m
    on l.l_m_id = m.id
    join goods g
    on l.l_g_gno = g.gno
+   join goodsfile f
+   on l.l_g_gno = f.f_g_gno
    order by lno desc
-  limit #{displayPost}, #{postNum}
+   limit #{displayPost}, #{postNum}
 </select>
  
   </mapper>

@@ -61,7 +61,8 @@ public class MemberDAOImpl implements MemberDAO {
 	// 회원 탈퇴
 	@Override
 	public void deleteMember(MemberVO vo) throws Exception {
-		sqlSession.delete(namespace+".deleteMember",vo);
+	     
+	  sqlSession.delete(namespace+".deleteMember",vo);
 	}
 
 	
