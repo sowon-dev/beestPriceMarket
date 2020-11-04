@@ -22,16 +22,23 @@
 <link href='${pageContext.request.contextPath}/resources/loginandjoin/loginandjoin.css' rel="stylesheet">
 
 <style>
-  .btn  {
- 
-    background:  #007BFF;
-    color :  white;
- 
-  }
-  .btn:hover {
-    background: #343A40;
-    color : #007BFF;
-  }
+  .btn {
+    border-radius: 4px !important; 
+    background: #212529 !important;
+    color: #fff !important;
+    padding: 7px 45px !important;
+    display: inline-block !important;
+    margin-top: 20px !important;
+    border: solid 2px #212529 !important; 
+    transition: all 0.5s ease-in-out 0s !important;
+}
+.btn:hover,
+.btn:focus {
+    background: transparent !important;
+    color: #212529 !important;
+    text-decoration: none !important;
+}
+
 
  .py-5  {
    width:100%;
@@ -103,22 +110,26 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">마이페이지</h1>
+        <h1 class="my-4">회원정보보기</h1>
         <div class="list-group">
-          <a href="/member/update" class="list-group-item">회원 수정</a>
+      	  <a href="/basket/listPage" class="list-group-item">좋아요</a>
+          <a href="/member/update" class="list-group-item">회원 수정</a>	
           <a href="/member/delete" class="list-group-item">회원 탈퇴</a>
-         </div>
+          <a href="/member/changePw" class="list-group-item">비밀번호 수정</a>	
+        </div>
       </div>
       
   <!-- /.container -->
 <fieldset>
     <legend> 회원탈퇴 </legend>
-    <form action="/member/delete" method="post">
+    <form  method="post" name="form1">
        <span class="front" style="margin-right: 52px;">아이디 </span> <input type="text" name="id" class="form-control" value="${id }" style="width:226px;display:inline;" readonly> <br>
       <span class="front" style="margin-right: 40px;">비밀번호</span><input type="password" class="form-control" name="pw"  style= "width: 226px; display: inline;"  required> <br>
-     
-      <input type="submit" class="btn" style="background-color: #343A40; color:white; " value="회원탈퇴"  name="commit">          
+     <input type="submit" class="btn" style="background-color: #343A40; color:white; " value="회원탈퇴"  id="btnDelete"> 
     </form>  
+   
+  
+  
   </fieldset>
   <!-- Footer -->
   <footer class="py-5 bg-dark" style="left:0px;">
@@ -131,6 +142,10 @@
   <!-- Bootstrap core JavaScript -->
   <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  
+
+
 </body>
 </html>
 
