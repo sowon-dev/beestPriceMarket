@@ -65,7 +65,7 @@ public class BasketController {
     
 
     
-    @RequestMapping(value="/delete", method=RequestMethod.GET)
+    @RequestMapping(value="/delete", method=RequestMethod.POST)
     public String deletePOST(@RequestParam(value="lno")Integer lno,HttpSession session) throws Exception{
     	
     	System.out.println("lno :"+lno);
@@ -88,10 +88,10 @@ public class BasketController {
 		 
 		 page.setNum(num);
 		 page.setCount(service.getCount());  
-
+		
 		 List<BasketVO> basketlist = null; 
 		 basketlist = service.listPage(page.getDisplayPost(), page.getPostNum());
-
+		 System.out.println("basketlist"+basketlist);
 		 model.addAttribute("basketlist", basketlist);   
 		 model.addAttribute("pageNum", page.getPageNum());
 
