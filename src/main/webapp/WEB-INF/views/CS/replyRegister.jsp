@@ -52,15 +52,14 @@
             <div class="card card-6">
                 
                 <div class="card-heading">
-                    <h2 class="title">문의하기</h2>
+                    <h2 class="title">답변하기</h2>
                 </div>
               
                 <div class="card-body">
-                    <form action="/CS/register" method="POST" accept-charset="UTF-8" name="fr">
                         <div class="form-row">
                             <div class="name">문의 제목</div>
                             <div class="value">
-                                <input class="input--style-6" type="text" name="cs_subject">
+                                <input class="input--style-6" type="text" name="cs_subject" readonly="readonly" value="${vo.cs_subject}">
                             </div>
                         </div>
                        
@@ -68,8 +67,7 @@
                             <div class="name">글 작성자</div>
                             <div class="value">
                                 <div class="input-group">
-                                <%String id=(String)session.getAttribute("id"); %>
-                                    <input class="input--style-6" type="text" name="cs_m_id" readonly="readonly" value="<%=id%>">
+                                    <input class="input--style-6" type="text" name="cs_m_id" readonly="readonly" value="${vo.cs_m_id}">
                                 </div>
                             </div>
                         </div>
@@ -78,18 +76,34 @@
                             <div class="name">문의 내용</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <textarea class="textarea--style-6" name="cs_content" placeholder="궁금하신 사항을 상세히 작성해 주세요."></textarea>
+                                    <textarea class="textarea--style-6" name="cs_content" readonly="readonly">${vo.cs_content }</textarea>
                                 </div>
                             </div>
                         </div>
 		               
+                    <form action="/CS/replyRegister" method="POST" accept-charset="UTF-8" name="fr">
+                        <div class="form-row">
+                            <div class="name">답변 내용</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="textarea--style-6" name="cs_content"></textarea>
+                                </div>
+                            </div>
+                        </div>
+		               		<input type="hidden" name="cs_ref" value="${vo.cs_ref }">
+		               		<input type="hidden" name="cs_subject" value=" &#09; ┗ 문의하신 글에 대한 답변 드립니다.">
+		               		<input type="hidden" name="cs_lev" value="${vo.cs_lev }">
+		               		<input type="hidden" name="cs_seq" value="${vo.cs_seq }">
+		               		<input type="hidden" name="csbno" value="${vo.csbno }">
+		               		<input type="hidden" name="cs_m_id" value="${vo.cs_m_id }">
+		               
 		                <div class="card-footer">
 		                   <div class="row">
 								<div class="col-lg-6">
-									<button type="submit" onclick="return register();" class="btn btn-secondary btn-block" style="font-size: 20px">문의하기</button>
+									<button type="submit" onclick="return register();" class="btn btn-secondary btn-block" style="font-size: 20px">답변하기</button>
 								</div>
 								<div class="col-lg-6">
-									<a class="cancle" href="/CS/CSFAQ"><button type="button" class="btn btn-danger btn-block" style="font-size: 20px">취소</button></a>
+									<a class="cancle" href="javascript:history.back()"><button type="button" class="btn btn-danger btn-block" style="font-size: 20px">취소</button></a>
 								</div>
 							</div><br>
 <!-- 		                   	<button type="submit" class="btn btn-secondary btn-block" style="font-size: 20px">작성하기</button> -->

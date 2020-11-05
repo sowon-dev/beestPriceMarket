@@ -75,6 +75,14 @@ public class CSServiceImpl implements CSService{
 		List<CSVO> CSList = cdao.listPage(displayPost, postNum);
 		return CSList;
 	}
+
+	//답글 등록
+	@Override
+	public void replyRegist(CSVO vo) throws Exception {
+	
+			cdao.replyCreate(vo);
+		
+	}
 	
    
 	
