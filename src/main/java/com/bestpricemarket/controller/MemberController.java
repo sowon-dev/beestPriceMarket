@@ -122,13 +122,24 @@ public class MemberController {
 		if(mvo != null) { 		
 			service.updateMember(vo);
 			return "redirect:/member/main";
-		}
+		}else {
+		MemberVO vo2 = service.readMember((String)session.getAttribute("id"));
+		vo.setAddr1(vo2.getAddr1());
+		vo.setAddr2(vo2.getAddr2());
+		vo.setEmail(vo2.getEmail());
+		vo.setPhone(vo2.getPhone());
+		vo.setUsername(vo2.getUsername());
+		vo.setBlock(vo2.getBlock());
+		vo.setBlock_r(vo2.getBlock_r());
+		vo.setScore(vo2.getScore());
+		
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('비밀번호가 옳바르지않습니다');</script>");
 		out.flush();
 		return "/member/updateForm";			
+		 }			
     }
     
     /* 회원탈퇴 */

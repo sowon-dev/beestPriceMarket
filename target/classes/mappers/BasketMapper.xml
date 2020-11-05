@@ -32,7 +32,7 @@
  
  <!-- 게시물 목록 + 페이징 -->
  <select id="listPage" parameterType="hashMap" resultType="com.bestpricemarket.domain.BasketVO">
-   select l.lno,l.l_m_id ,m.username, g.gno,g.gname,g.actionstatus,g.lowestprice,g.enddate,f.f_name
+   select l.lno,l.l_m_id ,m.username,l.l_g_gno,g.gname,g.actionstatus,g.lowestprice,g.enddate,f.f_name
    from likes l join member m
    on l.l_m_id = m.id
    join goods g

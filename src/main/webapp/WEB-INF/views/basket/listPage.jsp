@@ -11,19 +11,20 @@
 	width: 100% !important; 
 }
 .btn {
-    border-radius: 4px; 
-    background: #212529;
-    color: #fff;
-    padding: 7px 45px;
-    display: inline-block;
-    margin-top: 20px;
-    border: solid 2px #212529; 
-    transition: all 0.5s ease-in-out 0s;
+    border-radius: 4px !important; 
+    background: #212529 !important;
+    color: #fff !important;
+    padding: 7px 7px !important;
+    display: inline-block !important;
+    margin-top: 20px !important;
+    border: solid 2px #212529 !important; 
+    transition: all 0.5s ease-in-out 0s !important;
 }
-.btn:hover, .btn:focus {
-    background: transparent;
-    color: #212529;
-    text-decoration: none;
+.btn:hover,
+.btn:focus {
+    background: transparent !important;
+    color: #212529 !important;
+    text-decoration: none !important;
 }
 </style>
 </head>
@@ -48,7 +49,7 @@
          <div class="col-12">  
           	<!-- <div class="card"> -->
                    <h1 class="my-4" style="text-align: center;">장바구니</h1>   
-                    <div class="row p-5" style="top:300px;"  >
+                    <div class="row p-5" style="top:300px; width: 996px;"  >
                          <div class="col-md-12">
                             <form method="post" role="form">
                             <table class="table">
@@ -70,12 +71,14 @@
 				                      </c:when>
 				                        <c:otherwise>
                                     <c:forEach items="${basketlist }" var="BasketVO">
+                                    <input type="hidden" name="lno"  value="${BasketVO.lno }">
+                                    <input type="hidden" name="l_g_gno"  value="${BasketVO.l_g_gno}">
                                     <tr>
                                         <td>${BasketVO.lno}</td> 
                                         <!-- 업로드 위치 모르겠음 -->
-                                        <td><img src="./upload/${BasketVO.f_name}" alt="안뜸"> </td>
+                                        <td><img src="<c:url value="/imgUpload/${BasketVO.f_name}"/>" width="100px" height="100px"/></td>
                                         <!--  -->
-                                        <td><a href="goods/detail?gno=${BasketVO.lno }">${BasketVO.gname }</a></td>
+                                        <td><a href="/goods/detail?gno=${BasketVO.lno }">${BasketVO.gname }</a></td>
                                         <c:choose>
                                         <c:when test="${BasketVO.actionstatus == -1 }">
                                           <td>입찰실패</td>
@@ -92,8 +95,8 @@
                                         </c:choose>
                                         <td>${BasketVO.lowestprice }</td>
                                         <td>${BasketVO.enddate }</td>
-                                    	<td><a href="/basket/delete?lno=${BasketVO.lno}">삭제</a></td>
-                                    	<td><a href="/pay/order">입찰</a></td>
+                                    	<td><input type="button" class="btn" id="delete_btn" name="delete_btn" value="삭제"> 
+                                    	<input type="button" class="btn" id="pay_btn" name="pay_btn" value="입찰" onclick="fun1(${BasketVO.l_g_gno})"> </td>
                                     </tr>
                                        </c:forEach>
                                 </c:otherwise>
@@ -152,14 +155,26 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+
+function fun1(l_g_gno){
+	var con = confirm("입찰하러 가시겠습니까?");
+	if(con){
+	location.href="/goods/detail?gno="+l_g_gno;
+	}
+}
+
+
 $(document).ready(function(){
 	var formObj = $("form[role='form']");
                
-$(".btn").on("click",function(){
+$("#delete_btn").on("click",function(){
+		var con = confirm("삭제 하시겠습니까?");
+		if(con){
 		alert("삭제 되었습니다");
 		formObj.attr("action","/basket/delete");
 		formObj.submit();
-	});	
+		}
+		});	
 });
 </script>
 </body>
