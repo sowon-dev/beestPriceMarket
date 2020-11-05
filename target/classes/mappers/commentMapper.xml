@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD지정  -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bestpricemarket.mappers.commentMapper">
+
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert">
+	     insert into comment (c_m_id,c_g_gno,c_content,c_regdate)
+	     values(#{c_m_id},#{c_g_gno},#{c_content},now()) 
+	</insert>
+	
+	<!-- AI제약조건 있는 c_num가져오기 -->
+	<select id="getCnum" resultType="int">
+		select max(c_num) from comment
+	</select>
+
+	<!-- 댓글 리스트 -->
+	<select id = "commentList" resultType = "com.bestpricemarket.domain.GoodsCommentVO">
+	 select *
+	 from comment
+	 where c_num = #{c_num}
+	</select>
+
+	<!-- 댓글 리스트 한개씩만 -->
+	<select id = "commentListEach" resultType = "com.bestpricemarket.domain.GoodsCommentVO">
+	 select *
+	 from comment
+	 where c_num = #{c_num}
+	</select>
+
+	<!-- 댓글의 번호와 회원의 아이디가 모두다 같을경우에만 수정할 수 있도록 설정 -->    
+	<update id = "commentUpdate">
+		update comment set c_content = #{c_content} where c_num = #{c_num} 
+	</update>
+  
+	<!-- 댓글의 번호가 같을 경우에 삭제할 수 있도록 설정 (아이디는 앞에서 같지않으면 버튼조차 뜨지 않기때문에 따로 쿼리를 추가할 필요 없음) -->
+	<delete id="commentDelete">
+		delete from comment where c_num = #{c_num} 
+	</delete>
+
+
+</mapper>
