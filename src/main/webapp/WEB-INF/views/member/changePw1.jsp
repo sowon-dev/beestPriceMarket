@@ -4,20 +4,14 @@
 
 <!DOCTYPE html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>베프마켓 - 친구같은 경매플랫폼</title>
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/resources/css/shop-homepage.css" rel="stylesheet">
-<!-- <!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' rel="stylesheet"> -->
-<!-- <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel="stylesheet"> --> -->
+<!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' rel="stylesheet"> -->
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel="stylesheet">
 <link href='${pageContext.request.contextPath}/resources/loginandjoin/loginandjoin.css' rel="stylesheet">
 <style>
-
 .btn {
     border-radius: 4px !important; 
     background: #212529 !important;
@@ -66,7 +60,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-        <h1 class="my-4">회원정보보기</h1>
+        <h1 class="my-4">My Page</h1>
         <div class="list-group">
       	  <a href="/basket/listPage" class="list-group-item">좋아요</a>
           <a href="/member/update" class="list-group-item">회원 수정</a>	

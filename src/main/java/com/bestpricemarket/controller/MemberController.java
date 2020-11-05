@@ -65,16 +65,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void loginPOST(MemberVO vo, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
+	public void loginPOST(MemberVO vo, HttpSession session, HttpServletResponse response, RedirectAttributes rttr, Model model) throws Exception{
 		MemberVO returnVO = service.loginMember(vo);
 		System.out.println("C: 리턴VO결과(서비스에서 예외처리를 진행했으므로 null이 출력되면 코드에 문제있다는 의미) "+returnVO);
-			
+		System.out.println("C: mvo-id "+returnVO.getId());
+					
 		if(returnVO != null) {
 			session.setAttribute("id", returnVO.getId());			
-			rttr.addFlashAttribute("mvo", returnVO);
+			//rttr.addFlashAttribute("mvo", returnVO);
+			model.addAttribute("mvo", returnVO);
 			response.getWriter().print(true);
-		} else {
-			response.getWriter().print(false);
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class MemberController {
 	}
 	
 	/* 회원정보보기 */
-	// http://localhost:8088/test/member/info
+	// http://localhost:8088/member/info
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public void infoGET(HttpSession session, Model model) throws Exception{
 		MemberVO vo = service.readMember((String)session.getAttribute("id"));
@@ -113,22 +113,22 @@ public class MemberController {
 		 model.addAttribute("memberVO",service.readMember((String)session.getAttribute("id")));
 		return "/member/updateForm";
    }	
+	
     //회원정보 수정
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updatePOST(MemberVO vo,HttpSession session,HttpServletResponse response) throws Exception{        
-		     MemberVO mvo = service.loginMember(vo);
-		      if(mvo != null) { 		
-		    		service.updateMember(vo);
-		    		
-		    		return "redirect:/member/main";
-		        }		
-		    response.setContentType("text/html; charset=UTF-8");
-		    
-		    PrintWriter out = response.getWriter();
-		     
-		    out.println("<script>alert('비밀번호가 옳바르지않습니다'); </script>");
-		    out.flush();
-		    return "/member/updateForm";
+		 MemberVO mvo = service.loginMember(vo);
+		 
+		if(mvo != null) { 		
+			service.updateMember(vo);
+			return "redirect:/member/main";
+		}
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('비밀번호가 옳바르지않습니다');</script>");
+		out.flush();
+		return "/member/updateForm";			
     }
     
     /* 회원탈퇴 */

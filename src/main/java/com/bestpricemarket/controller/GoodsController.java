@@ -28,8 +28,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.service.GoodsCommentService;
 import com.bestpricemarket.service.GoodsService;
 
 @Controller
@@ -38,12 +40,11 @@ public class GoodsController {
 
 	private static final Logger log = LoggerFactory.getLogger(GoodsController.class);
 	
-	
-
 	// 서비스 의존 주입
 	@Inject
 	private GoodsService service;
-
+	@Inject
+	private GoodsCommentService cmtService;
 
 	// 상품 CURD
 	// *******************************************************************************************************************************
@@ -87,7 +88,7 @@ public class GoodsController {
 	}
 
 	// 상품 상세페이지
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	@RequestMapping(value = "/detail", method = {RequestMethod.GET, RequestMethod.POST})
 	public String goodsDetailGET(@RequestParam("gno") int gno, Model model, HttpSession session) throws Exception {
 		System.out.println("C : goodsDetail.jsp 이동");
 
@@ -97,6 +98,10 @@ public class GoodsController {
 		List<Map<String, Object>> fileList = service.selectFileList(gno);
 		model.addAttribute("file", fileList);
 
+		//댓글 조회 후 출력
+		List<GoodsCommentVO> reply = null;			
+		model.addAttribute("cmtList", cmtService.commentList(gno));
+		
 		return "/goods/goodsDetail";
 	}
 
@@ -288,14 +293,14 @@ public class GoodsController {
 		model.addAttribute("reportVO", service.showReportDetail(session, bno));
 	}
 
+	// 상품신고
 	@RequestMapping(value = "/report", method = RequestMethod.POST)
 	public String reportGET(HttpSession session, ReportVO vo) throws Exception {
 		service.sendReportEmail(vo);
 
-		return "/goods/goodsDetail";
+		return "/goods/report";
 	}
 	/* 태준 끝 */
-	// 상품신고
 	// *******************************************************************************************************************************
 
 }
