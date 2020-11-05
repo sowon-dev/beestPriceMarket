@@ -18,6 +18,7 @@
 <link href="${pageContext.request.contextPath}/resources/cs/cs_css/button-reg_goods.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/resources/cs/cs_css/shop-homepage.css" rel="stylesheet">
+
 </head>
 <body>
 	<!-- 헤더 -->
@@ -28,14 +29,15 @@
 	<div class="container">
 
 		<div class="row">
-
+			
+			
 			<!-- 상품 카테고리 메뉴바 -->
 			<div class="col-lg-3">
 
 				<h1 class="my-4">Shop Name</h1>
 				<div class="list-group">
 					<a href="/CS/CSFAQ" class="list-group-item">FAQ</a>
-					<a href="/CS/register" class="list-group-item">1:1 문의</a>
+					<a href="/CS/register" class="list-group-item" onclick="check();">1:1 문의</a>
 					<a href="/CS/CSBoardListPage?num=1" class="list-group-item">나의 문의 보기</a>
 
 				</div>

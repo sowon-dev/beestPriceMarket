@@ -23,8 +23,17 @@ public class CSDAOImpl implements CSDAO {
 	//글쓰기
 	@Override
 	public void create(CSVO vo) throws Exception {
-		session.insert(namespace+".create", vo);
 		
+		System.out.println("@@@csbno : "+vo.getCsbno());
+		System.out.println("@@@cs_ref : "+vo.getCs_ref());
+		session.insert(namespace+".create", vo);
+		int num=0;
+		
+		if(num == 0) {
+			num = (int)session.selectOne(namespace+".maxbno");
+		}
+
+		session.update(namespace+".bnoup", num);	
 	}
 
 	//글목록
@@ -80,5 +89,14 @@ public class CSDAOImpl implements CSDAO {
 		return CSList;
 	}
 
-	
+	@Override
+	public void replyCreate(CSVO vo) throws Exception {
+		
+		session.insert(namespace+".replyCreate", vo);
+
+		session.update(namespace+".united");
+		System.out.println("bnoup : ref일치 완료");
+		
+	}
+
 }

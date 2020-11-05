@@ -27,4 +27,6 @@ public interface CSDAO {
     //글 목록 + 페이징처리
     public List<CSVO> listPage(int displayPost, int postNum)throws Exception;
     
+    public void replyCreate(CSVO vo)throws Exception;
+    
 }

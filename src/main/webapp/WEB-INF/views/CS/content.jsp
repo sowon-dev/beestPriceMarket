@@ -13,9 +13,9 @@
     <meta name="keywords" content="Colorlib Templates">
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <!-- Title Page-->
     <title>내 문의</title>
@@ -47,8 +47,7 @@
                             <div class="name">글 작성자</div>
                             <div class="value">
                                 <div class="input-group">
-                                <%String id=(String)session.getAttribute("id"); %>
-                                    <input class="input--style-6" type="text" name="cs_m_id" readonly="readonly" value="<%=id%>">
+                                    <input class="input--style-6" type="text" name="cs_m_id" readonly="readonly" value="${vo.cs_m_id }">
                                 </div>
                             </div>
                         </div>
@@ -61,23 +60,32 @@
                             </div>
                         </div>
                     <div class="card-footer">
-                    	<div class="row">
-								<div class="col-lg-6">
-									<button type="button" onclick="location.href='/CS/modify?csbno=${vo.csbno}'" class="btn btn-secondary btn-block" style="font-size: 20px">글 수정하기</button>
-								</div>
-								<div class="col-lg-6">
-									<button type="button" class="btn btn-danger btn-block" style="font-size: 20px" onclick="removeCheck()">글 삭제하기</button>
-								</div>
-							</div><br>
-							
-		                   	<button type="button" onclick="location.href='/CS/CSBoardListPage?num=1'" class="btn btn-secondary btn-block" style="font-size: 20px">목록으로</button>		        
-		            </div>
+                    <%String id = (String)session.getAttribute("id"); %>
+                     <%if(id.equals("admin")) {%>
+                          <button type="button" onclick="location.href='/CS/replyRegister?csbno=${vo.csbno}&cs_ref=${vo.cs_ref}'" class="btn btn-secondary btn-block" style="font-size: 20px">관리자 기능 : 답변하기</button><br><br>
+                          <%} %>
+                       <div class="row">
+                       
+                        <div class="col-lg-6">
+                        <c:if test="${id ne 'admin'}">
+                           <button type="button" onclick="location.href='/CS/modify?csbno=${vo.csbno}'" class="btn btn-secondary btn-block" style="font-size: 20px">글 수정하기</button>
+						</c:if>
+                        </div>
+                        <div class="col-lg-6">
+                        <c:if test="${id ne 'admin'}">
+                           <button type="button" class="btn btn-danger btn-block" style="font-size: 20px" onclick="removeCheck()">글 삭제하기</button>
+						</c:if>
+                        </div>
+                     </div><br>
+                     
+                            <button type="button" onclick="location.href='/CS/CSBoardListPage?num=1'" class="btn btn-secondary btn-block" style="font-size: 20px">목록으로</button>
+                  </div>
                     </form>
                 </div>
                 </div>
             </div>
         </div>
-	<script type="text/javascript">
+   <script type="text/javascript">
    function removeCheck() {
 
        if (confirm("정말 삭제하시겠습니까??") == true){    //확인
