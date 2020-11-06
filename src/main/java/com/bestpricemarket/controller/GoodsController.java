@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -25,11 +26,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
 import com.bestpricemarket.service.GoodsCommentService;
 import com.bestpricemarket.service.GoodsService;
@@ -76,16 +79,18 @@ public class GoodsController {
 
 	// 상품목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String goodsListGET(Model model) throws Exception {
-
+	public String goodsListGET(Model model, String category) throws Exception {
+		System.out.println("카테고리 : " + category);
 		System.out.println("C : goodsList.jsp 이동");
-
-		List<GoodsVO> goodsList = service.goodsList();
-
 		model.addAttribute("goodsList", service.goodsList());
+		
+		// 상품별 카테고리 
+		model.addAttribute("category",service.goodsCategoryList(category));
+		System.out.println("C 카테고리실행?"+service.goodsCategoryList(category));
 
 		return "/goods/goodsList";
 	}
+	
 
 	// 상품 상세페이지
 	@RequestMapping(value = "/detail", method = {RequestMethod.GET, RequestMethod.POST})
@@ -95,12 +100,16 @@ public class GoodsController {
 		model.addAttribute("goods", service.goodsDetail(gno));
 		model.addAttribute("id", (String) session.getAttribute("id"));
 
+		// 파일이미지 출력
 		List<Map<String, Object>> fileList = service.selectFileList(gno);
 		model.addAttribute("file", fileList);
 
 		//댓글 조회 후 출력
 		List<GoodsCommentVO> reply = null;			
 		model.addAttribute("cmtList", cmtService.commentList(gno));
+		
+		// 입찰하기 목록 출력
+		model.addAttribute("bidList",service.getBidding(gno));
 		
 		return "/goods/goodsDetail";
 	}
@@ -129,7 +138,7 @@ public class GoodsController {
 			@RequestParam(value = "fileNameDel[]") String[] fileNames, MultipartHttpServletRequest mpRequest)
 			throws Exception {
 		System.out.println("C : 상품 수정 POST");
-
+		
 		service.goodsModify(vo, files, fileNames, mpRequest);
 
 		System.out.println("C : 수정된 정보 -> " + vo);
@@ -219,7 +228,6 @@ public class GoodsController {
 			  
 			  //서버에 저장된 이미지 경로 
 				  String path = "C:\\mp\\file\\"; 
-				 // String path ="C:\\mp\\file\\" + "ckImage/";
 			  
 			  String sDirPath = path + uid + "_" + fileName;
 			  
@@ -258,8 +266,26 @@ public class GoodsController {
 	// ck 이미지 업로드
 			  
 		
-
-			 
+	// 첨부파일 다운로드	
+	@RequestMapping(value="/fileDown")
+	public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception{
+		Map<String, Object> resultMap = service.selectFileInfo(map);
+		String storedFileName = (String) resultMap.get("f_name");
+		String originalFileName = (String) resultMap.get("f_oname");
+		System.out.println("C : @@@@@@@ 다운로드 실행");
+					
+		// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환
+		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+storedFileName));
+					
+		response.setContentType("application/octet-stream");
+		response.setContentLength(fileByte.length);
+		response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
+		response.getOutputStream().write(fileByte);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+					
+	}		  
+	// 첨부파일 다운로드		 
 	
 	
 
@@ -303,4 +329,31 @@ public class GoodsController {
 	/* 태준 끝 */
 	// *******************************************************************************************************************************
 
+	// 재원 입찰하기 소스코드
+	// *******************************************************************************************************************************
+	
+	@RequestMapping(value = "/bidding", method = RequestMethod.POST)
+	@ResponseBody
+	public PricemonitoringVO biddingPOST(PricemonitoringVO prvo,Model model,HttpServletResponse resp) throws Exception {			
+		System.out.println("객체 : " + prvo);	
+		List<PricemonitoringVO> getDB = service.getBidding(prvo.getPm_g_gno());
+		System.out.println("객체리스트 : " + getDB);
+		/*DB에서 가져온값이 없을때 db에 저장후 prvo 리턴*/
+		if(getDB.size() == 0) {
+			service.insertBidding(prvo);
+			return prvo;
+		} else if(getDB.size() != 0) {
+			int maxPrice = service.getMaxPrice(prvo.getPm_g_gno());
+			if(prvo.getPm_g_bidprice() > maxPrice) {
+				service.insertBidding(prvo);
+				return prvo;
+			}
+		}
+		
+		return null;
+	
+	}
+	
+	// *******************************************************************************************************************************
+	
 }

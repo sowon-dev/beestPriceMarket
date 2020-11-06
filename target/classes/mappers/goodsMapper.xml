@@ -72,8 +72,19 @@
   	</update> 
   	<!-- 첨부파일업로드 수정 -->
   	
- 
-  	
+  	<!-- 첨부파일 다운로드 -->
+  	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		select f_name, f_oname 
+		from goodsfile 
+		where fno = #{fno}
+	</select>
+  	<!-- 첨부파일 다운로드 -->
+ 	
+ 	<!-- 카테고리별 상품 분류 -->
+ 	<select id="category" resultType="com.bestpricemarket.domain.GoodsVO">
+ 		select * from goods where category = #{category}
+ 	</select>
+ 	<!-- 카테고리별 상품 분류 -->
   	
   	
   
@@ -87,7 +98,20 @@
   	</select>
   	<!-- 상품신고 -->
 
+ <!-- 입찰하기 -->
+  	<select id="getBidding" resultType="com.bestpricemarket.domain.PricemonitoringVO">
+  		select * from pricemonitoring where pm_g_gno = #{pm_g_gno} order by pm_g_bidprice desc,timelog desc;
+  	</select>
+  	
+  	<select id="getMaxPrice" resultType="Integer">
+  		select max(pm_g_bidprice) from pricemonitoring where pm_g_gno = #{pm_g_gno}
+  	</select>
   
+  	<insert id="insertBidding">
+  		insert into pricemonitoring(pm_g_gno,pm_m_userid,pm_g_bidprice,timelog)
+  		values(#{pm_g_gno},#{pm_m_userid},#{pm_g_bidprice},#{timelog})
+  	</insert>
+<!-- 입찰하기 -->
   
   
   </mapper>

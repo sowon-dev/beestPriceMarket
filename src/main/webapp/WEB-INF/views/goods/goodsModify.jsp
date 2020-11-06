@@ -131,7 +131,18 @@
     });
 	// category
 
-	
+	// 파일 추가 삭제 동작
+	 var fileNoArry = new Array();
+     var fileNameArry = new Array();
+     function fndel(value, name){
+
+      fileNoArry.push(value);
+      fileNameArry.push(name);
+    	$("#fileNoDel").attr("value", fileNoArry);
+    	 $("#fileNameDel").attr("value", fileNameArry);
+    }
+	// // 파일 추가 삭제 동작
+ 	
 	</script>    
     <!-- 유효성 체크 -->
  
@@ -206,11 +217,9 @@
  						};
  
 						 CKEDITOR.replace("content", ckeditor_config);
+
 					</script>
 					<!-- ck 에디터 -->
-                       
-                       
-                       
                        
                  <!-- 섬네일 이미지업로드 -->      
                      <div class="form-row">
@@ -223,7 +232,8 @@
 											<input type="hidden" id="fno" name="fno_${var.index}" value="${file.fno }">
 											<input type="hidden" id="f_name" name="f_name" value="fno_${var.index}">
 											<a href="#" onclick="fn_fileDown('${file.f_name}'); return false;">${file.f_oname}</a>
-											<button id="fileDel" onclick="fn_del('${file.fno}','fno_${var.index}');" type="button">삭제</button><br>
+											<input type="button" id="fileDel" onclick="fndel(${file.fno},fno_${var.index});" value="삭제">
+											<br>
 										</div>
 									  </c:forEach>
                               		</div>
@@ -254,16 +264,6 @@
 					$(this).parent().remove();
 				});
 
-				
-				var fileNoArry = new Array();
-    	 		var fileNameArry = new Array();
-    	 		function fn_del(value, name){
-    	 			
-    	 			fileNoArry.push(value);
-    	 			fileNameArry.push(name);
-    	 			$("#fileNoDel").attr("value", fileNoArry);
-    	 			$("#fileNameDel").attr("value", fileNameArry);
-    	 		}
 				
 			});	
         	// 파일추가
@@ -297,6 +297,7 @@
 
  <script type="text/javascript">
 
+ // 수정,목록,취소 버튼
  $(document).ready(function(){
 	 
  var formObj = $("form[role='form']");
@@ -311,8 +312,6 @@
 			location.href="/goods/list";
  	 		
  	 	});
-
-        
  });    
 
  	function cancel(){
@@ -321,9 +320,7 @@
 		    history.back();
 		}
 	}
-
-
- 
+ // 수정,목록,취소 버튼
  </script> 
 
    
