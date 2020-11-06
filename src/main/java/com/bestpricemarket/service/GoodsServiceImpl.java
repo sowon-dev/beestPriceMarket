@@ -3,6 +3,7 @@ package com.bestpricemarket.service;
 import java.io.File;
 
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,18 +15,28 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.ReportVO;
 import com.bestpricemarket.persistence.GoodsDAO;
 import com.bestpricemarket.utils.FileUtils;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
+	
+	/***** 정현 *****/
+//	@Autowired
+//	@Qualifier("GoodsDAOImpl")
+//	@Qualifier("com.bestpricemarket.persistence.GoodsDAOImpl")
+	private GoodsDAO GoodsDAO = null;
+	/***** 정현 *****/
 	
 	
 	// DAO 의존 주입
@@ -173,5 +184,67 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	/* 태준 */
 	// 상품신고 *******************************************************************************************************************************
+	
+	
+	/* 정현 */
+	// 좋아요 *******************************************************************************************************************************
+	
+	// 좋아요 입력 -> 제품상세페이지
+	@Override
+    public int like (int gno) throws Exception {
+        
+		System.out.println("S : 좋아요 클릭");
+        
+        return gdao.like(gno);
+        
+        }  
+	
+/*	@Override
+	  public int countbyLike(HashMap hashMap){
+	    int count = GoodsDAO.countbyLike(hashMap);
+	    return count;
+	  }  
+	  
+	  @Override
+	  public int create(HashMap hashMap){
+	    int count = GoodsDAO.create(hashMap);
+	    return count;
+	  }
+	  
+	  @Override
+	  public int like_check(HashMap hashMap) {
+	    int count = GoodsDAO.like_check(hashMap);
+	    return count;
+	  }
+
+	  @Override
+	  public int like_check_cancel(HashMap hashMap) {
+	    int count = GoodsDAO.like_check_cancel(hashMap);
+	    return count;
+	  }   
+	  
+	  @Override
+	  public LikesVO read(HashMap hashMap) {
+	    LikesVO vo = GoodsDAO.read(hashMap);
+	    return vo;
+	  }
+
+	  @Override
+	  public int deletebyGno(int gno) {
+	    int count = GoodsDAO.deletebyGno(gno);
+	    return count;
+	  }
+
+	  @Override
+	  public int deletebyL_m_id(String l_m_id) {
+	    int count = GoodsDAO.deletebyL_m_id(l_m_id);
+	    return count;
+	  }   */
+
+	
+	
+	
+	
+	
 	
 }

@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,11 +28,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.ReportVO;
 import com.bestpricemarket.service.GoodsCommentService;
 import com.bestpricemarket.service.GoodsService;
@@ -302,5 +307,38 @@ public class GoodsController {
 	}
 	/* 태준 끝 */
 	// *******************************************************************************************************************************
+	
+	
+	// *******************************************************************************************************************************
+		/* 정현 */
+		// 좋아요
+		
+	    // 좋아요 입력 -> 제품상세페이지
+	/*	@RequestMapping(value = "/likes", method = RequestMethod.GET)
+	    public String like (@RequestParam int gno) throws Exception {
+	        
+	        service.like(gno);
+	    
+	        return "forward:/goods/goodsDetail"; //페이지값을 그대로 넘겨받기위해서 포워딩을 사용해 컨트롤러로 리턴시킨다.
+	    }   */
+		
+		// 좋아요 입력 -> 제품상세페이지
+		  @ResponseBody
+		  @RequestMapping(value="/likes", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+		  public int like(@RequestParam int gno) throws Exception{
+		    System.out.println("C : 좋아요 created");
+		    
+		    
+		    int test = service.like(gno);
+		    
+		    return test;
+		    
+		
+	
+	
+		  }
+	
+	
+	
 
 }

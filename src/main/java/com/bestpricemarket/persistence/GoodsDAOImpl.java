@@ -8,14 +8,24 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.ReportVO;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
+	
+	
+	/***** 정현 *****/
+//	@Autowired
+//	 private SqlSessionTemplate sstemplate;
+	/***** 정현 *****/
+	
 	
 	// DB 의존 주입
 	@Inject
@@ -109,9 +119,65 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	/* 태준 */
 	// 상품신고 *******************************************************************************************************************************
+
 	
 	
 	
+	// 좋아요 *******************************************************************************************************************************
+		/* 정현 */
+		
+		// 좋아요 입력 -> 제품상세페이지
+		
+	  @Override
+	   public int like(int gno) throws Exception {
+		     
+		return sqlSession.insert(namespace + ".create", gno);
+		
+		
+	     }
+		  
+	/*	  @Override
+		  public int countbyLike(HashMap hashMap){
+		    int count = sstemplate.selectOne(namespace + ".countbyLike", hashMap);
+		    return count;
+		  }
+		  
+		  @Override
+		  public int create(HashMap hashMap){
+		    int count = sstemplate.insert(namespace + ".create", hashMap);
+		    return count;
+		  }
+		  
+		  @Override
+		  public int like_check(HashMap hashMap) {
+		    int count = sstemplate.update(namespace + ".like_check", hashMap);
+		    return count;
+		  }   
+
+		  @Override
+		  public int like_check_cancel(HashMap hashMap) {
+		    int count = sstemplate.update(namespace + ".like_check_cancel", hashMap);
+		    return count;
+		  }    
+		  
+		  @Override
+		  public LikesVO read(HashMap hashMap) {
+		    LikesVO vo = sstemplate.selectOne(namespace + ".read", hashMap);
+		    return vo;
+		  }
+
+		  @Override
+		  public int deletebyGno(int gno) {
+		    int count = sstemplate.delete(namespace + ".deletebyGno", gno);
+		    return count;
+		  }
+		  
+		  @Override
+		  public int deletebyL_m_id(String l_m_id) {
+		    int count = sstemplate.delete(namespace + ".deletebyL_m_id", l_m_id);
+		    return count;
+		  }   */
+
 	
 	
 	

@@ -86,6 +86,59 @@
   		where gno=#{gno}
   	</select>
   	<!-- 상품신고 -->
+  	
+  	
+  	<!-- 좋아요 상품상세페이지로 -->
+<!-- <update id="like_check">
+update goods
+set like = like + 1
+where gno = {#gno}  	
+  	
+</update>  -->
+
+
+<select id="countbyLike" resultType="int" parameterType="HashMap">
+   SELECT COUNT(lno) as cnt
+   FROM likes
+   where l_m_id = #{l_m_id}   <!-- 누가불렀는지  -->
+  </select>
+
+  <insert id="create" parameterType="HashMap">
+    INSERT INTO likes(l_g_gno, l_m_id, l_m_actionstatus) 
+    values (#{gno},#{g_m_id},#{l_m_actionstatus})  <!-- g_m_id 다시 확인 -->
+  </insert>
+    
+  <update id="goods_update" parameterType="int">
+    UPDATE goods
+    SET `like` = `like` + 1 
+    WHERE gno = #{gno}  <!-- l_m_id 맞는지 확인 -->
+  </update>
+  
+  <update id="like_check_cancel" parameterType="HashMap">
+    UPDATE likes
+    SET l_m_actionstatus = 0
+    WHERE l_m_id=#{l_m_id} AND gno=#{gno}  <!-- l_m_id 맞는지 확인 -->
+  </update>
+  
+  <select id="read" resultType="LikesVO" parameterType="HashMap">
+    SELECT lno, l_g_gno, l_m_id, l_m_actionstatus 
+    FROM likes 
+    WHERE gno=#{gno} AND l_m_id=#{l_m_id} <!-- 필요...??? -->
+  </select>
+  
+  <delete id="deletebyGno" parameterType="int">
+    DELETE FROM likes
+    WHERE gno=#{gno}
+  </delete>
+  
+  <delete id="deletebyL_m_id" parameterType="int">
+    DELETE FROM likes
+    WHERE l_m_id=#{l_m_id}
+  </delete>
+  	
+  	
+  	
+  	
 
   
   

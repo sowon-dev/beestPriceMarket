@@ -117,7 +117,7 @@ $(document).ready(function(){
 				<c:if test="${ id != goods.g_m_id}">
 			        <form action="#" class="display-flex">
 		        			<div class="product-count">
-		        				  <a href="#"> <jsp:include page="../goods/likebtn.jsp"/></a>
+		        				  <a href="/goods/likes?gno=${goods.gno }"> <jsp:include page="../goods/likebtn.jsp"/></a>
 		        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
 		        				  <a href="${path}/goods/report">신고하기</a>
 		        			</div>
