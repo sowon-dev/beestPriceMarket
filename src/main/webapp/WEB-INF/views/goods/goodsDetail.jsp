@@ -30,6 +30,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- 수정/삭제 아이콘 -->
 
+<!-- 좋아요버튼  -->
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/likebtn.css" rel="stylesheet">
+
 <script type="text/javascript">
 <!-- 수정/삭제 이동 --> 
 $(document).ready(function(){
@@ -114,8 +117,8 @@ $(document).ready(function(){
 				<c:if test="${ id != goods.g_m_id}">
 			        <form action="#" class="display-flex">
 		        			<div class="product-count">
+		        				  <a href="#"> <jsp:include page="../goods/likebtn.jsp"/></a>
 		        				  <a href="#" class="round-black-btn" style="margin-right:20px;">입찰하기</a>
-		        				  <a href="#" class="round-black-btn">관심상품</a>
 		        				  <a href="${path}/goods/report">신고하기</a>
 		        			</div>
 		        	</form>
