@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
 
 @Repository
@@ -88,7 +89,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectList(namespace+".selectFileList", gno);
 	}
 	
-	// 첨부파일 수정//
+	// 첨부파일 수정
 	@Override
 	public void updateFile(Map<String, Object> map) throws Exception {
 
@@ -96,6 +97,22 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.update(namespace+".updateFile",map);
 	}
 	
+	// 첨부파일 다운로드
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+		
+		System.out.println("DAO : 첨부파일 다운로드");
+		return sqlSession.selectOne(namespace+".selectFileInfo",map);
+	}
+	
+	// 카테고리별 상품 분류
+	@Override
+	public List<GoodsVO> goodsCategoryList(String category) throws Exception {
+			
+		System.out.println("DAO : 카테고리 분류");
+		
+		return sqlSession.selectList(namespace+".category",category);
+	}
 	
 	
 	
@@ -109,6 +126,28 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	/* 태준 */
 	// 상품신고 *******************************************************************************************************************************
+	
+	
+	// 입찰하기 *******************************************************************************************************************************
+	// 입찰하기
+	@Override
+	public List<PricemonitoringVO> getBidding(int pm_g_gno) throws Exception {
+		List<PricemonitoringVO> prvo = sqlSession.selectList(namespace + ".getBidding",pm_g_gno);
+		return prvo;
+	}
+		
+
+	@Override
+	public int getMaxPrice(int pm_g_gno) throws Exception {
+		int maxVO = sqlSession.selectOne(namespace + ".getMaxPrice",pm_g_gno);
+		return maxVO;
+	}
+
+	@Override
+	public void insertBidding(PricemonitoringVO prvo) throws Exception {
+		sqlSession.selectOne(namespace + ".insertBidding",prvo);
+	}	
+	// 입찰하기 *******************************************************************************************************************************
 	
 	
 	

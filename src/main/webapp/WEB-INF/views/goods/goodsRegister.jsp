@@ -92,6 +92,7 @@
 				$(document).on("click","#fileDel", function(){
 					$(this).parent().remove();
 				});
+				
 			});	
 		
 		// 파일추가
@@ -214,16 +215,20 @@
 					</script>
 					<!-- ck 에디터 -->
                        
-           <!-- 섬네일이미지업로드 -->        
+           <!-- 섬네일이미지업로드 --> 
+                
                     <div class="form-row">
                        <div class="name">섬네일 이미지 등록</div>
                            <div class="value">
                              <div class="input-group js-input-file">
                            		<div id="fileIndex"></div>
                               </div>
+                               
 							 <button  type="button" class="fileAdd" id="file" onclick="fn_addFile()">파일추가</button> 
+							 
                    	   </div>
                     </div> 
+                     
             <!-- 섬네일이미지업로드 -->
                    
                     <div class="form-row">
