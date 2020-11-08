@@ -81,16 +81,16 @@
                                         <td><a href="/goods/detail?gno=${BasketVO.lno }">${BasketVO.gname }</a></td>
                                         <c:choose>
                                         <c:when test="${BasketVO.actionstatus == -1 }">
-                                          <td>입찰실패</td>
+                                          <td>경매실패</td>
                                         </c:when>
                                         <c:when test="${BasketVO.actionstatus == 0 }">
-                                          <td>입찰중</td>
+                                          <td>경매중</td>
                                         </c:when>
                                         <c:when test="${BasketVO.actionstatus == 1 }">
-                                          <td>입찰종료</td>
+                                          <td>경매종료</td>
                                         </c:when>
                                         <c:when test="${BasketVO.actionstatus == 2 }">
-                                          <td>입찰성공</td>
+                                          <td>경매성공</td>
                                         </c:when>
                                         </c:choose>
                                         <td>${BasketVO.lowestprice }</td>

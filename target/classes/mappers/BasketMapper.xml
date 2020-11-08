@@ -39,8 +39,10 @@
    on l.l_g_gno = g.gno
    join goodsfile f
    on l.l_g_gno = f.f_g_gno
+   where l.l_m_id = #{l_m_id}
    order by lno desc
    limit #{displayPost}, #{postNum}
+  
 </select>
  
   </mapper>

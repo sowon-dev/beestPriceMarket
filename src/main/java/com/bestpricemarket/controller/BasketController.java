@@ -42,7 +42,7 @@ public class BasketController {
 		 l.info("C: vo 확인"+bv);
 	  
 	 
-	 return "/basket/basket"; }
+	 return "/basket/listPage"; }
 	 
 	
 	
@@ -80,17 +80,17 @@ public class BasketController {
 
 	
 	  @RequestMapping(value="/listPage", method = RequestMethod.GET) 
-	  public String getListPage(Model model, @RequestParam(value="num",defaultValue="1") int num) throws Exception{ 
+	  public String getListPage(Model model, @RequestParam(value="num",defaultValue="1") int num,HttpSession session) throws Exception{ 
 		// 게시물 목록 + 페이징 추가
 		 BasketPager page = new BasketPager();
 		 
 		 
-		 
+		 String l_m_id=(String)session.getAttribute("id");
 		 page.setNum(num);
 		 page.setCount(service.getCount());  
 		
 		 List<BasketVO> basketlist = null; 
-		 basketlist = service.listPage(page.getDisplayPost(), page.getPostNum());
+		 basketlist = service.listPage(page.getDisplayPost(), page.getPostNum(),l_m_id);
 		 System.out.println("basketlist"+basketlist);
 		 model.addAttribute("basketlist", basketlist);   
 		 model.addAttribute("pageNum", page.getPageNum());
