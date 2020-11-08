@@ -51,12 +51,12 @@ public class BasketDAOImpl implements BasketDAO {
 	}
 
 	@Override
-	public List listPage(int displayPost, int postNum) throws Exception {
+	public List listPage(int displayPost, int postNum,String l_m_id) throws Exception {
 		Map data = new HashMap();
 		  
 		 data.put("displayPost", displayPost);
 		 data.put("postNum", postNum);
-		  
+		 data.put("l_m_id", l_m_id); 
 		 return session.selectList(namespace + ".listPage", data);
 	}
 

@@ -49,9 +49,9 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public List listPage(int displayPost, int postNum) throws Exception {
+	public List listPage(int displayPost, int postNum,String l_m_id) throws Exception {
 		
-		return bkdao.listPage(displayPost, postNum);
+		return bkdao.listPage(displayPost, postNum,l_m_id);
 	}
 
 	
