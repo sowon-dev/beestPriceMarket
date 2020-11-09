@@ -50,5 +50,30 @@ public class GoodsCommentServiceImpl implements GoodsCommentService {
 		}
 	}
 
+	// 댓글 수정
+	@Override
+	public void commentUpdate(GoodsCommentVO cmt) throws Exception {
+		gcdao.commentUpdate(cmt);
+	}
+
+	//댓글 삭제
+	@Override
+	public void commentDelete(GoodsCommentVO cmt) throws Exception {
+		gcdao.commentDelete(cmt); 
+	}
+
+	//c_ref와 c_num 동기화
+	@Override
+	public void syncC_ref(Integer c_num) throws Exception {
+		gcdao.syncC_ref(c_num);
+	}
+
+	//대댓글 등록
+	@Override
+	public void rereplyInsert(GoodsCommentVO cmt) throws Exception {
+		gcdao.rereplyInsert(cmt);
+	}
+
+	
 
 }
