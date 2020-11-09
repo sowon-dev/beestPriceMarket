@@ -39,6 +39,12 @@ public class MyActionServiceImpl implements MyActionService {
 		return adao.getCount();
 	}
 
+	@Override
+	public void delete(String ano) {
+		adao.delete(ano);
+		
+	}
+
 	
 	
 	

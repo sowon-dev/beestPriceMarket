@@ -3,6 +3,7 @@ package com.bestpricemarket.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -91,6 +92,17 @@ public class MyActionController {
 		
     	return "/myAction/myAction2";
     }
-
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(HttpServletRequest request) {
+		
+		String [] ajaxMsg = request.getParameterValues("valueArr");
+		int size = ajaxMsg.length;
+		for(int i=0;i<size; i++) {
+			service.delete(ajaxMsg[i]);
+		}
+		
+		return "/MyAction/myAction2";
+	}
 
 }

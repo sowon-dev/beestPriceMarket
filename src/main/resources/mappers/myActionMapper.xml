@@ -33,4 +33,11 @@
    select count(ano)
    from myaction 
   </select>
+  
+  <delete id="delete">
+   delete from myaction
+   where ano=#{ano}
+  
+  </delete>
+  
   </mapper>
