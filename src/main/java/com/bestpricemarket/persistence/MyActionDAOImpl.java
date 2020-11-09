@@ -46,7 +46,12 @@ public class MyActionDAOImpl implements MyActionDAO {
 		
 		return session.selectOne(namespace+".getCount");
 	}
-
+	
+	@Override
+	public void delete(String ano) {
+		session.delete(namespace+".delete",ano);
+	}
+	
 	
 	
 

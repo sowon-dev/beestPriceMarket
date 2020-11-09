@@ -19,4 +19,6 @@ public interface MyActionDAO {
 	
 	//게시물 세기
 	public int getCount() throws Exception;
+
+	public void delete(String ano);
 } 
