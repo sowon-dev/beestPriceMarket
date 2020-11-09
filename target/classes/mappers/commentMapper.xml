@@ -22,7 +22,8 @@
 	<select id = "commentList" resultType = "com.bestpricemarket.domain.GoodsCommentVO">
 	 select *
 	 from comment
-	 where c_num = #{c_num}
+	 where c_g_gno = #{gno}
+	 order by c_ref asc, c_seq asc
 	</select>
 
 	<!-- 댓글 리스트 한개씩만 -->
@@ -32,15 +33,28 @@
 	 where c_num = #{c_num}
 	</select>
 
-	<!-- 댓글의 번호와 회원의 아이디가 모두다 같을경우에만 수정할 수 있도록 설정 -->    
+	<!-- 댓글수정  -->
 	<update id = "commentUpdate">
-		update comment set c_content = #{c_content} where c_num = #{c_num} 
+		update comment set c_content = #{c_content}
+		where c_num = #{c_num} 
 	</update>
-  
-	<!-- 댓글의 번호가 같을 경우에 삭제할 수 있도록 설정 (아이디는 앞에서 같지않으면 버튼조차 뜨지 않기때문에 따로 쿼리를 추가할 필요 없음) -->
-	<delete id="commentDelete">
-		delete from comment where c_num = #{c_num} 
-	</delete>
 
+	<!-- 댓글삭제  -->
+	<update id = "commentDelete">
+		update comment set c_content = #{c_content}, isDeleted = 1 
+		where c_num = #{c_num} 
+	</update>
+
+	<!-- c_ref와 c_num 싱크맞추기 -->
+	<update id="syncC_ref">
+		update comment set c_ref = #{c_num}
+		where c_num = #{c_num}
+	</update>
+	
+	<!-- 대댓글등록 -->
+	<insert id="rereplyInsert">
+	     insert into comment (c_m_id,c_g_gno,c_content,c_regdate,c_ref,c_seq)
+	     values(#{c_m_id},#{c_g_gno},'┗답글 '#{c_content},now(),#{c_ref},1) 
+	</insert>
 
 </mapper>

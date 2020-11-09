@@ -22,9 +22,15 @@ public interface GoodsCommentService {
 	public void commentInsert(GoodsCommentVO cmt) throws Exception;
 	
 	// 댓글 수정
-	// public void commentUpdate(GoodsCommentVO cmt);
+	public void commentUpdate(GoodsCommentVO cmt) throws Exception;
 	
 	// 댓글 삭제
-	// public void commentDelete(int c_num);
+	public void commentDelete(GoodsCommentVO cmt) throws Exception;
+	
+	//c_ref와 c_num 동기화
+	public void syncC_ref(Integer c_num) throws Exception;
+	
+	//대댓글 등록
+	public void rereplyInsert(GoodsCommentVO cmt) throws Exception;
 
 }

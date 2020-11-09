@@ -18,8 +18,6 @@ public class GoodsCommentDAOImpl implements GoodsCommentDAO {
 	//댓글 목록
 	@Override
 	public List<GoodsCommentVO> commentList(Integer gno) throws Exception{
-		
-		System.out.println("D : 댓글 목록");
 		return sqlSession.selectList(namespace + ".commentList", gno);
 	}
 	
@@ -38,30 +36,34 @@ public class GoodsCommentDAOImpl implements GoodsCommentDAO {
 	// 댓글 작성
 	@Override
 	public void commentInsert(GoodsCommentVO cmt) throws Exception{
-
-		System.out.println("D : 댓글 작성 성공!");
 		sqlSession.insert(namespace + ".commentInsert", cmt);
-		
 	}
-/*	
-    //댓글의 갯수
-    @Override
-    public int count(int c_num) {
-        return 0;
-    }
 	
-	//댓글의 수정
+	//댓글 수정
 	@Override
-	public void commentUpdate(GoodsCommentVO cmt) {
-		sqlSession.update("commentInsert.commentList", cmt);
-		
+	public void commentUpdate(GoodsCommentVO cmt) throws Exception {
+		sqlSession.update(namespace+".commentUpdate", cmt);
 	}
 
-	//댓글의 삭제
+	//댓글 삭제
 	@Override
-	public void commentDelete(int c_num) {
-		sqlSession.delete("commentInsert.commentList", c_num);
+	public void commentDelete(GoodsCommentVO cmt) throws Exception {
+		sqlSession.update(namespace+".commentDelete", cmt);
 	}
-*/	
+
+	//c_ref와 c_num 동기화
+	@Override
+	public void syncC_ref(Integer c_num) throws Exception {
+		sqlSession.update(namespace+".syncC_ref", c_num);
+	}
+	
+	//대댓글 등록
+	@Override
+	public void rereplyInsert(GoodsCommentVO cmt) throws Exception {
+		sqlSession.insert(namespace + ".rereplyInsert", cmt);
+	}
+	
+	
+	
 
 }
