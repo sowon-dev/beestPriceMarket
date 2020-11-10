@@ -12,7 +12,7 @@
 }
 .btn {
     border-radius: 4px !important; 
-    background: #212529 !important;
+    background: #DC3545 !important;
     color: #fff !important;
     padding: 7px 7px !important;
     display: inline-block !important;

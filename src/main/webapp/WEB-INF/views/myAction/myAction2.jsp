@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="${pageContext.request.contextPath}/resources/BasketCSS/css/bootstrap.min.css" rel="stylesheet">
@@ -96,7 +97,7 @@
 																		<td>입찰성공</td>
 																	</c:when>
 																</c:choose>
-																<td>${paylist.a_g_enddate }</td>
+																<td><fmt:formatDate value="${paylist.a_g_enddate }" pattern="yyyy-MM-dd"/></td>
 																 <c:choose>
 						                                        <c:when test="${paylist.paystatus == -1 }">
 						                                          <td>결제실패</td>

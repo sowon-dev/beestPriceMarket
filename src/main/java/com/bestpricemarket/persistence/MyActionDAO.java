@@ -10,7 +10,10 @@ import com.bestpricemarket.domain.MyActionVO;
 
 
 public interface MyActionDAO {
-
+	
+	//입찰 넣기
+	public void insertAction(MyActionVO av) throws Exception; 
+	
 	//입찰 목록
 	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception; 
 	
