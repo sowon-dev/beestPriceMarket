@@ -52,7 +52,7 @@
   	 </select>
   
   	 <select id="getGoods" resultType="com.bestpricemarket.domain.GoodsVO">
-  	 	select gname,gno,bidprice from goods where gno = #{gno}
+  	 	select gname,gno,finalprice from goods where gno = #{gno}
   	 </select>
   	 
   	 <insert id="insertParam">
