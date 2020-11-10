@@ -26,6 +26,22 @@
     color: #212529 !important;
     text-decoration: none !important;
 }
+.delete_btn {
+    border-radius: 4px !important; 
+    background: #DC3545 !important;
+    color: #fff !important;
+    padding: 7px 7px !important;
+    display: inline-block !important;
+    margin-top: 20px !important;
+    border: solid 2px #212529 !important; 
+    transition: all 0.5s ease-in-out 0s !important;
+}
+.delete_btn:hover,
+.delete_btn:focus {
+    background: transparent !important;
+    color: #212529 !important;
+    text-decoration: none !important;
+}
 </style>
 </head>
 <body>
@@ -95,8 +111,8 @@
                                         </c:choose>
                                         <td>${BasketVO.lowestprice }</td>
                                         <td>${BasketVO.enddate }</td>
-                                    	<td><input type="button" class="btn" id="delete_btn" name="delete_btn" value="삭제"> 
-                                    	<input type="button" class="btn" id="pay_btn" name="pay_btn" value="입찰" onclick="fun1(${BasketVO.l_g_gno})"> </td>
+                                    	<td><input type="button" class="delete_btn" id="delete_btn" name="delete_btn" value="삭제"></td>
+                                    	<td><input type="button" class="btn" id="pay_btn" name="pay_btn" value="입찰" onclick="fun1(${BasketVO.l_g_gno})"> </td>
                                     </tr>
                                        </c:forEach>
                                 </c:otherwise>

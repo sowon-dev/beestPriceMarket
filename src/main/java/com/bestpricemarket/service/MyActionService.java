@@ -7,6 +7,8 @@ import com.bestpricemarket.domain.MyActionVO;
 
 public interface MyActionService {
 	
+	public void insertAction(MyActionVO av) throws Exception;
+	
 	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception; 
     
 	public List<MyActionVO> paylist(int displayPost, int postNum,String a_m_id) throws Exception;

@@ -4,13 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.bestpricemarket.mappers.myActionMapper">
-   <insert id="insertAction">
-   insert into myaction (ano,a_g_gno,a_g_actionstatus,a_g_enddate,paystatus,deliverystatus)
-   values (#{ano},#{a_g_gno},#{a_g_actionstauts},#{a_g_enddate},#{paystatus},#{deliverystatus})
-   
+   <insert id="insertAction" >
+   insert into myaction (ano,a_m_id,a_g_gno,a_g_actionstatus,a_g_enddate,paystatus,deliverystatus)
+   values (#{ano},#{a_m_id},#{a_g_gno},#{a_g_actionstauts},#{a_g_enddate},#{paystatus},#{deliverystatus})
    </insert>
    
-   <!-- 특정 유저의 주문 목록 -->
+   <!-- 입찰 -->
 	<select id="actionlist" resultType="com.bestpricemarket.domain.MyActionVO">
 	select a.ano,a.a_m_id, a.a_g_gno, a.a_g_actionstatus, a.a_g_enddate,f.f_name,g.gname 
 	 from myaction a join goods g
@@ -22,7 +21,7 @@
      limit #{displayPost}, #{postNum}
   		
 	</select>
-  
+  <!-- 낙찰 -->
   <select id="paylist" resultType="com.bestpricemarket.domain.MyActionVO">
 	 select a.ano, a.a_m_id, a.a_g_gno, a.a_g_actionstatus, a.a_g_enddate,f.f_name,g.gname,a.paystatus,a.deliverystatus 
 	 from myaction a join goods g
@@ -49,7 +48,6 @@
 <delete id="delete">
  delete from myaction
      where ano = #{ano}
-         
 </delete>
   
   </mapper>

@@ -29,7 +29,17 @@ public class MyActionController {
 	private MyActionService service;
 	
 	private static final Logger l = LoggerFactory.getLogger(MyActionController.class);
-
+	
+	
+	  @RequestMapping(value = "/insert", method = RequestMethod.GET) 
+	  public String insertaction(MyActionVO av) throws Exception{
+	      
+	  service.insertAction(av);
+		  
+	  return "/myAction/myAction"; 
+	 }
+	
+	
 	// 입찰 목록
 	@RequestMapping(value = "/actionlist", method = RequestMethod.GET)
 	public String getOrderList(HttpSession session, MyActionVO action, Model model,@RequestParam(value="num",defaultValue="1") int num) throws Exception {
@@ -86,7 +96,8 @@ public class MyActionController {
 
 			 return "/myAction/myAction";
 	}
-
+    
+	 //낙찰 목록
 	@RequestMapping(value = "/paylist", method = RequestMethod.GET)
     public String getPaylist(HttpSession session, MyActionVO action, Model model,@RequestParam(value="num",defaultValue="1") int num) throws Exception {
     	
@@ -128,7 +139,7 @@ public class MyActionController {
 		paylist = service.paylist(displayPost, postNum, a_m_id);
 		model.addAttribute("paylist", paylist);
 		model.addAttribute("pageNum", pageNum);
-
+		
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
@@ -143,7 +154,7 @@ public class MyActionController {
     	return "/myAction/myAction2";
     }
 	
-	// 카트 삭제
+	// 선택 삭제
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public int deleteCart(HttpSession session,

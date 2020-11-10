@@ -5,26 +5,28 @@
   
   <mapper namespace="com.bestpricemarket.mappers.BasketMapper">
   
+  <!-- 관심상품 담기 -->
   <insert id="insertBasket">
    insert into likes(l.no,l_g_gno,l_m_id,l_m_actionstatus)
      values(#{lno},#{l_g_gno},#{l_m_id},#{l_m_actionstaus})
-  
   </insert>
-
+  
+  <!-- 관심상품 리스트 -->
   <select id="listBasket"   resultType="com.bestpricemarket.domain.BasketVO" >
    select  l.lno,l.l_m_id ,m.username, g.gno,g.gname,g.actionstatus,g.lowestprice,g.enddate
    from likes l join member m
    on l.l_m_id = m.id
    join goods g
    on l.l_g_gno = g.gno
- 
   </select>
   
+  <!-- 상품 삭제 -->
   <delete id="deleteBasket" parameterType="int">
 	delete from likes
 	where lno=#{lno}
   </delete>
   
+  <!-- 상품 세기 -->
   <select id="getCount" resultType="int">
    select count(lno)
    from likes 
@@ -42,9 +44,7 @@
    where l.l_m_id = #{l_m_id}
    order by lno desc
    limit #{displayPost}, #{postNum}
-  
 </select>
- 
   </mapper>
 
  

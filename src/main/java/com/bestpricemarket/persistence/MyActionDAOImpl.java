@@ -23,6 +23,14 @@ public class MyActionDAOImpl implements MyActionDAO {
 	private static final String namespace = "com.bestpricemarket.mappers.myActionMapper";
 
 	@Override
+	public void insertAction(MyActionVO av) throws Exception {
+		session.selectOne(namespace+".insertAction",av);
+		
+	}
+
+
+
+	@Override
 	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception {
 		Map data = new HashMap();
 		  
