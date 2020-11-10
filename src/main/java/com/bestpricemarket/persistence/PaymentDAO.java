@@ -14,5 +14,6 @@ public interface PaymentDAO {
 	// 결제내역 저장하기
 	public void insertParam(PaymentVO pvo) throws Exception;
 	
+	// 해당번호에 맞는 결제한 정보 가져오기
 	public PaymentVO getPayment(int p_g_gno) throws Exception;
 }
