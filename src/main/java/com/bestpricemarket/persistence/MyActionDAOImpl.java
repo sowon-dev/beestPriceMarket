@@ -21,15 +21,14 @@ public class MyActionDAOImpl implements MyActionDAO {
 	private SqlSession session; // mapper위치까지 접근 가능 but mapper가 여러개일수있음 => mapper구분필요
 
 	private static final String namespace = "com.bestpricemarket.mappers.myActionMapper";
-
+	
+	//입찰 목록 담기
 	@Override
 	public void insertAction(MyActionVO av) throws Exception {
 		session.selectOne(namespace+".insertAction",av);
 		
 	}
-
-
-
+	// 입찰 목록
 	@Override
 	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception {
 		Map data = new HashMap();
@@ -39,9 +38,7 @@ public class MyActionDAOImpl implements MyActionDAO {
 		 data.put("a_m_id", a_m_id); 
 		return session.selectList(namespace + ".actionlist",data);
 	}
-	
-	
-
+	// 낙찰 목록
 	@Override
 	public List<MyActionVO> paylist(int displayPost, int postNum, String a_m_id) throws Exception {
 		Map map = new HashMap();
@@ -51,25 +48,19 @@ public class MyActionDAOImpl implements MyActionDAO {
 		return session.selectList(namespace+".paylist",map);
 		
 	}
-
-
-
+	// 입찰 목록 세기
 	@Override
 	public int getCount() throws Exception {
 		
 		return session.selectOne(namespace+".getCount");
 	}
-	
-	
-	
+	// 낙찰 목록 세기
 	@Override
 	public int getPayCount() throws Exception {
 		
 		return session.selectOne(namespace+".getPayCount");
 	}
-
-
-
+    // 선택 삭제
 	@Override
 	public void delete(MyActionVO av) {
 		session.delete(namespace+".delete",av);
