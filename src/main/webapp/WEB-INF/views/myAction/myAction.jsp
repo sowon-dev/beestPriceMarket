@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="${pageContext.request.contextPath}/resources/BasketCSS/css/bootstrap.min.css" rel="stylesheet">
@@ -10,20 +11,20 @@
 .container{
 	width: 100% !important; 
 }
-.btn {
+.delete_btn {
     border-radius: 4px !important; 
     background: #DC3545 !important;
     color: #fff !important;
     padding: 7px 7px !important;
     display: inline-block !important;
     margin-top: 20px !important;
-    border: solid 2px #212529 !important; 
+    border: solid 2px #DC3545 !important; 
     transition: all 0.5s ease-in-out 0s !important;
 }
-.btn:hover,
-.btn:focus {
+.delete_btn:hover,
+.delete_btn:focus {
     background: transparent !important;
-    color: #212529 !important;
+    color: #DC3545 !important;
     text-decoration: none !important;
 }
 </style>
@@ -97,7 +98,7 @@
 																		<td>입찰성공</td>
 																	</c:when>
 																</c:choose>
-																<td>${actionlist.a_g_enddate }</td>
+																<td><fmt:formatDate value="${actionlist.a_g_enddate }" pattern="yyyy-MM-dd"/></td>
 															</tr>
 														</c:if>
 														</c:forEach>
@@ -105,7 +106,7 @@
 												</c:choose>
 										</tbody>
 									</table>
-								     <button type="button" class="btn">선택 삭제</button> 
+								     <button type="button" class="delete_btn">선택 삭제</button> 
 								</form>
 								<div class="text-center">
 									<ul class="pagination justify-content-center">
@@ -165,7 +166,7 @@ $("#allCheck").click(function(){
 </script>
  
  <script>
- $(".btn").click(function(){
+ $(".delete_btn").click(function(){
   var confirm_val = confirm("정말 삭제하시겠습니까?");
   
   if(confirm_val) {

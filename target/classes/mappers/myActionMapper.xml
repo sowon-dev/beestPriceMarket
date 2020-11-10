@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.bestpricemarket.mappers.myActionMapper">
-   <insert id="insertAction" >
+  <insert id="insertAction" >
    insert into myaction (ano,a_m_id,a_g_gno,a_g_actionstatus,a_g_enddate,paystatus,deliverystatus)
    values (#{ano},#{a_m_id},#{a_g_gno},#{a_g_actionstauts},#{a_g_enddate},#{paystatus},#{deliverystatus})
-   </insert>
+   </insert> 
    
    <!-- 입찰 -->
 	<select id="actionlist" resultType="com.bestpricemarket.domain.MyActionVO">
@@ -47,7 +47,7 @@
  <!-- 카트 삭제 -->
 <delete id="delete">
  delete from myaction
-     where ano = #{ano}
+ where ano= #{ano}
 </delete>
   
   </mapper>

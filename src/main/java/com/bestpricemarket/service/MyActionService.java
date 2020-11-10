@@ -1,8 +1,6 @@
 package com.bestpricemarket.service;
 
 import java.util.List;
-
-import com.bestpricemarket.domain.BasketVO;
 import com.bestpricemarket.domain.MyActionVO;
 
 public interface MyActionService {

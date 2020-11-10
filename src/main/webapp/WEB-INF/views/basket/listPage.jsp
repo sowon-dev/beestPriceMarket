@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="${pageContext.request.contextPath}/resources/BasketCSS/css/bootstrap.min.css" rel="stylesheet">
@@ -33,13 +34,13 @@
     padding: 7px 7px !important;
     display: inline-block !important;
     margin-top: 20px !important;
-    border: solid 2px #212529 !important; 
+    border: solid 2px #DC3545 !important; 
     transition: all 0.5s ease-in-out 0s !important;
 }
 .delete_btn:hover,
 .delete_btn:focus {
     background: transparent !important;
-    color: #212529 !important;
+    color: #DC3545 !important;
     text-decoration: none !important;
 }
 </style>
@@ -110,7 +111,7 @@
                                         </c:when>
                                         </c:choose>
                                         <td>${BasketVO.lowestprice }</td>
-                                        <td>${BasketVO.enddate }</td>
+                                        <td><fmt:formatDate value="${BasketVO.enddate }" pattern="yyyy-MM-dd"/></td>
                                     	<td><input type="button" class="delete_btn" id="delete_btn" name="delete_btn" value="삭제"></td>
                                     	<td><input type="button" class="btn" id="pay_btn" name="pay_btn" value="입찰" onclick="fun1(${BasketVO.l_g_gno})"> </td>
                                     </tr>
