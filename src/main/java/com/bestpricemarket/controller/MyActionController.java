@@ -14,12 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.bestpricemarket.domain.BasketPager;
-import com.bestpricemarket.domain.CSVO;
-import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.MyActionVO;
-
 import com.bestpricemarket.service.MyActionService;
 
 @Controller
