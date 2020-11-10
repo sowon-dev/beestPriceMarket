@@ -31,26 +31,43 @@ public class MyActionDAOImpl implements MyActionDAO {
 		 data.put("a_m_id", a_m_id); 
 		return session.selectList(namespace + ".actionlist",data);
 	}
+	
+	
+
 	@Override
-	public List<MyActionVO> paylist(int displayPost, int postNum,String a_m_id, Integer a_g_actionstatus) throws Exception {
-	 Map map = new HashMap();
-	 map.put("a_m_id", a_m_id);
-	 map.put("a_g_actionstatus", a_g_actionstatus);
-	 map.put("displayPost", displayPost);
-	 map.put("postNum", postNum);
-		
+	public List<MyActionVO> paylist(int displayPost, int postNum, String a_m_id) throws Exception {
+		Map map = new HashMap();
+		map.put("displayPost", displayPost);
+		map.put("postNum", postNum);
+		map.put("a_m_id", a_m_id);
 		return session.selectList(namespace+".paylist",map);
+		
 	}
+
+
+
 	@Override
 	public int getCount() throws Exception {
 		
 		return session.selectOne(namespace+".getCount");
 	}
 	
+	
+	
 	@Override
-	public void delete(String ano) {
-		session.delete(namespace+".delete",ano);
+	public int getPayCount() throws Exception {
+		
+		return session.selectOne(namespace+".getPayCount");
 	}
+
+
+
+	@Override
+	public void delete(MyActionVO av) {
+		session.delete(namespace+".delete",av);
+		
+	}
+	
 	
 	
 	
