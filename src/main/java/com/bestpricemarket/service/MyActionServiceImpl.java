@@ -27,11 +27,15 @@ public class MyActionServiceImpl implements MyActionService {
 		return adao.actionlist(displayPost,postNum,a_m_id);
 	}
 
+	
+
 	@Override
-	public List<MyActionVO> paylist(int displayPost,int postNum,String a_m_id, int a_g_actionstatus) throws Exception {
+	public List<MyActionVO> paylist(int displayPost, int postNum, String a_m_id) throws Exception {
 		
-		return adao.paylist(displayPost,postNum,a_m_id, a_g_actionstatus);
+		return adao.paylist(displayPost,postNum,a_m_id);
 	}
+
+
 
 	@Override
 	public int getCount() throws Exception {
@@ -39,12 +43,24 @@ public class MyActionServiceImpl implements MyActionService {
 		return adao.getCount();
 	}
 
+	
+	
+	
 	@Override
-	public void delete(String ano) {
-		adao.delete(ano);
+	public int getPayCount() throws Exception {
+		
+		return adao.getPayCount();
+	}
+
+
+
+	@Override
+	public void delete(MyActionVO av) {
+		adao.delete(av);
 		
 	}
 
+	
 	
 	
 	

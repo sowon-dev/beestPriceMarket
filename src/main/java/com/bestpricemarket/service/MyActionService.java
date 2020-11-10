@@ -9,9 +9,11 @@ public interface MyActionService {
 	
 	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception; 
     
-	public List<MyActionVO> paylist(int displayPost, int postNum,String a_m_id,int a_g_actionstatus) throws Exception;
+	public List<MyActionVO> paylist(int displayPost, int postNum,String a_m_id) throws Exception;
 
 	public int getCount() throws Exception;
 
-	public void delete(String ano);
+	public int getPayCount() throws Exception;
+	
+	public void delete(MyActionVO vo);
 }

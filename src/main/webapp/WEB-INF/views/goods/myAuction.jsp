@@ -7,10 +7,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+
+
 </head>
 <body>
  
-  <div class="tea">
+  
+  <jsp:include page="../inc/top.jsp"/>
+  
+   <div class="col-lg-3">
+        <h1 class="my-4">My Page</h1>
+        <div class="list-group">
+      	  <a href="/basket/listPage" class="list-group-item">좋아요</a>
+          <a href="/member/update" class="list-group-item">회원 수정</a>	
+          <a href="/member/delete" class="list-group-item">회원 탈퇴</a>
+          <a href="/member/changePw" class="list-group-item">비밀번호 수정</a>
+        </div>
+      </div>
+  <div class="tea"
+  style="margin-top: 50px; width: 1300px; margin-left: 500px; "
+  >
+  
+   
    <h1>내 경매 현황</h1><br>
   <table class="table" border="3">
   	<h3>내 낙찰 현황</h3>
@@ -117,9 +135,11 @@
   		</tr>
   	</tbody>
   </table>
-  </div>
+  
   	<div class="text-center">
-		<ul class="pagination">
+		<ul class="pagination"
+		 style="margin-bottom: 200px;"
+		>
 			<li><a href="#">1</a></li>
 			<li><a href="#">2</a></li>
 			<li><a href="#">3</a></li>
@@ -127,6 +147,7 @@
 			<li><a href="#">5</a></li>
 		</ul>
 	</div>
-	
+	</div>
+	<jsp:include page="../inc/bottom.jsp"/>
 </body>
 </html>

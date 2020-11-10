@@ -15,10 +15,14 @@ public interface MyActionDAO {
 	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception; 
 	
 	//낙찰 목록
-	public List<MyActionVO> paylist(int displayPost, int postNum,String a_m_id,Integer a_g_actionstatus) throws Exception;
+	public List<MyActionVO> paylist(int displayPost, int postNum,String a_m_id) throws Exception;
 	
-	//게시물 세기
+	//입찰목록 세기
 	public int getCount() throws Exception;
-
-	public void delete(String ano);
+    
+	//낙찰목록 세기
+	public int getPayCount() throws Exception;
+	
+	//게시물 삭제
+	public void delete(MyActionVO av);
 } 

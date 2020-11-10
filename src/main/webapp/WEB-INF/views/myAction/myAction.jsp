@@ -53,6 +53,9 @@
 									<table class="table">
 										<thead>
 											<tr>
+												<th class="border-0 text-uppercase small font-weight-bold">
+												 <input type="checkbox" name="allCheck" id="allCheck" /><label for="allCheck">모두 선택</label>
+												</th>
 												<th class="border-0 text-uppercase small font-weight-bold">상품명</th>
 												<th class="border-0 text-uppercase small font-weight-bold">상품사진</th>
 												<th class="border-0 text-uppercase small font-weight-bold">상품번호</th>
@@ -70,7 +73,9 @@
 													</c:when>
 													<c:otherwise>
 														<c:forEach items="${actionlist }" var="actionlist">
+															<c:if test="${actionlist.a_g_actionstatus != 2 }">
 															<tr>
+																<td><input type="checkbox" name="chBox" class="chBox" data-cartNum="${actionlist.ano}" /></td>
 																<td>${actionlist.gname}</td>
 																<td><img
 																	src="<c:url value="/imgUpload/${actionlist.f_name}"/>"
@@ -94,43 +99,41 @@
 																</c:choose>
 																<td>${actionlist.a_g_enddate }</td>
 															</tr>
+														</c:if>
 														</c:forEach>
 													</c:otherwise>
 												</c:choose>
 										</tbody>
 									</table>
+								     <button type="button" class="btn">선택 삭제</button> 
 								</form>
 								<div class="text-center">
 									<ul class="pagination justify-content-center">
-										<c:if test="${page.prev}">
-											<li class="page-item"><a class="page-link"
-												href="/myAction/actionlist?num=${page.startPageNum - 1}">이전</a>
-											</li>
-										</c:if>
-
-										<c:forEach begin="${page.startPageNum}"
-											end="${page.endPageNum}" var="num">
-
-
-											<c:if test="${select != num}">
-												<li class="page-item"><a class="page-link"
-													href="/myAction/actionlist?num=${num}">${num}</a></li>
-											</c:if>
-
-											<c:if test="${select == num}">
-												<li class="page-item"><b><a class="page-link"
-														href="/myAction/actionlist?num=${num}">${num}</a></b></li>
-											</c:if>
-
-
-										</c:forEach>
-
-										<c:if test="${page.next}">
-											<li class="page-item"><a class="page-link"
-												href="/myAction/actionlist?num=${page.endPageNum + 1}">다음</a>
-											</li>
-										</c:if>
-									</ul>
+							               
+							         <c:if test="${prev}">
+							         <li class="page-item">
+							          <a class="page-link" href="/myAction/actionlist?num=${startPageNum - 1}">Previous</a>
+							          </li>
+							         </c:if>
+							            <c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+							                          
+							                 <c:if test="${select!=num}">
+							                    <li class="page-item">
+							                     <a class="page-link" href="/myAction/actionlist?num=${num}">${num}</a>
+							                     </li>
+							                 </c:if>    
+							                 
+							                 <c:if test="${select==num}">
+							                 <a class="page-link" href="/myAction/actionlist?num=${num}">${num}</a>
+							                 </c:if>
+							                
+							         </c:forEach>
+							
+							         <c:if test="${next}">
+							             <li class="page-item"><a class="page-link" href="/myAction/actionlist?num=${endPageNum + 1}">Next</a>
+							          </li>
+							         </c:if>
+							         </ul>
 								</div>
 							</div>
 						</div>
@@ -139,32 +142,56 @@
 			</div>
 		</div>
 	</div>
-
+ <jsp:include page="../inc/bottom.jsp"/> 
 	<!-- 상품 카테고리 메뉴바 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>   
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-
-function fun1(l_g_gno){
-	var con = confirm("입찰하러 가시겠습니까?");
-	if(con){
-	location.href="/goods/detail?gno="+l_g_gno;
-	}
-}
-
-
-$(document).ready(function(){
-	var formObj = $("form[role='form']");
-               
-$("#delete_btn").on("click",function(){
-		var con = confirm("삭제 하시겠습니까?");
-		if(con){
-		alert("삭제 되었습니다");
-		formObj.attr("action","/basket/delete");
-		formObj.submit();
-		}
-		});	
+$("#allCheck").click(function(){
+ var chk = $("#allCheck").prop("checked");
+ if(chk) {
+  $(".chBox").prop("checked", true);
+ } else {
+  $(".chBox").prop("checked", false);
+ }
 });
 </script>
+
+<script>
+ $(".chBox").click(function(){
+  $("#allCheck").prop("checked", false);
+ });
+</script>
+ 
+ <script>
+ $(".btn").click(function(){
+  var confirm_val = confirm("정말 삭제하시겠습니까?");
+  
+  if(confirm_val) {
+   var checkArr = new Array();
+   
+   $("input[class='chBox']:checked").each(function(){
+    checkArr.push($(this).attr("data-cartNum"));
+   });
+    
+   $.ajax({
+    url : "/myAction/delete",
+    type : "post",
+    data : { chbox : checkArr },
+    success : function(result){
+     if(result == 1){   
+     location.href = "/myAction/actionlist";
+      }else{
+			alert("삭제 실패");
+          }
+     }
+   });
+  } 
+ });
+</script>
+
+
+               
+
 </body>
