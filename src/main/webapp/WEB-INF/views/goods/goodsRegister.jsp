@@ -202,6 +202,13 @@
                             <input class="input--style-6" type="date" name="endDate" style="height: 45px;" >
                          </div>
                     </div>
+                    
+                    <div class="form-row">
+                       <div class="name">입찰시작가</div>
+                         <div class="value">
+                            <input class="input--style-6" type="text" name="lowestprice"  style="height: 45px;">
+                         </div>
+                    </div>
                 
                       
                       <div class="card-footer">

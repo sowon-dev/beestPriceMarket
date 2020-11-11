@@ -42,13 +42,13 @@ $(document).ready(function(){
 	var gno = $('#gno').val();
 
 	$(document).on("click","#modify",function(){
-		location.href = '/goods/modify?gno='+gno;
+		location.href = '/goods/modify?gno=${goods.gno}&page=${cri.page}&pageSize=${cri.pageSize}';
 	});
 
 	$(document).on("click","#delete",function(){
 		var con = confirm("정말로 삭제하시겠습니까?");
 		if(con){
-			location.href = '/goods/delete?gno='+gno;
+			location.href = '/goods/delete?category=${goods.category}&gno=${goods.gno}&page=${cri.page}&pageSize=${cri.pageSize}';
 		}	
 	});
 });
@@ -82,33 +82,13 @@ function fn_fileDown(fno){
 					<!-- 슬라이드 추가 -->
 					<div id="carouselExampleIndicators" class="carousel slide my-4"
 						data-ride="carousel">
-						<!-- <ol class="carousel-indicators">
-							<li data-target="#carouselExampleIndicators" data-slide-to="0"
-								class="active"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						</ol> -->
 						<div class="carousel-inner" role="listbox">
 							<div class="carousel-item active">
 								<img src="<c:url value="/imgUpload/${file[0].f_name}"/>"
 									style="width: 600px; height: 400px; !important"
 									class="d-block img-fluid" />
 							</div>
-							<%-- <div class="carousel-item">
-								<img src="<c:url value="/imgUpload/${file[1].f_name}"/>"
-									style="width: 600px; height: 400px; !important"
-									class="d-block img-fluid" />
-							</div> --%>
 						</div>
-						<!-- <a class="carousel-control-prev" href="#carouselExampleIndicators"
-							role="button" data-slide="prev"> 
-						<span
-							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-							class="sr-only">Previous</span>
-						</a> <a class="carousel-control-next"
-							href="#carouselExampleIndicators" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a> -->
 					</div>
 					<c:forEach var="file" items="${file}">
 						<a href="#" onclick="fn_fileDown('${file.fno}'); return false;">
@@ -130,7 +110,18 @@ function fn_fileDown(fno){
 							</tr>
 							<tr>
 								<th>현재입찰가</th>
-								<td>원</td>
+							<%-- 	<c:choose>
+									<c:when test="${finalPrice == 0}">s --%>
+										<%-- <td>${goods.lowestprice}</td> --%>
+									<%-- </c:when> --%>
+									<%-- <c:otherwise> --%>
+										<td>${finalPrice}원</td>
+								<%-- 	</c:otherwise>
+								</c:choose>		 --%>					
+							</tr>
+							<tr>
+								<th>입찰시작가</th>
+								<td>${goods.lowestprice}원</td>
 							</tr>
 							<tr>
 								<th>경매기간</th>
@@ -142,7 +133,7 @@ function fn_fileDown(fno){
 							</tr>
 							<tr>
 								<th>입찰수</th>
-								<td><button>입찰기록</button></td>
+								<td></td>
 							</tr>
 							<tr>
 								<th>판매자</th>
@@ -156,9 +147,16 @@ function fn_fileDown(fno){
 							<form action="#" class="display-flex">
 								<div class="product-count">
 									<div id="wrap">
-									<c:if test="${id != null && memberList.block == 0}">
-										<a href="javascript:openModal('modal1');" class="round-black-btn">입찰하기</a>
-									</c:if>
+									 <c:if test="${id != null && memberList.block == 0}">
+											<c:choose>
+												<c:when test="${goods.actionstatus == 0}">
+													<h4>마감되었습니다.</h4>
+												</c:when>												
+												<c:otherwise>
+													<a href="javascript:openModal('modal1');" class="round-black-btn">입찰하기</a>
+												</c:otherwise>
+											</c:choose>
+										</c:if> 
 									</div>
 									<div id="modal"></div>
 									<div class="modal-con modal1" style="z-index: 9999">
@@ -186,9 +184,11 @@ function fn_fileDown(fno){
 											<input type="button" id="bidding" class="btn_bidding" value="입찰하기">
 										</div>
 									</div>
-
-									<a href="#" class="round-black-btn">관심상품</a> 
+									<c:if test="${id != null && memberList.block == 0}">								
+									 <!-- 좋아요/입찰/신고 -->     
+                                    <!--  <jsp:include page="../goods/likebtn.jsp"/> -->
 									<a href="${path}/goods/report?gno=${goods.gno}" class="round-black-btn">신고하기</a>
+									</c:if>
 								</div>
 							</form>
 						</c:if>

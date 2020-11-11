@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bestpricemarket.domain.AnotherGoodsVO;
 import com.bestpricemarket.domain.Criteria;
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
@@ -45,14 +47,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	}
 
-	// 상품목록 + 페이징처리
-	@Override
-	public List<GoodsVO> listGoods(Criteria cri) throws Exception {
-		System.out.println("DAO : 상품 목록");
-
-		return sqlSession.selectList(namespace + ".listGoods", cri);
-	}
-
 	// 카테고리별 상품 목록 + 페이징처리 ????????????????????????????????????????????
 	@Override
 	public List<GoodsVO> goodsCategoryList(String category, Criteria cri) throws Exception {
@@ -66,18 +60,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectList(namespace + ".category", map);
 	}
 
-	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리
-	@Override
-	public int pageCount() throws Exception {
-
-		System.out.println("DAO : pageCount() 호출");
-
-		int result = sqlSession.selectOne(namespace + ".pageCount");
-
-		System.out.println("DAO : 글 개수 -> " + result);
-
-		return result;
-	}
 	
 	// 카테고리별 글 개수 가져오는 처리
 	@Override
@@ -143,6 +125,14 @@ public class GoodsDAOImpl implements GoodsDAO {
 		System.out.println("DAO : 첨부파일 수정");
 		sqlSession.update(namespace + ".updateFile", map);
 	}
+	
+	// 첨부파일 수정
+	@Override
+	public void deleteFile(int fno) throws Exception {
+
+		sqlSession.delete(namespace+".deleteFile", fno);
+	}
+	
 
 	// 첨부파일 다운로드
 	@Override
@@ -153,15 +143,22 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	// 현재 입찰가
-	//@Override
-	//public int finalPrice(int gno) throws Exception {
+	@Override
+	public int finalPrice(int gno) throws Exception {
 
-		//int result = sqlSession.selectOne(namespace+".finalPrice",gno);
+		int result = sqlSession.selectOne(namespace+".getMaxPrice",gno);
 		
-		//return result;
+		return result;
 		
+	}
+	
+	//상품 테이블 현재 입찰가 업데이트
+	@Override
+	public void finalpriceupdate(int gno) throws Exception {
 		
-	//}
+		sqlSession.update(namespace+".finalpriceupdates");
+		
+	}
 	
 	
 
@@ -198,12 +195,114 @@ public class GoodsDAOImpl implements GoodsDAO {
 		int maxVO = sqlSession.selectOne(namespace + ".getMaxPrice", pm_g_gno);
 		return maxVO;
 	}
+	
+	@Override
+	public void upStatus(int gno) throws Exception {
+		sqlSession.update(namespace + ".updateStatus",gno);		
+	}
+
+	@Override
+	public void endStatus(int gno) throws Exception {
+		sqlSession.update(namespace + ".endStatus",gno);
+		
+	}
+
+	
 
 	@Override
 	public void insertBidding(PricemonitoringVO prvo) throws Exception {
 		sqlSession.selectOne(namespace + ".insertBidding", prvo);
 	}
 	// 입찰하기
+	/* 재원 끝 */
 	// *******************************************************************************************************************************
+	
+	// 태준 
+	// *******************************************************************************************************************************
+	// 판매자의 다른상품보기
+	@Override
+	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception {
+		
+		return sqlSession.selectList(namespace+".anothergoods",vo);
+	}
+	
+	
+	
+	
+	/* 태준 끝 */
+	// *******************************************************************************************************************************
+	
+	// 정현
+	// *******************************************************************************************************************************
+	
+	// 좋아요 입력 -> 제품상세페이지(likes 테이블)
+		  @Override
+		   public int like(LikesVO vo) throws Exception {
+			     
+			System.out.println("DAO : 좋아요 클릭(likes테이블)");
+			return sqlSession.insert(namespace + ".create", vo);
+			
+			
+		     }
+	  
+		// 좋아요 입력 -> 제품상세페이지(goods테이블의 like컬럼)
+		@Override
+		public void goodsLike(int gno) throws Exception {
+			
+			System.out.println("DAO : 좋아요 클릭(goods테이블 like컬럼)" + gno);
+			
+	      sqlSession.update(namespace + ".goods_update", gno);
+		}
+		  
+		  
+			  
+			  @Override
+			  public int countbyLike(String l_m_id){
+				  
+			  System.out.println("DAO : 좋아요 삭제(likes 테이블)" + l_m_id);
+
+			    int count = sqlSession.selectOne(namespace + ".countbyLike", l_m_id);
+			    
+			    
+			    return count;
+			  }
+
+
+	 @Override
+			  public LikesVO read(LikesVO vo) {
+				
+				System.out.println("DAO : 좋아요 조회");
+			    LikesVO read = sqlSession.selectOne(namespace + ".read", vo);
+			   
+			    return read;
+			  }  
+
+		      // 좋아요 삭제 (goods테이블 glike컬럼)
+			  @Override
+			  public void deletebyGoods(int gno) {
+				  
+				System.out.println("DAO : 좋아요 삭제(goods테이블 glike컬럼)"+gno);
+			    sqlSession.update(namespace + ".deletebyGoods", gno);
+			  }
+
+			// 좋아요 삭제 (likes테이블) 
+			@Override
+			public void deletebyLikes(String l_m_id, int l_g_gno) {
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("l_m_id", l_m_id);
+				map.put("l_g_gno", l_g_gno);
+				System.out.println("DAO : 좋아요 삭제(likes 테이블)의 파라미터 두개는 " + l_m_id + l_g_gno+" map은? "+map);
+				sqlSession.delete(namespace + ".deletebyLikes", map);  
+			}
+
+	
+	
+	
+	
+	
+	/* 정현 끝 */
+	// *******************************************************************************************************************************
+
 
 }

@@ -5,8 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.bestpricemarket.domain.AnotherGoodsVO;
 import com.bestpricemarket.domain.Criteria;
 import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
@@ -21,15 +23,9 @@ public interface GoodsDAO {
 	// SetGno
 	public void setGno(int gno) throws Exception;
 
-	// 상품목록 + 페이징처리
-	public List<GoodsVO> listGoods(Criteria cri) throws Exception;
-
 	// 카테고리별 상품목록 + 페이징처리
 	public List<GoodsVO> goodsCategoryList(String category, Criteria cri) throws Exception;
 
-	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리
-	public int pageCount() throws Exception;
-	
 	// 카테고리별 상품 개수 가지고 오는 처리
 	public int CategoryCount(String category) throws Exception;
 
@@ -53,11 +49,17 @@ public interface GoodsDAO {
 	// 첨부파일 수정
 	public void updateFile(Map<String, Object> map) throws Exception;
 
+	// 첨부파일 삭제 
+	public void deleteFile(int fno) throws Exception;
+	
 	// 첨부파일 다운로드
 	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
 
 	// 현재 입찰가
-	//public int finalPrice(int gno) throws Exception;
+	public int finalPrice(int gno) throws Exception;
+	
+	// 상품 테이블 현재 입찰가 업데이트
+	public void finalpriceupdate(int gno) throws Exception;
 
 	// 지은
 	// *********************************************************************************************************************************
@@ -78,10 +80,61 @@ public interface GoodsDAO {
 
 	// 입찰정보(가장큰 입찰가) 가져오기
 	public int getMaxPrice(int pm_g_gno) throws Exception;
+	
+	// 입찰중일때 actionstatus 1 초기화
+	public void upStatus(int gno) throws Exception;
+	
+	// 마감시간 후 actionstatus 0 초기화
+	public void endStatus(int gno) throws Exception;
 
 	// 입찰하기
 	public void insertBidding(PricemonitoringVO prvo) throws Exception;
 	// 입찰하기
+	/* 재원 끝 */
 	// *******************************************************************************************************************************
+	
+	// 태준 
+	// *******************************************************************************************************************************
+	// 판매자의 다른상품보기
+	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception;
+	
+	
+	
+	
+	/* 태준 끝 */
+	// *******************************************************************************************************************************
+	
+	// 정현
+	// *******************************************************************************************************************************
+	
+	// 좋아요 입력 -> 제품상세페이지(likes 테이블)
+			public int like(LikesVO vo) throws Exception; 
+			
+			// 좋아요 입력 -> 제품상세페이지(goods테이블의 like컬럼)
+			public void goodsLike(int gno) throws Exception;
+			
+			
+			
+			// 상품의 좋아요 번호가 있는지 카운트 
+			  public int countbyLike(String l_m_id);
+			  
+			 
+			  
+			  
+			  /* 조회 */
+			  public LikesVO read(LikesVO vo);
+			  
+			  // 상품의 좋아요 삭제 (goods테이블)
+			  public void deletebyGoods(int gno);
+			  
+			  public void deletebyLikes(String l_m_id, int l_g_gno);
+	
+	
+	
+	
+	
+	/* 정현 끝 */
+	// *******************************************************************************************************************************
+
 
 }

@@ -14,6 +14,19 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!--  -->
+<style type="text/css">
+.list-group-item:active{
+                background-color: #e9e9e9;
+            }
+.my{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}            
+</style>
+
 </head>
 <body>
 
@@ -25,15 +38,14 @@
    <div class="container">
 
     <div class="row">
-    
-    
 	<!-- 상품 카테고리 메뉴바-->
+	 
       <div class="col-lg-3">
+       <h2 class="my">${category}</h2>
         <c:if test="${id != null}">
         <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
       </c:if>
-      
-     
+    	
         <div class="list-group">
           <a href="/goods/list?category=컴퓨터" class="list-group-item">컴퓨터</a>
           <a href="/goods/list?category=디지털" class="list-group-item">디지털</a>

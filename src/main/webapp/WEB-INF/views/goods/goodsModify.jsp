@@ -215,7 +215,7 @@
                               </div>
                           <!-- <div class="label--desc">상품 이미지를 업로드 해주세요. 파일 크기 최대 50M</div> -->
                          
-                          	<button  type="button" class="fileAdd" id="file" onclick="fn_addFile()">파일추가</button>
+                         	<button  type="button" class="fileAdd" id="file" onclick="fn_addFile()">파일추가</button> 
                           	
                        </div>  
                     </div>  
@@ -240,6 +240,12 @@
                        <div class="name">마감 일자</div>
                          <div class="value">
                             <input class="input--style-6" type="date" name="endDate" value="${goodsVO.endDate}" style="height: 45px;">
+                         </div>
+                    </div>
+                    <div class="form-row">
+                       <div class="name">입찰시작가</div>
+                         <div class="value">
+                            <input class="input--style-6" type="text" name="lowestprice" value="${goodsVO.lowestprice}" style="height: 45px;">
                          </div>
                     </div>
                   
