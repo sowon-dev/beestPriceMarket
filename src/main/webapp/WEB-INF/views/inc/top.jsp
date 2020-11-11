@@ -17,7 +17,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/main">베프마켓</a>
+      <a class="navbar-brand" href="/main"><img src="../resources/logoonly.PNG" width="35px"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +27,7 @@
             <a class="nav-link" href="/main">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/goods/myauction">내경매</a>
+            <a class="nav-link" href="/myAction/actionlist">내경매</a>
           </li>
           <%
           String id = (String) session.getAttribute("id");
@@ -45,7 +45,7 @@
           </li>
 		  <%} %>          
           <li class="nav-item">
-            <a class="nav-link" href="/CS/CSFAQ">고객센터</a>
+            <a class="nav-link" href="/CS/CSBoardListPage?num=1">고객센터</a>
           </li>
         </ul>
       </div>
