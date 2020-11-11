@@ -67,7 +67,6 @@ public class FileUtils {
 				list.add(listMap);
 			}
 			
-			
 		}
 		return list;
 	}
