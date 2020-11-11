@@ -35,10 +35,8 @@
 
             <h1 class="my-4">Shop Name</h1>
             <div class="list-group">
-               <a href="/CS/CSFAQ" class="list-group-item">FAQ</a>
                <a href="/CS/register" class="list-group-item">1:1 문의</a>
                <a href="/CS/CSBoardListPage?num=1" class="list-group-item">나의 문의 보기</a>
-
             </div>
          </div>
          <!-- 상품 카테고리 메뉴바 -->

@@ -4,33 +4,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <head>
 <!-- 본문 CSS -->
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Include the above in your HEAD tag -->
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-<link
-	href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsDetail.css"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsDetail.css" rel="stylesheet">
 <!-- 본문 JS  -->
-<script
-	src='${pageContext.request.contextPath}/resources/goods/goods_js/goodsDetail.js'></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+<script src='${pageContext.request.contextPath}/resources/goods/goods_js/goodsDetail.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 	crossorigin="anonymous"></script>
 <script
@@ -39,26 +25,16 @@
 	crossorigin="anonymous"></script>
 <!-- 본문 JS  -->
 <!-- 버튼 CSS -->
-<link
-	href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsBtn.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/resources/goods/goods_css/bid_css.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsBtn.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/bid_css.css" rel="stylesheet">
 <!-- 버튼 CSS -->
 <!-- 상세페이지 섬네일 슬라이드 -->
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <!-- Link Swiper's CSS -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsDetailSlide.css">
-<script
-	src='${pageContext.request.contextPath}/resources/goods/goods_js/goodsDetailSlide.js'></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsDetailSlide.css">
+<script src='${pageContext.request.contextPath}/resources/goods/goods_js/goodsDetailSlide.js'></script>
 <!-- 상세페이지 섬네일 슬라이드 -->
-
-
 
 <script type="text/javascript">
 // 수정/삭제 이동  

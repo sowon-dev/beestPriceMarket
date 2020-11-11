@@ -89,7 +89,7 @@
 									<button type="submit" onclick="return register();" class="btn btn-secondary btn-block" style="font-size: 20px">문의하기</button>
 								</div>
 								<div class="col-lg-6">
-									<a class="cancle" href="/CS/CSFAQ"><button type="button" class="btn btn-danger btn-block" style="font-size: 20px">취소</button></a>
+									<a class="cancle" href="/CS/CSBoardListPage?num=1"><button type="button" class="btn btn-danger btn-block" style="font-size: 20px">취소</button></a>
 								</div>
 							</div><br>
 <!-- 		                   	<button type="submit" class="btn btn-secondary btn-block" style="font-size: 20px">작성하기</button> -->
