@@ -5,50 +5,35 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+<!-- Required meta tags-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Colorlib Templates">
+<meta name="author" content="Colorlib">
+<meta name="keywords" content="Colorlib Templates">
 
-    <!-- Title Page-->
-    <title>베프마켓 - 친구같은 경매플랫폼</title>
+<!-- Title Page-->
+<title>베프마켓 - 친구같은 경매플랫폼</title>
 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
-    <!-- Main CSS-->
-    <link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsRegister.css" rel="stylesheet" media="all">
-    <link href="${pageContext.request.contextPath}/resources/goods/goods_css/goods_optionbar.css" rel="stylesheet">
+<!-- Main CSS-->
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsRegister.css" rel="stylesheet" media="all">
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/goods_optionbar.css" rel="stylesheet">
     
-      <!-- Jquery JS-->
-  <!--   <script src="vendor/jquery/jquery.min.js"></script> -->
-    <script src='${pageContext.request.contextPath}/resources/goods/goods_js/jquery.min.js'></script>
+<!-- Jquery JS-->
+<script src='${pageContext.request.contextPath}/resources/goods/goods_js/jquery.min.js'></script>
 
-    <!-- Main JS-->
-    <script src='${pageContext.request.contextPath}/resources/goods/goods_js/global.js'></script>
-    <!-- <script src="js/global.js"></script> -->
+<!-- Main JS-->
+<script src='${pageContext.request.contextPath}/resources/goods/goods_js/global.js'></script>
+<!-- <script src="js/global.js"></script> -->
     
-    <!-- 버튼 -->
-      <style type="text/css">  
-.btn {
-    border-radius: 4px; 
-    background: #212529;
-    color: #fff;
-    padding: 7px 45px;
-    display: inline-block;
-    margin-top: 20px;
-    border: solid 2px #212529; 
-    transition: all 0.5s ease-in-out 0s;
-}
-.btn:hover,
-.btn:focus {
-    background: transparent;
-    color: #212529;
-    text-decoration: none;
-}
-
+<!-- 버튼 CSS -->
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsBtn.css" rel="stylesheet">
+<!-- 버튼 CSS -->
+    
+<style type="text/css">  
 #file{
 	 border-radius: 4px; 
     background: #212529;
@@ -59,28 +44,19 @@
     border: solid 2px #212529; 
     transition: all 0.5s ease-in-out 0s;
 }
-
 </style>
-    <!-- 버튼 -->
     
-    
-    <!-- 섬머노트 에디터 -->
-    <!-- include libraries(jQuery, bootstrap) -->
-
-	 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 	
-	
-	<!-- ck에디터 -->
-	<script src="/resources/ckeditor/ckeditor.js"></script>
-	<!-- ck에디터 -->
-
+<!-- ck에디터 -->
+<script src="/resources/ckeditor/ckeditor.js"></script>
+<!-- ck에디터 -->
     
-    <!-- 유효성 체크 -->
-	<script type="text/javascript">
-
+<script type="text/javascript">
+	// 유효성 체크
 	function goods_modify(){
 
 		var category = document.fr.category.value;
@@ -123,7 +99,7 @@
 		}
 	 
 	}
-
+	// 유효성 체크
 
 	// category
 	$(function(){
@@ -142,10 +118,7 @@
     	 $("#fileNameDel").attr("value", fileNameArry);
     }
 	// // 파일 추가 삭제 동작
- 	
-	</script>    
-    <!-- 유효성 체크 -->
- 
+</script>    
     
 </head>
 <body>
@@ -161,6 +134,8 @@
 
                  <form action ="/goods/modify" method="post" enctype="multipart/form-data" name="fr" role="form">
                     <input type="hidden" name="gno"  value="${goodsVO.gno}">
+                    <input type="hidden" name="page" value="${cri.page}">
+                    <input type="hidden" name="pageSize" value="${cri.pageSize}">
                     <input type="hidden" id="fileNoDel" name="fileNoDel[]" value=""> 
 					<input type="hidden" id="fileNameDel" name="fileNameDel[]" value=""> 
                   <div class="form-row">
@@ -168,16 +143,16 @@
                      <div class="name">물품분류</div>
                         <select class="bo_w_select" name="category" id="category">
                       		<option value="" selected>카테고리 선택</option>
-                      		<option value="computer">컴퓨터</option>
-                      		<option value="digital">디지털</option>
-                      		<option value="appliances">생활가전</option>
-                      		<option value="stationery">생활문구</option>
-                      		<option value="furniture">생활가구</option>
-                      		<option value="sports">스포츠</option>
-                      		<option value="fashion">패션의류</option>
-                      		<option value="miscellaneousitems">패션잡화</option>
-                      		<option value="cosmetics">화장품</option>
-                      		<option value="jewelry">쥬얼리</option>
+                      		<option value="컴퓨터">컴퓨터</option>
+                      		<option value="디지털">디지털</option>
+                      		<option value="생활가전">생활가전</option>
+                      		<option value="생활문구">생활문구</option>
+                      		<option value="생활가구">생활가구</option>
+                      		<option value="스포츠">스포츠</option>
+                      		<option value="패션의류">패션의류</option>
+                      		<option value="패션잡화">패션잡화</option>
+                      		<option value="화장품">화장품</option>
+                      		<option value="쥬얼리">쥬얼리</option>
                       	</select>
                     </div>
                     
@@ -246,12 +221,7 @@
                     </div>  
                 <!-- 섬네일 이미지업로드 -->
                 
-                <script type="text/javascript">
-
-              
-              
-
-
+          <script type="text/javascript">
         	// 파일 추가
 			$(document).ready(function(){
 			  var fileIndex = 1;
@@ -263,32 +233,20 @@
 				$(document).on("click","#fileDel", function(){
 					$(this).parent().remove();
 				});
-
-				
 			});	
         	// 파일추가
-                </script>
+         </script>
                     <div class="form-row">
                        <div class="name">마감 일자</div>
                          <div class="value">
                             <input class="input--style-6" type="date" name="endDate" value="${goodsVO.endDate}" style="height: 45px;">
                          </div>
-                         <!--  <script>
-                            document.getElementById('endDate').value= new Date().toISOString().slice(0, -1);
-                         </script>  -->
                     </div>
-                    <div class="form-row">
-                        <div class="name">경매 시작가</div>
-                          <div class="value">
-                             <input class="input--style-6" type="text" name="lowestprice" id="input" value="${goodsVO.lowestprice}">
-                            
-                           </div>
-                      </div>
+                  
                       </form>
                       <div class="card-footer">
-                      	<input type="submit" value="목록으로" id="list" class="btn" style="width: 100px; !important">
-                    	<input type="submit" value="수정하기" id="modify" onclick="return goods_modify()" class="btn" style="width: 100px; margin-left: 870px; !important">
-                    	<input type="button" value="취소하기" id="back" class="btn" style="width: 100px; !important" onclick="cancel()">
+                    	<input type="submit" value="수정하기" id="modify" onclick="return goods_modify()" class="modify-btn" style="width: 100px; margin-left: 870px; !important">
+                    	<input type="button" value="취소하기" id="back" class="delete-btn" style="width: 100px; !important" onclick="cancel()">
                       </div>
                 </div>
             </div>
@@ -307,11 +265,7 @@
 			formObj.submit();
 		});
  
- 		// 목록으로 
- 		$("#list").on("click", function(){
-			location.href="/goods/list";
- 	 		
- 	 	});
+ 	
  });    
 
  	function cancel(){
@@ -332,3 +286,4 @@
 
 </html>
 <!-- end document-->
+

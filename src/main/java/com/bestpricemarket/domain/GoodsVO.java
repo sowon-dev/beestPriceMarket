@@ -17,8 +17,25 @@ public class GoodsVO {
 	private Date regDate;
 	private Date endDate;
 	private int actionstatus;
+	private String thumbnail;
 	
-	
+	public GoodsVO() {}
+	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
+			int finalprice, int like, Date regDate, Date endDate, int actionstatus, String thumbnail) {
+		super();
+		this.gno = gno;
+		this.g_m_id = g_m_id;
+		this.category = category;
+		this.gname = gname;
+		this.lowestprice = lowestprice;
+		this.content = content;
+		this.finalprice = finalprice;
+		this.like = like;
+		this.regDate = regDate;
+		this.endDate = endDate;
+		this.actionstatus = actionstatus;
+		this.thumbnail = thumbnail;
+	}
 	public int getGno() {
 		return gno;
 	}
@@ -85,22 +102,11 @@ public class GoodsVO {
 	public void setActionstatus(int actionstatus) {
 		this.actionstatus = actionstatus;
 	}
-	
-	public GoodsVO() {}
-	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
-			int finalprice, int like, Date regDate, Date endDate, int actionstatus) {
-		super();
-		this.gno = gno;
-		this.g_m_id = g_m_id;
-		this.category = category;
-		this.gname = gname;
-		this.lowestprice = lowestprice;
-		this.content = content;
-		this.finalprice = finalprice;
-		this.like = like;
-		this.regDate = regDate;
-		this.endDate = endDate;
-		this.actionstatus = actionstatus;
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 	
 	
@@ -108,15 +114,14 @@ public class GoodsVO {
 	public String toString() {
 		return "GoodsVO [gno=" + gno + ", g_m_id=" + g_m_id + ", category=" + category + ", gname=" + gname
 				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like="
-				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus + "]";
+				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus
+				+ ", thumbnail=" + thumbnail + "]";
 	}
-
 	
 	
 	
 	
 	
-
 	
 	
 	
