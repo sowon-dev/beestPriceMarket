@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <% String id = (String) session.getAttribute("id"); %> 
 
+
 <!-- 좋아요버튼  -->
 <span>
     <input type="checkbox" id="checkbox" />
