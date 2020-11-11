@@ -16,44 +16,37 @@
  <jsp:include page="./inc/top.jsp"/>
 <!-- 헤더 -->
 
-  <!-- Page Content -->
-  <div class="container">
-
-    <div class="row">
+<!-- Page Content -->
+<div class="container">
+	<div class="row">
 
 	<!-- 상품 카테고리 메뉴바 -->
-      <div class="col-lg-3">
-      <c:if test="${memVO.id != null}">
-        <h2 class="my-4">${memVO.username}님<br>환영합니다😀</h2>
-        <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
-      </c:if>
-      
-      <c:if test="${memVO.id == null}">
-        <h2 class="my-4">카테고리</h2>
-      </c:if>
+	<div class="col-lg-3">
+		<c:if test="${memVO.id != null}">
+		  <h2 class="my-4">${memVO.username}님<br>환영합니다😀</h2>
+		  <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+		</c:if>
+	
+		<c:if test="${memVO.id == null}">
+		  <h2 class="my-4">카테고리</h2>
+		</c:if>
       
         <div class="list-group">
-          <a href="/goods/list" class="list-group-item">노트북</a>
-          <a href="#" class="list-group-item">데스크탑</a>
-          <a href="#" class="list-group-item">모니터</a>
-          <a href="#" class="list-group-item">PC부품</a>
-          <a href="#" class="list-group-item">디지털</a>
-          <a href="#" class="list-group-item">생활가전</a>
-          <a href="#" class="list-group-item">생활문구</a>
-          <a href="#" class="list-group-item">생활가구</a>
-          <a href="#" class="list-group-item">스포츠</a>
-          <a href="#" class="list-group-item">자동차</a>
-          <a href="#" class="list-group-item">패션의류</a>
-          <a href="#" class="list-group-item">패션잡화</a>
-          <a href="#" class="list-group-item">화장품</a>
-          <a href="#" class="list-group-item">쥬얼리</a>
+          <a href="/goods/list?category=컴퓨터" class="list-group-item">컴퓨터</a>
+          <a href="/goods/list?category=디지털" class="list-group-item">디지털</a>
+          <a href="/goods/list?category=생활가전" class="list-group-item">생활가전</a>
+          <a href="/goods/list?category=생활문구" class="list-group-item">생활문구</a>
+          <a href="/goods/list?category=생활가구" class="list-group-item">생활가구</a>
+          <a href="/goods/list?category=스포츠" class="list-group-item">스포츠</a>
+          <a href="/goods/list?category=패션의류" class="list-group-item">패션의류</a>
+          <a href="/goods/list?category=패션잡화" class="list-group-item">패션잡화</a>
+          <a href="/goods/list?category=화장품" class="list-group-item">화장품</a>
+          <a href="/goods/list?category=쥬얼리" class="list-group-item">쥬얼리</a> 
         </div>
-      </div> 
-    <!-- 상품 카테고리 메뉴바 -->
+	</div> <!-- 상품 카테고리 메뉴바 끝-->
 
-      <div class="col-lg-9">
-
-        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+	<div class="col-lg-9">
+		<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -80,115 +73,58 @@
           </a>
         </div>
 
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="/goods/detail">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="/goods/detail">Item Two</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="/goods/detail">Item Three</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="/goods/detail">Item Four</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="/goods/detail"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="/goods/detail">Item Five</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Six</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
+        <!-- 상품 카드 목록(Category) -->
+		<div class="row"> 
+			<c:forEach var="category" items="${goodsList}" >
+				<div class="col-lg-4 col-md-6 mb-4">
+				<div class="card h-100">
+				<a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
+					<img src="<c:url value="/imgUpload/${category.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
+				</a>
+				<div class="card-body">
+			  		<h4 class="card-title">
+			    		<a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${category.gname}</a>
+					</h4>
+					
+					<h6>현재가(50000)</h6>
+					<h6>입찰자 0</h6>
+					<h6>${category.endDate}</h6>
+			    </div>
+			  	</div>
+				</div>
+			</c:forEach>
         </div>
-        <!-- /.row -->
+     	<!-- 상품 카드 목록(Category) 끝-->
+        
+        <!-- 페이징 하단부 처리(카테고리목록) -->
+		<ul class="pagination justify-content-center">
+		 	<!-- 이전 -->
+			<c:if test="${pm.prev}">
+   				<li class="page-item">
+   					<a class="page-link" href="/main?page=${pm.startPage-1}">&laquo;</a>
+   				</li>
+			</c:if>	
+   			
+			<!-- 페이지 번호 -->	
+   		  	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="idx">
+				<li class="page-item" ${pm.cri.page == idx? 'class=active':''}>
+					<a class="page-link" href="/main?page=${idx}">${idx}</a>
+				</li>		
+		  	</c:forEach>     
+   			
+   		 	<!-- 다음 -->
+   		  	<c:if test="${pm.next && pm.endPage > 0}">	
+   				<li class="page-item">
+   			  		<a class="page-link" href="/main?page=${pm.endPage+1}">&raquo;</a>
+   				</li>
+   		  	</c:if>	
+   		  	
+		</ul>
+        <!-- 페이징 하단부 처리(카테고리목록) 끝 -->
 
-      </div>
-      <!-- /.col-lg-9 -->
-
-    </div>
-    <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
+      </div><!-- /.col-lg-9 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 
 <!-- 푸터 -->
 <jsp:include page="./inc/bottom.jsp"/>
