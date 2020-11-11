@@ -32,7 +32,7 @@
 <body>
 <jsp:include page="../inc/top.jsp"/> 
     <!-- Page Content -->
-	<div class="container">
+	<div class="container" style="margin-bottom: 500px;">
 		<div class="row">
 
 			<div class="col-lg-3">
@@ -76,7 +76,14 @@
 														<c:forEach items="${actionlist }" var="actionlist">
 															<c:if test="${actionlist.a_g_actionstatus != 2 }">
 															<tr>
+																<c:choose>
+																<c:when test="${actionlist.a_g_actionstatus == 0 }">
+																<td><input type="checkbox" name="chBox" class="chBox" data-cartNum="${actionlist.ano}" disabled/></td>
+																</c:when>
+																<c:otherwise>
 																<td><input type="checkbox" name="chBox" class="chBox" data-cartNum="${actionlist.ano}" /></td>
+																</c:otherwise>
+																</c:choose>
 																<td>${actionlist.gname}</td>
 																<td><img
 																	src="<c:url value="/imgUpload/${actionlist.f_name}"/>"

@@ -48,7 +48,7 @@
 <body>
 <jsp:include page="../inc/top.jsp"/> 
     <!-- Page Content -->
-  <div class="container">
+  <div class="container" style="margin-bottom: 500px;">
     <div class="row">
     
       <div class="col-lg-3">
@@ -156,17 +156,13 @@
 									</ul>
 									
 									</div>
-                       
-                       
-                        
-                    </div>
-                </div>
-            </div> 
-      </div>   
-      </div>  
-    
-    
-      </div>
+					                    </div>
+					                </div>
+					            </div> 
+					         </div>   
+					        </div>  
+					      </div>
+<jsp:include page="../inc/bottom.jsp"/> 
 <!-- 상품 카테고리 메뉴바 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>   
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

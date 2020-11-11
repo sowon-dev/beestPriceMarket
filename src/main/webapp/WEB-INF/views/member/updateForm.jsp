@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -71,13 +71,13 @@
 	    <legend> 회원정보 수정 </legend>
 	    <form action="/member/update" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8" name="frJoin">
 	     <span class="front" style="margin-right: 34px;">아이디</span>  <input type="text" name="id" class="form-control" value="${memberVO.id }" style="width:226px;display:inline; text-align: center;" readonly><br>
-	     <span class="front" style="margin-right: 17px; ">비밀번호</span>  <input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호(영문,숫자,특수문자혼용)" name="pw" style="width:226px;display:inline;" required>  <br>
+	     <span class="front" style="margin-right: 17px; ">비밀번호</span>  <input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호" name="pw" style="width:226px;display:inline;" required>  <br>
 	     <span class="front" style="margin-right: 50px; "> 이름 </span><input type="text" name="username" class="form-control" value="${memberVO.username }" style="width:226px;display:inline; "> <br>
 	     <span class="front" style="margin-right: 34px;" >이메일</span> <input type="text" name="email" class="form-control"  value="${memberVO.email }" style="width:226px;display:inline; "> <br>
 	     <span class="front"  style="margin-right: 38px;">연락처</span><input type="text" name="phone"  class="form-control" value="${memberVO.phone}" style="width:226px;display:inline; "><br>
 	     <span class="front" style="margin-right: 45px; ">주소: </span><input type="text" name="addr1" class="form-control" value="${memberVO.addr1}" style="width:226px;display:inline; "><br>
 	     <span class="front" style="margin-right: 40px; ">주소2:</span><input type="text" name="addr2" class="form-control" value="${memberVO.addr2}" style="width:226px;display:inline; "><br>
-	     <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="${memberVO.reg_date}" style="width:226px;display:inline; "readonly><br>
+	     <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="<fmt:formatDate value="${memberVO.reg_date }" pattern="yyyy-MM-dd"/>" style="width:226px;display:inline; "readonly><br>
 	     <input class="btn" type="submit" value="회원수정" name="commit" id="submitBtn" >          
 	    </form>  
 	  	</fieldset>

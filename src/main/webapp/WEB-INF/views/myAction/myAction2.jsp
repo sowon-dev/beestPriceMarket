@@ -33,7 +33,7 @@
 <body>
 <jsp:include page="../inc/top.jsp"/> 
     <!-- Page Content -->
-	<div class="container">
+	<div class="container" style="margin-bottom: 500px;">
 		<div class="row">
 
 			<div class="col-lg-3">
@@ -123,6 +123,12 @@
 						                                          <td>배송성공</td>
 						                                        </c:when>
 						                                   </c:choose>
+															<c:choose>
+															<c:when test="${paylist.paystatus != 1 }">
+															<td>
+															<input type="button" class="btn" id="pay_btn" name="pay_btn" value="결제하기" onclick="fun1(${paylist.a_g_gno})"> </td>
+															</c:when>
+															</c:choose>
 															</tr>
 														</c:forEach>
 													</c:otherwise>
@@ -165,9 +171,19 @@
 			</div>
 		</div>
 	</div>
-
+<jsp:include page="../inc/bottom.jsp"/> 
 	<!-- 상품 카테고리 메뉴바 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>   
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+function fun1(a_g_gno){
+	var con = confirm("입찰하러 가시겠습니까?");
+	if(con){
+	location.href="/pay/payment?gno="+a_g_gno;
+	}
+}
+</script>
+
 </body>
