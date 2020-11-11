@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String id = (String) session.getAttribute("id"); %> 
 
 <!-- 좋아요버튼  -->
-<div>
+<span>
     <input type="checkbox" id="checkbox" />
     <label for="checkbox">
       <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
@@ -47,4 +48,49 @@
         </g>
       </svg>
     </label>
-</div>
+</span>
+
+<script type="text/javascript">
+// 좋아요 버튼 처리
+$(document).ready(function(){
+	let gno = ${param.gno};
+	$('#Group').on('click',function(){		
+	let likeId = '<%=id %>';
+		    
+	  $.ajax({
+	  type:'POST',
+	  url: "/goods/likes", 
+	  data: {
+	   	   gno: gno,
+		   l_g_gno : gno,
+		   l_m_id : likeId,
+		   l_m_actionstatus: 0,
+	      },
+		  success: function(data){
+				if(data == "likeClick" ){  
+					alert("좋아요! 내경매에서 확인할 수 있습니다.");
+				} else if(data == "cancel"){ 
+					alert("좋아요가 취소되었습니다.");
+				}
+			},  	  
+		  error:function(error){
+					alert("예기치 못한 에러가 발생했습니다. 재접속해주세요")
+			}, 
+		});//end of ajax
+	});	
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
