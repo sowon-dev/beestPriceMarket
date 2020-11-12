@@ -30,7 +30,7 @@
 	</colgroup>
 	<thead>
 	<tr>
-		<th>순번</th>
+		<th></th>
 		<th>아이디</th>
 		<th>문의내용</th>
 		<th>작성일</th>
@@ -40,9 +40,8 @@
 	<tbody id="ppap">
 	<c:forEach items="${cmtList}" var="cmt">
 		<tr id="tr_${cmt.c_num}">
-			<td><input id="td_c_num_${cmt.c_num}" class="collapseInputCss" value="${cmt.c_num}" readonly></td>
-			<td>${fn:substring(cmt.c_m_id,0, 4)}*****
-			</td>
+			<td><input type="hidden" id="td_c_num_${cmt.c_num}" class="collapseInputCss" value="" readonly></td>
+			<td>${fn:substring(cmt.c_m_id,0, 4)}*****</td>
 			<td><textarea class="collapseTextareaCss" id="td_c_content_${cmt.c_num}" rows="3" readonly>${cmt.c_content}</textarea></td>
 			<td><fmt:formatDate value="${cmt.c_regdate}" pattern="yyyy-MM-dd" /></td>
 			<td>
@@ -134,7 +133,7 @@ function rereplyParam(e, param){
 	  if(data){
 		alert("댓글이 성공적으로 작성되었습니다.");
 		$("#c_content").val("");
-		$('#tr_'+ck_c_num).after("<tr><td>"+data+"</td><td>"+info.c_m_id+"</td><td>┗답글:"+info.c_content+"</td><td>"+today+"</td></tr>");
+		$('#tr_'+ck_c_num).after("<tr><td> </td><td>"+info.c_m_id+"</td><td>┗답글:"+info.c_content+"</td><td>"+today+"</td></tr>");
       }else{
 		alert("작성이 실패했습니다. 다시 시도하세요.")
 	  }
@@ -175,7 +174,7 @@ $("#cmtBtn").click(function(){
 	  if(data){
 		alert("문의글이 성공적으로 등록되었습니다.");
 		$("#c_content").val("");
-		$('#ppap').after("<tr><td>"+data+"</td><td>"+info.c_m_id+"</td><td>"+info.c_content+"</td><td>"+today+"</td></tr>");
+		$('#ppap').after("<tr><td> </td><td>"+info.c_m_id+"</td><td>"+info.c_content+"</td><td>"+today+"</td></tr>");
       }else{
 		alert("문의글 등록에 실패했습니다. 다시 시도하세요.")
 	  }

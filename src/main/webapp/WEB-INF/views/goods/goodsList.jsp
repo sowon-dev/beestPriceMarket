@@ -3,22 +3,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html lang="en">
 <head>
-<title>베프마켓 - 친구같은 경매플랫폼</title>
-
 <!-- 버튼 CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/button-reg_goods.css" rel="stylesheet">
 <!-- 버튼 CSS -->
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!--  -->
 <style type="text/css">
 .list-group-item:active{
-                background-color: #e9e9e9;
-            }
+  background-color: #e9e9e9;
+}
 .my{
   text-align: center;
   font-weight: bold;
@@ -26,7 +19,6 @@
   margin-top: 30px;
 }            
 </style>
-
 </head>
 <body>
 
@@ -40,7 +32,7 @@
     <div class="row">
 	<!-- 상품 카테고리 메뉴바-->
 	 
-      <div class="col-lg-3">
+      <div class="col-lg-3" style="height:800px">
        <h2 class="my">${category}</h2>
         <c:if test="${id != null}">
         <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>

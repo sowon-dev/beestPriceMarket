@@ -33,7 +33,7 @@
 <body>
 <jsp:include page="../inc/top.jsp"/> 
     <!-- Page Content -->
-	<div class="container" style="margin-bottom: 500px;">
+	<div class="container">
 		<div class="row">
 
 			<div class="col-lg-3">
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-9">
+			<div class="col-lg-9" style="height:800px">
 				<div class="row">
 					<div class="col-12">
 						<!-- <div class="card"> -->

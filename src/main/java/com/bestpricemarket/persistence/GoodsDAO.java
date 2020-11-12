@@ -15,8 +15,7 @@ import com.bestpricemarket.domain.ReportVO;
 
 public interface GoodsDAO {
 
-	// 지은
-	// *********************************************************************************************************************************
+// 지은 *************************************************************************************************************************
 	// 상품등록
 	public void registerGoods(GoodsVO vo) throws Exception;
 
@@ -37,8 +36,6 @@ public interface GoodsDAO {
 
 	// 상품삭제
 	public void goodsDelete(int gno) throws Exception;
-	
-	
 
 	// 첨부파일 업로드
 	public void insertFile(Map<String, Object> map) throws Exception;
@@ -61,20 +58,12 @@ public interface GoodsDAO {
 	// 상품 테이블 현재 입찰가 업데이트
 	public void finalpriceupdate(int gno) throws Exception;
 
-	// 지은
-	// *********************************************************************************************************************************
-
-	// 상품신고
-	// *******************************************************************************************************************************
+// 재원 *************************************************************************************************************************
 	// 상품신고
 	public MemberVO myInfo(String id) throws Exception;
 
 	public ReportVO showReportDetail(int gno) throws Exception;
-	// 상품신고
-	// *******************************************************************************************************************************
 
-	// 입찰하기
-	// *******************************************************************************************************************************
 	// 입찰정보 가져오기(모든 리스트)
 	public List<PricemonitoringVO> getBidding(int pm_g_gno) throws Exception;
 
@@ -89,52 +78,34 @@ public interface GoodsDAO {
 
 	// 입찰하기
 	public void insertBidding(PricemonitoringVO prvo) throws Exception;
-	// 입찰하기
-	/* 재원 끝 */
-	// *******************************************************************************************************************************
 	
-	// 태준 
-	// *******************************************************************************************************************************
+// 태준 *************************************************************************************************************************
 	// 판매자의 다른상품보기
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception;
 	
-	
-	
-	
-	/* 태준 끝 */
-	// *******************************************************************************************************************************
-	
-	// 정현
-	// *******************************************************************************************************************************
-	
+// 정현 *************************************************************************************************************************
 	// 좋아요 입력 -> 제품상세페이지(likes 테이블)
-			public int like(LikesVO vo) throws Exception; 
-			
-			// 좋아요 입력 -> 제품상세페이지(goods테이블의 like컬럼)
-			public void goodsLike(int gno) throws Exception;
-			
-			
-			
-			// 상품의 좋아요 번호가 있는지 카운트 
-			  public int countbyLike(String l_m_id);
-			  
-			 
-			  
-			  
-			  /* 조회 */
-			  public LikesVO read(LikesVO vo);
-			  
-			  // 상품의 좋아요 삭제 (goods테이블)
-			  public void deletebyGoods(int gno);
-			  
-			  public void deletebyLikes(String l_m_id, int l_g_gno);
+	public int like(LikesVO vo) throws Exception; 
 	
+	// 좋아요 입력 -> 제품상세페이지(goods테이블의 like컬럼)
+	public void goodsLike(int gno) throws Exception;
 	
-	
-	
-	
-	/* 정현 끝 */
-	// *******************************************************************************************************************************
+	// 상품의 좋아요 번호가 있는지 카운트 
+	public int countbyLike(String l_m_id);
 
+	// 조회
+	public LikesVO read(LikesVO vo);
+	  
+	// 상품의 좋아요 삭제 (goods테이블)
+	public void deletebyGoods(int gno);
+	  
+	public void deletebyLikes(String l_m_id, int l_g_gno);
+	
+// 소원 *************************************************************************************************************************
+	// 상품목록 + 페이징처리	
+	public List<GoodsVO> listGoods(Criteria cri) throws Exception;
+	
+	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리	
+	public int pageCount() throws Exception;
 
 }

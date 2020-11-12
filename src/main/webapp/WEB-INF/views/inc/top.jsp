@@ -13,6 +13,8 @@
 <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/resources/css/shop-homepage.css" rel="stylesheet">
+<!-- favicon -->
+<link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
