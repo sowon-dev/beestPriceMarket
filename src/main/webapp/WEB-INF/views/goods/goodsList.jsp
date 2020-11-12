@@ -77,7 +77,7 @@
                   <a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${category.gname}</a>
                 </h4>
                 <h6>현재가(50000)</h6>
-                <h6>입찰자 0</h6>
+                <h6>입찰자 </h6>
                 <h6>${category.endDate}</h6>
               </div>
             </div>

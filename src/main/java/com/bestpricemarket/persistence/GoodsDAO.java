@@ -107,5 +107,8 @@ public interface GoodsDAO {
 	
 	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리	
 	public int pageCount() throws Exception;
+	
+	//입찰자수 가져오기
+	public int gd_bidCount(int gno) throws Exception;
 
 }

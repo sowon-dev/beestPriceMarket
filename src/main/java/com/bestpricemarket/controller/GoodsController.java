@@ -111,13 +111,17 @@ public class GoodsController {
 
 		// 카테고리
 		model.addAttribute("category", category);
-
+		
 		// 하단부 페이징처리
 		PageMaker pm = new PageMaker();
 		pm.setCri(cri);
 		pm.setTotalCount(service.CategoryCount(category));
 		model.addAttribute("pm", pm);
 
+		//입찰자수 가져오기 pm_g_gno
+		//model.addAttribute("gd_bidCount", service.gd_bidCount(gno));
+		//System.out.println("gd_bidCount는 왜 3이 아닐까? "+ service.gd_bidCount(gno));
+		
 		return "/goods/goodsList";
 	}
 
@@ -167,13 +171,14 @@ public class GoodsController {
 		} else {
 			model.addAttribute("finalPrice", service.finalPrice(gno));
 		}
-		
-		// 태준
+
 		// 판매자의 다른상품목록 출력
 		GoodsVO vo = service.goodsDetail(gno);
 		model.addAttribute("List", service.anothergoods(vo));
-		// 태준
 
+		//입찰자수 가져오기 pm_g_gno
+		model.addAttribute("gd_bidCount", service.gd_bidCount(gno));
+		System.out.println("gd_bidCount는 왜 3이 아닐까? "+ service.gd_bidCount(gno));
 
 		return "/goods/goodsDetail";
 	}

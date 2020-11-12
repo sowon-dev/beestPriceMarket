@@ -123,7 +123,7 @@ function fn_fileDown(fno){
 							</tr>
 							<tr>
 								<th>입찰수</th>
-								<td></td>
+								<td>${gd_bidCount}</td>
 							</tr>
 							<tr>
 								<th>판매자</th>

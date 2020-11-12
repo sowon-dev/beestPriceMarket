@@ -236,4 +236,13 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return result;	
 	}
 
+	//입찰자수 가져오기
+	@Override
+	public int gd_bidCount(int gno) throws Exception {
+		return sqlSession.selectOne(namespace+".gd_bidCount", gno);
+	}
+
+
+	
+	
 }

@@ -261,4 +261,13 @@ public class GoodsServiceImpl implements GoodsService {
 		System.out.println("S : 글 개수 -> " + result);	
 		return result;	
 	}
+
+	//입찰자수 가져오기
+	@Override
+	public int gd_bidCount(int gno) throws Exception {
+		System.out.println("gd_bidCount는 왜 3이 아닐까? "+ gdao.gd_bidCount(gno));
+		return gdao.gd_bidCount(gno);
+	}
+	
+	
 }

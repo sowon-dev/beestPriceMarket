@@ -152,6 +152,12 @@
   		insert into pricemonitoring(pm_g_gno,pm_m_userid,pm_g_bidprice,timelog)
   		values(#{pm_g_gno},#{pm_m_userid},#{pm_g_bidprice},#{timelog})
   	</insert>
+  	
+  	<select id="gd_bidCount" resultType="Integer">
+  		select count(*)
+  		from pricemonitoring
+  		where pm_g_gno=#{pm_g_gno}
+  	</select>
 	<!-- 입찰하기 -->
   
    <!-- 태준 ******************************************************************************************** -->
