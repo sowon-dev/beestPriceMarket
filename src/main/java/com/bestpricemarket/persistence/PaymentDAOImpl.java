@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.MemberVO;
+import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.PaymentVO;
 
 //@Repository : DAO객체를 스프링에서 인식 할 수 있도록 처리
@@ -50,4 +51,17 @@ public class PaymentDAOImpl implements PaymentDAO{
 		
 		return sqlSession.selectOne(namespace + ".getPayment",p_g_gno);
 	}
+
+	@Override
+	public MyActionVO getMyAction(int a_g_gno) throws Exception {
+		MyActionVO myVO = sqlSession.selectOne(namespace + ".getMyAction",a_g_gno);
+		return myVO;
+	}
+
+	@Override
+	public void updateMyAction(MyActionVO myVO) throws Exception {
+		sqlSession.update(namespace + ".updateMyAction",myVO);		
+	}
+	
+	
 }

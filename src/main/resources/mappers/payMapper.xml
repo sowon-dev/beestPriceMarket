@@ -62,5 +62,13 @@
   	 <select id="getPayment" resultType="com.bestpricemarket.domain.PaymentVO">
   	 	select * from pay where p_g_gno = #{p_g_gno}
   	 </select>
+  	 
+  	 <select id="getMyAction" resultType="com.bestpricemarket.domain.MyActionVO">
+  	 	select * from myaction where a_g_gno = #{a_g_gno}
+  	 </select>
+  	 
+  	 <update id="updateMyAction">
+  	 	update myaction set paystatus=1 where a_g_gno = #{a_g_gno}
+  	 </update>
   
   </mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.MemberVO;
+import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.PaymentVO;
 import com.bestpricemarket.persistence.PaymentDAO;
 
@@ -43,6 +44,16 @@ public class PaymentServiceImpl implements PaymentService{
 		PaymentVO vo = pdao.getPayment(p_g_gno);
 		return vo;
 	}
-	
-	
+
+	@Override
+	public MyActionVO getMyAction(int a_g_gno) throws Exception {
+		MyActionVO myVO = pdao.getMyAction(a_g_gno);
+		return myVO;
+	}
+
+	@Override
+	public void updateMyAction(MyActionVO myVO) throws Exception {
+		pdao.updateMyAction(myVO);
+		
+	}
 }
