@@ -2,20 +2,19 @@ package com.bestpricemarket.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bestpricemarket.domain.MemberVO;
+import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.PaymentVO;
 import com.bestpricemarket.service.PaymentService;
 
@@ -30,11 +29,10 @@ public class PaymentController {
 
 	// http://localhost:8088/pay/payment
 	@RequestMapping(value = "/payment", method = RequestMethod.GET)
-	public String detailPayment(Model model, HttpSession session) throws Exception {
+	public String detailPayment(Model model, HttpSession session,@RequestParam("gno")int gno) throws Exception {
 
-		String id = (String) session.getAttribute("id"); // 메인이랑 연결되면(String)session.getAttribute("id")로 변경
+		String id = (String) session.getAttribute("id");
 		System.out.println("손님아이디 : " + id);
-		int a_g_gno = 1; // 내경매랑 연결되면 Integer.parsInt(request.getParameter("a_g_gno")로 변경
 		
 		MemberVO vo = service.getMember(id);
 		logger.info("객체 : " + vo);
@@ -43,10 +41,10 @@ public class PaymentController {
 		model.addAttribute("memVO", vo);
 		// 내경매에서 해당하는 상품번호 물건을 결제하기 눌렀을때 출력되는 상품정보 객체저장
 		// 추후 사진추가예정(지금은 사진x)
-		model.addAttribute("gvo", service.getGoods(a_g_gno));
+		model.addAttribute("gvo", service.getGoods(gno));
 
 		// 결제 유효성검사(DB에 중복된값 체크)
-		PaymentVO result = service.getpayment(a_g_gno);
+		PaymentVO result = service.getpayment(gno);
 		model.addAttribute("result", result);
 
 		return "/pay/paymentDetail";
@@ -71,6 +69,10 @@ public class PaymentController {
 	public String orderCompleted(int gno, Model model) throws Exception {
 		PaymentVO pvo = service.getpayment(gno);
 		model.addAttribute("pay", pvo);
+		MyActionVO myVO = service.getMyAction(pvo.getP_g_gno());
+		if(pvo.getP_g_gno() == myVO.getA_g_gno()) {
+			service.updateMyAction(myVO);
+		}
 		return "/pay/orderCompleted";
 	}
 
