@@ -96,7 +96,6 @@ public interface GoodsService {
 	// 좋아요 삭제 (likes테이블)
 	public void deletebyLikes(String l_m_id, int l_g_gno);
 /* 정현 끝 */
-
 	
 /* 소원 */
 	// 상품목록 + 페이징처리
@@ -104,6 +103,10 @@ public interface GoodsService {
 	
 	// 전체 글 개수 가져오는 처리	
 	public int listTotalCount() throws Exception;
+	
+	// 입찰자수 가져오기
+	public int gd_bidCount(int gno) throws Exception;
+	
 /* 소원 끝*/
 	
 }
