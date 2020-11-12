@@ -4,7 +4,7 @@
 
 <!-- 좋아요버튼  -->
 <span>
-    <input type="checkbox" id="checkbox" />
+    <input type="checkbox" id="checkbox"/>
     <label for="checkbox">
       <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
         <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
@@ -68,7 +68,7 @@ $(document).ready(function(){
 	      },
 		  success: function(data){
 				if(data == "likeClick" ){  
-					alert("좋아요! 내경매에서 확인할 수 있습니다.");
+					//alert("좋아요! 내경매에서 확인할 수 있습니다.");
 				} else if(data == "cancel"){ 
 					alert("좋아요가 취소되었습니다.");
 				}

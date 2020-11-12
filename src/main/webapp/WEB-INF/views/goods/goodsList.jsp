@@ -37,6 +37,9 @@
         <c:if test="${id != null}">
         <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
       </c:if>
+      
+    	<!-- 재원 -->
+    	<div>검색</div>
     	
         <div class="list-group">
           <a href="/goods/list?category=컴퓨터" class="list-group-item">컴퓨터</a>

@@ -1,6 +1,10 @@
 package com.bestpricemarket.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -44,6 +48,16 @@ public class HomeController {
 		pm.setCri(cri);
 		pm.setTotalCount(gservice.listTotalCount());
 		model.addAttribute("pm",pm);
+	}
+	
+	//favicon
+	@RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
+	public void favicon( HttpServletRequest request, HttpServletResponse reponse ) {
+		try {
+		  reponse.sendRedirect("/resources/favicon.ico");
+		} catch (IOException e) {
+		  e.printStackTrace();
+		}
 	}
 	
 }

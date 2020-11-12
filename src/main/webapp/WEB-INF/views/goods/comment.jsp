@@ -37,10 +37,10 @@
 		<th></th>
 	</tr>
 	</thead>
-	<tbody id="ppap">
+	<tbody id="ppap2">
 	<c:forEach items="${cmtList}" var="cmt">
 		<tr id="tr_${cmt.c_num}">
-			<td><input type="hidden" id="td_c_num_${cmt.c_num}" class="collapseInputCss" value="" readonly></td>
+			<td><input type="hidden" id="td_c_num_${cmt.c_num}" class="collapseInputCss" value="${cmt.c_num}" readonly></td>
 			<td>${fn:substring(cmt.c_m_id,0, 4)}*****</td>
 			<td><textarea class="collapseTextareaCss" id="td_c_content_${cmt.c_num}" rows="3" readonly>${cmt.c_content}</textarea></td>
 			<td><fmt:formatDate value="${cmt.c_regdate}" pattern="yyyy-MM-dd" /></td>
@@ -145,7 +145,7 @@ function rereplyParam(e, param){
 };//대댓글등록 파라미터 가져가기 끝
 
 //문의하기 버튼 클릭시
-$("#cmtBtn").click(function(){
+function clickedCmtBtn(){
 	let c_content = document.frCmt.c_content.value;
 	let c_m_idFormat = document.frCmt.c_m_id.value.substring(0,4).concat('*****');
 	
@@ -173,8 +173,9 @@ $("#cmtBtn").click(function(){
 	  success: function(data){//데이터를 보내는 것이 성공했을 시 출력되는 메시지
 	  if(data){
 		alert("문의글이 성공적으로 등록되었습니다.");
+		console.log("data: "+data+", info: "+info.c_m_id+today)
 		$("#c_content").val("");
-		$('#ppap').after("<tr><td> </td><td>"+info.c_m_id+"</td><td>"+info.c_content+"</td><td>"+today+"</td></tr>");
+		$("#ppap2").after("<tr><td> </td><td>"+info.c_m_id+"</td><td>"+info.c_content+"</td><td>"+today+"</td></tr>");
       }else{
 		alert("문의글 등록에 실패했습니다. 다시 시도하세요.")
 	  }
@@ -183,7 +184,7 @@ $("#cmtBtn").click(function(){
         alert("예상치 못한 에러가 발생했습니다. 재접속하세요");
     }
 	});
-});//문의하기 버튼 끝
+};//문의하기 버튼 끝
 
 //댓글수정버튼 클릭시
 let isFirstClick = true;

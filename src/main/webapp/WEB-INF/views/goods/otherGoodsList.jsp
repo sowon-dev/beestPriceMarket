@@ -3,6 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<style>
+*{margin:0;padding:0; color:#666}
+img{border:0 none; vertical-align:top;}
+li{list-style:none;}
+
+.bannerArea{width:100%; padding:10px 50px 10px 90px; border:1px solid #000; margin:30px auto; position:relative;}
+
+.bannerArea .banner{width:300px; height:200px; overflow:hidden; }
+.bannerArea .banner ul:after{display:block; clear:both; content:"";}
+.bannerArea .banner ul{width:5000px; *zoom:1;}
+.bannerArea .banner ul li{width:235px; float:left; position: relative;}
+
+.bannerArea .btns a{position:absolute; top:30px;}
+.bannerArea .prev{left:15px;}
+.bannerArea .next{right:15px;}
+p {text-align: center;}
+</style>
+
 </head>
 <body>
 <!-- 태준 -->
@@ -18,7 +36,7 @@
 			      <li>
 			      <a href="detail?gno=${List.gno}"><img src="<c:url value="/imgUpload/${List.f_name}"/>" width=220px; height=200px;></a>
 			      </li>
-			    	</c:forEach>
+			    </c:forEach>
 			    </ul>
 			  </div>
 			  <div class="btns">
@@ -115,10 +133,5 @@ $(document).ready(function () {
    stopBtn.on("click" , function () {stopTimer()})
   })
 
-
-
-
-
-    
 </script>
 </body>

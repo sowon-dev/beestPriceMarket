@@ -54,8 +54,7 @@
   		    gname = #{gname},
   		    content = #{content},
   		    endDate = #{endDate},
-  		    lowestprice = #{lowestprice}.
-  		    thumbnail = #{thumbnail}
+  		    lowestprice = #{lowestprice}
   		  where gno = #{gno}
   	</update>  
   	<!-- 상품 수정 -->
