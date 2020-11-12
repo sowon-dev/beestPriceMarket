@@ -67,13 +67,15 @@ public class FileUtils {
 				list.add(listMap);
 			}
 			
-			
 		}
 		return list;
 	}
 	
 	public List<Map<String, Object>> parseUpdateFileInfo(GoodsVO vo, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception{ 
 		Iterator<String> iterator = mpRequest.getFileNames();
+		
+		System.out.println("%#$%$%^$%^$%: "+mpRequest.getFileNames());
+		
 		MultipartFile multipartFile = null; 
 		String originalFileName = null; 
 		String originalFileExtension = null; 
@@ -98,7 +100,9 @@ public class FileUtils {
 				listMap.put("f_name", storedFileName); 
 				listMap.put("f_size", multipartFile.getSize()); 
 				list.add(listMap);
+				System.out.println("WWWWWWWWWWWWW"+list);
 			} 
+			System.out.println("IIIIIIIIIIIIII"+list);
 		}
 		if(files != null && fileNames != null){ 
 			for(int i = 0; i<fileNames.length; i++) {
@@ -108,6 +112,7 @@ public class FileUtils {
 					list.add(listMap); 
 			}
 		}
+		System.out.println("$$$UUUUU :"+list);
 		return list; 
 	}
 

@@ -12,10 +12,11 @@ public class GoodsCommentVO {
 	private int c_ref;
 	private int c_seq;
 	private int c_lev;
+	private int isDeleted;
 	
 	public GoodsCommentVO() {}
 	public GoodsCommentVO(int c_num, int c_g_gno, String c_m_id, Timestamp c_regdate, String c_content, int c_ref,
-		int c_seq, int c_lev) {
+			int c_seq, int c_lev, int isDeleted) {
 		super();
 		this.c_num = c_num;
 		this.c_g_gno = c_g_gno;
@@ -25,7 +26,9 @@ public class GoodsCommentVO {
 		this.c_ref = c_ref;
 		this.c_seq = c_seq;
 		this.c_lev = c_lev;
+		this.isDeleted = isDeleted;
 	}
+
 
 	public int getC_num() {
 		return c_num;
@@ -91,11 +94,18 @@ public class GoodsCommentVO {
 		this.c_lev = c_lev;
 	}
 
+	public int getIsDeleted() {
+		return isDeleted;
+	}
+	
+	public void setIsDeleted(int isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+	
 	@Override
 	public String toString() {
 		return "GoodsCommentVO [c_num=" + c_num + ", c_g_gno=" + c_g_gno + ", c_m_id=" + c_m_id + ", c_regdate="
 				+ c_regdate + ", c_content=" + c_content + ", c_ref=" + c_ref + ", c_seq=" + c_seq + ", c_lev=" + c_lev
-				+ "]";
+				+ ", isDeleted=" + isDeleted + "]";
 	}
-
 }

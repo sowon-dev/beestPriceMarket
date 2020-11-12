@@ -3,7 +3,6 @@ package com.bestpricemarket.controller;
 import java.io.PrintWriter;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,13 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bestpricemarket.domain.MemberVO;
@@ -94,7 +91,7 @@ public class MemberController {
 		l.info("C: 메인 출력페이지 GET");
 		MemberVO vo = service.readMember((String)session.getAttribute("id"));
 		model.addAttribute("memVO", vo);
-		return "main";
+		return "redirect:/main";
 	}
 	
 	/* 회원정보보기 */
@@ -122,13 +119,24 @@ public class MemberController {
 		if(mvo != null) { 		
 			service.updateMember(vo);
 			return "redirect:/member/main";
-		}
+		}else {
+		MemberVO vo2 = service.readMember((String)session.getAttribute("id"));
+		vo.setAddr1(vo2.getAddr1());
+		vo.setAddr2(vo2.getAddr2());
+		vo.setEmail(vo2.getEmail());
+		vo.setPhone(vo2.getPhone());
+		vo.setUsername(vo2.getUsername());
+		vo.setBlock(vo2.getBlock());
+		vo.setBlock_r(vo2.getBlock_r());
+		vo.setScore(vo2.getScore());
+		
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('비밀번호가 옳바르지않습니다');</script>");
 		out.flush();
 		return "/member/updateForm";			
+		 }			
     }
     
     /* 회원탈퇴 */

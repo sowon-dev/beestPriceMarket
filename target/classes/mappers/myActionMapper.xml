@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.bestpricemarket.mappers.myActionMapper">
+  <insert id="insertAction" >
+   insert into myaction (ano,a_m_id,a_g_gno,a_g_actionstatus,a_g_enddate,paystatus,deliverystatus)
+   values (#{ano},#{a_m_id},#{a_g_gno},#{a_g_actionstauts},#{a_g_enddate},#{paystatus},#{deliverystatus})
+   </insert> 
+   
+   <!-- 입찰 -->
+	<select id="actionlist" resultType="com.bestpricemarket.domain.MyActionVO">
+	select a.ano,a.a_m_id, a.a_g_gno, a.a_g_actionstatus, a.a_g_enddate,f.f_name,g.gname 
+	 from myaction a join goods g
+	 on a.a_g_gno = g.gno
+	 join goodsfile f
+	 on a.a_g_gno = f.f_g_gno
+	 where a.a_m_id = #{a_m_id} and a.a_g_actionstatus!=2
+	 order by a.ano desc
+     limit #{displayPost}, #{postNum}
+  		
+	</select>
+  <!-- 낙찰 -->
+  <select id="paylist" resultType="com.bestpricemarket.domain.MyActionVO">
+	 select a.ano, a.a_m_id, a.a_g_gno, a.a_g_actionstatus, a.a_g_enddate,f.f_name,g.gname,a.paystatus,a.deliverystatus 
+	 from myaction a join goods g
+	 on a.a_g_gno = g.gno
+	 join goodsfile f
+	 on a.a_g_gno = f.f_g_gno
+	 where a.a_m_id = #{a_m_id} and a.a_g_actionstatus=2
+	 limit #{displayPost}, #{postNum}
+	</select>
+  
+  <select id="getCount" resultType="int">
+   select count(a_g_actionstatus)
+   from myaction
+   where a_g_actionstatus != 2 
+  </select>
+  
+  <select id="getPayCount" resultType="int">
+   select count(a_g_actionstatus)
+   from myaction
+   where a_g_actionstatus = 2 
+  </select>
+  
+ <!-- 카트 삭제 -->
+<delete id="delete">
+ delete from myaction
+ where ano= #{ano}
+</delete>
+  
+  </mapper>
