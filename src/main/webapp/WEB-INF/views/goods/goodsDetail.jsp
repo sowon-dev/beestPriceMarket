@@ -14,7 +14,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 <link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsDetail.css" rel="stylesheet">
 <!-- 본문 JS  -->
-<script src='${pageContext.request.contextPath}/resources/goods/goods_js/goodsDetail.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -28,14 +27,7 @@
 <link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsBtn.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/goods/goods_css/bid_css.css" rel="stylesheet">
 <!-- 버튼 CSS -->
-<!-- 상세페이지 섬네일 슬라이드 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-<!-- Link Swiper's CSS -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsDetailSlide.css">
-<script src='${pageContext.request.contextPath}/resources/goods/goods_js/goodsDetailSlide.js'></script>
-<!-- 상세페이지 섬네일 슬라이드 -->
-
+<link href="${pageContext.request.contextPath}/resources/goods/goods_css/likebtn.css" rel="stylesheet">
 <script type="text/javascript">
 // 수정/삭제 이동  
 $(document).ready(function(){
@@ -75,24 +67,22 @@ function fn_fileDown(fno){
 		<div class="container">
 			<div class="heading-section">경매상품 상세정보</div>
 			<div class="row">
+			
 				<!-- 경매정보 이미지 -->
-				<div class="col-md-6">
-				
-				
+				<div class="col-md-6">							
 					<!-- 슬라이드 추가 -->
 					<c:forEach var="file" items="${file}">
-					<div id="carouselExampleIndicators" class="carousel slide my-4"
-						data-ride="carousel">
+					<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
 						<div class="carousel-inner" role="listbox">
 							<div class="carousel-item active">
-								<img src="<c:url value="/imgUpload/${file[0].f_name}"/>"
+								<img src="<c:url value="/imgUpload/${file.f_name}"/>"
 									style="width: 600px; height: 400px; !important"
 									class="d-block img-fluid" />
 							</div>
 						</div>
 					</div>
-						<a href="#" onclick="fn_fileDown('${file.fno}'); return false;">
-						<i class="fas fa-arrow-alt-circle-down" style="color: black;"></i></a>
+					<a href="#" onclick="fn_fileDown('${file.fno}'); return false;">
+					<i class="fas fa-arrow-alt-circle-down" style="color: black;"></i></a>
 					</c:forEach>
 				</div>
 				<!-- 경매정보 이미지 끝-->
@@ -146,17 +136,21 @@ function fn_fileDown(fno){
 						<c:if test="${ id != goods.g_m_id}">
 							<!-- <form action="#" class="display-flex"> -->
 								<div class="product-count">
+									<!-- 좋아요버튼  -->
+ 									<c:if test="${id != null && memberList.block == 0}">								
+                                    <jsp:include page="../goods/likebtn.jsp"/>
+									</c:if>
 									<span id="wrap">
 									 <c:if test="${id != null && memberList.block == 0}">
 											<c:choose>
-												<c:when test="${goods.actionstatus == 1}">
+												<c:when test="${goods.actionstatus == 0}">
 													<span style="font-size:2rem;"><strong>마감되었습니다.</strong></span>
 												</c:when>												
 												<c:otherwise>
 													<a href="javascript:openModal('modal1');" class="round-black-btn">입찰하기</a>
 												</c:otherwise>
 											</c:choose>
-										</c:if> 
+									</c:if> 
 									</span>
 									<div id="modal"></div>
 									<div class="modal-con modal1" style="z-index: 9999">
@@ -185,8 +179,6 @@ function fn_fileDown(fno){
 										</div>
 									</div>
 									<c:if test="${id != null && memberList.block == 0}">								
-									 <!-- 좋아요/입찰/신고 -->     
-                                    <jsp:include page="../goods/likebtn.jsp"/>
 									<a href="${path}/goods/report?gno=${goods.gno}" class="round-black-btn">신고하기</a>
 									</c:if>
 								</div>
@@ -234,9 +226,9 @@ function fn_fileDown(fno){
 						${goods.content}
 					</div>
 					<!-- 상품정보 끝-->
-					<div class="tab-pane fade" id="review" role="tabpanel"
-						aria-labelledby="review-tab">
+					<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
 						<div class="review-heading"></div>
+						<c:if test="${id != null}">								
 						<button class="round-black-btn" id="reviewToggleBtn">문의하기</button>
 						<div id="reviewToggle">
 							<form name="frCmt" id="frCmt" method="post" class="review-form">
@@ -252,9 +244,10 @@ function fn_fileDown(fno){
 								<label>문의내용</label>
 								<textarea name="c_content" id="c_content" class="form-control" rows="5" placeholder="욕설, 비방 등 적절하지 않은 문의는 삭제될 수 있습니다."></textarea>
 							</form>
-							<button class="round-black-btn" id="cmtBtn" style="margin-left: 81%;">등록</button>
+							<button class="round-black-btn" id="cmtBtn" onclick="clickedCmtBtn();" style="margin-left: 81%;">등록</button>
 							<button class="round-black-btn" id="recmtBtn" style="margin-left: 81%; display: none">댓글등록</button>
 						</div>
+						</c:if>
 						<!-- 댓글리스트 -->
 						<%@ include file="../goods/comment.jsp"%>
 						<!-- 댓글리스트 끝 -->
@@ -267,99 +260,102 @@ function fn_fileDown(fno){
 		<!-- container 끝 -->
 	</div>
 	<!-- pd-wrap끝 -->
-
+	
+	<!-- 판매자의 상품보기 -->
+	<jsp:include page="../goods/otherGoodsList.jsp" />
+	<!-- 판매자의 상품보기 끝 -->
+	
 	<!-- 푸터 -->
 	<jsp:include page="../inc/bottom.jsp" />
 	<!-- 푸터 -->
 
-	<!-- 입찰하기 ************************************************************************************* -->
-	<script type="text/javascript">
-	
- function fillZeros(n, digits) {  
-     var zero = '';  
-     n = n.toString();  
+<!-- 입찰하기 js ************************************************************************************* -->
+<script type="text/javascript">
+var result = '${result}';
+if(result == '1'){
+	alert("신고가 접수되었습니다.");
+}
 
-     if (n.length < digits) {  
-         for (i = 0; i < digits - n.length; i++)  
-             zero += '0';  
-     }  
-     return zero + n;  
- }  
-   
- function getNowTimeStamp() {  
-     var d = new Date();  
+function fillZeros(n, digits) {  
+    var zero = '';  
+    n = n.toString();  
 
-     var s = fillZeros(d.getFullYear(), 4) + '-' +  
-             fillZeros(d.getMonth() + 1, 2) + '-' +  
-             fillZeros(d.getDate(), 2) + ' ' +  
-       
-             fillZeros(d.getHours(), 2) + ':' +  
-             fillZeros(d.getMinutes(), 2) + ':' +  
-             fillZeros(d.getSeconds(), 2);  
-
-     return s;  
- } 
+    if (n.length < digits) {  
+        for (i = 0; i < digits - n.length; i++)  
+            zero += '0';  
+    }  
+    return zero + n;  
+}  
   
- function openModal(modalname){
-	  document.get	  
-	  $("#modal").fadeIn(300);
-	  $("."+modalname).fadeIn(300,function(){
-		var list = new Array();		
-		<c:forEach items="${addList}" var="alist">
-			list.push('${alist.timelog}');
-			list.push('${alist.pm_m_userid}');
-			list.push('${alist.pm_g_bidprice}');
-		</c:forEach>
-		});
-	}
+function getNowTimeStamp() {  
+    var d = new Date();  
 
-	$("#modal, .close").on('click',function(){
-	  $("#modal").fadeOut(300);
-	  $(".modal-con").fadeOut(300);	  
+    var s = fillZeros(d.getFullYear(), 4) + '-' +  
+            fillZeros(d.getMonth() + 1, 2) + '-' +  
+            fillZeros(d.getDate(), 2) + ' ' +  
+            fillZeros(d.getHours(), 2) + ':' +  
+            fillZeros(d.getMinutes(), 2) + ':' +  
+            fillZeros(d.getSeconds(), 2);  
+    return s;  
+} 
+ 
+function openModal(modalname){
+  document.get	  
+  $("#modal").fadeIn(300);
+  $("."+modalname).fadeIn(300,function(){
+	var list = new Array();		
+	<c:forEach items="${addList}" var="alist">
+		list.push('${alist.timelog}');
+		list.push('${alist.pm_m_userid}');
+		list.push('${alist.pm_g_bidprice}');
+	</c:forEach>
 	});
-	
-	$(document).ready(function(){
-		$("#bidding").click(function(){	
-			var stack = document.getElementById('bidprice_input').value;
-			if((stack%10) != 0){ // 최소 입찰가 단위 10원부터 배팅가능 (1~9원 배팅 X)
-				alert("10단위 적어주세요");
-				document.getElementById('bidprice_input').focus();
-				return false;	
-			}
-			var info = {"pm_g_gno":${goods.gno},/* 입찰시간 */"pm_m_userid": '${id}'/* 현재 로그인되어있는 아이디(세션) */,"pm_g_bidprice": document.getElementById('bidprice_input').value /* 입찰가 */,"timelog": getNowTimeStamp()/* 입찰한 시간 */};
-			var check = confirm("입찰하시겠습니까?");
-			if(check){				
-				$.ajax({
-					url: '/goods/bidding',
-					type: 'POST',				
-					data: info,					
-					success: function(data){															
-						if(data.pm_g_bidprice == undefined){
-							alert("현재 물품의 최대입찰가 보다 낮습니다.");
-							document.getElementById('bidprice_input').focus();
-							return;
-						}
-						/* if(data["pm_g_bidprice"] > info.pm_g_bidprice) */							
-						/* alert(info.timelog); */	
-						/* $('#ppap').before("<tr><td>"+ date.timelog + "</td><td>" + data["pm_m_userid"] + "</td><td>" + data.pm_g_bidprice +"</td></tr>"); */																
-						$('#ppap').after("<tr class='mo2'><td>"+ (info.timelog+".0") + "</td><td>" + info.pm_m_userid + "</td><td>" + info.pm_g_bidprice +"</td></tr>");																
-						// alert(data[0].pm_g_gno); 데이터 받아오는 코드					
-					},
-					error: function(data){
-						alert("입찰가를 입력해주세요!");	
-						document.getElementById('bidprice_input').focus();				
+}
+
+$("#modal, .close").on('click',function(){
+  $("#modal").fadeOut(300);
+  $(".modal-con").fadeOut(300);	  
+});
+
+$(document).ready(function(){
+	$("#bidding").click(function(){	
+		var stack = document.getElementById('bidprice_input').value;
+		if((stack%10) != 0){ // 최소 입찰가 단위 10원부터 배팅가능 (1~9원 배팅 X)
+			alert("10단위 적어주세요");
+			document.getElementById('bidprice_input').focus();
+			return false;	
+		}
+		var info = {"pm_g_gno":${goods.gno},/* 입찰시간 */"pm_m_userid": '${id}'/* 현재 로그인되어있는 아이디(세션) */,"pm_g_bidprice": document.getElementById('bidprice_input').value /* 입찰가 */,"timelog": getNowTimeStamp()/* 입찰한 시간 */};
+		var check = confirm("입찰하시겠습니까?");
+		if(check){				
+			$.ajax({
+				url: '/goods/bidding',
+				type: 'POST',				
+				data: info,					
+				success: function(data){															
+					if(data.pm_g_bidprice == undefined){
+						alert("현재 물품의 최대입찰가 보다 낮습니다.");
+						document.getElementById('bidprice_input').focus();
+						return;
 					}
-				});
-			} 
-			/* alert("입찰테스트"); */			
-		});				
-	});
+					/* if(data["pm_g_bidprice"] > info.pm_g_bidprice) */							
+					/* alert(info.timelog); */	
+					/* $('#ppap').before("<tr><td>"+ date.timelog + "</td><td>" + data["pm_m_userid"] + "</td><td>" + data.pm_g_bidprice +"</td></tr>"); */																
+					$('#ppap').after("<tr class='mo2'><td>"+ (info.timelog+".0") + "</td><td>" + info.pm_m_userid + "</td><td>" + info.pm_g_bidprice +"</td></tr>");																
+					// alert(data[0].pm_g_gno); 데이터 받아오는 코드					
+				},
+				error: function(data){
+					alert("입찰가를 입력해주세요!");	
+					document.getElementById('bidprice_input').focus();				
+				}
+			});
+		} 
+		/* alert("입찰테스트"); */			
+	});				
+});
 
-	function getExit(){
-		location.reload(true);
-	}
-	
- </script>
-	<!-- 입찰하기 ************************************************************************************* -->
-
+function getExit(){
+	location.reload(true);
+}
+</script>
 </body>

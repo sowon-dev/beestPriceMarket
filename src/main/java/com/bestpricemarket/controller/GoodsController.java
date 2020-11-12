@@ -65,9 +65,7 @@ public class GoodsController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	// 지은
-	// ***************************************************************************************************************************
-
+// 지은 ***************************************************************************************************************************
 	// 상품등록
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String goodsRegisterGET(Model model, HttpSession session, Criteria cri,
@@ -376,26 +374,8 @@ public class GoodsController {
 		response.getOutputStream().close();
 
 	}
-	// 첨부파일 다운로드
 
-	// 지은
-	// ***************************************************************************************************************************
-
-	// 내경매
-	// *******************************************************************************************************************************
-	// 내경매
-	@RequestMapping(value = "/myauction", method = RequestMethod.GET)
-	public String myAuctionGET() throws Exception {
-
-		return "/goods/myAuction";
-	}
-
-	// 내경매
-	// *******************************************************************************************************************************
-
-	// 상품신고
-	// *******************************************************************************************************************************
-	/* 재원 */
+// 재원 *******************************************************************************************************************************
 	// 상품신고
 	// http://localhost:8088/goods/report?gno=1
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
@@ -413,11 +393,12 @@ public class GoodsController {
 
 	// 상품신고
 	@RequestMapping(value = "/report", method = RequestMethod.POST)
-	public String reportPOST(ReportVO rvo, RedirectAttributes rttr, @RequestParam("content") String text)
+	public String reportPOST(ReportVO rvo, RedirectAttributes rttr,HttpServletRequest request)
 			throws Exception {
-		// @RequestParam("content") String text -> 추후 수정(강사님)
+		String text = request.getParameter("content");
 		System.out.println("레포트 VO : " + rvo);
-
+		System.out.println("기타사유 : " + text);
+		
 		// 메일 관련 정보(gmail)
 		String setfrom = rvo.getReporterEmail();
 		String tomail = "bestpricemarketnoreply@gmail.com"; // 받는 사람 이메일
@@ -431,30 +412,27 @@ public class GoodsController {
 		} else if (rvo.getRepo() == -1) {
 			content += "사유 : " + text + "\n";
 		}
-
+	
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-
+	
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(tomail); // 받는사람 이메일
 			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
 			messageHelper.setText(content); // 메일 내용
-
-			mailSender.send(message);
-
+	
+			mailSender.send(message); 		
+	
+			rttr.addFlashAttribute("result","1");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
+	
 		return "redirect:/goods/detail?gno=" + rvo.getGno();
 	}
-	/* 재원 끝 */
-	// *******************************************************************************************************************************
-
-	// 재원 입찰하기 소스코드
-	// *******************************************************************************************************************************
-
+	
+	//입찰하기
 	@RequestMapping(value = "/bidding", method = RequestMethod.POST)
 	@ResponseBody
 	public PricemonitoringVO biddingPOST(PricemonitoringVO prvo, Model model, HttpServletResponse resp)
@@ -485,38 +463,23 @@ public class GoodsController {
 		return null;
 
 	}
-	/* 재원 끝 */
-	// *******************************************************************************************************************************
-	
-	// 태준 
-	// *******************************************************************************************************************************
+// 태준 *******************************************************************************************************************************
 	
 
-
 	
 	
-	
-	
-	/* 태준 끝 */
-	// *******************************************************************************************************************************
-	
-	// 정현
-	// *******************************************************************************************************************************
+// 정현 *******************************************************************************************************************************
 	//좋아요 입력 -> 제품상세페이지
-	  @ResponseBody
-	  @RequestMapping(value="/likes", method= {RequestMethod.GET, RequestMethod.POST})
-	  public String likeGET(@RequestParam("gno") int gno,@RequestParam("l_g_gno") int l_g_gno, 
+	@ResponseBody
+	@RequestMapping(value="/likes", method= {RequestMethod.GET, RequestMethod.POST})
+	public String likeGET(@RequestParam("gno") int gno,@RequestParam("l_g_gno") int l_g_gno, 
 			  @RequestParam("l_m_id") String l_m_id,
 			  @ModelAttribute LikesVO vo, HttpSession session) throws Exception{
-	    System.out.println("C : 좋아요 created의 vo"+vo+" param's gno는 "+gno);
-
-	    
+		System.out.println("C : 좋아요 created의 vo"+vo+" param's gno는 "+gno);
 	    int check = service.countbyLike(l_m_id);
-	    
 
-
-  	//변수찾기
-  	System.out.println("l_m_id는 "+l_m_id+" vo.getL_m_id는 "+vo.getL_m_id()+" check는 "+check);
+	    //변수찾기
+	    System.out.println("l_m_id는 "+l_m_id+" vo.getL_m_id는 "+vo.getL_m_id()+" check는 "+check);
   	
 	    // 좋아요 likes테이블 삭제, goods테이블의 glike컬럼 업데이트(delete, update)
 		if(l_m_id == vo.getL_m_id() && check == 1) {
@@ -530,15 +493,6 @@ public class GoodsController {
 	    	service.like(vo);	
 	    	return "likeClick";
 		}			
-	  }//end of likeGet메서드  	  
-
-	
-	
-	
-	
-	
-	
-	/* 정현 끝 */
-	// *******************************************************************************************************************************
+	}//end of likeGet메서드  	  
 
 }

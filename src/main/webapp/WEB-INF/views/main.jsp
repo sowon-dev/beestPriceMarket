@@ -24,8 +24,13 @@
 	<div class="col-lg-3">
 		<c:if test="${memVO.id != null}">
 		  <h2 class="my-4">${memVO.username}님<br>환영합니다😀</h2>
-		  <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+		  <c:if test="${memVO.block == 0}">
+		  	<a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+		  </c:if>
 		</c:if>
+		
+		<!-- 재원 -->
+		<div>검색</div>
 	
 		<c:if test="${memVO.id == null}">
 		  <h2 class="my-4">카테고리</h2>
@@ -44,7 +49,7 @@
           <a href="/goods/list?category=쥬얼리" class="list-group-item">쥬얼리</a> 
         </div>
 	</div> <!-- 상품 카테고리 메뉴바 끝-->
-
+	
 	<div class="col-lg-9">
 		<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
