@@ -186,7 +186,7 @@ function fn_fileDown(fno){
 									</div>
 									<c:if test="${id != null && memberList.block == 0}">								
 									 <!-- 좋아요/입찰/신고 -->     
-                                    <!--  <jsp:include page="../goods/likebtn.jsp"/> -->
+                                    <jsp:include page="../goods/likebtn.jsp"/>
 									<a href="${path}/goods/report?gno=${goods.gno}" class="round-black-btn">신고하기</a>
 									</c:if>
 								</div>

@@ -18,7 +18,7 @@
 <!-- 헤더 -->
 
    <!-- Page Content -->
-   <div class="container" style="margin-bottom:410px">
+   <div class="container">
       <div class="row">
          <!-- 상품 카테고리 메뉴바 -->
          <div class="col-lg-3">
@@ -30,7 +30,7 @@
          </div>
          <!-- 상품 카테고리 메뉴바 -->
 
-         <div class="col-lg-9">
+         <div class="col-lg-9" style="height:800px">
             <br>
             <br>
             <h2>나의 문의 보기</h2> 

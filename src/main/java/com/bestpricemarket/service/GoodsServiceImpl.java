@@ -29,9 +29,7 @@ public class GoodsServiceImpl implements GoodsService {
 	@Inject
 	private GoodsDAO gdao;
 
-	// 지은
-	// *********************************************************************************************************************************
-
+	// 지은 *****************************************************************************************************************
 	@Resource(name = "fileUtils")
 	private FileUtils fileUtils;
 
@@ -156,14 +154,8 @@ public class GoodsServiceImpl implements GoodsService {
 		gdao.finalpriceupdate(gno);
 		
 	}
-	
 
-	// 지은
-	// *********************************************************************************************************************************
-
-	// 상품신고
-	// *******************************************************************************************************************************
-	/* 태준 */
+	// 재원 ************************************************************************************************************************
 	// 상품신고
 	@Override
 	public MemberVO myInfo(String id) throws Exception {
@@ -175,13 +167,8 @@ public class GoodsServiceImpl implements GoodsService {
 		ReportVO vo = gdao.showReportDetail(gno);
 		return vo;
 	}
-
-
-	/* 태준 */
-	// 상품신고
-	// *******************************************************************************************************************************
+	
 	// 입찰하기
-	// *******************************************************************************************************************************
 	@Override
 	public List<PricemonitoringVO> getBidding(int pm_g_gno) throws Exception {
 		List<PricemonitoringVO> prvo = gdao.getBidding(pm_g_gno);
@@ -205,95 +192,73 @@ public class GoodsServiceImpl implements GoodsService {
 		gdao.endStatus(gno);		
 	}
 	
-
-
 	@Override
 	public void insertBidding(PricemonitoringVO prvo) throws Exception {
 		gdao.insertBidding(prvo);
 	}
-	// 입찰하기
-	/* 재원 끝 */
-	// *******************************************************************************************************************************
 	
-	// 태준 
-	// *******************************************************************************************************************************
+	// 태준 *******************************************************************************************************************************
 	//판매자의 다른상품보기
 	@Override
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception {
-		
-		
 		return gdao.anothergoods(vo);
 	}
 	
-	
-	
-	
-	/* 태준 끝 */
-	// *******************************************************************************************************************************
-	
-	// 정현
-	// *******************************************************************************************************************************
+	// 정현 *******************************************************************************************************************************
 	@Override
     public int like (LikesVO vo) throws Exception {
-        
 		System.out.println("S : 좋아요 클릭(->likes 테이블)");
-        
         return gdao.like(vo);
-        
-        }
+    }
 
 	// 좋아요 입력 -> 제품상세페이지(goods테이블 like컬럼)
 	@Override
 	public void goodsLike(int gno) throws Exception {
-		
 		System.out.println("S : 좋아요 클릭(->goods 테이블 like 컬럼" + gno);
-
 		gdao.goodsLike(gno);
 	}  
 	
-	
-	
-	
 	@Override
-	  public int countbyLike(String l_m_id){
+	public int countbyLike(String l_m_id){
 	    int count = gdao.countbyLike(l_m_id);
 	    return count;
-	  }  
+	}  
 
-
-@Override
-	  public LikesVO read(LikesVO vo) {
-		  
+	@Override
+	public LikesVO read(LikesVO vo) {
 		System.out.println("S : 좋아요 조회");  
-		  
 	    LikesVO read = gdao.read(vo);
 	    return read;
-	  }  
+	}  
 
-	  // 좋아요 취소(goods테이블 like컬럼)
-	  @Override
-	  public void deletebyGoods(int gno) {
-		  
+	// 좋아요 취소(goods테이블 like컬럼)
+	@Override
+	public void deletebyGoods(int gno) {
 		System.out.println("S : 좋아요 취소(->goods 테이블 glike 컬럼"+gno);  
 	    gdao.deletebyGoods(gno);
-	    
-	  }
+	}
 
 	// 좋아요 취소(likes테이블) 
 	@Override
 	public void deletebyLikes(String l_m_id, int l_g_gno) {
-		
 		System.out.println("S : 좋아요 취소(->likes테이블)"+l_m_id+l_g_gno);  
 	    gdao.deletebyLikes(l_m_id, l_g_gno);
-		
 	}
 
-	
-	
-	
-	
-	
-	
-	/* 정현 끝 */
-	// *******************************************************************************************************************************
+	// 소원 ************************************************************************************************************************
+	// 상품목록 + 페이징처리	
+	@Override	
+	public List<GoodsVO> goodsList(Criteria cri) throws Exception {	
+		System.out.println("S : 상품목록");	
+		return gdao.listGoods(cri);	
+	}
+
+	// 전체 글 개수 가져오는 처리	
+	@Override	
+	public int listTotalCount() throws Exception {	
+		System.out.println("S : 목록 전체 글 가져오기");	
+		int result = gdao.pageCount();	
+		System.out.println("S : 글 개수 -> " + result);	
+		return result;	
+	}
 }

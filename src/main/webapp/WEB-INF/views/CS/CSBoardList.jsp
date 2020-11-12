@@ -42,7 +42,7 @@
 			</div>
 			<!-- 상품 카테고리 메뉴바 -->
 
-			<div class="col-lg-9">
+			<div class="col-lg-9" style="height:800px">
 
 				<br>
 				<br>

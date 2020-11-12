@@ -56,11 +56,10 @@
   		    endDate = #{endDate},
   		    lowestprice = #{lowestprice}.
   		    thumbnail = #{thumbnail}
-  		  where gno = #{gno}  
+  		  where gno = #{gno}
   	</update>  
   	<!-- 상품 수정 -->
   	
-  	 	
   	<!-- 상품 삭제 -->
   	<delete id="deleteGoods">
   		delete from goods
@@ -77,7 +76,6 @@
 		]]>
 	</insert> 
 	<!-- 첨부파일업로드  -->
-	
 	
 	<!-- 첨부파일 조회 -->
 	<select id="selectFileList" parameterType="int" resultType="hashMap">
@@ -118,14 +116,8 @@
   		where g.gno = #{gno}
   	</update>
   	<!-- 상품 테이블 현재 입찰가 업데이트 -->
- 	
- 
-  <!-- 지은 ******************************************************************************************** -->	
-  
   
   <!-- 재원 ******************************************************************************************** -->	
-  	
-  	
      <!-- 상품신고 -->
    	<select id="myInfo" resultType="com.bestpricemarket.domain.MemberVO">
    		select * from member where id = #{id}
@@ -140,7 +132,7 @@
   	</select>
   	<!-- 상품신고 -->
 
- <!-- 입찰하기 -->
+ 	<!-- 입찰하기 -->
   	<select id="getBidding" resultType="com.bestpricemarket.domain.PricemonitoringVO">
   		select * from pricemonitoring where pm_g_gno = #{pm_g_gno} order by pm_g_bidprice desc,timelog desc limit 5
   	</select>
@@ -161,10 +153,8 @@
   		insert into pricemonitoring(pm_g_gno,pm_m_userid,pm_g_bidprice,timelog)
   		values(#{pm_g_gno},#{pm_m_userid},#{pm_g_bidprice},#{timelog})
   	</insert>
-<!-- 입찰하기 -->
+	<!-- 입찰하기 -->
   
-   <!-- 재원 ******************************************************************************************** -->
-   
    <!-- 태준 ******************************************************************************************** -->
    <!-- 판매자의 다른상품 -->
   	<select id="anothergoods" resultType="AnotherGoodsVO">
@@ -177,11 +167,8 @@
 	</select>
   	<!-- 판매자의 다른상품 -->
    
-   <!-- 태준 ******************************************************************************************** -->
-   
    <!-- 정현 ******************************************************************************************** -->
    <!-- 좋아요 -->
-
   <select id="countbyLike" parameterType="map" resultType="int">
    SELECT COUNT(*) as cnt
    FROM likes
@@ -216,14 +203,21 @@
     DELETE FROM likes
     WHERE l_g_gno = #{l_g_gno} and l_m_id = #{l_m_id}
   </delete>
+   
+	<!-- 소원 ******************************************************************************************** -->
+  	<!-- 상품목록 -->	
+  	<select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">	
+  		select * 	
+  		from goods 	
+  		order by gno desc, regDate desc 	
+  		limit #{pageStart},#{pageSize}	
+  	</select> 	
   	
-   
-   
-   
-   
-   <!-- 정현 ******************************************************************************************** -->
-  
-  
-  
+  	<!-- DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리 -->	
+ 	<select id="pageCount" resultType="int">	
+ 		select	
+ 		 count(*)	
+ 		from goods 	
+ 	</select>
   
   </mapper>
