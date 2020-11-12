@@ -32,14 +32,14 @@
 <body>
 <jsp:include page="../inc/top.jsp"/> 
     <!-- Page Content -->
-	<div class="container" style="margin-bottom: 500px;">
+	<div class="container" style="margin-bottom: 400px;">
 		<div class="row">
 
 			<div class="col-lg-3">
 				<h1 class="my-4">My Page</h1>
 				<div class="list-group">
-					<a href="/myAction/actionlist" class="list-group-item">입찰</a> <a
-						href="/myAction/paylist" class="list-group-item">낙찰</a>
+					<a href="/myAction/actionlist" class="list-group-item">입찰</a> 
+					<a href="/myAction/paylist" class="list-group-item">낙찰</a>
 				</div>
 			</div>
 
@@ -198,8 +198,4 @@ $("#allCheck").click(function(){
   } 
  });
 </script>
-
-
-               
-
 </body>

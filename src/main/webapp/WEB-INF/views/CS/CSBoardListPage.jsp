@@ -1,18 +1,10 @@
 
 <%@page import="com.bestpricemarket.domain.CSVO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>베프마켓 - 친구같은 경매플랫폼</title>
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/cs/cs_css/bootstrap.min.css" rel="stylesheet">
 <!-- 버튼 CSS -->
@@ -21,19 +13,16 @@
 <link href="${pageContext.request.contextPath}/resources/cs/cs_css/shop-homepage.css" rel="stylesheet">
 </head>
 <body>
-   <!-- 헤더 -->
-   <jsp:include page="../inc/top.jsp" />
-   <!-- 헤더 -->
+<!-- 헤더 -->
+<jsp:include page="../inc/top.jsp" />
+<!-- 헤더 -->
 
    <!-- Page Content -->
-   <div class="container">
-
+   <div class="container" style="margin-bottom:410px">
       <div class="row">
-
          <!-- 상품 카테고리 메뉴바 -->
          <div class="col-lg-3">
-
-            <h1 class="my-4">Shop Name</h1>
+            <h1 class="my-4">문의하기</h1>
             <div class="list-group">
                <a href="/CS/register" class="list-group-item">1:1 문의</a>
                <a href="/CS/CSBoardListPage?num=1" class="list-group-item">나의 문의 보기</a>
@@ -42,7 +31,6 @@
          <!-- 상품 카테고리 메뉴바 -->
 
          <div class="col-lg-9">
-
             <br>
             <br>
             <h2>나의 문의 보기</h2> 
@@ -133,4 +121,3 @@
    <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
    <script   src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
