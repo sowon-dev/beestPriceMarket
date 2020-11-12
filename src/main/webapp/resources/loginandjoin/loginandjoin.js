@@ -51,7 +51,7 @@ function loginAjax(){
 		success: function(data){
 			if(data == "true"){
 				alert("정상적으로 로그인되었습니다");
-				window.location.replace("/main");
+				window.location.replace("main");
 			} else {
 				shakeModal();
 			}
