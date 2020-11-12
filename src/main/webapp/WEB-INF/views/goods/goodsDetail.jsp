@@ -80,6 +80,7 @@ function fn_fileDown(fno){
 				
 				
 					<!-- 슬라이드 추가 -->
+					<c:forEach var="file" items="${file}">
 					<div id="carouselExampleIndicators" class="carousel slide my-4"
 						data-ride="carousel">
 						<div class="carousel-inner" role="listbox">
@@ -90,7 +91,6 @@ function fn_fileDown(fno){
 							</div>
 						</div>
 					</div>
-					<c:forEach var="file" items="${file}">
 						<a href="#" onclick="fn_fileDown('${file.fno}'); return false;">
 						<i class="fas fa-arrow-alt-circle-down" style="color: black;"></i></a>
 					</c:forEach>
@@ -144,20 +144,20 @@ function fn_fileDown(fno){
 
 						<!--************************************************* *입찰하기/관심상품(구매자들만 보이기) 끝 *********************************************************-->
 						<c:if test="${ id != goods.g_m_id}">
-							<form action="#" class="display-flex">
+							<!-- <form action="#" class="display-flex"> -->
 								<div class="product-count">
-									<div id="wrap">
+									<span id="wrap">
 									 <c:if test="${id != null && memberList.block == 0}">
 											<c:choose>
-												<c:when test="${goods.actionstatus == 0}">
-													<h4>마감되었습니다.</h4>
+												<c:when test="${goods.actionstatus == 1}">
+													<span style="font-size:2rem;"><strong>마감되었습니다.</strong></span>
 												</c:when>												
 												<c:otherwise>
 													<a href="javascript:openModal('modal1');" class="round-black-btn">입찰하기</a>
 												</c:otherwise>
 											</c:choose>
 										</c:if> 
-									</div>
+									</span>
 									<div id="modal"></div>
 									<div class="modal-con modal1" style="z-index: 9999">
 										<a href="javascript:;" class="close" style="color: white;">X</a>
@@ -190,7 +190,7 @@ function fn_fileDown(fno){
 									<a href="${path}/goods/report?gno=${goods.gno}" class="round-black-btn">신고하기</a>
 									</c:if>
 								</div>
-							</form>
+							<!-- </form> -->
 						</c:if>
 						<!--************************************************* *입찰하기/관심상품(구매자들만 보이기) 끝 *********************************************************-->
 
