@@ -85,16 +85,22 @@
 				return false;
 		}
 
-		if(lowestprice == ""){
-			alert("물품의 하한가를 입력하세요.");
-			document.fr.lowestprice.focus();
+
+		if(file == ""){
+			alert("섬네일 이미지를 등록하세요.");
+			document.fr.file.focus();
 			return false;
 		}
-
 
 		if(endDate == ""){
 			alert("물품의 마감날짜를 입력하세요.");
 			document.fr.endDate.focus();
+			return false;
+		}
+		
+		if(lowestprice == ""){
+			alert("물품의 하한가를 입력하세요.");
+			document.fr.lowestprice.focus();
 			return false;
 		}
 	 

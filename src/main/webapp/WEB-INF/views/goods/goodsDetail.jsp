@@ -100,14 +100,7 @@ function fn_fileDown(fno){
 							</tr>
 							<tr>
 								<th>현재입찰가</th>
-							<%-- 	<c:choose>
-									<c:when test="${finalPrice == 0}">s --%>
-										<%-- <td>${goods.lowestprice}</td> --%>
-									<%-- </c:when> --%>
-									<%-- <c:otherwise> --%>
-										<td>${finalPrice}원</td>
-								<%-- 	</c:otherwise>
-								</c:choose>		 --%>					
+								<td>${finalPrice}원</td>
 							</tr>
 							<tr>
 								<th>입찰시작가</th>
@@ -358,4 +351,5 @@ function getExit(){
 	location.reload(true);
 }
 </script>
+
 </body>

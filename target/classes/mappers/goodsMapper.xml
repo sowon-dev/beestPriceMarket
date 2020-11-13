@@ -92,12 +92,6 @@
   	</update> 
   	<!-- 첨부파일업로드 수정 -->
   	
-  	<!-- 첨부파일 삭제 -->
-  	<delete id="deleteFile">
-  	   delete * from goodsfile where del_chk = 'Y' and fno = #{fno}
-  	</delete>
-  	<!-- 첨부파일 삭제 -->
-  	
   	<!-- 첨부파일 다운로드 -->
   	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
 		select f_name, f_oname 
