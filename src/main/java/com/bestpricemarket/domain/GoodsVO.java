@@ -22,24 +22,6 @@ public class GoodsVO {
 	
 	public GoodsVO() {}
 	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
-			int finalprice, int like, Date regDate, Date endDate, int actionstatus, String thumbnail) {
-		super();
-		this.gno = gno;
-		this.g_m_id = g_m_id;
-		this.category = category;
-		this.gname = gname;
-		this.lowestprice = lowestprice;
-		this.content = content;
-		this.finalprice = finalprice;
-		this.like = like;
-		this.regDate = regDate;
-		this.endDate = endDate;
-		this.actionstatus = actionstatus;
-		this.thumbnail = thumbnail;
-	}
-	
-	
-	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
 			int finalprice, int like, Date regDate, Date endDate, int actionstatus, String thumbnail, int numofbid) {
 		super();
 		this.gno = gno;
@@ -131,14 +113,12 @@ public class GoodsVO {
 		this.thumbnail = thumbnail;
 	}
 	
-	
 	public int getNumofbid() {
 		return numofbid;
 	}
 	public void setNumofbid(int numofbid) {
 		this.numofbid = numofbid;
 	}
-	
 	
 	@Override
 	public String toString() {

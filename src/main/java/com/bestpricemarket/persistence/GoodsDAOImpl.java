@@ -256,6 +256,15 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsVO> top3goods(Criteria cri) throws Exception {
 		System.out.println("DAO: 탑쓰리는? "+sqlSession.selectList(namespace + ".top3goods", cri));
 		return sqlSession.selectList(namespace + ".top3goods", cri);	
+	}
+
+	//좋아요유지
+	@Override
+	public int isClickedLikeBtn(int gno, String id) throws Exception {
+		Map<String, Object> isClickedLikeBtnMap = new HashMap<String, Object>();
+		isClickedLikeBtnMap.put("gno", gno);
+		isClickedLikeBtnMap.put("id", id);
+		return sqlSession.selectOne(namespace+".isClickedLikeBtn", isClickedLikeBtnMap);
 	}	
 	
 	

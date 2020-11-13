@@ -280,5 +280,12 @@ public class GoodsServiceImpl implements GoodsService {
 		System.out.println("탑쓰리는? " +gdao.top3goods(cri));
 		return gdao.top3goods(cri);
 	}
+
+	//좋아요 유지
+	@Override
+	public int isClickedLikeBtn(int gno, String id) throws Exception {
+		return gdao.isClickedLikeBtn(gno, id);
+	}
+	
 	
 }
