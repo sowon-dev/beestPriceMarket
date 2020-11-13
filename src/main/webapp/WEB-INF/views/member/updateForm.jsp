@@ -77,7 +77,7 @@
 	     <span class="front"  style="margin-right: 38px;">연락처</span><input type="text" name="phone"  class="form-control" value="${memberVO.phone}" style="width:226px;display:inline; "><br>
 	     <span class="front" style="margin-right: 45px; ">주소: </span><input type="text" name="addr1" class="form-control" value="${memberVO.addr1}" style="width:226px;display:inline; "><br>
 	     <span class="front" style="margin-right: 40px; ">주소2:</span><input type="text" name="addr2" class="form-control" value="${memberVO.addr2}" style="width:226px;display:inline; "><br>
-	     <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="<fmt:formatDate value="${memberVO.reg_date }" pattern="yyyy-MM-dd"/>" style="width:226px;display:inline; "readonly><br>
+	     <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="${memberVO.reg_date }"style="width:226px;display:inline; "readonly><br>
 	     <input class="btn" type="submit" value="회원수정" name="commit" id="submitBtn" >          
 	    </form>  
 	  	</fieldset>

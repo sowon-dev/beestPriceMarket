@@ -36,17 +36,13 @@ public class BasketController {
 	
 	private static final Logger l = LoggerFactory.getLogger(BasketController.class);
 	
-	
+	 // 관심상품 넣기
 	 @RequestMapping(value="/insert") 
 	 public String insert(@ModelAttribute BasketVO bv, HttpSession session){ 
 		 l.info("C: vo 확인"+bv);
-	  
-	 
 	 return "/basket/listPage"; }
-	 
 	
-	
-	
+	 // 관심상품 리스트
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public  String listGET(HttpSession session,Model model) throws Exception{
     	String id = (String)session.getAttribute("id");
@@ -61,29 +57,22 @@ public class BasketController {
     	
     	return"/basket/basket";
     } 
-    
-    
 
-    
+    //관심상품 삭제
     @RequestMapping(value="/delete", method=RequestMethod.POST)
     public String deletePOST(@RequestParam(value="lno")Integer lno,HttpSession session) throws Exception{
     	
     	System.out.println("lno :"+lno);
     	service.deleteBasket(lno);
-		
-    	
     	System.out.println("C: 삭제 성공");
-    	
     	return "redirect:/basket/listPage";
-    
     }
 
-	
+      // 관심상품 페이징+리스트 출력	
 	  @RequestMapping(value="/listPage", method = RequestMethod.GET) 
 	  public String getListPage(Model model, @RequestParam(value="num",defaultValue="1") int num,HttpSession session) throws Exception{ 
 		// 게시물 목록 + 페이징 추가
 		 BasketPager page = new BasketPager();
-		 
 		 
 		 String l_m_id=(String)session.getAttribute("id");
 		 page.setNum(num);
@@ -101,14 +90,11 @@ public class BasketController {
 		 model.addAttribute("prev", page.getPrev());
 		 model.addAttribute("next", page.getNext());  
 		 
-		 
-		 
 		 model.addAttribute("page", page);
 		 model.addAttribute("select", num);
 	  
 			 return "/basket/listPage"; 
 	  }
-	  
 
 }
 	 
