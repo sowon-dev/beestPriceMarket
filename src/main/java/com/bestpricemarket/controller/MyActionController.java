@@ -26,17 +26,24 @@ public class MyActionController {
 	private static final Logger l = LoggerFactory.getLogger(MyActionController.class);
 	
 	
-	  @RequestMapping(value = "/insert", method = RequestMethod.GET) 
-	  public String insertaction(MyActionVO av) throws Exception{
-	      
-	  service.insertAction(av);
-		  
-	  return "/myAction/myAction"; 
-	 }
+		//관심상품 넣기  
+		@RequestMapping(value = "/insert", method = RequestMethod.GET) 
+		  public String insertaction(MyActionVO av) throws Exception{
+		      
+		  service.insertAction(av);
+			  
+		  return "/myAction/myAction"; 
+		 }
 	
-	
+
+		//관리자 페이지 첫화면
+		@RequestMapping(value = "/actionlist", method=RequestMethod.GET)
+		public String indexGET(HttpSession session)throws Exception{
+			l.info("get index");
+			return "/myAction/myAction3";
+		}
 	// 입찰 목록
-	@RequestMapping(value = "/actionlist", method = RequestMethod.GET)
+	@RequestMapping(value = "/actionlist2", method = RequestMethod.GET)
 	public String getOrderList(HttpSession session, MyActionVO action, Model model,@RequestParam(value="num",defaultValue="1") int num) throws Exception {
 				// num = 페이지 번호
 				String a_m_id = (String)session.getAttribute("id");
