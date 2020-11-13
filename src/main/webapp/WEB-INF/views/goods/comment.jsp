@@ -175,7 +175,10 @@ function clickedCmtBtn(){
 		alert("문의글이 성공적으로 등록되었습니다.");
 		console.log("data: "+data+", info: "+info.c_m_id+today)
 		$("#c_content").val("");
-		$("#ppap2").after("<tr><td> </td><td>"+info.c_m_id+"</td><td>"+info.c_content+"</td><td>"+today+"</td></tr>");
+		$("#ppap2").after("<tr><td> </td><td>"+info.c_m_id+"</td><td>"+info.c_content+"</td><td>"+today+"</td>"
+				+"<td><button class='round-black-btn updateBtnCustom' id='updateBtn_"+data+"' onclick='updateCmt("+data+");'> 수정 </button>"
+				+"<button class='round-black-btn deleteBtnCustom' style='margin-left: 5px;' onclick='deleteCmt("+data+");'>삭제</button></td></tr>"
+				);
       }else{
 		alert("문의글 등록에 실패했습니다. 다시 시도하세요.")
 	  }
