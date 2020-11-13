@@ -128,14 +128,14 @@ public class CSController {
 		int startPageNum = endPageNum - (pageNum_cnt - 1);
 
 		// 마지막 번호 재계산
-		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) postNum));
 
 		if (endPageNum > endPageNum_tmp) {
 			endPageNum = endPageNum_tmp;
 		}
 
 		boolean prev = startPageNum == 1 ? false : true;
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
 
 		// 글 목록 가져오기
 		List<CSVO> CSList = null;
