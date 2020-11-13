@@ -1,6 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%-- <%@ page session="false" %> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- 버튼 CSS -->
@@ -90,10 +92,16 @@
 			  		<h4 class="card-title">
 			    		<a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${category.gname}</a>
 					</h4>
-					
-					<h6>현재가(50000)</h6>
-					<h6>입찰자 0</h6>
-					<h6>${category.endDate}</h6>
+	                <c:choose>
+					    <c:when test="${category.finalprice > 0}">
+					        <h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${category.finalprice}" /></b>원</h6>
+					    </c:when>
+					    <c:otherwise>
+					        <h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${category.lowestprice}" /></b>원</h6>
+					    </c:otherwise>
+					</c:choose>
+					<h6>입찰수 ${category.numofbid}</h6>
+					<h6>경매마감일 ${category.endDate}</h6>
 			    </div>
 			  	</div>
 				</div>

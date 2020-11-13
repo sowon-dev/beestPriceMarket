@@ -27,7 +27,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	private static final String namespace = "com.bestpricemarket.mappers.goodsMapper";
 
-	// 지은 *********************************************************************************************************************************
+// 지은 *********************************************************************************************************************************
 	// 상품등록
 	@Override
 	public void registerGoods(GoodsVO vo) throws Exception {
@@ -123,8 +123,15 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.update(namespace+".finalpriceupdate",gno);
 		
 	}
+
+	// 블락된 회원 가져오기 
+	@Override
+	public MemberVO blockMember(String id) throws Exception {
+
+		return sqlSession.selectOne(namespace+".block", id);
+	}
 	
-	// 재원 *******************************************************************************************************************************
+// 재원 *******************************************************************************************************************************
 	// 상품신고
 	@Override
 	public MemberVO myInfo(String id) throws Exception {
@@ -165,14 +172,14 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.selectOne(namespace + ".insertBidding", prvo);
 	}
 	
-	// 태준 *******************************************************************************************************************************
+// 태준 *******************************************************************************************************************************
 	// 판매자의 다른상품보기
 	@Override
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception {
 		return sqlSession.selectList(namespace+".anothergoods",vo);
 	}
 
-	// 정현 *******************************************************************************************************************************
+// 정현 *******************************************************************************************************************************
 	// 좋아요 입력 -> 제품상세페이지(likes 테이블)
 	@Override
 	public int like(LikesVO vo) throws Exception {
@@ -218,7 +225,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.delete(namespace + ".deletebyLikes", map);  
 	}
 
-	// 소원 ************************************************************************************************************************
+// 소원 ************************************************************************************************************************
 	// 상품목록 + 페이징처리	
 	@Override	
 	public List<GoodsVO> listGoods(Criteria cri) throws Exception {	
@@ -238,7 +245,10 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectOne(namespace+".gd_bidCount", gno);
 	}
 
-
-	
+	//numofbid 입찰자수 전체
+	@Override
+	public void numofbid(int pm_g_gno) throws Exception {
+		sqlSession.update(namespace+".numofbid", pm_g_gno);
+	}	
 	
 }

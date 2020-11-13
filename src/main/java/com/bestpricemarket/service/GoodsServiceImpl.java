@@ -155,7 +155,14 @@ public class GoodsServiceImpl implements GoodsService {
 		
 	}
 
-	// 재원 ************************************************************************************************************************
+	// 블락된 회원 가져오기 
+	@Override
+	public MemberVO blockMember(String id) throws Exception {
+		
+		return gdao.blockMember(id);
+	}
+	
+// 재원 ************************************************************************************************************************
 	// 상품신고
 	@Override
 	public MemberVO myInfo(String id) throws Exception {
@@ -195,16 +202,18 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void insertBidding(PricemonitoringVO prvo) throws Exception {
 		gdao.insertBidding(prvo);
+		gdao.numofbid(prvo.getPm_g_gno());
+		System.out.println("pm_g_gno가 뭐니?" + prvo.getPm_g_gno());
 	}
 	
-	// 태준 *******************************************************************************************************************************
+// 태준 *******************************************************************************************************************************
 	//판매자의 다른상품보기
 	@Override
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception {
 		return gdao.anothergoods(vo);
 	}
 	
-	// 정현 *******************************************************************************************************************************
+// 정현 *******************************************************************************************************************************
 	@Override
     public int like (LikesVO vo) throws Exception {
 		System.out.println("S : 좋아요 클릭(->likes 테이블)");
@@ -245,7 +254,7 @@ public class GoodsServiceImpl implements GoodsService {
 	    gdao.deletebyLikes(l_m_id, l_g_gno);
 	}
 
-	// 소원 ************************************************************************************************************************
+// 소원 ************************************************************************************************************************
 	// 상품목록 + 페이징처리	
 	@Override	
 	public List<GoodsVO> goodsList(Criteria cri) throws Exception {	
