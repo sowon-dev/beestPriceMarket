@@ -59,7 +59,7 @@ public class AdminController {
 		int startPageNum = endPageNum - (pageNum_cnt - 1);
 		System.out.println("startPageNum:"+startPageNum);
 
-		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) postNum));
 		System.out.println("endPageNum_tmp:"+endPageNum_tmp);
 		
 		if (endPageNum > endPageNum_tmp) {
@@ -69,7 +69,7 @@ public class AdminController {
 		boolean prev = startPageNum == 1 ? false : true;
 		System.out.println("prev:"+prev);
 		
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
 		System.out.println("next:"+next);
 		List<MemberVO> MemberList =null;
 		 
@@ -155,7 +155,7 @@ public class AdminController {
 		int startPageNum = endPageNum - (pageNum_cnt - 1);
 		System.out.println("startPageNum:"+startPageNum);
 
-		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) postNum));
 		System.out.println("endPageNum_tmp:"+endPageNum_tmp);
 		
 		if (endPageNum > endPageNum_tmp) {
@@ -165,7 +165,7 @@ public class AdminController {
 		boolean prev = startPageNum == 1 ? false : true;
 		System.out.println("prev:"+prev);
 		
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
 		System.out.println("next:"+next);
 		
 		List<MemberVO> generalMemberList =null;
@@ -217,7 +217,7 @@ public class AdminController {
 		int startPageNum = endPageNum - (pageNum_cnt - 1);
 		System.out.println("startPageNum :"+startPageNum);
 
-		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) postNum));
 		System.out.println("endPageNum_tmp :"+endPageNum_tmp);
 		
 		if (endPageNum > endPageNum_tmp) {
@@ -225,10 +225,7 @@ public class AdminController {
 		}
 
 		boolean prev = startPageNum == 1 ? false : true;
-		System.out.println("prev :"+prev);
-		
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
-		System.out.println("next :"+next);
+		boolean next = endPageNum * postNum >= count ? false : true;
 		
 		List<MemberVO> restrictionMemberList =null;
 		restrictionMemberList = service.getRestrictionMemberList(displayPost, postNum);
@@ -271,14 +268,14 @@ public class AdminController {
 
 		int startPageNum = endPageNum - (pageNum_cnt - 1);
 
-		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) postNum));
 
 		if (endPageNum > endPageNum_tmp) {
 			endPageNum = endPageNum_tmp;
 		}
 
 		boolean prev = startPageNum == 1 ? false : true;
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
 
 		List<GoodsVO> goodsList = null;
 		goodsList = service.getGoodsList(displayPost, postNum);
@@ -324,14 +321,14 @@ public class AdminController {
 
 		int startPageNum = endPageNum - (pageNum_cnt - 1);
 
-		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) postNum));
 
 		if (endPageNum > endPageNum_tmp) {
 			endPageNum = endPageNum_tmp;
 		}
 
 		boolean prev = startPageNum == 1 ? false : true;
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
 
 		List<GoodsVO> underwayAuctionList = null;
 		underwayAuctionList = service.getUnderwayAuctionList(displayPost, postNum);
@@ -376,14 +373,14 @@ public class AdminController {
 
 		int startPageNum = endPageNum - (pageNum_cnt - 1);
 
-		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNum_cnt));
+		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) postNum));
 
 		if (endPageNum > endPageNum_tmp) {
 			endPageNum = endPageNum_tmp;
 		}
 
 		boolean prev = startPageNum == 1 ? false : true;
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
 
 		// 글 목록 가져오기
 		List<GoodsVO> closedAuctionList = null;
