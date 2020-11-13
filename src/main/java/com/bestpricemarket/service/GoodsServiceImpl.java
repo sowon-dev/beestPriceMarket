@@ -258,25 +258,27 @@ public class GoodsServiceImpl implements GoodsService {
 	// 상품목록 + 페이징처리	
 	@Override	
 	public List<GoodsVO> goodsList(Criteria cri) throws Exception {	
-		System.out.println("S : 상품목록");	
 		return gdao.listGoods(cri);	
 	}
 
 	// 전체 글 개수 가져오는 처리	
 	@Override	
 	public int listTotalCount() throws Exception {	
-		System.out.println("S : 목록 전체 글 가져오기");	
 		int result = gdao.pageCount();	
-		System.out.println("S : 글 개수 -> " + result);	
 		return result;	
 	}
 
 	//입찰자수 가져오기
 	@Override
 	public int gd_bidCount(int gno) throws Exception {
-		System.out.println("gd_bidCount는 왜 3이 아닐까? "+ gdao.gd_bidCount(gno));
 		return gdao.gd_bidCount(gno);
 	}
-	
+
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	@Override
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception {
+		System.out.println("탑쓰리는? " +gdao.top3goods(cri));
+		return gdao.top3goods(cri);
+	}
 	
 }

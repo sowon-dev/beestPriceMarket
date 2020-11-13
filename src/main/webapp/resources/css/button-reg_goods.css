@@ -2,7 +2,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=BenchNine:700);
 .snip1535 {
-  background-color: #aeaeae;
+  background-color: #212529;
   border: none;
   color: #ffffff;
   cursor: pointer;
@@ -46,7 +46,8 @@
 }
 .snip1535:hover,
 .snip1535.hover {
-  background-color: #808080;
+  background-color: white;
+  color: #000000;
 }
 .snip1535:hover:before,
 .snip1535.hover:before,

@@ -47,7 +47,11 @@ public class HomeController {
 		PageMaker pm = new PageMaker();
 		pm.setCri(cri);
 		pm.setTotalCount(gservice.listTotalCount());
-		model.addAttribute("pm",pm);		
+		model.addAttribute("pm",pm);
+		
+		//입찰수 높은 상품 3가지 슬라이드로 출력
+		model.addAttribute("top3goods", gservice.top3goods(cri));
+		
 	}
 	
 	//favicon

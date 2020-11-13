@@ -111,6 +111,9 @@ public interface GoodsService {
 	// 입찰자수 가져오기
 	public int gd_bidCount(int gno) throws Exception;
 	
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception;
+	
 /* 소원 끝*/
 	
 }

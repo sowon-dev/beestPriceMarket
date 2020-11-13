@@ -113,5 +113,9 @@ public interface GoodsDAO {
 	
 	//numofbid 입찰자수 전체
 	public void numofbid(int pm_g_gno) throws Exception;
+	
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception;
+	
 
 }
