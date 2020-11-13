@@ -93,6 +93,7 @@ request.setCharacterEncoding("utf-8");
 
 <script type="text/javascript">
 // 아이디 중복체크
+let isIdCheckBtn = false;
 $("#idCheckBtn").click(function(){  
 	let d = document.frJoin.id.value;
 	
@@ -109,18 +110,23 @@ $("#idCheckBtn").click(function(){
 			}else if(d.length < 4){
 				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'red'}).text("아이디를 4자리이상 입력하세요.");
 			}else{
-				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");				
+				$(".idCheck .idCheckMsg").css({visibility: 'visible', display: 'block', color:'blue'}).text("사용 가능한 아이디입니다.");
+				isIdCheckBtn = true;	
+				console.log("아이디체크"+isIdCheckBtn);			
 			}
 	    }
 	  }, error : function(){ console.log("아이디 중복확인 실패"); }
 	 }); 
 });
 
+console.log("아이디체크"+isIdCheckBtn);
+
 //비밀번호 체크 
+let isPwValCheckF = false;
 function pwValCheck(){
     let pwd1 = document.frJoin.pw.value;
     let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-
+    
 	//비밀번호 유효성체크
     if(pwd1.length < 8){
         $('.pwValCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호 8자리이상 입력하세요.");
@@ -128,6 +134,7 @@ function pwValCheck(){
 		$('.pwValCheckMsg').css({visibility: 'visible', display: 'block', color:'red'}).text("비밀번호는 숫자/영문/특수문자를 모두 포함해야합니다.");           
    	 }else {
 		$('.pwValCheckMsg').css({visibility: 'hidden', display: 'block'}).text("");
+		isPwValCheckF = true;
    	 }    
 }
 
@@ -147,6 +154,8 @@ function pwCheck(){
 	}
 }
 
+console.log("비번체크"+isPwValCheckF);
+
 // 회원가입 유효성 체크
 function signUpValidation(){
 	let f = document.frJoin;
@@ -158,18 +167,21 @@ function signUpValidation(){
 	let phone = f.phone.value;
 	let addr1 = f.addr1.value;
 	
-	if(!userId || userId.length < 4){
-		alert("아이디 중복확인버튼을 눌러주세요");
+	if(!userId || isIdCheckBtn == false){
+		alert("아이디 중복확인버튼을 눌러주세요.");
+		$("#id").focus();
+	}else if(userId.length < 4 ){
+		alert("아이디는 4글자 이상이어야합니다.");
 		$("#id").focus();
 	}else if(!userName){
 		alert("이름 입력은 필수입니다.");
 		$("#username").focus();
-	}else if(!userPw){
+	}else if(!userPw ){
 		alert("비밀번호 입력은 필수입니다.");
 		$("#pw").focus();
-	}else if(!userPwCheck){
-		alert("비밀번호 확인은 필수입니다.");
-		$("#password_confirmation").focus();	
+	}else if(userPw.length < 8 || isPwValCheckF == false){
+		alert("유효한 비밀번호를 입력하세요.");
+		$("#password_confirmation").focus();
 	}else if(!email){
 		alert("이메일 입력은 필수입니다.");
 		$("#email").focus();
