@@ -1,6 +1,5 @@
 <%@page import="com.bestpricemarket.domain.BasketVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
@@ -65,7 +64,7 @@
      <div class="row"> 
          <div class="col-12">  
           	<!-- <div class="card"> -->
-                   <h1 class="my-4" style="text-align: center;">장바구니</h1>   
+                   <h1 class="my-4" style="text-align: center;">좋아요</h1>   
                     <div class="row p-5" style="top:300px; width: 996px;"  >
                          <div class="col-md-12">
                             <form method="post" role="form">

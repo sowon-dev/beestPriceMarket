@@ -28,9 +28,7 @@
     color: #212529 !important;
     text-decoration: none !important;
 }
-
- 
- .py-5  {
+.py-5  {
    width:100%;
    position:absolute;
    bottom:0;
@@ -46,8 +44,6 @@
  }
 .front{
  width: 202px;
- 
-
 }
 </style>
 </head>
@@ -68,8 +64,9 @@
           <a href="/member/changePw" class="list-group-item">비밀번호 수정</a>
         </div>
       </div>
+      
       <div class="col-lg-9">
-	    <fieldset>
+	    <fieldset style="margin-top: 50px;">
 	    <legend> 비밀번호 수정 </legend>
 	    <form action="/member/changePw" method="post" name="frJoin">
 	     <span class="front" style="margin-right: 34px;">아이디</span>  <input type="text" name="id" class="form-control" value="${memberVO.id }" style="width:226px;display:inline; text-align: center;" readonly><br>

@@ -2,7 +2,6 @@
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
 <head>
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,9 +27,7 @@
     color: #212529 !important;
     text-decoration: none !important;
 }
-
- 
- .py-5  {
+.py-5  {
    width:100%;
    position:absolute;
    bottom:0;
@@ -42,19 +39,16 @@
   justify-content: center;
   align-items: center;
   border: solid 1px gray;
-  
- }
+}
 .front{
  width: 202px;
- 
-
 }
 </style>
 </head>
 <body>
-  <!-- 헤더 -->
-   <jsp:include page="../inc/top.jsp"/>
-  <!-- 헤더 -->
+<!-- 헤더 -->
+<jsp:include page="../inc/top.jsp"/>
+<!-- 헤더 -->
   
   <!-- Page Content -->
   <div class="container">
@@ -68,8 +62,9 @@
           <a href="/member/changePw" class="list-group-item">비밀번호 수정</a>
         </div>
       </div>
+      
       <div class="col-lg-9">
-	    <fieldset>
+	    <fieldset style="margin-top: 50px;">
 	    <legend> 비밀번호 수정 </legend>
 	    <form action="/member/checkPw" method="post">
 	     <span class="front" style="margin-right: 34px;">아이디</span>  <input type="text" name="id" class="form-control" value="${memberVO.id }" style="width:226px;display:inline; text-align: center;" readonly><br>
@@ -82,16 +77,11 @@
     </div>
   </div>
  
-  <!-- 푸터 -->
-  <jsp:include page="../inc/bottom.jsp"/>
-  <!-- 푸터 -->
+<!-- 푸터 -->
+<jsp:include page="../inc/bottom.jsp"/>
+<!-- 푸터 -->
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
-
-
+<!-- Bootstrap core JavaScript -->
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
