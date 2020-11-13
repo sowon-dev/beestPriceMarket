@@ -234,5 +234,13 @@
  		 count(*)	
  		from goods 	
  	</select>
-  
+ 	
+ 	<!-- 입찰수 높은 상품 3가지 슬라이드로 출력 -->
+    <select id="top3goods" resultType="com.bestpricemarket.domain.GoodsVO">	
+  		select gno, thumbnail
+  		from goods 	
+  		order by numofbid desc
+  		limit 3
+  	</select> 
+  	
   </mapper>

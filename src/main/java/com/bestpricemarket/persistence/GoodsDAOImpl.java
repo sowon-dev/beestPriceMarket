@@ -249,6 +249,15 @@ public class GoodsDAOImpl implements GoodsDAO {
 	@Override
 	public void numofbid(int pm_g_gno) throws Exception {
 		sqlSession.update(namespace+".numofbid", pm_g_gno);
+	}
+
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	@Override
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception {
+		System.out.println("DAO: 탑쓰리는? "+sqlSession.selectList(namespace + ".top3goods", cri));
+		return sqlSession.selectList(namespace + ".top3goods", cri);	
 	}	
+	
+	
 	
 }
