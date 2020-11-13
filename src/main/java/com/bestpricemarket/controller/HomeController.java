@@ -47,7 +47,7 @@ public class HomeController {
 		PageMaker pm = new PageMaker();
 		pm.setCri(cri);
 		pm.setTotalCount(gservice.listTotalCount());
-		model.addAttribute("pm",pm);
+		model.addAttribute("pm",pm);		
 	}
 	
 	//favicon

@@ -109,6 +109,14 @@
   		where g.gno = #{gno}
   	</update>
   	<!-- 상품 테이블 현재 입찰가 업데이트 -->
+  	
+  	<!-- 블락된 회원 가져오기 -->
+  	<select id="block" resultType="com.bestpricemarket.domain.MemberVO">
+  		select *
+  		from member
+  		where id=#{id} 
+  	</select> 
+  	<!-- 블락된 회원 가져오기 -->
   
   <!-- 재원 ******************************************************************************************** -->	
      <!-- 상품신고 -->
@@ -152,6 +160,14 @@
   		from pricemonitoring
   		where pm_g_gno=#{pm_g_gno}
   	</select>
+  	
+  	<update id="numofbid">
+  		update goods 
+		set numofbid = (select count(*)
+						from pricemonitoring
+						where pm_g_gno=#{pm_g_gno})
+		where gno=#{pm_g_gno};
+  	</update>
 	<!-- 입찰하기 -->
   
    <!-- 태준 ******************************************************************************************** -->

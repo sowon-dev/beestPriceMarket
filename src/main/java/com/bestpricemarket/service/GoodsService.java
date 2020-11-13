@@ -49,6 +49,10 @@ public interface GoodsService {
 	
 	// 상품 테이블 현재 입찰가 업데이트
 	public void finalpriceupdate(int gno) throws Exception;
+	
+	// 블락된 회원 가져오기 
+	public MemberVO blockMember(String id) throws Exception;
+	
 /* 지은 끝 */
 	
 /* 재원 */

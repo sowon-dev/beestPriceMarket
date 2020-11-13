@@ -54,6 +54,9 @@ public interface GoodsDAO {
 	
 	// 상품 테이블 현재 입찰가 업데이트
 	public void finalpriceupdate(int gno) throws Exception;
+	
+	// 블락된 회원 가져오기 
+	public MemberVO blockMember(String id) throws Exception;
 
 // 재원 *************************************************************************************************************************
 	// 상품신고
@@ -107,5 +110,8 @@ public interface GoodsDAO {
 	
 	//입찰자수 가져오기
 	public int gd_bidCount(int gno) throws Exception;
+	
+	//numofbid 입찰자수 전체
+	public void numofbid(int pm_g_gno) throws Exception;
 
 }

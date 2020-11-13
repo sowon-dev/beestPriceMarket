@@ -43,6 +43,7 @@ import com.bestpricemarket.domain.Criteria;
 import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.LikesVO;
+import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PageMaker;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
@@ -75,7 +76,6 @@ public class GoodsController {
 
 		// id 세션값
 		model.addAttribute("id", (String) session.getAttribute("id"));
-
 		model.addAttribute("category", category);
 		model.addAttribute("cri", cri);
 
@@ -118,9 +118,9 @@ public class GoodsController {
 		pm.setTotalCount(service.CategoryCount(category));
 		model.addAttribute("pm", pm);
 
-		//입찰자수 가져오기 pm_g_gno
-		//model.addAttribute("gd_bidCount", service.gd_bidCount(gno));
-		//System.out.println("gd_bidCount는 왜 3이 아닐까? "+ service.gd_bidCount(gno));
+		// 블락된 회원 가져오기
+		MemberVO mvo = service.blockMember((String) session.getAttribute("id"));
+		model.addAttribute("member", mvo);
 		
 		return "/goods/goodsList";
 	}
@@ -163,7 +163,6 @@ public class GoodsController {
 					service.endStatus(gno);
 		}
 
-		
 		// 현재입찰가
 		List<PricemonitoringVO> prvo = service.getBidding(gno);
 		if (prvo.size() == 0) {
@@ -174,14 +173,12 @@ public class GoodsController {
 			service.finalpriceupdate(gno);
 		}
 	
-		
 		// 판매자의 다른상품목록 출력
 		GoodsVO vo = service.goodsDetail(gno);
 		model.addAttribute("List", service.anothergoods(vo));
 
 		//입찰자수 가져오기 pm_g_gno
 		model.addAttribute("gd_bidCount", service.gd_bidCount(gno));
-		System.out.println("gd_bidCount는 왜 3이 아닐까? "+ service.gd_bidCount(gno));
 
 		return "/goods/goodsDetail";
 	}
