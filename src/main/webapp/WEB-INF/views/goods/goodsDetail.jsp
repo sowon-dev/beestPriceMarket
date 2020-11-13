@@ -22,11 +22,9 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<!-- 본문 JS  -->
 <!-- 버튼 CSS -->
 <link href="${pageContext.request.contextPath}/resources/goods/goods_css/goodsBtn.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/goods/goods_css/bid_css.css" rel="stylesheet">
-<!-- 버튼 CSS -->
 <link href="${pageContext.request.contextPath}/resources/goods/goods_css/likebtn.css" rel="stylesheet">
 <script type="text/javascript">
 // 수정/삭제 이동  
@@ -65,7 +63,15 @@ String result = (String) session.getAttribute("0");
 <!-- 본문 -->
 <div class="pd-wrap">
 	<div class="container">
-		<div class="heading-section">경매상품 상세정보</div>
+	
+		<!-- 태준 시작 -->
+		<span style="float : right;">
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">twitter</a>
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		</span>		
+		<!-- 태준 끝 -->
+	
+		<div class="heading-section">경매상품 상세정보</div>		
 		<div class="row">
 		
 			<!-- 경매정보 이미지 -->
@@ -111,8 +117,8 @@ String result = (String) session.getAttribute("0");
 							<td>${goods.regDate}  ~  ${goods.endDate}</td>
 						</tr>
 						<tr>
-							<th>남은시간</th>
-							<td></td>
+							<th>입찰마감</th>
+							<td><div id="d-day"></div></td>
 						</tr>
 						<tr>
 							<th>입찰수</th>
@@ -350,5 +356,18 @@ $(document).ready(function(){
 function getExit(){
 	location.reload(true);
 }
+
+//마감 카운트다운
+var countDownDate = new Date("${goods.endDate}").getTime(); // 1초간격 갱신 
+var x = setInterval(function() { // 오늘 날짜 등록 
+var now = new Date().getTime(); 
+var distance = countDownDate - now; // 마감일자-현재일자
+var d = Math.floor(distance / (1000 * 60 * 60 * 24)); 
+var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));  
+var s = Math.floor((distance % (1000 * 60)) / 1000);
+
+document.getElementById("d-day").innerHTML = "<span style='color: red;'>" + d +"일 " + h + "시간 " + m + "분 " + s + "초 </span>남았습니다."; });
+
 </script>
 </body>
