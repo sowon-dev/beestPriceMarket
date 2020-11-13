@@ -117,5 +117,7 @@ public interface GoodsDAO {
 	//입찰수 높은 상품 3가지 슬라이드로 출력
 	public List<GoodsVO> top3goods(Criteria cri) throws Exception;
 	
-
+	//좋아요유지
+	public int isClickedLikeBtn(int gno, String id) throws Exception;
+	
 }

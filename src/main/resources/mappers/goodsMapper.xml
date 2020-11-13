@@ -243,4 +243,10 @@
   		limit 3
   	</select> 
   	
+  	<!-- 좋아요유지 -->
+  	<select id="isClickedLikeBtn" resultType="int">
+  		select count(*)
+  		from likes
+  		where l_g_gno = #{gno} and l_m_id =#{id}
+  	</select>
   </mapper>

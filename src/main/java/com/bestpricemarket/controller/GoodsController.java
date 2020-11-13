@@ -69,10 +69,7 @@ public class GoodsController {
 // 지은 ***************************************************************************************************************************
 	// 상품등록
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String goodsRegisterGET(Model model, HttpSession session, Criteria cri,
-			@ModelAttribute("category") String category) throws Exception {
-
-		System.out.println("@@@@@@@ 상품등록 페이지 이동");
+	public String goodsRegisterGET(Model model, HttpSession session, Criteria cri, @ModelAttribute("category") String category) throws Exception {
 
 		// id 세션값
 		model.addAttribute("id", (String) session.getAttribute("id"));
@@ -83,26 +80,16 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String goodsRegisterPOST(GoodsVO vo, MultipartHttpServletRequest mpRequest, Criteria cri,
-			@ModelAttribute("category") String category) throws Exception {
-
-		System.out.println("C : 뷰페이지에서 전달되는 파라미터 -> " + vo);
+	public String goodsRegisterPOST(GoodsVO vo, MultipartHttpServletRequest mpRequest, Criteria cri, @ModelAttribute("category") String category) throws Exception {
 
 		// 상품 등록 서비스
 		service.goodsRegister(vo, mpRequest);
-
-		System.out.println("C : 상품등록 완료@@@@");
-
 		return "redirect:/goods/list";
 	}
 
 	// 상품목록 + 카테고리별 목록 + 페이징 처리
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String goodsListGET(Model model, HttpSession session, @ModelAttribute("cri") Criteria cri, String category)
-			throws Exception {
-		System.out.println("카테고리 : " + category);
-		System.out.println("C : goodsList.jsp 이동");
-
+	public String goodsListGET(Model model, HttpSession session, @ModelAttribute("cri") Criteria cri, String category) throws Exception {
 		// id 세션값
 		model.addAttribute("id", (String) session.getAttribute("id"));
 
@@ -131,7 +118,6 @@ public class GoodsController {
 			HttpSession session, @ModelAttribute("category") String category) throws Exception {
 
 		String id = (String) session.getAttribute("id");
-		System.out.println("C : goodsDetail.jsp 이동");
 
 		model.addAttribute("goods", service.goodsDetail(gno));
 		model.addAttribute("id", (String) session.getAttribute("id"));
@@ -167,7 +153,6 @@ public class GoodsController {
 		List<PricemonitoringVO> prvo = service.getBidding(gno);
 		if (prvo.size() == 0) {
 			model.addAttribute("finalPrice", gvo.getLowestprice());
-			
 		} else {
 			model.addAttribute("finalPrice", service.finalPrice(gno));
 			service.finalpriceupdate(gno);
@@ -179,7 +164,11 @@ public class GoodsController {
 
 		//입찰자수 가져오기 pm_g_gno
 		model.addAttribute("gd_bidCount", service.gd_bidCount(gno));
-
+		
+		//좋아요유지
+		model.addAttribute("isClickedLikeBtn", service.isClickedLikeBtn(gno, id));
+		System.out.println("좋아요유지 : "+service.isClickedLikeBtn(gno, id)+" gno랑 id는? "+gno+id);
+		
 		return "/goods/goodsDetail";
 	}
 
@@ -187,8 +176,6 @@ public class GoodsController {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String goodsModifyGET(@RequestParam("gno") int gno, Model model, HttpSession session,
 			@ModelAttribute("cri") Criteria cri, @ModelAttribute("category") String category) throws Exception {
-
-		System.out.println("C : goodsModify.jsp 이동(GET)");
 
 		// 아이디 세션값
 		model.addAttribute("id", (String) session.getAttribute("id"));
@@ -206,8 +193,6 @@ public class GoodsController {
 		model.addAttribute("cri", cri);
 		model.addAttribute("category", category);
 
-		System.out.println("################ 수정GET에서 cri : " + cri);
-
 		return "/goods/goodsModify";
 	}
 
@@ -217,27 +202,20 @@ public class GoodsController {
 			RedirectAttributes rttr, @ModelAttribute("category") String category, @ModelAttribute("cri") Criteria cri)
 			throws Exception {
 
-		System.out.println("C : 상품 수정 POST");
-
 		// 상품 수정 서비스 호출
 		service.goodsModify(vo, files, fileNames, mpRequest);
-		System.out.println("C : 수정된 정보 -> " + vo);
 
 		// 수정 완료된 페이징 정보
 		rttr.addAttribute("category", category);
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("pageSize", cri.getPageSize());
 
-
 		return "redirect:/goods/list";
 	}
 
 	// 상품삭제
 	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
-	public String goodsDeletePOST(@RequestParam("gno") int gno, Model model, Criteria cri, RedirectAttributes rttr,
-			@ModelAttribute("category") String category) throws Exception {
-
-		System.out.println("C : 상품 삭제 POST");
+	public String goodsDeletePOST(@RequestParam("gno") int gno, Model model, Criteria cri, RedirectAttributes rttr, @ModelAttribute("category") String category) throws Exception {
 
 		// 상품 삭제 서비스 호출
 		service.goodsDelete(gno);
@@ -364,7 +342,6 @@ public class GoodsController {
 		Map<String, Object> resultMap = service.selectFileInfo(map);
 		String storedFileName = (String) resultMap.get("f_name");
 		String originalFileName = (String) resultMap.get("f_oname");
-		System.out.println("C : @@@@@@@ 다운로드 실행");
 
 		// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환
 		byte fileByte[] = org.apache.commons.io.FileUtils
@@ -385,12 +362,7 @@ public class GoodsController {
 	// http://localhost:8088/goods/report?gno=1
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
 	public void reportGET(HttpSession session, @RequestParam("gno") int bno, Model model) throws Exception {
-		// public void reportGET( @RequestParam("session") String session,
-		// @RequestParam("gno") int bno, Model model) throws Exception{
-		log.info("C : /report -> report.jsp ");
-		log.info("C : reportGET() 호출 ");
 		String id = (String) session.getAttribute("id");
-		// session.setAttribute("id", "user1");
 		model.addAttribute("reportVO", service.showReportDetail(bno));
 
 		model.addAttribute("myInfo", service.myInfo(id));
@@ -464,15 +436,9 @@ public class GoodsController {
 				return prvo;
 			}
 		}
-
 		return null;
-
 	}
-// 태준 *******************************************************************************************************************************
-	
 
-	
-	
 // 정현 *******************************************************************************************************************************
 	//좋아요 입력 -> 제품상세페이지
 	@ResponseBody

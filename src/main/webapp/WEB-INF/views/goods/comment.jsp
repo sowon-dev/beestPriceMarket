@@ -91,21 +91,15 @@ function rereplyCmt(c_num){
 	$('#cmtBtn').hide();
 	$('#recmtBtn').show();	
 	document.getElementById("review").scrollIntoView();
-	
 	ck_c_num = c_num;
-	console.log("c_num은 "+c_num+" ck_c_num은 "+ck_c_num);
-
 	$("#recmtBtn").click({param: c_num}, rereplyParam);	
-	console.log("rereplyCmt메서드 끝");
 };//대댓글쓰기 버튼 끝
 
 //대댓글등록 파라미터 가져가기
 function rereplyParam(e, param){
-	console.log("Param메서드 시작");
 	let c_content = document.frCmt.c_content.value;
 	let c_m_idFormat = document.frCmt.c_m_id.value.substring(0,4).concat('*****');
 	ck_c_num = e.data.param;
-	console.log("파람함수 c_num "+e.data.param+" ck_c_num: "+ck_c_num);
 
 	//대댓글내용없는 경우
 	if(c_content == ""){ 
@@ -173,7 +167,6 @@ function clickedCmtBtn(){
 	  success: function(data){//데이터를 보내는 것이 성공했을 시 출력되는 메시지
 	  if(data){
 		alert("문의글이 성공적으로 등록되었습니다.");
-		console.log("data: "+data+", info: "+info.c_m_id+today)
 		$("#c_content").val("");
 		$("#ppap2").after("<tr><td> </td><td>"+info.c_m_id+"</td><td>"+info.c_content+"</td><td>"+today+"</td>"
 				+"<td><button class='round-black-btn updateBtnCustom' id='updateBtn_"+data+"' onclick='updateCmt("+data+");'> 수정 </button>"
@@ -196,7 +189,6 @@ function updateCmt(c_num){
 		document.getElementById('updateBtn_'+c_num).innerHTML = '등록';
 		document.getElementById('td_c_content_'+c_num).readOnly = false;
 		isFirstClick = false;
-		console.log("플래그 확인 "+isFirstClick);
 	}else{
 		ck_c_content = document.getElementById('td_c_content_'+c_num).value;
 		ck_c_num = document.getElementById('td_c_num_'+c_num).value;
@@ -224,7 +216,6 @@ function updateCmt(c_num){
 		document.getElementById('updateBtn_'+c_num).innerHTML = '수정';
 		document.getElementById('td_c_content_'+c_num).readOnly = true;
 		isFirstClick = true;
-		console.log("플래그 확인 "+isFirstClick);
 	}
 }//댓글수정버튼 끝
 
