@@ -45,9 +45,6 @@ public interface GoodsDAO {
 
 	// 첨부파일 수정
 	public void updateFile(Map<String, Object> map) throws Exception;
-
-	// 첨부파일 삭제 
-	public void deleteFile(int fno) throws Exception;
 	
 	// 첨부파일 다운로드
 	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;

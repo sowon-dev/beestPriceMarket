@@ -102,11 +102,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.update(namespace + ".updateFile", map);
 	}
 	
-	// 첨부파일 수정
-	@Override
-	public void deleteFile(int fno) throws Exception {
-		sqlSession.delete(namespace+".deleteFile", fno);
-	}
 	
 	// 첨부파일 다운로드
 	@Override
@@ -125,9 +120,10 @@ public class GoodsDAOImpl implements GoodsDAO {
 	//상품 테이블 현재 입찰가 업데이트
 	@Override
 	public void finalpriceupdate(int gno) throws Exception {
-		sqlSession.update(namespace+".finalpriceupdate");
+		sqlSession.update(namespace+".finalpriceupdate",gno);
 		
 	}
+	
 	// 재원 *******************************************************************************************************************************
 	// 상품신고
 	@Override

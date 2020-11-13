@@ -8,6 +8,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/button-reg_goods.css" rel="stylesheet">
 <!-- 버튼 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style type="text/css">
 .list-group-item:active{
   background-color: #e9e9e9;
@@ -76,9 +77,9 @@
                 <h4 class="card-title">
                   <a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${category.gname}</a>
                 </h4>
-                <h6>현재가(50000)</h6>
+                <h6>현재가  <b>${category.finalprice}</b>원</h6>
                 <h6>입찰자 </h6>
-                <h6>${category.endDate}</h6>
+                <h6>마감일 ${category.endDate}</h6>
               </div>
             </div>
           </div>
@@ -95,7 +96,7 @@
 		 <!-- 이전 -->
 		  <c:if test="${pm.prev}">
    			<li class="page-item">
-   				<a class="page-link" href="/goods/list?category=${category}&page=${pm.startPage-1}">&laquo;</a>
+   				<a class="page-link" href="/goods/list?category=${category}&page=${pm.startPage-1}">Previous</a>
    			</li>
    		   </c:if>	
    		 <!-- 이전 -->	
@@ -113,17 +114,13 @@
    		 <!-- 다음 -->
    		  <c:if test="${pm.next && pm.endPage > 0}">	
    			<li class="page-item">
-   			  	<a class="page-link" href="/goods/list?category=${category}&page=${pm.endPage+1}">&raquo;</a>
+   			  	<a class="page-link" href="/goods/list?category=${category}&page=${pm.endPage+1}">Next</a>
    			</li>
    		  </c:if>	
    		 <!-- 다음 -->	
 		  </ul>
 	     </c:if>
         <!-- 페이징 하단부 처리(카테고리목록) -->
-        
-        
-        
-       
       </div>
       <!-- /.col-lg-9 -->
 

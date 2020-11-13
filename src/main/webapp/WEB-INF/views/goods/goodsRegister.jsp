@@ -77,6 +77,7 @@
 		var content = document.fr.content.value;
 		var lowestprice = document.fr.lowestprice.value;
 		var endDate = document.fr.endDate.value;
+		var file = document.fr.file.value;
 
 		if(category == ""){
 			alert("물품분류를 선택하세요.");
@@ -96,16 +97,22 @@
 				$("#content").focus();
 				return false;
 			}
-		
-		if(lowestprice == ""){
-			alert("물품의 하한가를 입력하세요.");
-			document.fr.lowestprice.focus();
+
+		if(file == ""){
+			alert("섬네일 이미지를 등록하세요.");
+			document.fr.file.focus();
 			return false;
 		}
 
 		if(endDate == ""){
 			alert("물품의 마감날짜를 입력하세요.");
 			document.fr.endDate.focus();
+			return false;
+		}
+		
+		if(lowestprice == ""){
+			alert("물품의 하한가를 입력하세요.");
+			document.fr.lowestprice.focus();
 			return false;
 		}
 
@@ -190,7 +197,6 @@
                            		<div id="fileIndex"></div>
                            		<input type="file" name="file" id="file">
                               </div>
-							 <!-- <button  type="button" class="fileAdd" id="file" >파일추가</button>  -->
                    	   </div>
                     </div> 
                      

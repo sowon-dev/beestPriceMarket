@@ -163,15 +163,18 @@ public class GoodsController {
 					service.endStatus(gno);
 		}
 
+		
 		// 현재입찰가
 		List<PricemonitoringVO> prvo = service.getBidding(gno);
 		if (prvo.size() == 0) {
 			model.addAttribute("finalPrice", gvo.getLowestprice());
-			service.finalpriceupdate(gno);
+			
 		} else {
 			model.addAttribute("finalPrice", service.finalPrice(gno));
+			service.finalpriceupdate(gno);
 		}
-
+	
+		
 		// 판매자의 다른상품목록 출력
 		GoodsVO vo = service.goodsDetail(gno);
 		model.addAttribute("List", service.anothergoods(vo));
