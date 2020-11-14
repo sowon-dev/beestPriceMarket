@@ -125,11 +125,11 @@
 										<ul class="pagination justify-content-center">
 										<c:if test="${page.prev}">
 										 <li class="page-item">
-										 <a class="page-link" href="/basket/listPage?num=${page.startPageNum - 1}">이전</a>
+										 <a class="page-link" href="/basket/listPage?num=${startPageNum - 1}">Previous</a>
 										 </li>
 										</c:if>
 										
-										<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
+										<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
 										 
 										 
 										  <c:if test="${select != num}">
@@ -149,7 +149,7 @@
 										
 										<c:if test="${page.next}">
 										 <li class="page-item">
-										 <a class="page-link" href="/basket/listPage?num=${page.endPageNum + 1}">다음</a>
+										 <a class="page-link" href="/basket/listPage?num=${endPageNum + 1}">Next</a>
 										 </li>
 										</c:if>
 									</ul>

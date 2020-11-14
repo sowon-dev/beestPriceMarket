@@ -43,9 +43,9 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public int getCount() throws Exception {
+	public int getCount(String l_m_id) throws Exception {
 		
-		return bkdao.getCount();
+		return bkdao.getCount(l_m_id);
 	}
 
 	@Override

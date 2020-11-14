@@ -26,7 +26,8 @@
   <!-- 상품 세기 -->
   <select id="getCount" resultType="int">
    select count(lno)
-   from likes 
+   from likes
+   where l_m_id={l_m_id} 
   </select>
  
  <!-- 게시물 목록 + 페이징 -->
