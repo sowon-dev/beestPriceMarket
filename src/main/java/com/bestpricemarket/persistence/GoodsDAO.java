@@ -79,6 +79,9 @@ public interface GoodsDAO {
 	// 입찰하기
 	public void insertBidding(PricemonitoringVO prvo) throws Exception;
 	
+	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리
+	public int getTotalCount(Criteria cri) throws Exception;
+	
 // 태준 *************************************************************************************************************************
 	// 판매자의 다른상품보기
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception;

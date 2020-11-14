@@ -169,6 +169,31 @@
 		where gno=#{pm_g_gno};
   	</update>
 	<!-- 입찰하기 -->
+	
+	<!-- 검색하기 -->
+	<sql id="searchCondition">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and gname like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and g_m_id like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (gname like concat('%', #{keyword}, '%')
+					or content like concat('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'all'.toString()">
+				and (gname like concat('%', #{keyword}, '%')
+					or content like concat('%', #{keyword}, '%')
+					or g_m_id like concat('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>  
+	<!-- 검색하기 -->
   
    <!-- 태준 ******************************************************************************************** -->
    <!-- 판매자의 다른상품 -->
@@ -244,6 +269,8 @@
   	<select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">	
   		select * 	
   		from goods 	
+  		where gno > 0 	
+  		<include refid="searchCondition"></include>
   		order by gno desc, regDate desc 	
   		limit #{pageStart},#{pageSize}	
   	</select> 	
@@ -252,7 +279,9 @@
  	<select id="pageCount" resultType="int">	
  		select	
  		 count(*)	
- 		from goods 	
+ 		from goods 
+ 		where gno > 0
+ 		<include refid="searchCondition"></include>	
  	</select>
  	
  	<!-- 입찰수 높은 상품 3가지 슬라이드로 출력 -->

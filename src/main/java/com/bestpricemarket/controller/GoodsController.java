@@ -100,8 +100,8 @@ public class GoodsController {
 		model.addAttribute("category", category);
 		
 		// 하단부 페이징처리
-		PageMaker pm = new PageMaker();
-		pm.setCri(cri);
+		PageMaker pm = new PageMaker(cri);
+		// pm.setCri(cri);
 		pm.setTotalCount(service.CategoryCount(category));
 		model.addAttribute("pm", pm);
 

@@ -28,11 +28,27 @@
 		  <c:if test="${memVO.block == 0}">
 		  	<a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
 		  </c:if>
-		</c:if>
-		
+		</c:if>		
+		<br>
 		<!-- 재원 -->
-		<div>검색</div>
-	
+		<div class="form-inline">
+			<select id="searchTypeSel" name="searchType" class="form-control" style="margin-bottom: 10px;">
+				<option value="">검색조건</option>
+				<option value="t">상품명</option>
+				<option value="c">상품내용</option>
+				<option value="w">판매자</option>
+				<option value="tc">상품명 + 상품내용</option>
+				<option value="all">전체조건</option>
+			</select>
+			<br>
+			<div class="md-form mt-0">
+			<input class="form-control" type="text" id="keyword" name="keyword"
+			value="${pm.cri.keyword}" placeholder="Search.." style="margin-bottom: 10px; width: 260px;">
+			</div>
+			<button id="searchBtn" class="btn-search">Search</button>
+		</div>
+		
+		
 		<c:if test="${memVO.id == null}">
 		  <h2 class="my-4">카테고리</h2>
 		</c:if>
@@ -270,6 +286,74 @@
 <!-- 푸터 -->
 <jsp:include page="./inc/bottom.jsp"/>
 <!-- 푸터 -->
+
+<script>
+	$(function(){		
+		//perPageNum select 박스 설정
+		setPerPageNumSelect();		
+		//searchType select 박스 설정
+		setSearchTypeSelect();
+		
+		//prev 버튼 활성화, 비활성화 처리
+		var canPrev = '${pm.prev}';
+		if(canPrev !== 'true'){
+			$('#page-prev').addClass('disabled');
+		}
+		
+		//next 버튼 활성화, 비활성화 처리
+		var canNext = '${pm.next}';
+		if(canNext !== 'true'){
+			$('#page-next').addClass('disabled');
+		}
+		
+		//현재 페이지 파란색으로 활성화
+		var thisPage = '${pm.cri.page}';
+		//매번 refresh 되므로 다른 페이지 removeClass 할 필요는 없음->Ajax 이용시엔 해야함
+		$('#page'+thisPage).addClass('active');
+	})
+	
+	function setPerPageNumSelect(){
+		var perPageNum = "${pm.cri.pageSize}";
+		var $perPageSel = $('#perPageSel');
+		var thisPage = '${pm.cri.page}';
+		$perPageSel.val(perPageNum).prop("selected",true);
+		//PerPageNum가 바뀌면 링크 이동
+		$perPageSel.on('change',function(){
+			//pageMarker.makeQuery 사용 못하는 이유: makeQuery는 page만을 매개변수로 받기에 변경된 perPageNum을 반영못함
+			window.location.href = "main?page="+thisPage+"&pageSize="+$perPageSel.val();
+		})
+	}
+	
+	function setSearchTypeSelect(){
+		var $searchTypeSel = $('#searchTypeSel');
+		var $keyword = $('#keyword');
+		
+		$searchTypeSel.val('${pm.cri.searchType}').prop("selected",true);
+		//검색 버튼이 눌리면
+		$('#searchBtn').on('click',function(){
+			var searchTypeVal = $searchTypeSel.val();
+			var keywordVal = $keyword.val();
+			//검색 조건 입력 안했으면 경고창 
+			if(!searchTypeVal){
+				alert("검색 조건을 선택하세요!");
+				$searchTypeSel.focus();
+				return;
+			//검색어 입력 안했으면 검색창
+			}else if(!keywordVal){
+				alert("검색어를 입력하세요!");
+				$('#keyword').focus();
+				return;
+			}
+			var url = "main?page=1"
+				+ "&pageSize=" + "${pm.cri.pageSize}"
+				+ "&searchType=" + searchTypeVal
+				+ "&keyword=" + encodeURIComponent(keywordVal);
+			window.location.href = url;
+		})
+	}
+	
+</script>
+
 <!-- Bootstrap core JavaScript -->
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
