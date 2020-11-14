@@ -74,6 +74,8 @@ public interface GoodsService {
 	public void endStatus(int gno) throws Exception;
 
 	public void insertBidding(PricemonitoringVO prvo) throws Exception;
+	
+	public int getTotalCount(Criteria cri) throws Exception;
 /* 재원 끝 */
 	
 /* 태준 */ 
