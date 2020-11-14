@@ -65,10 +65,15 @@ String result = (String) session.getAttribute("0");
 	<div class="container">
 	
 		<!-- 태준 시작 -->
+		<!-- 페이스북공유 -->			
+		<button type="button" style="float:right;outline:none;border:none;width:90px;" value="페이스북" onclick="sharing();"><img src="../resources/goods/goods_img/facebook.png" style="border-radius: 3px;"></button>
+		
+		<!-- 트위터공유 -->
 		<span style="float : right;">
-		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">twitter</a>
+			<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+				class="twitter-share-button" data-size="large" data-lang="ko" data-show-count="false">트윗</a>
 		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-		</span>		
+		</span>
 		<!-- 태준 끝 -->
 	
 		<div class="heading-section">경매상품 상세정보</div>		
@@ -368,6 +373,11 @@ var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 var s = Math.floor((distance % (1000 * 60)) / 1000);
 
 document.getElementById("d-day").innerHTML = "<span style='color: red;'>" + d +"일 " + h + "시간 " + m + "분 " + s + "초 </span>남았습니다."; });
+
+//태준 sns공유하기
+function sharing(){
+	window.open("http://www.facebook.com/sharer/sharer.php?u=http://localhost:8088/goods/detail?gno="+${goods.gno});
+}
 
 </script>
 </body>
