@@ -224,6 +224,32 @@ public class GoodsDAOImpl implements GoodsDAO {
 		System.out.println("DAO : 좋아요 삭제(likes 테이블)의 파라미터 두개는 " + l_m_id + l_g_gno+" map은? "+map);
 		sqlSession.delete(namespace + ".deletebyLikes", map);  
 	}
+	
+	// 메인페이지 옵션바 (신규등록순)
+	@Override
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception {
+		System.out.println("DAO : 옵션바 - 신규등록순");
+		
+		return sqlSession.selectList(namespace + ".orderbyNew", cri);
+	}
+
+	// 메인페이지 옵션바 (마감임박순)
+	@Override
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception {
+		System.out.println("DAO : 옵션바 - 마감임박순");
+		return sqlSession.selectList(namespace + ".orderbyDuedate", cri);
+	}
+	
+	// 메인페이지 옵션바 (인기경매순)
+	@Override
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception {
+		System.out.println("DAO : 옵션바 - 인기경매순");
+		return sqlSession.selectList(namespace + ".orderbyBest", cri);
+
+	}
+	
+	
+	
 
 // 소원 ************************************************************************************************************************
 	// 상품목록 + 페이징처리	
@@ -232,6 +258,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectList(namespace + ".listGoods", cri);	
 	}
 	
+
 	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리	
 	@Override	
 	public int pageCount() throws Exception {	

@@ -101,6 +101,17 @@ public interface GoodsDAO {
 	  
 	public void deletebyLikes(String l_m_id, int l_g_gno);
 	
+	// 메인페이지 옵션바 (신규등록순)
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception;
+	
+	// 메인페이지 옵션바 (마감임박순)
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception;
+	
+	// 메인페이지 옵션바 (인기경매순)
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception;
+	
+	
+	
 // 소원 *************************************************************************************************************************
 	// 상품목록 + 페이징처리	
 	public List<GoodsVO> listGoods(Criteria cri) throws Exception;

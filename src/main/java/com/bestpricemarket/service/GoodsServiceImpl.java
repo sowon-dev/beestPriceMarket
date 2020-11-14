@@ -253,8 +253,30 @@ public class GoodsServiceImpl implements GoodsService {
 		System.out.println("S : 좋아요 취소(->likes테이블)"+l_m_id+l_g_gno);  
 	    gdao.deletebyLikes(l_m_id, l_g_gno);
 	}
+	
+	// 메인페이지 옵션바 (신규등록순)
+    @Override
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception {
+		
+		return gdao.orderbyNew(cri);
+	}
 
-// 소원 ************************************************************************************************************************
+   // 메인페이지 옵션바 (마감임박순)
+	@Override
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception {
+		
+		return gdao.orderbyDuedate(cri);
+	}
+
+	// 메인페이지 옵션바 (인기경매순)
+	@Override
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception {
+		
+		return gdao.orderbyBest(cri);
+	}
+
+
+	// 소원 ************************************************************************************************************************
 	// 상품목록 + 페이징처리	
 	@Override	
 	public List<GoodsVO> goodsList(Criteria cri) throws Exception {	

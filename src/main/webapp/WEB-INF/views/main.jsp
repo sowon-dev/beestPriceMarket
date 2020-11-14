@@ -9,6 +9,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/button-reg_goods.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath}/resources/css/shop-homepage.css" rel="stylesheet">
+<!-- 옵션바 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/optionBar.css">
 </head>
 <body>
 <!-- 헤더 -->
@@ -79,6 +81,8 @@
             
           </div>
           
+          
+          
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="color:black;">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only" style="color:black;">Previous</span>
@@ -88,9 +92,124 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
+        
+        <br>
+        
+ 
+ <!-- 옵션바 -->       
+ <div class="tabset">
+  <!-- Tab 1 -->
+  <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
+  <label for="tab1">신규등록순</label>
+  <!-- Tab 2 -->
+  <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
+  <label for="tab2">마감임박순</label>
+  <!-- Tab 3 -->
+  <input type="radio" name="tabset" id="tab3" aria-controls="dunkles">
+  <label for="tab3">인기경매순</label>
+  
+  <!-- 옵션바 신규등록순-->
+ <div class="tab-panels" >
+    <section id="marzen" class="tab-panel">
+  <div class="row" >
+   <c:forEach var="orderbynew" items="${orderbyNew}">    
+	<div class="row" style="position:absolute ; right:0;"> </div>
+	<div class="col-lg-4 col-md-6 mb-4" >
+	<div class="card h-100" style="margin-left:30px;"> 
+		<a href="/goods/detail?gno=${orderbynew.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
+		<img src="<c:url value="/imgUpload/${orderbynew.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
+		</a>
+		<div class="card-body" >
+			<h4 class="card-title">
+			<a href="/goods/detail?gno=${orderbynew.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${orderbynew.gname}</a>  
+		</h4>
+	     <c:choose>
+			<c:when test="${orderbynew.finalprice > 0}">
+			<h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${orderbynew.finalprice}" /></b>원</h6>
+			</c:when>
+			<c:otherwise>
+			<h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${orderbynew.lowestprice}" /></b>원</h6>
+			</c:otherwise>
+			</c:choose>
+				<h6>입찰수 ${orderbynew.numofbid}</h6>
+				<h6>경매마감일 ${orderbynew.endDate}</h6>
+      </div>
+    </div>
+  </div>
+  </c:forEach>   
+</div>
+</section>
+  
+  
+  <!-- 옵션바 마감임박순-->
+ <section id="rauchbier" class="tab-panel">
+  <div class="row">
+   <c:forEach var="duedate" items="${orderbyDuedate}">    
+			          <div class="row" style="position:absolute ; right:0;"> </div>
+				<div class="col-lg-4 col-md-6 mb-4">
+				<div class="card h-100" style="margin-left:30px;">
+				 <a href="/goods/detail?gno=${duedate.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
+					<img src="<c:url value="/imgUpload/${duedate.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
+				</a>
+				<div class="card-body">
+			  		<h4 class="card-title">
+			    	<a href="/goods/detail?gno=${duedate.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${duedate.gname}</a>  
+					</h4>
+	                <c:choose>
+					    <c:when test="${duedate.finalprice > 0}">
+					        <h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${duedate.finalprice}" /></b>원</h6>
+					    </c:when>
+					    <c:otherwise>
+					        <h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${duedate.lowestprice}" /></b>원</h6>
+					    </c:otherwise>
+					</c:choose>
+					<h6>입찰수 ${duedate.numofbid}</h6>
+					<h6>경매마감일 ${duedate.endDate}</h6>
+			</div>
+		</div>
+	</div>
+     </c:forEach>      
+</div>      
+</section>
 
+  <!-- 옵션바 인기경매순 -->  
+  <section id="dunkles" class="tab-panel">
+   <div class="row">
+ <c:forEach var="best" items="${orderbyBest}">    
+			          <div class="row" style="position:absolute ; right:0;"> </div>
+				<div class="col-lg-4 col-md-6 mb-4">
+				<div class="card h-100" style="margin-left:30px;">
+				 <a href="/goods/detail?gno=${best.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
+					<img src="<c:url value="/imgUpload/${best.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
+				</a>
+				<div class="card-body" style="display:inline;">
+			  		<h4 class="card-title">
+			    	<a href="/goods/detail?gno=${best.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${best.gname}</a>  
+					</h4>
+	                <c:choose>
+					    <c:when test="${best.finalprice > 0}">
+					        <h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${best.finalprice}" /></b>원</h6>
+					    </c:when>
+					    <c:otherwise>
+					        <h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${best.lowestprice}" /></b>원</h6>
+					    </c:otherwise>
+					</c:choose>
+					<h6>입찰수 ${best.numofbid}</h6>
+					<h6>경매마감일 ${best.endDate}</h6>
+		</div>
+	</div>
+</div>
+</c:forEach>   
+</div>
+</section>
+</div>
+</div>
+<!-- 옵션바 --> 
+
+
+ 
         <!-- 상품 카드 목록(Category) -->
-		<div class="row"> 
+		<%-- <div class="row"> 
 			<c:forEach var="category" items="${goodsList}" >
 				<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100">
@@ -115,7 +234,7 @@
 			  	</div>
 				</div>
 			</c:forEach>
-        </div>
+        </div> --%>
      	<!-- 상품 카드 목록(Category) 끝-->
         
         <!-- 페이징 하단부 처리(카테고리목록) -->
@@ -154,6 +273,10 @@
 <!-- Bootstrap core JavaScript -->
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
+
 </body>
 </html>
 
