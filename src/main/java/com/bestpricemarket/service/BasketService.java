@@ -14,7 +14,7 @@ public interface BasketService {
 	// 관심상품 삭제
     public void deleteBasket(int l_g_gno) throws Exception;
 	// 관심상품 세기
-    public int getCount() throws Exception;
+    public int getCount(String l_m_id) throws Exception;
     // 게시물 목록 + 페이징
     public List listPage(int displayPost, int postNum,String l_m_id) throws Exception;
 

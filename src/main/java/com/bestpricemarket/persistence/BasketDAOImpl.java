@@ -45,7 +45,7 @@ public class BasketDAOImpl implements BasketDAO {
 	}
 	// 관심상품 세기
 	@Override
-	public int getCount() throws Exception {
+	public int getCount(String l_m_id) throws Exception {
 		
 		return session.selectOne(namespace+".getCount");
 	}
