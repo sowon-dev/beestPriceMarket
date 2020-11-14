@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bestpricemarket.domain.BasketVO;
+import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.MyActionVO;
 
 @Repository
 public class BasketDAOImpl implements BasketDAO {
@@ -31,18 +33,15 @@ public class BasketDAOImpl implements BasketDAO {
 	}
 	// 관심상품 목록
 	@Override
-	public List<BasketVO> Basketlist() throws Exception {
-	 List<BasketVO> basketlist = 
-	 session.selectList(namespace+".listBasket");
-		
-		return basketlist;
+	public BasketVO Basketlist(int lno) throws Exception {
+	 BasketVO bvo = session.selectOne(namespace+".listBasket");
+		return bvo;
 	}
 	// 관심상품 삭제
 	@Override
-	public void deleteBasket(Integer lno) throws Exception {
+	public void deleteBasket(int l_g_gno) throws Exception {
 		System.out.println("D: 삭제 동작!!");
-	  
-	    session.delete(namespace+".deleteBasket",lno);
+	     session.delete(namespace+".deleteBasket",l_g_gno);
 	}
 	// 관심상품 세기
 	@Override
@@ -60,9 +59,21 @@ public class BasketDAOImpl implements BasketDAO {
 		 data.put("l_m_id", l_m_id); 
 		 return session.selectList(namespace + ".listPage", data);
 	}
+	
+	
+	@Override
+	public void updateGlike(int l_g_gno) throws Exception {
+		session.update(namespace + ".updateMyAction",l_g_gno);	
+	}
+	@Override
+	public GoodsVO getGoods(int gno) throws Exception {
+		GoodsVO gvo = session.selectOne(namespace + ".getMyAction",gno);
+		return gvo;
+		
+	}
 
 	
-
+    
   
 	
 

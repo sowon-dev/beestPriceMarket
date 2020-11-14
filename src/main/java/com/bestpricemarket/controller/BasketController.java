@@ -21,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bestpricemarket.domain.BasketPager;
 import com.bestpricemarket.domain.BasketVO;
+import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.service.BasketService;
 import com.bestpricemarket.service.MemberService;
@@ -44,7 +46,7 @@ public class BasketController {
 	
 	 // 관심상품 리스트
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public  String listGET(HttpSession session,Model model) throws Exception{
+    public  String listGET(HttpSession session,Model model,int l_g_gno) throws Exception{
     	String id = (String)session.getAttribute("id");
     	
     	if(id == null) {
@@ -52,18 +54,19 @@ public class BasketController {
     		return "/member/loginandjoin";
     	}
     	
-    	List<BasketVO> basketlist = null;
-    	basketlist = service.Basketlist();
+    	BasketVO basketlist = null;
+    	basketlist = service.Basketlist(l_g_gno);
     	
     	return"/basket/basket";
     } 
 
     //관심상품 삭제
     @RequestMapping(value="/delete", method=RequestMethod.POST)
-    public String deletePOST(@RequestParam(value="lno")Integer lno,HttpSession session) throws Exception{
+    public String deletePOST(@RequestParam(value="l_g_gno")int l_g_gno,HttpSession session,Model model) throws Exception{
     	
-    	System.out.println("lno :"+lno);
-    	service.deleteBasket(lno);
+    	service.updateGlike(l_g_gno);
+    	service.deleteBasket(l_g_gno);
+       
     	System.out.println("C: 삭제 성공");
     	return "redirect:/basket/listPage";
     }
@@ -78,12 +81,15 @@ public class BasketController {
 		 page.setNum(num);
 		 page.setCount(service.getCount());  
 		
+		 
+		 
 		 List<BasketVO> basketlist = null; 
 		 basketlist = service.listPage(page.getDisplayPost(), page.getPostNum(),l_m_id);
 		 System.out.println("basketlist"+basketlist);
 		 model.addAttribute("basketlist", basketlist);   
 		 model.addAttribute("pageNum", page.getPageNum());
-
+		
+		
 		 model.addAttribute("startPageNum", page.getStartPageNum());
 		 model.addAttribute("endPageNum", page.getEndPageNum());
 		  

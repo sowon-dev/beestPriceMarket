@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.bestpricemarket.controller.MemberController;
 import com.bestpricemarket.domain.BasketVO;
+import com.bestpricemarket.domain.GoodsVO;
+import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.persistence.BasketDAO;
 
 @Service
@@ -28,18 +30,16 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public List<BasketVO> Basketlist() throws Exception {
+	public BasketVO Basketlist(int lno) throws Exception {
 		l.info("S: 장바구니 추가동작!");
-		List<BasketVO> basketlist = 
-				bkdao.Basketlist();
-		return basketlist;
+	    BasketVO bvo = bkdao.Basketlist(lno);
+		return bvo;
 	}
 
 	@Override
-	public void deleteBasket(Integer lno) throws Exception {
+	public void deleteBasket(int l_g_gno) throws Exception {
 		System.out.println("S: 삭제 동작");
-      
-		 bkdao.deleteBasket(lno);
+	    bkdao.deleteBasket(l_g_gno);
 	}
 
 	@Override
@@ -54,17 +54,16 @@ public class BasketServiceImpl implements BasketService {
 		return bkdao.listPage(displayPost, postNum,l_m_id);
 	}
 
-	
-	
+	@Override
+	public void updateGlike(int l_g_gno) throws Exception {
+		bkdao.updateGlike(l_g_gno);
+		
+	}
 
-	
-	
-   
-	
-	
-	
-	
-
-	
+	@Override
+	public GoodsVO getGoods(int gno) throws Exception {
+	    GoodsVO gvo = bkdao.getGoods(gno);
+		return gvo;
+	}
 	
 }
