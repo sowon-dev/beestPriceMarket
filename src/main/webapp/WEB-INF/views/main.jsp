@@ -77,20 +77,20 @@
 
           <!-- 슬라이드(입찰수기준) -->
           <div class="carousel-inner" role="listbox" style="height:350px;background-color:gainsboro;">
-            <div class="carousel-item active">
+            <div class="carousel-item active" style="height:350px;">
             	<a href="/goods/detail?gno=${top3goods[0].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
-					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[0].thumbnail}"/>" style="margin:0 auto;object-fit: contain;" alt="First slide"/> 
+					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[0].thumbnail}"/>" style="margin:0 auto;object-fit:contain;height:350px;" alt="First slide"/> 
 				</a>
               <!-- <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide"> -->
             </div>
-   		    <div class="carousel-item">
+   		    <div class="carousel-item" style="height:350px;">
    		        <a href="/goods/detail?gno=${top3goods[1].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
-					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[1].thumbnail}"/>" style="margin:0 auto;object-fit: contain;" alt="Second slide"/> 
+					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[1].thumbnail}"/>" style="margin:0 auto;object-fit:contain;height:350px;" alt="Second slide"/> 
 				</a>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" style="height:350px;">
                	<a href="/goods/detail?gno=${top3goods[2].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
-					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[2].thumbnail}"/>" style="margin:0 auto;object-fit: contain;" alt="Third slide"/> 
+					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[2].thumbnail}"/>" style="margin:0 auto;object-fit:contain;height:350px;" alt="Third slide"/> 
 				</a>
             </div>
             
