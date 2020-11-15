@@ -24,6 +24,7 @@ import com.bestpricemarket.domain.BasketVO;
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
+import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.service.BasketService;
 import com.bestpricemarket.service.MemberService;
 
@@ -75,8 +76,10 @@ public class BasketController {
 	  @RequestMapping(value="/listPage", method = RequestMethod.GET) 
 	  public String getListPage(Model model, @RequestParam(value="num",defaultValue="1") int num,HttpSession session) throws Exception{ 
 		
+		// num = 페이지 번호
 			String l_m_id = (String)session.getAttribute("id");
-		    // 등록된 글의 총 갯수
+	
+			// 등록된 글의 총 갯수
 			int count = service.getCount(l_m_id);
 
 			// 페이지당 출력할 글의 갯수
@@ -107,21 +110,22 @@ public class BasketController {
 			boolean prev = startPageNum == 1 ? false : true;
 			boolean next = endPageNum * pageNum_cnt >= count ? false : true;
 
-				// 글 목록 가져오기
-			 List<BasketVO> basketlist = null; 
-			 basketlist = service.listPage(displayPost,postNum,l_m_id);
-			 System.out.println("basketlist"+basketlist);
-			 model.addAttribute("basketlist", basketlist);   
-			 model.addAttribute("pageNum", pageNum);
-			
-			
-			 model.addAttribute("startPageNum",startPageNum);
-			 model.addAttribute("endPageNum", endPageNum);
-			  
-			 model.addAttribute("prev", prev);
-			 model.addAttribute("next", next);  
-			 
-			 model.addAttribute("select", num);
+			// 글 목록 가져오기
+			List<BasketVO> basketlist = null;
+			basketlist = service.listPage(displayPost, postNum, l_m_id);
+			model.addAttribute("basketlist", basketlist);
+			model.addAttribute("pageNum", pageNum);
+
+			// 시작 및 끝 번호
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+
+			// 이전 및 다음
+			model.addAttribute("prev", prev);
+			model.addAttribute("next", next);
+
+			// 현재 페이지
+			model.addAttribute("select", num);
 	  
 			 return "/basket/listPage"; 
 	  }
