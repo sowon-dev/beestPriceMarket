@@ -44,11 +44,14 @@ import com.bestpricemarket.domain.GoodsCommentVO;
 import com.bestpricemarket.domain.GoodsVO;
 import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
+import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.PageMaker;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 import com.bestpricemarket.service.GoodsCommentService;
 import com.bestpricemarket.service.GoodsService;
+import com.bestpricemarket.service.MyActionService;
 
 @Controller
 @RequestMapping(value = "/goods/*")
@@ -61,7 +64,8 @@ public class GoodsController {
 	private GoodsService service;
 	@Inject
 	private GoodsCommentService cmtService;
-
+    @Inject
+    private MyActionService myService;
 	// 재원 신고하기
 	@Autowired
 	private JavaMailSender mailSender;
@@ -138,17 +142,27 @@ public class GoodsController {
 		// 카테고리
 		model.addAttribute("category", category);
 		model.addAttribute("cri", cri);
-		
-		// 마감시간이되면 goods테이블 actionstats 0으로 업데이트
-		Date now = new Date(); // 현재시간
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // 시간형식 지정
-				System.out.println("현재시간 : " + sdf.format(now));
-				GoodsVO gvo = service.goodsDetail(gno);
-				Date endDate = gvo.getEndDate();
-				if(now.getTime() >= endDate.getTime()) {
-					service.endStatus(gno);
-		}
-
+		// *************** 2020/11/16/월요일 낙찰정보 **************************
+				// 마감시간이되면 goods테이블 actionstats 0으로 업데이트
+				Date now = new Date(); // 현재시간
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // 시간형식 지정
+						System.out.println("현재시간 : " + sdf.format(now));
+						GoodsVO gvo = service.goodsDetail(gno);
+						Date endDate = gvo.getEndDate();
+						if(now.getTime() >= endDate.getTime()) {
+							service.endStatus(gno);					
+							gvo = service.goodsDetail(gno);
+							if(gvo.getActionstatus() == 0) {
+								// 최종 낙찰 정해졌을때만 myaction에 값을 넣어준다.
+								finalBidVO finalBid = service.finalBid(gno);	
+								// 이미 이 상품에 대해 낙찰정보가 있는경우 중복을 막기위해 번호에 해당하는 정보를 가져와서 null이면 넣어준다.
+								MyActionVO myVO = myService.myActionInfo(gno);						
+								if(finalBid != null && myVO == null) {
+									service.insertMyAction(finalBid);
+								}					
+							}
+				}
+				// *************** 2020/11/16/월요일 낙찰정보끝 **************************
 		// 현재입찰가
 		List<PricemonitoringVO> prvo = service.getBidding(gno);
 		if (prvo.size() == 0) {
@@ -435,6 +449,7 @@ public class GoodsController {
 				service.insertBidding(prvo);
 				return prvo;
 			}
+		
 		}
 		return null;
 	}

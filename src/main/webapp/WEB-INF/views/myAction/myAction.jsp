@@ -90,13 +90,13 @@
 							<tbody>
 								<tr>
 								 <c:choose>
-								 <c:when test="${actionlist.a_g_actionstatus == 0}">
+								 <c:when test="${actionlist.actionstatus == 1}">
 								 <td>
-								 <input type="checkbox" id="chBox" name="chBox1" class="chBox1" data-cartNum="${actionlist.ano }" disabled/>
+								 <input type="checkbox" id="chBox" name="chBox1" class="chBox1" data-cartNum="${actionlist.gno }" disabled/>
 								 </td>
 								 </c:when>
 								 <c:otherwise>
-								 <td><input type="checkbox" id="chBox" name="chBox" class="chBox" data-cartNum="${actionlist.ano }"/></td>
+								 <td><input type="checkbox" id="chBox" name="chBox" class="chBox" data-cartNum="${actionlist.gno }"/></td>
 								 </c:otherwise>
 								 </c:choose>
 								 <td style="text-align: center;">
@@ -105,25 +105,25 @@
 								 <td style="text-align: center;">
 		                        	<img
 										src="<c:url value="/imgUpload/${actionlist.f_name}"/>"
-										width="100px" height="100px" />
+										width="100px" height="100px" /> 
 		                         </td>
 								 <td style="text-align: center;">
-		                        	<b>${actionlist.a_g_gno }</b>
+		                        	<b>${actionlist.gno }</b>
 		                        </td>
 								 <td style="text-align: center;">
-		                        	${actionlist.a_m_id}
+		                        	${actionlist.g_m_id}
 		                        </td>
 									 <c:choose>
-									   <c:when test="${actionlist.a_g_actionstatus == -1 }">
+									   <c:when test="${actionlist.actionstatus == -1 }">
 											        <td style="text-align: center;"><b style="color:crimson">입찰실패</b></td>
 										</c:when>
-										<c:when test="${actionlist.a_g_actionstatus == 0 }">
-													<td style="text-align: center;">입찰중</td>
-										</c:when>
-										<c:when test="${actionlist.a_g_actionstatus == 1 }">
+										<c:when test="${actionlist.actionstatus == 0 }">
 													<td style="text-align: center;">입찰종료</td>
 										</c:when>
-									 	<c:when test="${actionlist.a_g_actionstatus == 2 }">
+										<c:when test="${actionlist.actionstatus == 1 }">
+													<td style="text-align: center;">입찰진행</td>
+										</c:when>
+									 	<c:when test="${actionlist.actionstatus == 2 }">
 											       <td style="text-align: center;">입찰성공</td>
 										</c:when>
 									 </c:choose>

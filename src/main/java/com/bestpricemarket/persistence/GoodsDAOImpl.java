@@ -17,6 +17,7 @@ import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
@@ -178,6 +179,21 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectOne(namespace + ".pageCount",cri);
 	}
 	
+
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	
+		@Override
+		public finalBidVO finalBid(int gno) throws Exception {
+			return sqlSession.selectOne(namespace + ".getFinalBid",gno);
+		}
+
+		@Override
+		public void insertMyAction(finalBidVO fivo) throws Exception {
+			sqlSession.insert(namespace + ".insertMyAction",fivo);
+			
+		}
+		
+		// *************** 2020/11/16/월요일 낙찰정보끝 **************************
 // 태준 *******************************************************************************************************************************
 	// 판매자의 다른상품보기
 	@Override

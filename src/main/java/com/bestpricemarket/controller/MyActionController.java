@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.bestpricemarket.domain.MyActionVO;
+import com.bestpricemarket.domain.MyBiddingVO;
 import com.bestpricemarket.service.MyActionService;
 
 @Controller
@@ -42,14 +43,14 @@ public class MyActionController {
 			l.info("get index");
 			return "/myAction/myAction3";
 		}
-	// 입찰 목록
-	@RequestMapping(value = "/actionlist2", method = RequestMethod.GET)
-	public String getOrderList(HttpSession session, MyActionVO action, Model model,@RequestParam(value="num",defaultValue="1") int num) throws Exception {
+	  // 입찰 목록
+	  @RequestMapping(value = "/actionlist2", method = RequestMethod.GET)
+	  public String getOrderList(HttpSession session, MyActionVO action, Model model,@RequestParam(value="num",defaultValue="1") int num) throws Exception {
 				// num = 페이지 번호
-				String a_m_id = (String)session.getAttribute("id");
-		
+				String pm_m_userid = (String)session.getAttribute("id");
+		        System.out.println("id값 ?"+pm_m_userid);
 				// 등록된 글의 총 갯수
-				int count = service.getCount();
+				int count = service.getCount(pm_m_userid);
 
 				// 페이지당 출력할 글의 갯수
 				int postNum = 5;
@@ -80,8 +81,9 @@ public class MyActionController {
 				boolean next = endPageNum * pageNum_cnt >= count ? false : true;
 
 				// 글 목록 가져오기
-				List<MyActionVO> actionlist = null;
-				actionlist = service.actionlist(displayPost, postNum, a_m_id);
+				List<MyBiddingVO> actionlist = null;
+				actionlist = service.actionlist(displayPost, postNum, pm_m_userid);
+				 System.out.println("actionlist값 ?"+actionlist);
 				model.addAttribute("actionlist", actionlist);
 				model.addAttribute("pageNum", pageNum);
 

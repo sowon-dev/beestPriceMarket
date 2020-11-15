@@ -16,6 +16,7 @@ import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 
 public interface GoodsService {
 
@@ -76,7 +77,14 @@ public interface GoodsService {
 	public void insertBidding(PricemonitoringVO prvo) throws Exception;
 	
 	public int getTotalCount(Criteria cri) throws Exception;
-/* 재원 끝 */
+
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+		public finalBidVO finalBid(int gno) throws Exception;
+		
+		// 최종 입찰 성공한 사람의 정보를 myaction테이블에 정보넣기
+		public void insertMyAction(finalBidVO fivo) throws Exception;
+		// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+	/* 재원 끝 */
 	
 /* 태준 */ 
 	// 판매자의 다른상품보기
