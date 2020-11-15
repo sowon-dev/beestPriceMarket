@@ -202,7 +202,7 @@
 		from goods g
 		join goodsfile f
 		on g.gno = f.f_g_gno
-		where g_m_id = #{g_m_id}
+		where g_m_id = #{g_m_id} and f.f_name != ""
 		order by gno desc, regDate desc
 	</select>
   	<!-- 판매자의 다른상품 -->
@@ -226,7 +226,6 @@
     WHERE gno = #{gno}  
   </update>
   
-  
   <select id="read" resultType="LikesVO">
     SELECT lno, l_g_gno, l_m_id, l_m_actionstatus 
     FROM likes 
@@ -243,6 +242,25 @@
     DELETE FROM likes
     WHERE l_g_gno = #{l_g_gno} and l_m_id = #{l_m_id}
   </delete>
+   
+   <!-- 메인페이지 옵션바 -->
+  <select id="orderbyNew" resultType="com.bestpricemarket.domain.GoodsVO">
+   select *
+   from goods
+   order by regDate desc;
+  </select>
+  
+  <select id="orderbyDuedate" resultType="com.bestpricemarket.domain.GoodsVO">
+   select * 
+   from goods
+   order by endDate;
+  </select>
+  
+  <select id="orderbyBest" resultType="com.bestpricemarket.domain.GoodsVO">
+   select *
+   from goods
+   order by numofbid desc;
+  </select>
    
 	<!-- 소원 ******************************************************************************************** -->
   	<!-- 상품목록 -->	

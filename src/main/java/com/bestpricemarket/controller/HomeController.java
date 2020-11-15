@@ -57,12 +57,17 @@ public class HomeController {
 		// 페이징 처리된 전체목록(검색)
 		List<GoodsVO> goods = gservice.goodsList(cri);
 		model.addAttribute("goodsList",goods);
+		
 		// 하단부 페이징처리(검색)
 		PageMaker pageMaker = new PageMaker(cri);
 		int totalCount = gservice.getTotalCount(cri);
 		pageMaker.setTotalCount(totalCount);
 		model.addAttribute("pm",pageMaker);
 		
+		//옵션바 출력
+		model.addAttribute("orderbyNew", gservice.orderbyNew(cri));
+		model.addAttribute("orderbyDuedate", gservice.orderbyDuedate(cri));
+		model.addAttribute("orderbyBest", gservice.orderbyBest(cri));
 	}
 	
 	//favicon
