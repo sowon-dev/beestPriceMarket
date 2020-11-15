@@ -136,25 +136,25 @@
 
 					<c:if test="${prev}">
 						<li class="page-item"><a class="page-link"
-							href="/myAction/actionlist?num=${startPageNum - 1}">Previous</a></li>
+							href="/myAction/actionlist2?num=${startPageNum - 1}">Previous</a></li>
 					</c:if>
 
 					<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
 
 						<c:if test="${select!=num}">
 							<li class="page-item"><a class="page-link"
-								href="/myAction/actionlist?num=${num}">${num}</a></li>
+								href="/myAction/actionlist2?num=${num}">${num}</a></li>
 						</c:if>
 
 						<c:if test="${select==num}">
-							<a class="page-link" href="/myAction/actionlist?num=${num}">${num}</a>
+							<a class="page-link" href="/myAction/actionlist2?num=${num}">${num}</a>
 						</c:if>
 
 					</c:forEach>
 
 					<c:if test="${next}">
 						<li class="page-item"><a class="page-link"
-							href="/myAction/actionlist?num=${endPageNum + 1}">Next</a></li>
+							href="/myAction/actionlist2?num=${endPageNum + 1}">Next</a></li>
 					</c:if>
 				</ul>
 

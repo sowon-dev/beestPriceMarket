@@ -78,7 +78,7 @@
                         </div>
                      </div><br>
                      
-                            <button type="button" onclick="location.href='/CS/CSBoardListPage?num=1'" class="btn btn-secondary btn-block" style="font-size: 20px">목록으로</button>
+                            <button type="button" onclick="history.back()" class="btn btn-secondary btn-block" style="font-size: 20px">목록으로</button>
                   </div>
                     </form>
                 </div>

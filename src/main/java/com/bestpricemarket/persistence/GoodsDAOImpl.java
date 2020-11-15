@@ -172,6 +172,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.selectOne(namespace + ".insertBidding", prvo);
 	}
 	
+	@Override
+	public int getTotalCount(Criteria cri) throws Exception {
+		
+		return sqlSession.selectOne(namespace + ".pageCount",cri);
+	}
+	
 // 태준 *******************************************************************************************************************************
 	// 판매자의 다른상품보기
 	@Override

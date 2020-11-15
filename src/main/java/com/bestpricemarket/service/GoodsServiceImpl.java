@@ -206,6 +206,12 @@ public class GoodsServiceImpl implements GoodsService {
 		System.out.println("pm_g_gno가 뭐니?" + prvo.getPm_g_gno());
 	}
 	
+	@Override
+	public int getTotalCount(Criteria cri) throws Exception {
+		
+		return gdao.getTotalCount(cri);
+	}
+	
 // 태준 *******************************************************************************************************************************
 	//판매자의 다른상품보기
 	@Override
