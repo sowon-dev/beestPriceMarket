@@ -56,7 +56,7 @@ public class HomeController {
 		model.addAttribute("orderbyNew", gservice.orderbyNew(cri));
 		model.addAttribute("orderbyDuedate", gservice.orderbyDuedate(cri));
 		model.addAttribute("orderbyBest", gservice.orderbyBest(cri));
-		
+
 	}
 	
 	//favicon

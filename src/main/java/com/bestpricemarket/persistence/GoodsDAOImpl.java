@@ -225,29 +225,28 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.delete(namespace + ".deletebyLikes", map);  
 	}
 	
-	// 메인페이지 옵션바 (신규등록순)
-	@Override
-	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception {
-		System.out.println("DAO : 옵션바 - 신규등록순");
-		
-		return sqlSession.selectList(namespace + ".orderbyNew", cri);
-	}
-	
-	// 메인페이지 옵션바 (마감임박순)
-	@Override
-	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception {
-		System.out.println("DAO : 옵션바 - 마감임박순");
-		return sqlSession.selectList(namespace + ".orderbyDuedate", cri);
-	}
-	
-	// 메인페이지 옵션바 (인기경매순)
-	@Override
-	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception {
-		System.out.println("DAO : 옵션바 - 인기경매순");
-		return sqlSession.selectList(namespace + ".orderbyBest", cri);
+	// 메인페이지 옵션바
+		@Override
+		public List<GoodsVO> orderbyNew(Criteria cri) throws Exception {
+			System.out.println("DAO : 옵션바 - 신규등록순");
+			
+			return sqlSession.selectList(namespace + ".orderbyNew", cri);
+		}
 
-	}
-	
+		
+		@Override
+		public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception {
+			System.out.println("DAO : 옵션바 - 마감임박순");
+			return sqlSession.selectList(namespace + ".orderbyDuedate", cri);
+		}
+		
+
+		@Override
+		public List<GoodsVO> orderbyBest(Criteria cri) throws Exception {
+			System.out.println("DAO : 옵션바 - 인기경매순");
+			return sqlSession.selectList(namespace + ".orderbyBest", cri);
+
+		}
 	
 	
 

@@ -219,7 +219,7 @@
     WHERE l_g_gno = #{l_g_gno} and l_m_id = #{l_m_id}
   </delete>
   
-   <!-- 메인페이지 옵션바 -->
+ <!-- 메인페이지 옵션바 -->
   <select id="orderbyNew" resultType="com.bestpricemarket.domain.GoodsVO">
    select *
    from goods
@@ -234,10 +234,9 @@
   
   <select id="orderbyBest" resultType="com.bestpricemarket.domain.GoodsVO">
    select *
-   from goods               
+   from goods
    order by numofbid desc;
   </select>
-  
    
 	<!-- 소원 ******************************************************************************************** -->
   	<!-- 상품목록 -->	
