@@ -234,9 +234,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}  
 	
 	@Override
-	public int countbyLike(String l_m_id){
-	    int count = gdao.countbyLike(l_m_id);
-	    return count;
+	public int countbyLike(String l_m_id, int gno){
+	    return gdao.countbyLike(l_m_id, gno);
 	}  
 
 	@Override

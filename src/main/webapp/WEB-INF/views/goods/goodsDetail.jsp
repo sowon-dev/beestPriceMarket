@@ -364,16 +364,23 @@ function getExit(){
 
 //마감 카운트다운
 var countDownDate = new Date("${goods.endDate}").getTime(); // 1초간격 갱신 
-var x = setInterval(function() { // 오늘 날짜 등록 
-var now = new Date().getTime(); 
+var x = setInterval(function() { 
+var now = new Date().getTime(); // 오늘 날짜 등록 
 var distance = countDownDate - now; // 마감일자-현재일자
+var isPause = false;
 var d = Math.floor(distance / (1000 * 60 * 60 * 24)); 
 var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));  
 var s = Math.floor((distance % (1000 * 60)) / 1000);
 
-document.getElementById("d-day").innerHTML = "<span style='color: red;'>" + d +"일 " + h + "시간 " + m + "분 " + s + "초 </span>남았습니다."; });
+document.getElementById("d-day").innerHTML = "<span style='color: red;'>" + d +"일 " + h + "시간 " + m + "분 " + s + "초 </span>남았습니다."; 
 
+// 마감기한 종료
+if(distance < 0) {
+	clearInterval(x);
+    document.getElementById("d-day").innerHTML = "입찰이 마감되었습니다";
+	}
+}, 1000);
 //태준 sns공유하기
 function sharing(){
 	window.open("http://www.facebook.com/sharer/sharer.php?u=http://localhost:8088/goods/detail?gno="+${goods.gno});

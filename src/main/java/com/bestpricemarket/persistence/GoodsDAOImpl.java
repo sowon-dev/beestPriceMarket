@@ -201,10 +201,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public int countbyLike(String l_m_id){
+	public int countbyLike(String l_m_id, int gno){
 		System.out.println("DAO : 좋아요 삭제(likes 테이블)" + l_m_id);
-		int count = sqlSession.selectOne(namespace + ".countbyLike", l_m_id);
-		return count;
+		Map<String, Object> likeInsertMap = new HashMap<String, Object>();
+		likeInsertMap.put("l_m_id", l_m_id);
+		likeInsertMap.put("gno", gno);
+		return sqlSession.selectOne(namespace + ".countbyLike", likeInsertMap);
 	}
 
 	@Override
