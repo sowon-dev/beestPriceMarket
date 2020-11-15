@@ -101,6 +101,15 @@ public interface GoodsService {
   
 	// 좋아요 삭제 (likes테이블)
 	public void deletebyLikes(String l_m_id, int l_g_gno);
+	
+	// 메인페이지 옵션바 (신규등록순)
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception;
+		
+	// 메인페이지 옵션바 (마감임박순)
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception;
+		
+	// 메인페이지 옵션바 (인기경매순)
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception;
 /* 정현 끝 */
 	
 /* 소원 */
