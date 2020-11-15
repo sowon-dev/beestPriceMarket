@@ -10,18 +10,18 @@
    </insert> 
    
    <!-- 입찰 -->
-	<select id="actionlist" resultType="com.bestpricemarket.domain.MyActionVO">
-	select a.ano,a.a_m_id, a.a_g_gno, a.a_g_actionstatus, a.a_g_enddate,f.f_name,g.gname 
-	 from myaction a join goods g
-	 on a.a_g_gno = g.gno
+	<select id="actionlist" resultType="com.bestpricemarket.domain.MyBiddingVO">
+	 select DISTINCT g.gname,g.g_m_id,g.gno,pm.pm_m_userid,g.actionstatus,f.f_name
+	 from goods g join pricemonitoring pm
+	 on g.gno = pm.pm_g_gno
 	 join goodsfile f
-	 on a.a_g_gno = f.f_g_gno
-	 where a.a_m_id = #{a_m_id} and a.a_g_actionstatus!=2
-	 order by a.ano desc
+	 on g.gno = f.f_g_gno
+	 where pm.pm_m_userid = #{pm_m_userid} and g.actionstatus != 2
+	 order by pmno desc
      limit #{displayPost}, #{postNum}
   		
-	</select>
-  <!-- 낙찰 -->
+	</select> 
+	  <!-- 낙찰 -->
   <select id="paylist" resultType="com.bestpricemarket.domain.MyActionVO">
 	 select a.ano, a.a_m_id, a.a_g_gno, a.a_g_actionstatus, a.a_g_enddate,f.f_name,g.gname,a.paystatus,a.deliverystatus 
 	 from myaction a join goods g
@@ -33,13 +33,13 @@
 	</select>
   
   <select id="getCount" resultType="int">
-   select count(a_g_actionstatus)
-   from myaction
-   where a_g_actionstatus != 2 
+   select count(pmno)
+   from pricemonitoring
+   where pm_m_userid=#{pm_m_userid} 
   </select>
   
   <select id="getPayCount" resultType="int">
-   select count(a_g_actionstatus)
+   select count(ano)
    from myaction
    where a_g_actionstatus = 2 
   </select>
@@ -49,5 +49,19 @@
  delete from myaction
  where ano= #{ano}
 </delete>
+  <!-- *************** 2020/11/16/월요일 낙찰정보 ************************** -->
+
+<select id="mybiddingInfo" resultType="com.bestpricemarket.domain.MyBiddingVO">
+	select DISTINCT g.gname,g.g_m_id,g.gno,pm.pm_m_userid,g.actionstatus
+	from goods g join pricemonitoring pm
+	on g.gno = pm.pm_g_gno
+	where pm_m_userid = #{pm_m_userid}
+</select>
+
+<select id="myActionInfo" resultType="com.bestpricemarket.domain.MyActionVO">
+	select * from myaction where a_g_gno = #{a_g_gno}
+</select>
+
+<!-- *************** 2020/11/16/월요일 낙찰정보 ************************** -->
   
   </mapper>

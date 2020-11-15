@@ -168,8 +168,34 @@
 						where pm_g_gno=#{pm_g_gno})
 		where gno=#{pm_g_gno};
   	</update>
-	<!-- 입찰하기 -->
-	
+	<!-- 낙찰한 사람의 정보 가져오기 -->
+  	<select id="getFinalBid" resultType="com.bestpricemarket.domain.finalBidVO">
+  		select p.pm_m_userid,p.pm_g_gno,g.endDate
+		from pricemonitoring p join goods g
+		on pm_g_gno = gno
+		where pm_g_gno = #{pm_g_gno}
+		order by pm_g_bidprice desc
+		limit 1
+  	</select>
+  	
+  	<!-- *************** 2020/11/16/월요일 낙찰정보 ************************** -->
+  	<!-- 낙찰한 사람의 정보 가져오기 -->
+  	<select id="getFinalBid" resultType="com.bestpricemarket.domain.finalBidVO">
+  		select p.pm_m_userid,p.pm_g_gno,g.endDate
+		from pricemonitoring p join goods g
+		on pm_g_gno = gno
+		where pm_g_gno = #{pm_g_gno}
+		order by pm_g_bidprice desc
+		limit 1
+  	</select>
+  	
+  	<!-- 낙찰정보 넣기 -->
+  	<insert id="insertMyAction">
+  		insert into myaction(a_m_id,a_g_gno,a_g_actionstatus,paystatus,deliverystatus,a_g_enddate,sellstatus)
+  		values(#{pm_m_userid},#{pm_g_gno},2,0,0,#{endDate},1)
+  	</insert>
+  	<!-- *************** 2020/11/16/월요일 낙찰정보끝 ************************** -->
+  
 	<!-- 검색하기 -->
 	<sql id="searchCondition">
 		<if test="searchType != null">

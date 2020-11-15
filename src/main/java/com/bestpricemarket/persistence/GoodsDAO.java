@@ -12,6 +12,7 @@ import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 
 public interface GoodsDAO {
 
@@ -81,6 +82,18 @@ public interface GoodsDAO {
 	
 	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리
 	public int getTotalCount(Criteria cri) throws Exception;
+
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	
+		// 최종 입찰 성공한 사람의 정보 가져오기
+		public finalBidVO finalBid(int gno) throws Exception;
+		
+		// 최종 입찰 성공한 사람의 정보를 myaction테이블에 정보넣기
+		public void insertMyAction(finalBidVO fivo) throws Exception;
+		
+		// *************** 2020/11/16/월요일 낙찰정보끝 ************************
 	
 // 태준 *************************************************************************************************************************
 	// 판매자의 다른상품보기
