@@ -94,7 +94,7 @@ public interface GoodsDAO {
 	public void goodsLike(int gno) throws Exception;
 	
 	// 상품의 좋아요 번호가 있는지 카운트 
-	public int countbyLike(String l_m_id);
+	public int countbyLike(String l_m_id, int gno);
 
 	// 조회
 	public LikesVO read(LikesVO vo);

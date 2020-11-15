@@ -210,9 +210,9 @@
    <!-- 정현 ******************************************************************************************** -->
    <!-- 좋아요 -->
   <select id="countbyLike" parameterType="map" resultType="int">
-   SELECT COUNT(*) as cnt
+   SELECT COUNT(*)
    FROM likes
-   where l_m_id = #{l_m_id}   <!-- 좋아요 취소 시, if~else문 제어에 필요 -->
+   where l_m_id = #{l_m_id} and l_g_gno = #{gno}
   </select>
 
   <insert id="create" parameterType="com.bestpricemarket.domain.LikesVO">

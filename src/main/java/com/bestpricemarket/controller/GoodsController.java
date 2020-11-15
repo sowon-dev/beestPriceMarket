@@ -447,7 +447,7 @@ public class GoodsController {
 			  @RequestParam("l_m_id") String l_m_id,
 			  @ModelAttribute LikesVO vo, HttpSession session) throws Exception{
 		System.out.println("C : 좋아요 created의 vo"+vo+" param's gno는 "+gno);
-	    int check = service.countbyLike(l_m_id);
+	    int check = service.countbyLike(l_m_id, gno);
 
 	    //변수찾기
 	    System.out.println("l_m_id는 "+l_m_id+" vo.getL_m_id는 "+vo.getL_m_id()+" check는 "+check);
