@@ -27,7 +27,7 @@
   <select id="getCount" resultType="int">
    select count(lno)
    from likes
-   where l_m_id={l_m_id} 
+   where l_m_id=#{l_m_id} 
   </select>
  
  <!-- 게시물 목록 + 페이징 -->

@@ -230,7 +230,7 @@ public class MemberController {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비밀번호가 옳바르지않습니다');</script>");
+			out.println("<script>alert('기존의 비밀번호와 일치합니다');</script>");
 			out.flush();
 			return "/member/changePw2";
 		}

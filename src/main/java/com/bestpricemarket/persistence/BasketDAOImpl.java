@@ -47,7 +47,7 @@ public class BasketDAOImpl implements BasketDAO {
 	@Override
 	public int getCount(String l_m_id) throws Exception {
 		
-		return session.selectOne(namespace+".getCount");
+		return session.selectOne(namespace+".getCount",l_m_id);
 	}
 	// 게시물 목록 + 페이징
 	@Override
