@@ -109,7 +109,7 @@ public interface GoodsService {
 	// 메인페이지 옵션바 (인기경매순)
 	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception;
 /* 정현 끝 */
-	
+
 /* 소원 */
 	// 상품목록 + 페이징처리
 	public List<GoodsVO> goodsList(Criteria cri) throws Exception;

@@ -234,7 +234,7 @@
   
   <select id="orderbyBest" resultType="com.bestpricemarket.domain.GoodsVO">
    select *
-   from goods
+   from goods               
    order by numofbid desc;
   </select>
   

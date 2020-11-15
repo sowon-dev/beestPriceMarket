@@ -232,7 +232,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 		return sqlSession.selectList(namespace + ".orderbyNew", cri);
 	}
-
+	
 	// 메인페이지 옵션바 (마감임박순)
 	@Override
 	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception {

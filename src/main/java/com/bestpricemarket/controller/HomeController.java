@@ -52,7 +52,7 @@ public class HomeController {
 		//입찰수 높은 상품 3가지 슬라이드로 출력
 		model.addAttribute("top3goods", gservice.top3goods(cri));
 		
-		//옵션바 출력
+		//옵션바 출력           
 		model.addAttribute("orderbyNew", gservice.orderbyNew(cri));
 		model.addAttribute("orderbyDuedate", gservice.orderbyDuedate(cri));
 		model.addAttribute("orderbyBest", gservice.orderbyBest(cri));

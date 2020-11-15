@@ -267,7 +267,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		return gdao.orderbyDuedate(cri);
 	}
-
+		
 	// 메인페이지 옵션바 (인기경매순)
 	@Override
 	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception {

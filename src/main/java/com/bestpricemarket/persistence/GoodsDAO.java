@@ -111,7 +111,6 @@ public interface GoodsDAO {
 	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception;
 	
 	
-	
 // 소원 *************************************************************************************************************************
 	// 상품목록 + 페이징처리	
 	public List<GoodsVO> listGoods(Criteria cri) throws Exception;
