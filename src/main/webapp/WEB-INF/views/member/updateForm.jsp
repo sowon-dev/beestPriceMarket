@@ -11,7 +11,7 @@
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel="stylesheet">
 <link href='${pageContext.request.contextPath}/resources/loginandjoin/loginandjoin.css' rel="stylesheet">
 <style>
- .btn {
+.btn {
     border-radius: 4px !important; 
     background: #212529 !important;
     color: #fff !important;
@@ -27,8 +27,7 @@
     color: #212529 !important;
     text-decoration: none !important;
 }
-
- .py-5  {
+.py-5  {
    width:100%;
    position:absolute;
    bottom:0;
@@ -40,19 +39,16 @@
   justify-content: center;
   align-items: center;
   border: solid 1px gray;
-  
- }
+}
 .front{
  width: 202px;
- 
-
 }
 </style>
 </head>
 <body>
-  <!-- 헤더 -->
-   <jsp:include page="../inc/top.jsp"/>
-  <!-- 헤더 -->
+<!-- 헤더 -->
+<jsp:include page="../inc/top.jsp"/>
+<!-- 헤더 -->
   
   <!-- Page Content -->
   <div class="container">
@@ -67,8 +63,9 @@
         </div>
       </div>
       <div class="col-lg-9">
-	    <fieldset>
+	    <fieldset style="margin-top: 50px;">
 	    <legend> 회원정보 수정 </legend>
+      	<div id="blockMsg" style="color:red;font-weight: bold;font-size: 15px;display:none;margin:10px 0;">정지된 회원입니다. 고객센터로 문의하시기바랍니다.</div>
 	    <form action="/member/update" method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8" name="frJoin">
 	     <span class="front" style="margin-right: 34px;">아이디</span>  <input type="text" name="id" class="form-control" value="${memberVO.id }" style="width:226px;display:inline; text-align: center;" readonly><br>
 	     <span class="front" style="margin-right: 17px; ">비밀번호</span>  <input id="pw" class="form-control" type="password" onkeyup="pwValCheck()" placeholder="비밀번호" name="pw" style="width:226px;display:inline;" required>  <br>
@@ -77,7 +74,7 @@
 	     <span class="front"  style="margin-right: 38px;">연락처</span><input type="text" name="phone"  class="form-control" value="${memberVO.phone}" style="width:226px;display:inline; "><br>
 	     <span class="front" style="margin-right: 45px; ">주소: </span><input type="text" name="addr1" class="form-control" value="${memberVO.addr1}" style="width:226px;display:inline; "><br>
 	     <span class="front" style="margin-right: 40px; ">주소2:</span><input type="text" name="addr2" class="form-control" value="${memberVO.addr2}" style="width:226px;display:inline; "><br>
-	     <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="<fmt:formatDate value="${memberVO.reg_date }" pattern="yyyy-MM-dd"/>" style="width:226px;display:inline; "readonly><br>
+	     <span class="front" style="margin-right: 17px; ">가입일자</span> <input type="text" name="reg_date" class="form-control" value="${memberVO.reg_date }"style="width:226px;display:inline; "readonly><br>
 	     <input class="btn" type="submit" value="회원수정" name="commit" id="submitBtn" >          
 	    </form>  
 	  	</fieldset>
@@ -85,13 +82,17 @@
     </div>
   </div>
 
-  <!-- 푸터 -->
-  <jsp:include page="../inc/bottom.jsp"/>
-  <!-- 푸터 -->
+<!-- 푸터 -->
+<jsp:include page="../inc/bottom.jsp"/>
+<!-- 푸터 -->
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+if(${memberVO.block} != 0){
+	$('#blockMsg').css('display', 'block');
+}
+</script>
+
+<!-- Bootstrap core JavaScript -->
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
-

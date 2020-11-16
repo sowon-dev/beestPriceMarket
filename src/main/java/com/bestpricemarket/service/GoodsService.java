@@ -16,6 +16,7 @@ import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 
 public interface GoodsService {
 
@@ -49,6 +50,10 @@ public interface GoodsService {
 	
 	// 상품 테이블 현재 입찰가 업데이트
 	public void finalpriceupdate(int gno) throws Exception;
+	
+	// 블락된 회원 가져오기 
+	public MemberVO blockMember(String id) throws Exception;
+	
 /* 지은 끝 */
 	
 /* 재원 */
@@ -70,7 +75,16 @@ public interface GoodsService {
 	public void endStatus(int gno) throws Exception;
 
 	public void insertBidding(PricemonitoringVO prvo) throws Exception;
-/* 재원 끝 */
+	
+	public int getTotalCount(Criteria cri) throws Exception;
+
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+		public finalBidVO finalBid(int gno) throws Exception;
+		
+		// 최종 입찰 성공한 사람의 정보를 myaction테이블에 정보넣기
+		public void insertMyAction(finalBidVO fivo) throws Exception;
+		// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+	/* 재원 끝 */
 	
 /* 태준 */ 
 	// 판매자의 다른상품보기
@@ -85,7 +99,7 @@ public interface GoodsService {
 	public void goodsLike(int gno) throws Exception;
 
 	// 상품의 좋아요 번호가 있는지 카운트
-	public int countbyLike(String l_m_id);
+	public int countbyLike(String l_m_id, int gno);
   
 	// 조회
 	public LikesVO read(LikesVO vo);
@@ -95,6 +109,15 @@ public interface GoodsService {
   
 	// 좋아요 삭제 (likes테이블)
 	public void deletebyLikes(String l_m_id, int l_g_gno);
+	
+	// 메인페이지 옵션바 (신규등록순)
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception;
+		
+	// 메인페이지 옵션바 (마감임박순)
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception;
+		
+	// 메인페이지 옵션바 (인기경매순)
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception;
 /* 정현 끝 */
 	
 /* 소원 */
@@ -106,6 +129,12 @@ public interface GoodsService {
 	
 	// 입찰자수 가져오기
 	public int gd_bidCount(int gno) throws Exception;
+	
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception;
+	
+	//좋아요버튼유지
+	public int isClickedLikeBtn(int gno, String id) throws Exception;
 	
 /* 소원 끝*/
 	

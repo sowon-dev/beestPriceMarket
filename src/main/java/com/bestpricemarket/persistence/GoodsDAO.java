@@ -12,6 +12,7 @@ import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 
 public interface GoodsDAO {
 
@@ -54,6 +55,9 @@ public interface GoodsDAO {
 	
 	// 상품 테이블 현재 입찰가 업데이트
 	public void finalpriceupdate(int gno) throws Exception;
+	
+	// 블락된 회원 가져오기 
+	public MemberVO blockMember(String id) throws Exception;
 
 // 재원 *************************************************************************************************************************
 	// 상품신고
@@ -76,6 +80,21 @@ public interface GoodsDAO {
 	// 입찰하기
 	public void insertBidding(PricemonitoringVO prvo) throws Exception;
 	
+	// DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리
+	public int getTotalCount(Criteria cri) throws Exception;
+
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	
+		// 최종 입찰 성공한 사람의 정보 가져오기
+		public finalBidVO finalBid(int gno) throws Exception;
+		
+		// 최종 입찰 성공한 사람의 정보를 myaction테이블에 정보넣기
+		public void insertMyAction(finalBidVO fivo) throws Exception;
+		
+		// *************** 2020/11/16/월요일 낙찰정보끝 ************************
+	
 // 태준 *************************************************************************************************************************
 	// 판매자의 다른상품보기
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception;
@@ -88,7 +107,7 @@ public interface GoodsDAO {
 	public void goodsLike(int gno) throws Exception;
 	
 	// 상품의 좋아요 번호가 있는지 카운트 
-	public int countbyLike(String l_m_id);
+	public int countbyLike(String l_m_id, int gno);
 
 	// 조회
 	public LikesVO read(LikesVO vo);
@@ -97,6 +116,15 @@ public interface GoodsDAO {
 	public void deletebyGoods(int gno);
 	  
 	public void deletebyLikes(String l_m_id, int l_g_gno);
+	
+	// 메인페이지 옵션바 (신규등록순)
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception;
+	
+	// 메인페이지 옵션바 (마감임박순)
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception;
+	
+	// 메인페이지 옵션바 (인기경매순)
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception;
 	
 // 소원 *************************************************************************************************************************
 	// 상품목록 + 페이징처리	
@@ -107,5 +135,14 @@ public interface GoodsDAO {
 	
 	//입찰자수 가져오기
 	public int gd_bidCount(int gno) throws Exception;
-
+	
+	//numofbid 입찰자수 전체
+	public void numofbid(int pm_g_gno) throws Exception;
+	
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception;
+	
+	//좋아요유지
+	public int isClickedLikeBtn(int gno, String id) throws Exception;
+	
 }

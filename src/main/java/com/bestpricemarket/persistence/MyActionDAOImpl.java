@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bestpricemarket.domain.BasketVO;
 import com.bestpricemarket.domain.MyActionVO;
+import com.bestpricemarket.domain.MyBiddingVO;
 
 @Repository
 public class MyActionDAOImpl implements MyActionDAO {
@@ -30,12 +31,12 @@ public class MyActionDAOImpl implements MyActionDAO {
 	}
 	// 입찰 목록
 	@Override
-	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception {
+	public List<MyBiddingVO> actionlist(int displayPost, int postNum,String pm_m_userid) throws Exception {
 		Map data = new HashMap();
 		  
 		 data.put("displayPost", displayPost);
 		 data.put("postNum", postNum);
-		 data.put("a_m_id", a_m_id); 
+		 data.put("pm_m_userid", pm_m_userid); 
 		return session.selectList(namespace + ".actionlist",data);
 	}
 	// 낙찰 목록
@@ -50,9 +51,9 @@ public class MyActionDAOImpl implements MyActionDAO {
 	}
 	// 입찰 목록 세기
 	@Override
-	public int getCount() throws Exception {
+	public int getCount(String pm_m_id) throws Exception {
 		
-		return session.selectOne(namespace+".getCount");
+		return session.selectOne(namespace+".getCount",pm_m_id);
 	}
 	// 낙찰 목록 세기
 	@Override
@@ -66,6 +67,21 @@ public class MyActionDAOImpl implements MyActionDAO {
 		session.delete(namespace+".delete",av);
 		
 	}
+	
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	@Override
+	public List<MyBiddingVO> myBidding(String pm_m_userid) throws Exception {
+		
+		return session.selectList(namespace + ".mybiddingInfo",pm_m_userid);
+	}
+	
+	@Override
+	public MyActionVO myActionInfo(int a_g_gno) throws Exception {
+		
+		return session.selectOne(namespace + ".myActionInfo",a_g_gno);
+	}
+	// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+	
 	
 	
 	

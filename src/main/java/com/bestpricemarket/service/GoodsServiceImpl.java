@@ -19,6 +19,7 @@ import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 import com.bestpricemarket.persistence.GoodsDAO;
 import com.bestpricemarket.utils.FileUtils;
 
@@ -155,7 +156,14 @@ public class GoodsServiceImpl implements GoodsService {
 		
 	}
 
-	// 재원 ************************************************************************************************************************
+	// 블락된 회원 가져오기 
+	@Override
+	public MemberVO blockMember(String id) throws Exception {
+		
+		return gdao.blockMember(id);
+	}
+	
+// 재원 ************************************************************************************************************************
 	// 상품신고
 	@Override
 	public MemberVO myInfo(String id) throws Exception {
@@ -195,16 +203,39 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void insertBidding(PricemonitoringVO prvo) throws Exception {
 		gdao.insertBidding(prvo);
+		gdao.numofbid(prvo.getPm_g_gno());
+		System.out.println("pm_g_gno가 뭐니?" + prvo.getPm_g_gno());
 	}
 	
-	// 태준 *******************************************************************************************************************************
+	@Override
+	public int getTotalCount(Criteria cri) throws Exception {
+		
+		return gdao.getTotalCount(cri);
+	}
+
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	@Override
+	public finalBidVO finalBid(int gno) throws Exception {
+		
+		return gdao.finalBid(gno);
+	}
+
+	@Override
+	public void insertMyAction(finalBidVO fivo) throws Exception {
+		gdao.insertMyAction(fivo);
+		
+	}
+	// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+		// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+
+// 태준 *******************************************************************************************************************************
 	//판매자의 다른상품보기
 	@Override
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception {
 		return gdao.anothergoods(vo);
 	}
 	
-	// 정현 *******************************************************************************************************************************
+// 정현 *******************************************************************************************************************************
 	@Override
     public int like (LikesVO vo) throws Exception {
 		System.out.println("S : 좋아요 클릭(->likes 테이블)");
@@ -219,9 +250,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}  
 	
 	@Override
-	public int countbyLike(String l_m_id){
-	    int count = gdao.countbyLike(l_m_id);
-	    return count;
+	public int countbyLike(String l_m_id, int gno){
+	    return gdao.countbyLike(l_m_id, gno);
 	}  
 
 	@Override
@@ -244,29 +274,54 @@ public class GoodsServiceImpl implements GoodsService {
 		System.out.println("S : 좋아요 취소(->likes테이블)"+l_m_id+l_g_gno);  
 	    gdao.deletebyLikes(l_m_id, l_g_gno);
 	}
+	
+	// 메인페이지 옵션바
+    @Override
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception {
+    	return gdao.orderbyNew(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception {
+		return gdao.orderbyDuedate(cri);
+	}
+	
+	@Override
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception {
+		return gdao.orderbyBest(cri);
+	}
 
-	// 소원 ************************************************************************************************************************
+// 소원 ************************************************************************************************************************
 	// 상품목록 + 페이징처리	
 	@Override	
 	public List<GoodsVO> goodsList(Criteria cri) throws Exception {	
-		System.out.println("S : 상품목록");	
 		return gdao.listGoods(cri);	
 	}
 
 	// 전체 글 개수 가져오는 처리	
 	@Override	
 	public int listTotalCount() throws Exception {	
-		System.out.println("S : 목록 전체 글 가져오기");	
 		int result = gdao.pageCount();	
-		System.out.println("S : 글 개수 -> " + result);	
 		return result;	
 	}
 
 	//입찰자수 가져오기
 	@Override
 	public int gd_bidCount(int gno) throws Exception {
-		System.out.println("gd_bidCount는 왜 3이 아닐까? "+ gdao.gd_bidCount(gno));
 		return gdao.gd_bidCount(gno);
+	}
+
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	@Override
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception {
+		System.out.println("탑쓰리는? " +gdao.top3goods(cri));
+		return gdao.top3goods(cri);
+	}
+
+	//좋아요 유지
+	@Override
+	public int isClickedLikeBtn(int gno, String id) throws Exception {
+		return gdao.isClickedLikeBtn(gno, id);
 	}
 	
 	

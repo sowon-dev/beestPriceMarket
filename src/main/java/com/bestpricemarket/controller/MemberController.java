@@ -220,14 +220,18 @@ public class MemberController {
  	
  	//비밀번호 변경 요청
  	@RequestMapping(value = "/changePw")
- 	public String pwChange(MemberVO vo, HttpSession session,Model model,RedirectAttributes rttr) throws Exception {
+ 	public String pwChange(MemberVO vo, HttpSession session,Model model,RedirectAttributes rttr,HttpServletResponse response) throws Exception {
  		l.info("비밀번호 변경 요청 발생!!!");
- 		if( vo != null) {
+ 		MemberVO mvo = service.loginMember(vo);
+ 		if( mvo == null) {
  			service.modifyPw(vo);
 			rttr.addFlashAttribute("vo", vo);
 			return "redirect:/member/main";
 		} else {
-			l.info("/member/changePw2로 이동");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('기존의 비밀번호와 일치합니다');</script>");
+			out.flush();
 			return "/member/changePw2";
 		}
  	}

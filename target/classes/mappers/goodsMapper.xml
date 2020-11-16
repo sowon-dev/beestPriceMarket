@@ -171,7 +171,7 @@
   <select id="countbyLike" parameterType="map" resultType="int">
    SELECT COUNT(*) as cnt
    FROM likes
-   where l_m_id = #{l_m_id}   <!-- 좋아요 취소 시, if~else문 제어에 필요 -->
+   where l_m_id = #{l_m_id}  <!-- 좋아요 취소 시, if~else문 제어에 필요 -->
   </select>
 
   <insert id="create" parameterType="com.bestpricemarket.domain.LikesVO">
@@ -202,6 +202,19 @@
     DELETE FROM likes
     WHERE l_g_gno = #{l_g_gno} and l_m_id = #{l_m_id}
   </delete>
+  
+  <select id="whoLiked"> <!-- 좋아요 클릭 유지 -->
+  SELECT COUNT(*) as cnt
+  FROM likes
+  where l_m_id = #{l_m_id} 
+  </select>
+  
+  <select id="whoLikedGno"> <!-- 좋아요 클릭 유지 -->
+  SELECT COUNT(*) as cnt
+  FROM likes
+  where l_g_gno = #{gno} 
+  </select>
+  
    
 	<!-- 소원 ******************************************************************************************** -->
   	<!-- 상품목록 -->	

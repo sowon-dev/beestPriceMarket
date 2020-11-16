@@ -1,6 +1,5 @@
 <%@page import="com.bestpricemarket.domain.BasketVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
@@ -65,7 +64,7 @@
      <div class="row"> 
          <div class="col-12">  
           	<!-- <div class="card"> -->
-                   <h1 class="my-4" style="text-align: center;">장바구니</h1>   
+                   <h1 class="my-4" style="text-align: center;">좋아요</h1>   
                     <div class="row p-5" style="top:300px; width: 996px;"  >
                          <div class="col-md-12">
                             <form method="post" role="form">
@@ -126,11 +125,11 @@
 										<ul class="pagination justify-content-center">
 										<c:if test="${page.prev}">
 										 <li class="page-item">
-										 <a class="page-link" href="/basket/listPage?num=${page.startPageNum - 1}">이전</a>
+										 <a class="page-link" href="/basket/listPage?num=${startPageNum - 1}">Previous</a>
 										 </li>
 										</c:if>
 										
-										<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
+										<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
 										 
 										 
 										  <c:if test="${select != num}">
@@ -150,7 +149,7 @@
 										
 										<c:if test="${page.next}">
 										 <li class="page-item">
-										 <a class="page-link" href="/basket/listPage?num=${page.endPageNum + 1}">다음</a>
+										 <a class="page-link" href="/basket/listPage?num=${endPageNum + 1}">Next</a>
 										 </li>
 										</c:if>
 									</ul>
@@ -168,15 +167,12 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-
 function fun1(l_g_gno){
 	var con = confirm("입찰하러 가시겠습니까?");
 	if(con){
 	location.href="/goods/detail?gno="+l_g_gno;
 	}
 }
-
-
 $(document).ready(function(){
 	var formObj = $("form[role='form']");
                

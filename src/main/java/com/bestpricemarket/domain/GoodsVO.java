@@ -18,10 +18,11 @@ public class GoodsVO {
 	private Date endDate;
 	private int actionstatus;
 	private String thumbnail;
+	private int numofbid;
 	
 	public GoodsVO() {}
 	public GoodsVO(int gno, String g_m_id, String category, String gname, int lowestprice, String content,
-			int finalprice, int like, Date regDate, Date endDate, int actionstatus, String thumbnail) {
+			int finalprice, int like, Date regDate, Date endDate, int actionstatus, String thumbnail, int numofbid) {
 		super();
 		this.gno = gno;
 		this.g_m_id = g_m_id;
@@ -35,7 +36,10 @@ public class GoodsVO {
 		this.endDate = endDate;
 		this.actionstatus = actionstatus;
 		this.thumbnail = thumbnail;
+		this.numofbid = numofbid;
 	}
+	
+	
 	public int getGno() {
 		return gno;
 	}
@@ -109,32 +113,19 @@ public class GoodsVO {
 		this.thumbnail = thumbnail;
 	}
 	
+	public int getNumofbid() {
+		return numofbid;
+	}
+	public void setNumofbid(int numofbid) {
+		this.numofbid = numofbid;
+	}
 	
 	@Override
 	public String toString() {
 		return "GoodsVO [gno=" + gno + ", g_m_id=" + g_m_id + ", category=" + category + ", gname=" + gname
 				+ ", lowestprice=" + lowestprice + ", content=" + content + ", finalprice=" + finalprice + ", like="
 				+ like + ", regDate=" + regDate + ", endDate=" + endDate + ", actionstatus=" + actionstatus
-				+ ", thumbnail=" + thumbnail + "]";
+				+ ", thumbnail=" + thumbnail + ", numofbid=" + numofbid + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-
 }

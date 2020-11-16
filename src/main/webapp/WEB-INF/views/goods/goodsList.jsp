@@ -1,8 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <!-- 버튼 CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/button-reg_goods.css" rel="stylesheet">
@@ -68,18 +67,23 @@
         <c:forEach var="category" items="${categoryList}" >
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
-              	
-                 	 <img src="<c:url value="/imgUpload/${category.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
-               	
-               </a>
+				<a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
+				<img src="<c:url value="/imgUpload/${category.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
+               	</a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="/goods/detail?gno=${category.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${category.gname}</a>
                 </h4>
-                <h6>현재가  <b>${category.finalprice}</b>원</h6>
-                <h6>입찰자 </h6>
-                <h6>마감일 ${category.endDate}</h6>
+				<c:choose>
+			 		<c:when test="${finalprice > 0}">
+						<h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${category.finalprice}" /></b>원</h6>
+					</c:when>
+					<c:otherwise>
+						<h6>현재가 <b><fmt:formatNumber type="number" maxFractionDigits="3" value="${category.lowestprice}" /></b>원</h6>
+					</c:otherwise>
+				</c:choose>
+                <h6>입찰수 ${category.numofbid}</h6>
+                <h6>경매마감일 ${category.endDate}</h6>
               </div>
             </div>
           </div>
@@ -87,7 +91,6 @@
         </div>
         </c:if> 
      <!-- 상품 카드 목록(Category) 
-
         
         <!-- 페이징 하단부 처리(카테고리목록) -->
        <c:set var="cate" value="${category}" />

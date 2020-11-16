@@ -27,27 +27,19 @@
     color: #212529 !important;
     text-decoration: none !important;
 }
-
-
- .py-5  {
+.py-5  {
    width:100%;
-   
    position:absolute;
    bottom:0;
-
   text-align: center;
-  
 }
- 
- .form {
+.form {
   display: flex;
   height: 100vh;
   justify-content: center;
   align-items: center;
   border: solid 1px gray;
-  
- }
-
+}
 </style>
 </head>
 
@@ -71,7 +63,7 @@
 
   <!-- /.container -->
    <div class="col-lg-9">
-	<fieldset>
+	<fieldset style="margin-top: 50px;">
 	    <legend> 회원탈퇴 </legend>
 	    <form method="post" name="form1">
 	       <span class="front" style="margin-right: 52px;">아이디 </span> <input type="text" name="id" class="form-control" value="${id }" style="width:226px;display:inline;" readonly> <br>

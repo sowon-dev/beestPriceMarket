@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.bestpricemarket.controller.MemberController;
 import com.bestpricemarket.domain.MyActionVO;
+import com.bestpricemarket.domain.MyBiddingVO;
 import com.bestpricemarket.persistence.MyActionDAO;
 
 @Service
@@ -27,8 +28,8 @@ public class MyActionServiceImpl implements MyActionService {
 
 	// 입찰 목록 
 	@Override
-	public List<MyActionVO> actionlist(int displayPost, int postNum,String a_m_id) throws Exception {
-		return adao.actionlist(displayPost,postNum,a_m_id);
+	public List<MyBiddingVO> actionlist(int displayPost, int postNum,String pm_m_userid) throws Exception {
+		return adao.actionlist(displayPost,postNum,pm_m_userid);
 	}
 	
 	// 낙찰 목록
@@ -39,8 +40,8 @@ public class MyActionServiceImpl implements MyActionService {
 
 	//입찰 세기
 	@Override
-	public int getCount() throws Exception {
-		return adao.getCount();
+	public int getCount(String pm_m_userid) throws Exception {
+		return adao.getCount(pm_m_userid);
 	}
 	
 	//낙찰 세기
@@ -54,4 +55,20 @@ public class MyActionServiceImpl implements MyActionService {
 	public void delete(MyActionVO av) {
 		adao.delete(av);
 	}
+	
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	@Override
+	public List<MyBiddingVO> myBidding(String pm_m_userid) throws Exception {
+		
+		return adao.myBidding(pm_m_userid);
+	}
+
+	@Override
+	public MyActionVO myActionInfo(int a_g_gno) throws Exception {
+		
+		return adao.myActionInfo(a_g_gno);
+	}
+	// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+	
+	
 }

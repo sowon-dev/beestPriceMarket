@@ -1,19 +1,13 @@
 <%@page import="com.bestpricemarket.domain.BasketVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/BasketCSS/css/bootstrap.min.css" rel="stylesheet">
-
- <style type="text/css">
+<style type="text/css">
 .container{
  width: 100% !important; 
 }
@@ -33,14 +27,12 @@
     color: #212529;
     text-decoration: none;
 }
-
 </style> 
 
 <script type="text/javascript">
 function basketlist(page){
 	location.href="basket/basket?curPage=" + page
 }
-
 </script>
 
 </head>
@@ -64,21 +56,7 @@ function basketlist(page){
      <div class="row"> 
          <div class="col-12">  
           <!--  <div class="card"> -->  
-                    <%-- <div class="row pb-5 p-5"   style="height: 200px;">
-                        <div class="col-md-6">
-                            <p class="font-weight-bold mb-4">경매 상품</p>
-                            <img src="basket/pineapple.jpg" alt="안뜨노">
-                        </div>
-
-                        <div class="col-md-6 text-right">
-                            <p class="font-weight-bold mb-4">물건 현황</p>
-                            <p class="mb-1"><span class="text-muted">아이디: </span>${b}</p>
-                            <p class="mb-1"><span class="text-muted">카테고리 </span> 10253642</p>
-                            <p class="mb-1"><span class="text-muted">상품이름: </span> Root</p>
-                            <p class="mb-1"><span class="text-muted">좋아요: </span> John Doe</p>
-                        </div>
-                    </div> --%>
-                   <h1 class="my-4" style="text-align: center;">장바구니</h1>   
+                   <h1 class="my-4" style="text-align: center;">좋아요</h1>   
                     <div class="row p-5" style="top:300px;"  >
                        <c:choose>
                       <c:when test="${basketlist == null }">
@@ -149,10 +127,7 @@ function basketlist(page){
       </div>  
     
     <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="http://totoprayogo.com">totoprayogo.com</a></div>
-      </div>
+</div>
 <!-- 상품 카테고리 메뉴바 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>   
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>   
 </body>
-</html>

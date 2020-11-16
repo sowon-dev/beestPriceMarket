@@ -17,6 +17,7 @@ import com.bestpricemarket.domain.LikesVO;
 import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.domain.ReportVO;
+import com.bestpricemarket.domain.finalBidVO;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO {
@@ -27,7 +28,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	private static final String namespace = "com.bestpricemarket.mappers.goodsMapper";
 
-	// 지은 *********************************************************************************************************************************
+// 지은 *********************************************************************************************************************************
 	// 상품등록
 	@Override
 	public void registerGoods(GoodsVO vo) throws Exception {
@@ -123,8 +124,15 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.update(namespace+".finalpriceupdate",gno);
 		
 	}
+
+	// 블락된 회원 가져오기 
+	@Override
+	public MemberVO blockMember(String id) throws Exception {
+
+		return sqlSession.selectOne(namespace+".block", id);
+	}
 	
-	// 재원 *******************************************************************************************************************************
+// 재원 *******************************************************************************************************************************
 	// 상품신고
 	@Override
 	public MemberVO myInfo(String id) throws Exception {
@@ -165,14 +173,35 @@ public class GoodsDAOImpl implements GoodsDAO {
 		sqlSession.selectOne(namespace + ".insertBidding", prvo);
 	}
 	
-	// 태준 *******************************************************************************************************************************
+	@Override
+	public int getTotalCount(Criteria cri) throws Exception {
+		
+		return sqlSession.selectOne(namespace + ".pageCount",cri);
+	}
+	
+
+	// *************** 2020/11/16/월요일 낙찰정보 **************************
+	
+		@Override
+		public finalBidVO finalBid(int gno) throws Exception {
+			return sqlSession.selectOne(namespace + ".getFinalBid",gno);
+		}
+
+		@Override
+		public void insertMyAction(finalBidVO fivo) throws Exception {
+			sqlSession.insert(namespace + ".insertMyAction",fivo);
+			
+		}
+		
+		// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+// 태준 *******************************************************************************************************************************
 	// 판매자의 다른상품보기
 	@Override
 	public List<AnotherGoodsVO> anothergoods(GoodsVO vo) throws Exception {
 		return sqlSession.selectList(namespace+".anothergoods",vo);
 	}
 
-	// 정현 *******************************************************************************************************************************
+// 정현 *******************************************************************************************************************************
 	// 좋아요 입력 -> 제품상세페이지(likes 테이블)
 	@Override
 	public int like(LikesVO vo) throws Exception {
@@ -188,10 +217,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public int countbyLike(String l_m_id){
+	public int countbyLike(String l_m_id, int gno){
 		System.out.println("DAO : 좋아요 삭제(likes 테이블)" + l_m_id);
-		int count = sqlSession.selectOne(namespace + ".countbyLike", l_m_id);
-		return count;
+		Map<String, Object> likeInsertMap = new HashMap<String, Object>();
+		likeInsertMap.put("l_m_id", l_m_id);
+		likeInsertMap.put("gno", gno);
+		return sqlSession.selectOne(namespace + ".countbyLike", likeInsertMap);
 	}
 
 	@Override
@@ -217,8 +248,27 @@ public class GoodsDAOImpl implements GoodsDAO {
 		System.out.println("DAO : 좋아요 삭제(likes 테이블)의 파라미터 두개는 " + l_m_id + l_g_gno+" map은? "+map);
 		sqlSession.delete(namespace + ".deletebyLikes", map);  
 	}
+	
+	// 메인페이지 옵션바
+	@Override
+	public List<GoodsVO> orderbyNew(Criteria cri) throws Exception {
+		System.out.println("DAO : 옵션바 - 신규등록순");
+		return sqlSession.selectList(namespace + ".orderbyNew", cri);
+	}
+	
+	@Override
+	public List<GoodsVO> orderbyDuedate(Criteria cri) throws Exception {
+		System.out.println("DAO : 옵션바 - 마감임박순");
+		return sqlSession.selectList(namespace + ".orderbyDuedate", cri);
+	}
 
-	// 소원 ************************************************************************************************************************
+	@Override
+	public List<GoodsVO> orderbyBest(Criteria cri) throws Exception {
+		System.out.println("DAO : 옵션바 - 인기경매순");
+		return sqlSession.selectList(namespace + ".orderbyBest", cri);
+	}
+
+// 소원 ************************************************************************************************************************
 	// 상품목록 + 페이징처리	
 	@Override	
 	public List<GoodsVO> listGoods(Criteria cri) throws Exception {	
@@ -238,7 +288,28 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return sqlSession.selectOne(namespace+".gd_bidCount", gno);
 	}
 
+	//numofbid 입찰자수 전체
+	@Override
+	public void numofbid(int pm_g_gno) throws Exception {
+		sqlSession.update(namespace+".numofbid", pm_g_gno);
+	}
 
+	//입찰수 높은 상품 3가지 슬라이드로 출력
+	@Override
+	public List<GoodsVO> top3goods(Criteria cri) throws Exception {
+		System.out.println("DAO: 탑쓰리는? "+sqlSession.selectList(namespace + ".top3goods", cri));
+		return sqlSession.selectList(namespace + ".top3goods", cri);	
+	}
+
+	//좋아요유지
+	@Override
+	public int isClickedLikeBtn(int gno, String id) throws Exception {
+		Map<String, Object> isClickedLikeBtnMap = new HashMap<String, Object>();
+		isClickedLikeBtnMap.put("gno", gno);
+		isClickedLikeBtnMap.put("id", id);
+		return sqlSession.selectOne(namespace+".isClickedLikeBtn", isClickedLikeBtnMap);
+	}	
+	
 	
 	
 }
