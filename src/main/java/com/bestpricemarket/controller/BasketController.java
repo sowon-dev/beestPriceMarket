@@ -29,7 +29,7 @@ import com.bestpricemarket.service.BasketService;
 import com.bestpricemarket.service.MemberService;
 
 @Controller
-@RequestMapping(value ="/bestpricemarket/basket/*")
+@RequestMapping(value ="/basket/*")
 public class BasketController {
 
 	@Inject

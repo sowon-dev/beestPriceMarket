@@ -54,16 +54,16 @@
 		</c:if>
       
         <div class="list-group">
-          <a href="/bestpricemarket/goods/list?category=컴퓨터" class="list-group-item">컴퓨터</a>
-          <a href="/bestpricemarket/goods/list?category=디지털" class="list-group-item">디지털</a>
-          <a href="/bestpricemarket/goods/list?category=생활가전" class="list-group-item">생활가전</a>
-          <a href="/bestpricemarket/goods/list?category=생활문구" class="list-group-item">생활문구</a>
-          <a href="/bestpricemarket/goods/list?category=생활가구" class="list-group-item">생활가구</a>
-          <a href="/bestpricemarket/goods/list?category=스포츠" class="list-group-item">스포츠</a>
-          <a href="/bestpricemarket/goods/list?category=패션의류" class="list-group-item">패션의류</a>
-          <a href="/bestpricemarket/goods/list?category=패션잡화" class="list-group-item">패션잡화</a>
-          <a href="/bestpricemarket/goods/list?category=화장품" class="list-group-item">화장품</a>
-          <a href="/bestpricemarket/goods/list?category=쥬얼리" class="list-group-item">쥬얼리</a> 
+          <a href="/goods/list?category=컴퓨터" class="list-group-item">컴퓨터</a>
+          <a href="/goods/list?category=디지털" class="list-group-item">디지털</a>
+          <a href="/goods/list?category=생활가전" class="list-group-item">생활가전</a>
+          <a href="/goods/list?category=생활문구" class="list-group-item">생활문구</a>
+          <a href="/goods/list?category=생활가구" class="list-group-item">생활가구</a>
+          <a href="/goods/list?category=스포츠" class="list-group-item">스포츠</a>
+          <a href="/goods/list?category=패션의류" class="list-group-item">패션의류</a>
+          <a href="/goods/list?category=패션잡화" class="list-group-item">패션잡화</a>
+          <a href="/goods/list?category=화장품" class="list-group-item">화장품</a>
+          <a href="/goods/list?category=쥬얼리" class="list-group-item">쥬얼리</a> 
         </div>
 	</div> <!-- 상품 카테고리 메뉴바 끝-->
 	
@@ -78,18 +78,18 @@
           <!-- 슬라이드(입찰수기준) -->
           <div class="carousel-inner" role="listbox" style="height:350px;background-color:gainsboro;">
             <div class="carousel-item active" style="height:350px;">
-            	<a href="/bestpricemarket/goods/detail?gno=${top3goods[0].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
+            	<a href="/goods/detail?gno=${top3goods[0].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
 					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[0].thumbnail}"/>" style="margin:0 auto;object-fit:contain;height:350px;" alt="First slide"/> 
 				</a>
               <!-- <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide"> -->
             </div>
    		    <div class="carousel-item" style="height:350px;">
-   		        <a href="/bestpricemarket/goods/detail?gno=${top3goods[1].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
+   		        <a href="/goods/detail?gno=${top3goods[1].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
 					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[1].thumbnail}"/>" style="margin:0 auto;object-fit:contain;height:350px;" alt="Second slide"/> 
 				</a>
             </div>
             <div class="carousel-item" style="height:350px;">
-               	<a href="/bestpricemarket/goods/detail?gno=${top3goods[2].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
+               	<a href="/goods/detail?gno=${top3goods[2].gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">
 					<img class="d-block img-fluid" src="<c:url value="/imgUpload/${top3goods[2].thumbnail}"/>" style="margin:0 auto;object-fit:contain;height:350px;" alt="Third slide"/> 
 				</a>
             </div>
@@ -127,12 +127,12 @@
 					<div class="row" style="position:absolute ; right:0;"> </div>
 					<div class="col-lg-4 col-md-6 mb-4" >
 					<div class="card h-100" style="margin-left:30px;"> 
-						<a href="/bestpricemarket/goods/detail?gno=${orderbynew.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
+						<a href="/goods/detail?gno=${orderbynew.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
 						<img src="<c:url value="/imgUpload/${orderbynew.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
 						</a>
 						<div class="card-body" >
 							<h4 class="card-title">
-							<a href="/bestpricemarket/goods/detail?gno=${orderbynew.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${orderbynew.gname}</a>  
+							<a href="/goods/detail?gno=${orderbynew.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${orderbynew.gname}</a>  
 						</h4>
 					     <c:choose>
 							<c:when test="${orderbynew.finalprice > 0}">
@@ -158,12 +158,12 @@
 					          <div class="row" style="position:absolute ; right:0;"> </div>
 						<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100" style="margin-left:30px;">
-						 <a href="/bestpricemarket/goods/detail?gno=${duedate.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
+						 <a href="/goods/detail?gno=${duedate.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
 							<img src="<c:url value="/imgUpload/${duedate.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
 						</a>
 						<div class="card-body">
 					  		<h4 class="card-title">
-					    	<a href="/bestpricemarket/goods/detail?gno=${duedate.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${duedate.gname}</a>  
+					    	<a href="/goods/detail?gno=${duedate.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${duedate.gname}</a>  
 							</h4>
 			                <c:choose>
 							    <c:when test="${duedate.finalprice > 0}">
@@ -189,12 +189,12 @@
 					    <div class="row" style="position:absolute ; right:0;"> </div>
 						<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100" style="margin-left:30px;">
-						 <a href="/bestpricemarket/goods/detail?gno=${best.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
+						 <a href="/goods/detail?gno=${best.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}"> 
 							<img src="<c:url value="/imgUpload/${best.thumbnail}"/>" width="410px" height="200px" class="card-img-top"/> 
 						</a>
 						<div class="card-body" style="display:inline;">
 					  		<h4 class="card-title">
-					    	<a href="/bestpricemarket/goods/detail?gno=${best.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${best.gname}</a>  
+					    	<a href="/goods/detail?gno=${best.gno}&page=${pm.cri.page}&pageSize=${pm.cri.pageSize}">${best.gname}</a>  
 							</h4>
 			                <c:choose>
 							    <c:when test="${best.finalprice > 0}">
@@ -250,21 +250,21 @@
 		 	<!-- 이전 -->
 			<c:if test="${pm.prev}">
    				<li class="page-item">
-   					<a class="page-link" href="/bestpricemarket/main?page=${pm.startPage-1}">&laquo;</a>
+   					<a class="page-link" href="/main?page=${pm.startPage-1}">&laquo;</a>
    				</li>
 			</c:if>	
    			
 			<!-- 페이지 번호 -->	
    		  	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="idx">
 				<li class="page-item" ${pm.cri.page == idx? 'class=active':''}>
-					<a class="page-link" href="/bestpricemarket/main?page=${idx}">${idx}</a>
+					<a class="page-link" href="/main?page=${idx}">${idx}</a>
 				</li>		
 		  	</c:forEach>     
    			
    		 	<!-- 다음 -->
    		  	<c:if test="${pm.next && pm.endPage > 0}">	
    				<li class="page-item">
-   			  		<a class="page-link" href="/bestpricemarket/main?page=${pm.endPage+1}">&raquo;</a>
+   			  		<a class="page-link" href="/main?page=${pm.endPage+1}">&raquo;</a>
    				</li>
    		  	</c:if>	
    		  	
