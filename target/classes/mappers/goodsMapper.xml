@@ -168,15 +168,7 @@
 						where pm_g_gno=#{pm_g_gno})
 		where gno=#{pm_g_gno};
   	</update>
-	<!-- 낙찰한 사람의 정보 가져오기 -->
-  	<select id="getFinalBid" resultType="com.bestpricemarket.domain.finalBidVO">
-  		select p.pm_m_userid,p.pm_g_gno,g.endDate
-		from pricemonitoring p join goods g
-		on pm_g_gno = gno
-		where pm_g_gno = #{pm_g_gno}
-		order by pm_g_bidprice desc
-		limit 1
-  	</select>
+	
   	
   	<!-- *************** 2020/11/16/월요일 낙찰정보 ************************** -->
   	<!-- 낙찰한 사람의 정보 가져오기 -->
