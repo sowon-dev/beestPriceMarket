@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.bestpricemarket.domain.BasketVO;
 import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.MyBiddingVO;
+import com.bestpricemarket.domain.PricemonitoringVO;
 
 @Repository
 public class MyActionDAOImpl implements MyActionDAO {
@@ -57,9 +58,9 @@ public class MyActionDAOImpl implements MyActionDAO {
 	}
 	// 낙찰 목록 세기
 	@Override
-	public int getPayCount() throws Exception {
+	public int getPayCount(String a_m_id) throws Exception {
 		
-		return session.selectOne(namespace+".getPayCount");
+		return session.selectOne(namespace+".getPayCount",a_m_id);
 	}
     // 선택 삭제
 	@Override
@@ -81,6 +82,13 @@ public class MyActionDAOImpl implements MyActionDAO {
 		return session.selectOne(namespace + ".myActionInfo",a_g_gno);
 	}
 	// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+	@Override
+	public PricemonitoringVO pricemotoringInfo(int pm_g_gno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".getPricemonitoring",pm_g_gno);
+	}
+	
+	
 	
 	
 	

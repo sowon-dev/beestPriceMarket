@@ -75,14 +75,13 @@
 			<br>	          	
 			<br>	          	
 			<h3  style="text-align:center;"><b>입찰중인</b> 경매내역</h3>   
-				<table class="table table-hover">
+				<table class="table table-hover" style="width: 1000px;">
 					<thead>
 						<tr>
 							<td><input type="checkbox" id="allCheck" name="allCheck" /><b>모두선택</b></td>
-							<td style="text-align: center;"><b>상품이름</b></td>
-							<td style="text-align: center;">상품사진</td>
 							<td style="text-align: center;"><b>상품번호</b></td>
-							<td style="text-align: center;">판매자</td>
+							<td style="text-align: center;">상품사진</td>
+							<td style="text-align: center;"><b>상품이름</b></td>
 							<td style="text-align: center;" colspan="2"><b>진행상태</b></td>
 						</tr>
 					</thead>
@@ -99,19 +98,16 @@
 								 <td><input type="checkbox" id="chBox" name="chBox" class="chBox" data-cartNum="${actionlist.pm_g_gno }"/></td>
 								 </c:otherwise>
 								 </c:choose>
-								 <td style="text-align: center;">
-		                        	<b>${actionlist.gname}</b>
+								  <td style="text-align: center;">
+		                        	<b>${actionlist.pm_g_gno }</b>
 		                        </td>
-								 <td style="text-align: center;">
+								  <td style="text-align: center;">
 		                        	<img
 										src="<c:url value="/imgUpload/${actionlist.f_name}"/>"
 										width="100px" height="100px" /> 
 		                         </td>
 								 <td style="text-align: center;">
-		                        	<b>${actionlist.pm_g_gno }</b>
-		                        </td>
-								 <td style="text-align: center;">
-		                        	${actionlist.g_m_id}
+		                       	 <b>${actionlist.gname}</b>
 		                        </td>
 									 <c:choose>
 									   <c:when test="${actionlist.actionstatus == -1 }">
