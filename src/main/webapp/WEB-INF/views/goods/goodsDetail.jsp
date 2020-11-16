@@ -323,7 +323,7 @@ $("#modal, .close").on('click',function(){
 
 var timeout = new Date("${goods.endDate}").getTime();
 var nowTime = new Date().getTime();
-var resultTime = countDownDate - now;
+var resultTime = timeout - nowTime;
 
 if(resultTime < 0){
 	alert("입찰이 마감된 상품입니다.");
