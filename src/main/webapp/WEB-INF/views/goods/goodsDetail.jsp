@@ -392,7 +392,7 @@ if(distance < 0) {
 }, 1000);
 //태준 sns공유하기
 function sharing(){
-	window.open("http://www.facebook.com/sharer/sharer.php?u=http://localhost:8088/goods/detail?gno="+${goods.gno});
+	window.open("http://www.facebook.com/sharer/sharer.php?u=http://itwillbs12.cafe24.com/goods/detail?gno="+${goods.gno});
 }
 
 </script>
