@@ -52,8 +52,8 @@ public class MyActionServiceImpl implements MyActionService {
 
 	//선택 삭제
 	@Override
-	public void delete(MyActionVO av) {
-		adao.delete(av);
+	public void delete(MyBiddingVO bvo) {
+		adao.delete(bvo);
 	}
 	
 	// *************** 2020/11/16/월요일 낙찰정보 **************************

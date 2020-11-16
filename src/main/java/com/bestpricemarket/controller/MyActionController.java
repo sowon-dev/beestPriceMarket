@@ -162,7 +162,7 @@ public class MyActionController {
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public int deleteCart(HttpSession session,
-	     @RequestParam(value = "chbox[]") List<String> chArr, MyActionVO av) throws Exception {
+	     @RequestParam(value = "chbox[]") List<String> chArr, MyBiddingVO bvo) throws Exception {
 	 l.info("delete cart");
 	
 	 String id = (String)session.getAttribute("id");
@@ -172,12 +172,12 @@ public class MyActionController {
 	 
 	 
 	 if(id != null) {
-	  av.setA_m_id(id);
+	  bvo.setPm_m_userid(id);
 	  
 	  for(String i : chArr) {   
 	   cartNum = Integer.parseInt(i);
-	   av.setAno(cartNum);
-	   service.delete(av);
+	   bvo.setPm_g_gno(cartNum);
+	   service.delete(bvo);
 	  }   
 	  result = 1;
 	 }  

@@ -11,7 +11,7 @@
    
    <!-- 입찰 -->
 	<select id="actionlist" resultType="com.bestpricemarket.domain.MyBiddingVO">
-	 select DISTINCT g.gname,g.g_m_id,g.gno,pm.pm_m_userid,g.actionstatus,f.f_name
+	 select DISTINCT g.gname,g.g_m_id,pm.pm_g_gno,pm.pm_m_userid,g.actionstatus,f.f_name
 	 from goods g join pricemonitoring pm
 	 on g.gno = pm.pm_g_gno
 	 join goodsfile f
@@ -46,8 +46,8 @@
   
  <!-- 카트 삭제 -->
 <delete id="delete">
- delete from myaction
- where ano= #{ano}
+ delete from pricemonitoring
+ where pm_g_gno= #{pm_g_gno}
 </delete>
   <!-- *************** 2020/11/16/월요일 낙찰정보 ************************** -->
 

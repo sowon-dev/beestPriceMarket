@@ -92,11 +92,11 @@
 								 <c:choose>
 								 <c:when test="${actionlist.actionstatus == 1}">
 								 <td>
-								 <input type="checkbox" id="chBox" name="chBox1" class="chBox1" data-cartNum="${actionlist.gno }" disabled/>
+								 <input type="checkbox" id="chBox" name="chBox1" class="chBox1" data-cartNum="${actionlist.pm_g_gno }" disabled/>
 								 </td>
 								 </c:when>
 								 <c:otherwise>
-								 <td><input type="checkbox" id="chBox" name="chBox" class="chBox" data-cartNum="${actionlist.gno }"/></td>
+								 <td><input type="checkbox" id="chBox" name="chBox" class="chBox" data-cartNum="${actionlist.pm_g_gno }"/></td>
 								 </c:otherwise>
 								 </c:choose>
 								 <td style="text-align: center;">
