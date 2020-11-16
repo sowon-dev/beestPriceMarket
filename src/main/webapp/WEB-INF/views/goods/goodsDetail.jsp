@@ -321,42 +321,51 @@ $("#modal, .close").on('click',function(){
   $(".modal-con").fadeOut(300);	  
 });
 
-$(document).ready(function(){
-	$("#bidding").click(function(){	
-		var stack = document.getElementById('bidprice_input').value;
-		if((stack%10) != 0){ // 최소 입찰가 단위 10원부터 배팅가능 (1~9원 배팅 X)
-			alert("10단위 적어주세요");
-			document.getElementById('bidprice_input').focus();
-			return false;	
-		}
-		var info = {"pm_g_gno":${goods.gno},/* 입찰시간 */"pm_m_userid": '${id}'/* 현재 로그인되어있는 아이디(세션) */,"pm_g_bidprice": document.getElementById('bidprice_input').value /* 입찰가 */,"timelog": getNowTimeStamp()/* 입찰한 시간 */};
-		var check = confirm("입찰하시겠습니까?");
-		if(check){				
-			$.ajax({
-				url: '/goods/bidding',
-				type: 'POST',				
-				data: info,					
-				success: function(data){															
-					if(data.pm_g_bidprice == undefined){
-						alert("현재 물품의 최대입찰가 보다 낮습니다.");
-						document.getElementById('bidprice_input').focus();
-						return;
+var timeout = new Date("${goods.endDate}").getTime();
+var nowTime = new Date().getTime();
+var resultTime = countDownDate - now;
+
+if(resultTime < 0){
+	alert("입찰이 마감된 상품입니다.");
+} else {
+	$(document).ready(function(){
+		$("#bidding").click(function(){	
+			var stack = document.getElementById('bidprice_input').value;
+			if((stack%10) != 0){ // 최소 입찰가 단위 10원부터 배팅가능 (1~9원 배팅 X)
+				alert("10단위 적어주세요");
+				document.getElementById('bidprice_input').focus();
+				return false;	
+			}
+			var info = {"pm_g_gno":${goods.gno},/* 입찰시간 */"pm_m_userid": '${id}'/* 현재 로그인되어있는 아이디(세션) */,"pm_g_bidprice": document.getElementById('bidprice_input').value /* 입찰가 */,"timelog": getNowTimeStamp()/* 입찰한 시간 */};
+			var check = confirm("입찰하시겠습니까?");
+			if(check){				
+				$.ajax({
+					url: '/goods/bidding',
+					type: 'POST',				
+					data: info,					
+					success: function(data){															
+						if(data.pm_g_bidprice == undefined){
+							alert("현재 물품의 최대입찰가 보다 낮습니다.");
+							document.getElementById('bidprice_input').focus();
+							return;
+						}
+						/* if(data["pm_g_bidprice"] > info.pm_g_bidprice) */							
+						/* alert(info.timelog); */	
+						/* $('#ppap').before("<tr><td>"+ date.timelog + "</td><td>" + data["pm_m_userid"] + "</td><td>" + data.pm_g_bidprice +"</td></tr>"); */																
+						$('#ppap').after("<tr class='mo2'><td>"+ (info.timelog+".0") + "</td><td>" + info.pm_m_userid + "</td><td>" + info.pm_g_bidprice +"</td></tr>");																
+						// alert(data[0].pm_g_gno); 데이터 받아오는 코드					
+					},
+					error: function(data){
+						alert("입찰가를 입력해주세요!");	
+						document.getElementById('bidprice_input').focus();				
 					}
-					/* if(data["pm_g_bidprice"] > info.pm_g_bidprice) */							
-					/* alert(info.timelog); */	
-					/* $('#ppap').before("<tr><td>"+ date.timelog + "</td><td>" + data["pm_m_userid"] + "</td><td>" + data.pm_g_bidprice +"</td></tr>"); */																
-					$('#ppap').after("<tr class='mo2'><td>"+ (info.timelog+".0") + "</td><td>" + info.pm_m_userid + "</td><td>" + info.pm_g_bidprice +"</td></tr>");																
-					// alert(data[0].pm_g_gno); 데이터 받아오는 코드					
-				},
-				error: function(data){
-					alert("입찰가를 입력해주세요!");	
-					document.getElementById('bidprice_input').focus();				
-				}
-			});
-		} 
-		/* alert("입찰테스트"); */			
-	});				
-});
+				});
+			} 
+			/* alert("입찰테스트"); */			
+		});				
+	});
+}
+
 
 function getExit(){
 	location.reload(true);
