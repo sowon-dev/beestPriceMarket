@@ -265,19 +265,28 @@
   <select id="orderbyNew" resultType="com.bestpricemarket.domain.GoodsVO">
    select *
    from goods
-   order by regDate desc;
+   where gno > 0 	
+   <include refid="searchCondition"></include>
+  	order by regDate desc 	
+  	limit #{pageStart},#{pageSize}
   </select>
   
   <select id="orderbyDuedate" resultType="com.bestpricemarket.domain.GoodsVO">
    select * 
    from goods
-   order by endDate;
+   where gno > 0 	
+  <include refid="searchCondition"></include>
+  order by endDate desc 	
+  limit #{pageStart},#{pageSize}   
   </select>
   
   <select id="orderbyBest" resultType="com.bestpricemarket.domain.GoodsVO">
    select *
    from goods
-   order by numofbid desc;
+   where gno > 0 	
+  <include refid="searchCondition"></include>
+  order by numofbid desc 	
+  limit #{pageStart},#{pageSize}   
   </select>
    
 	<!-- 소원 ******************************************************************************************** -->
