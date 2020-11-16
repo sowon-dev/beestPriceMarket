@@ -63,8 +63,8 @@ public class MyActionDAOImpl implements MyActionDAO {
 	}
     // 선택 삭제
 	@Override
-	public void delete(MyActionVO av) {
-		session.delete(namespace+".delete",av);
+	public void delete(MyBiddingVO bvo) {
+		session.delete(namespace+".delete",bvo);
 		
 	}
 	

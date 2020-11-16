@@ -9,11 +9,11 @@ public class MyBiddingVO {
 	private String pm_m_userid;
 	private int actionstatus;
 	private String f_name;
-	
+	private int pm_g_gno;
 	
 	public MyBiddingVO() {}
-	
-	public MyBiddingVO(String gname, String g_m_id, int gno, String pm_m_userid, int actionstatus, String f_name) {
+	public MyBiddingVO(String gname, String g_m_id, int gno, String pm_m_userid, int actionstatus, String f_name,
+			int pm_g_gno) {
 		super();
 		this.gname = gname;
 		this.g_m_id = g_m_id;
@@ -21,7 +21,10 @@ public class MyBiddingVO {
 		this.pm_m_userid = pm_m_userid;
 		this.actionstatus = actionstatus;
 		this.f_name = f_name;
+		this.pm_g_gno = pm_g_gno;
 	}
+
+
 	public String getGname() {
 		return gname;
 	}
@@ -58,10 +61,16 @@ public class MyBiddingVO {
 	public void setF_name(String f_name) {
 		this.f_name = f_name;
 	}
+	public int getPm_g_gno() {
+		return pm_g_gno;
+	}
+	public void setPm_g_gno(int pm_g_gno) {
+		this.pm_g_gno = pm_g_gno;
+	}
 	@Override
 	public String toString() {
 		return "MyBiddingVO [gname=" + gname + ", g_m_id=" + g_m_id + ", gno=" + gno + ", pm_m_userid=" + pm_m_userid
-				+ ", actionstatus=" + actionstatus + ", f_name=" + f_name + "]";
+				+ ", actionstatus=" + actionstatus + ", f_name=" + f_name + ", pm_g_gno=" + pm_g_gno + "]";
 	}
 	
 	

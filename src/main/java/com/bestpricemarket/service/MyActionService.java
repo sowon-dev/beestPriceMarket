@@ -16,7 +16,7 @@ public interface MyActionService {
 	//낙찰 세기
 	public int getPayCount() throws Exception;
 	//선택 삭제
-	public void delete(MyActionVO vo);
+	public void delete(MyBiddingVO bvo);
 	
 	// *************** 2020/11/16/월요일 낙찰정보 **************************
 	// 입찰목록 리스트

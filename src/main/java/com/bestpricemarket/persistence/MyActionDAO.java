@@ -28,7 +28,7 @@ public interface MyActionDAO {
 	public int getPayCount() throws Exception;
 	
 	//게시물 삭제
-	public void delete(MyActionVO av);
+	public void delete(MyBiddingVO bvo);
 	
 	// *************** 2020/11/16/월요일 낙찰정보 **************************
 	// 입찰목록 리스트
