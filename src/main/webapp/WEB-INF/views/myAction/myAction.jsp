@@ -108,7 +108,7 @@
 										width="100px" height="100px" /> 
 		                         </td>
 								 <td style="text-align: center;">
-		                        	<b>${actionlist.gno }</b>
+		                        	<b>${actionlist.pm_g_gno }</b>
 		                        </td>
 								 <td style="text-align: center;">
 		                        	${actionlist.g_m_id}
