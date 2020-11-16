@@ -51,9 +51,9 @@ public class MyActionDAOImpl implements MyActionDAO {
 	}
 	// 입찰 목록 세기
 	@Override
-	public int getCount(String pm_m_id) throws Exception {
+	public int getCount(String pm_m_userid) throws Exception {
 		
-		return session.selectOne(namespace+".getCount",pm_m_id);
+		return session.selectOne(namespace+".getCount",pm_m_userid);
 	}
 	// 낙찰 목록 세기
 	@Override

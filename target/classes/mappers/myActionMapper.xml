@@ -35,7 +35,7 @@
   <select id="getCount" resultType="int">
    select count(pmno)
    from pricemonitoring
-   where pm_m_userid=#{pm_m_userid} 
+   where pm_m_userid=#{pm_m_userid}
   </select>
   
   <select id="getPayCount" resultType="int">
