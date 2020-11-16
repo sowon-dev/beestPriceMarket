@@ -18,7 +18,7 @@ import com.bestpricemarket.service.GoodsService;
 
 @RestController
 //@Controller
-@RequestMapping("/bestpricemarket/detail/comment/*")
+@RequestMapping("/detail/comment/*")
 public class GoodsCommentController {
 	@Inject
 	private GoodsService gService;

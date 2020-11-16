@@ -19,7 +19,7 @@ import com.bestpricemarket.domain.MyBiddingVO;
 import com.bestpricemarket.service.MyActionService;
 
 @Controller
-@RequestMapping(value ="/bestpricemarket/myAction/*")
+@RequestMapping(value ="/myAction/*")
 public class MyActionController {
 	@Inject
 	private MyActionService service;

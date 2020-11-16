@@ -54,7 +54,7 @@ import com.bestpricemarket.service.GoodsService;
 import com.bestpricemarket.service.MyActionService;
 
 @Controller
-@RequestMapping(value = "/bestpricemarket/goods/*")
+@RequestMapping(value = "/goods/*")
 public class GoodsController {
 
 	private static final Logger log = LoggerFactory.getLogger(GoodsController.class);

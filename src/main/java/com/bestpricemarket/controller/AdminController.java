@@ -18,7 +18,7 @@ import com.bestpricemarket.domain.MemberVO;
 import com.bestpricemarket.service.AdminService;
 
 @Controller
-@RequestMapping(value = "/bestpricemarket/admin/*")
+@RequestMapping(value = "/admin/*")
 public class AdminController {
 
 	@Inject
