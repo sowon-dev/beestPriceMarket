@@ -267,7 +267,7 @@
    from goods
    where gno > 0 	
    <include refid="searchCondition"></include>
-  	order by regDate desc 	
+  	order by regDate	
   	limit #{pageStart},#{pageSize}
   </select>
   
@@ -276,7 +276,7 @@
    from goods
    where gno > 0 	
   <include refid="searchCondition"></include>
-  order by endDate desc 	
+  order by endDate	
   limit #{pageStart},#{pageSize}   
   </select>
   
