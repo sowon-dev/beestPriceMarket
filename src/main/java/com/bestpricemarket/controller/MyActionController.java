@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.MyBiddingVO;
+import com.bestpricemarket.domain.PricemonitoringVO;
+import com.bestpricemarket.service.GoodsService;
 import com.bestpricemarket.service.MyActionService;
 
 @Controller
@@ -23,6 +25,8 @@ import com.bestpricemarket.service.MyActionService;
 public class MyActionController {
 	@Inject
 	private MyActionService service;
+	@Inject
+	private GoodsService gservice;
 	
 	private static final Logger l = LoggerFactory.getLogger(MyActionController.class);
 	
@@ -49,15 +53,17 @@ public class MyActionController {
 				// num = 페이지 번호
 				String pm_m_userid = (String)session.getAttribute("id");
 		        System.out.println("id값 ?"+pm_m_userid);
-				// 등록된 글의 총 갯수
+				
+		       
+		        // 등록된 글의 총 갯수
 				int count = service.getCount(pm_m_userid);
-
+		       
 				// 페이지당 출력할 글의 갯수
 				int postNum = 5;
 
 				// 페이지 하단 페이징 번호 (등록된 글의 총 갯수 / 한 페이지에 출력할 갯수) + 소수점은 올림(Math.ceil)
 				int pageNum = (int) Math.ceil((double) count / postNum);
-
+		        
 				// 출력할 글
 				int displayPost = (num - 1) * postNum;
 
@@ -79,7 +85,7 @@ public class MyActionController {
 
 				boolean prev = startPageNum == 1 ? false : true;
 				boolean next = endPageNum * pageNum_cnt >= count ? false : true;
-
+		        
 				// 글 목록 가져오기
 				List<MyBiddingVO> actionlist = null;
 				actionlist = service.actionlist(displayPost, postNum, pm_m_userid);
@@ -97,7 +103,7 @@ public class MyActionController {
 
 				// 현재 페이지
 				model.addAttribute("select", num);
-
+		        
 			 return "/myAction/myAction";
 	}
     
@@ -108,7 +114,7 @@ public class MyActionController {
 		String a_m_id = (String)session.getAttribute("id");
 		
 		// 등록된 글의 총 갯수
-		int count = service.getPayCount();
+		int count = service.getPayCount(a_m_id);
 
 		// 페이지당 출력할 글의 갯수
 		int postNum = 5;

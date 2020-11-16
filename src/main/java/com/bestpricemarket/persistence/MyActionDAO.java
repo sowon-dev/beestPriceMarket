@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.bestpricemarket.domain.BasketVO;
 import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.MyBiddingVO;
+import com.bestpricemarket.domain.PricemonitoringVO;
 
 
 
@@ -25,7 +26,7 @@ public interface MyActionDAO {
 	public int getCount(String pm_m_userid) throws Exception;
     
 	//낙찰목록 세기
-	public int getPayCount() throws Exception;
+	public int getPayCount(String a_m_id) throws Exception;
 	
 	//게시물 삭제
 	public void delete(MyBiddingVO bvo);
@@ -37,4 +38,6 @@ public interface MyActionDAO {
 	// 낙찰된 회원 체크
 	public MyActionVO myActionInfo(int a_g_gno) throws Exception;
 	// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+	
+	public PricemonitoringVO pricemotoringInfo(int pm_g_gno) throws Exception;
 } 

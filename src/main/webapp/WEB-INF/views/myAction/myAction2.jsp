@@ -81,12 +81,12 @@
 	          	<button onclick="location.href='/myAction/paylist?num=1'" class="btn btn-secondary" style="width:272px; text-align: center;"><b>낙찰</b> 경매내역</button> -->
 			<br>     	
 			<br>     	
-				<table class="table table-hover">
+				<table class="table table-hover" style="width: 1000px;">
 					<thead>
 						<tr>
-							<td style="text-align: center;"><b>상품이름</b></td>
-							<td style="text-align: center;">상품사진</td>
 							<td style="text-align: center;"><b>상품번호</b></td>
+							<td style="text-align: center;">상품이름</td>
+							<td style="text-align: center;">상품사진</td>
 							<td style="text-align: center;">판매자</td>
 							<td style="text-align: center;"><b>입찰</b></td>
 							<td style="text-align: center;"><b>결제</b></td>
@@ -98,7 +98,7 @@
 							<tbody>
 								<tr>
 								 <td style="text-align: center;">
-		                        	<b>${paylist.gname}</b>
+		                        	<b>${paylist.a_g_gno }</b>
 		                        </td>
 								 <td style="text-align: center;">
 		                        	<img
@@ -106,7 +106,7 @@
 										width="100px" height="100px" />
 		                         </td>
 								 <td style="text-align: center;">
-		                        	<b>${paylist.a_g_gno }</b>
+		                        	<b>${paylist.gname}</b>
 		                        </td>
 								 <td style="text-align: center;">
 		                        	${paylist.a_m_id}

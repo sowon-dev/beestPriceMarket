@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.bestpricemarket.controller.MemberController;
 import com.bestpricemarket.domain.MyActionVO;
 import com.bestpricemarket.domain.MyBiddingVO;
+import com.bestpricemarket.domain.PricemonitoringVO;
 import com.bestpricemarket.persistence.MyActionDAO;
 
 @Service
@@ -46,10 +47,10 @@ public class MyActionServiceImpl implements MyActionService {
 	
 	//낙찰 세기
 	@Override
-	public int getPayCount() throws Exception {
-		return adao.getPayCount();
+	public int getPayCount(String a_m_id) throws Exception {
+		return adao.getPayCount(a_m_id);
 	}
-
+    
 	//선택 삭제
 	@Override
 	public void delete(MyBiddingVO bvo) {
@@ -69,6 +70,12 @@ public class MyActionServiceImpl implements MyActionService {
 		return adao.myActionInfo(a_g_gno);
 	}
 	// *************** 2020/11/16/월요일 낙찰정보끝 **************************
+
+	@Override
+	public PricemonitoringVO pricemonitoringInfo(int pm_g_gno) throws Exception {
+		
+		return adao.pricemotoringInfo(pm_g_gno);
+	}
 	
 	
 }
