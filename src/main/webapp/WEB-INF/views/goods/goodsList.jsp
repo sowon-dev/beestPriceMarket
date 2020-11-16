@@ -35,23 +35,23 @@
       <div class="col-lg-3" style="height:800px">
        <h2 class="my">${category}</h2>
         <c:if test="${id != null}">
-        <a href="/goods/register"><button class="snip1535">내 상품팔기</button></a>
+        <a href="/bestpricemarket/goods/register"><button class="snip1535">내 상품팔기</button></a>
       </c:if>
       
     	<!-- 재원 -->
     	<div>검색</div>
     	
         <div class="list-group">
-          <a href="/goods/list?category=컴퓨터" class="list-group-item">컴퓨터</a>
-          <a href="/goods/list?category=디지털" class="list-group-item">디지털</a>
-          <a href="/goods/list?category=생활가전" class="list-group-item">생활가전</a>
-          <a href="/goods/list?category=생활문구" class="list-group-item">생활문구</a>
-          <a href="/goods/list?category=생활가구" class="list-group-item">생활가구</a>
-          <a href="/goods/list?category=스포츠" class="list-group-item">스포츠</a>
-          <a href="/goods/list?category=패션의류" class="list-group-item">패션의류</a>
-          <a href="/goods/list?category=패션잡화" class="list-group-item">패션잡화</a>
-          <a href="/goods/list?category=화장품" class="list-group-item">화장품</a>
-          <a href="/goods/list?category=쥬얼리" class="list-group-item">쥬얼리</a> 
+          <a href="/bestpricemarket/goods/list?category=컴퓨터" class="list-group-item">컴퓨터</a>
+          <a href="/bestpricemarket/goods/list?category=디지털" class="list-group-item">디지털</a>
+          <a href="/bestpricemarket/goods/list?category=생활가전" class="list-group-item">생활가전</a>
+          <a href="/bestpricemarket/goods/list?category=생활문구" class="list-group-item">생활문구</a>
+          <a href="/bestpricemarket/goods/list?category=생활가구" class="list-group-item">생활가구</a>
+          <a href="/bestpricemarket/goods/list?category=스포츠" class="list-group-item">스포츠</a>
+          <a href="/bestpricemarket/goods/list?category=패션의류" class="list-group-item">패션의류</a>
+          <a href="/bestpricemarket/goods/list?category=패션잡화" class="list-group-item">패션잡화</a>
+          <a href="/bestpricemarket/goods/list?category=화장품" class="list-group-item">화장품</a>
+          <a href="/bestpricemarket/goods/list?category=쥬얼리" class="list-group-item">쥬얼리</a> 
         </div>
       </div> 
    <!-- 상품 카테고리 메뉴바-->
