@@ -19,7 +19,7 @@ import com.bestpricemarket.domain.PaymentVO;
 import com.bestpricemarket.service.PaymentService;
 
 @Controller
-@RequestMapping(value = "/pay/*")
+@RequestMapping(value = "/bestpricemarket/pay/*")
 public class PaymentController {
 
 	@Inject

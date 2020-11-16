@@ -22,7 +22,7 @@ import com.bestpricemarket.persistence.MemberDAOImpl;
 import com.bestpricemarket.service.CSService;
 
 @Controller
-@RequestMapping("/CS/*")
+@RequestMapping("/bestpricemarket/CS/*")
 public class CSController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CSController.class);
