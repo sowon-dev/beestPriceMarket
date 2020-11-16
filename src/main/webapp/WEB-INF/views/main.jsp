@@ -216,8 +216,8 @@
 		</div>
 		<!-- 옵션바 --> 
 
-        <!-- 상품 카드 목록(Category) -->
-		<!--  <div class="row"> 
+       <%--  <!-- 상품 카드 목록(Category) -->
+		<div class="row"> 
 			<c:forEach var="category" items="${goodsList}" >
 				<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100">
@@ -242,7 +242,7 @@
 			  	</div>
 				</div>
 			</c:forEach>
-        </div> -->
+        </div> --%>
      	<!-- 상품 카드 목록(Category) 끝-->
         
         <!-- 페이징 하단부 처리(카테고리목록) -->
