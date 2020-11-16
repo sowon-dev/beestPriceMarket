@@ -43,7 +43,41 @@
 			}
 		}
     </script>
-    
+     <style type="text/css">  
+   .btn {
+       border-radius: 4px !important;
+       background: #212529 !important;
+       color: #fff !important;
+       padding: 7px 45px !important;
+       display: inline-block !important;
+       margin-top: 20px !important;
+       border: solid 2px #212529 !important; 
+       transition: all 0.5s ease-in-out 0s !important;
+   }
+   .btn:hover,
+   .btn:focus {
+       background: transparent !important;
+       color: #212529 !important;
+       text-decoration: none !important;
+   }
+ .btn-danger {
+       border-radius: 4px !important;
+       background: #DC3545 !important;
+       color: #fff !important;
+       padding: 7px 45px !important;
+       display: inline-block !important;
+       margin-top: 20px !important;
+       border: solid 2px #DC3545 !important; 
+       transition: all 0.5s ease-in-out 0s !important;
+   }
+   .btn-danger:hover,
+   .btn-danger:focus {
+       background: transparent !important;
+       color: #DC3545 !important;
+       text-decoration: none !important;
+}
+
+</style>
 </head>
 
 <body>

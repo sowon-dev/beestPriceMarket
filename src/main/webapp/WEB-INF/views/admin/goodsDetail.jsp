@@ -1,4 +1,5 @@
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@page import="com.bestpricemarket.domain.GoodsVO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -67,7 +68,19 @@
 	<br>      
 	<br>      
 	<br>      
-
+	
+	<%String status = ""; %>
+	<c:choose>
+		<c:when test="${vo.actionstatus == 2}">
+			<%status = "상품등록"; %>
+		</c:when>
+		<c:when test="${vo.actionstatus == 1}">
+			<%status = "진행중"; %>
+		</c:when>
+		<c:otherwise>
+			<%status = "종료"; %>
+		</c:otherwise>
+	</c:choose>
 
     <fieldset>
 	    <legend style="margin-left: 250px;"><b>상품 상세보기</b></legend>
@@ -92,9 +105,13 @@
 		      <span class="front" style="margin-right: 34px; ">상품설명</span>
 		      	<input type="text" name="content" class="form-control" value="${vo.content}" style="width:180px;display:inline; text-align: center;"readonly>
 	
+	
+		      										
 		      <span class="front" style="margin-right: 34px; margin-left: 40px;">경매상태</span>
-		      	<input type="text" name="actionstatus" class="form-control" value="${vo.actionstatus}" style="width:180px;display:inline; text-align: center; "readonly>
-		      	<br>
+		      	<input type="text" name="actionstatus" class="form-control" value="<%=status%>" style="width:180px;display:inline; text-align: center; "readonly>
+		      	
+		      	
+		      	<br>			
 		      	<br>
 	
 		      <span class="front" style="margin-right: 2px; "><b>경매시작시간</b></span>
